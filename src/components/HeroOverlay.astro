@@ -1,0 +1,286 @@
+---
+interface Props {
+	eyebrow?: string;
+	heading: string;
+	description?: string;
+	trustItems?: string[];
+	ctas?: { label: string; href?: string }[];
+	imageSrc: string;
+	imageAlt: string;
+}
+
+const { eyebrow, heading, description, trustItems, ctas, imageSrc, imageAlt } = Astro.props;
+---
+
+<section class="hero hero--overlay" aria-label="Hero overlay layout">
+	<div class="hero__frame">
+		<img class="hero__bg" src={imageSrc} alt={imageAlt} width="1500" height="1500" fetchpriority="high" />
+		<div class="hero__overlay" aria-hidden="true"></div>
+		<div class="hero__footer">
+			<div class="hero__bottom">
+				<div class="hero__left">
+					{eyebrow && <p class="hero__eyebrow">{eyebrow}</p>}
+					<h1 class="hero__heading">{heading}</h1>
+				</div>
+				{(description || ctas) && (
+					<div class="hero__right">
+						<div class="hero__right-inner">
+							{description && <p class="hero__description">{description}</p>}
+							{ctas && ctas.length > 0 && (
+								<div class="hero__actions">
+									{ctas.map((cta, index) => {
+										const classes = ['hero__cta', index === 0 ? 'hero__cta--primary' : 'hero__cta--secondary'];
+										return cta.href ? (
+											<a href={cta.href} class:list={classes}>
+												{cta.label}
+											</a>
+										) : (
+											<button type="button" class:list={classes}>
+												{cta.label}
+											</button>
+										);
+									})}
+								</div>
+							)}
+						</div>
+					</div>
+				)}
+			</div>
+			{trustItems && trustItems.length > 0 && (
+				<div class="hero__trust">
+					<p class="hero__trust-list">
+						{trustItems.map((item, index) => (
+							<>
+								{index > 0 && <span class="hero__trust-separator" aria-hidden="true">·</span>}
+								<span class="hero__trust-item">{item}</span>
+							</>
+						))}
+					</p>
+				</div>
+			)}
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero--overlay {
+		width: 100%;
+		min-height: 100vh;
+		min-height: 100svh;
+	}
+
+	.hero--overlay .hero__frame {
+		position: relative;
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		height: 100vh;
+		height: 100svh;
+		overflow: hidden;
+	}
+
+	.hero--overlay .hero__bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		max-width: none;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.hero--overlay .hero__overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background: linear-gradient(
+			to top,
+			rgba(0, 0, 0, 0.75) 0%,
+			rgba(0, 0, 0, 0.35) 45%,
+			rgba(0, 0, 0, 0.05) 100%
+		);
+	}
+
+	.hero--overlay .hero__footer {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 2;
+		padding-inline: var(--site-gutter);
+		padding-bottom: clamp(0.875rem, 2vw, 1.125rem);
+	}
+
+	.hero--overlay .hero__bottom {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: end;
+		gap: clamp(2rem, 4vw, 4rem);
+		padding-top: clamp(2rem, 5vw, 4rem);
+		padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+	}
+
+	.hero--overlay .hero__left {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.hero--overlay .hero__right {
+		display: flex;
+		justify-content: flex-end;
+		align-items: flex-end;
+	}
+
+	.hero--overlay .hero__right-inner {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		align-items: flex-end;
+		max-width: 38rem;
+	}
+
+	.hero--overlay .hero__eyebrow {
+		font-family: var(--font-body);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.75);
+	}
+
+	.hero--overlay .hero__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+		font-weight: 400;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		color: #ffffff;
+		max-width: 22ch;
+	}
+
+	.hero--overlay .hero__description {
+		font-family: var(--font-body);
+		font-size: clamp(0.875rem, 1.25vw, 1rem);
+		line-height: 1.7;
+		color: rgba(255, 255, 255, 0.85);
+		max-width: 38rem;
+		text-align: right;
+	}
+
+	.hero--overlay .hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.hero--overlay .hero__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.875rem 1.5rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		border-radius: 0;
+		transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+		white-space: nowrap;
+	}
+
+	.hero--overlay .hero__cta--primary {
+		color: var(--color-text);
+		background-color: var(--color-earth-pink);
+		border: 1px solid var(--color-earth-pink);
+	}
+
+	.hero--overlay .hero__cta--primary:hover {
+		background-color: var(--color-earth-pink-hover);
+		border-color: var(--color-earth-pink-hover);
+	}
+
+	.hero--overlay .hero__cta--secondary {
+		color: #ffffff;
+		background-color: transparent;
+		border: 1px solid rgba(255, 255, 255, 0.6);
+	}
+
+	.hero--overlay .hero__cta--secondary:hover {
+		background-color: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.9);
+	}
+
+	.hero--overlay .hero__trust {
+		border-top: 1px solid rgba(255, 255, 255, 0.25);
+		padding-top: clamp(0.875rem, 2vw, 1.125rem);
+	}
+
+	.hero--overlay .hero__trust-list {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.625rem 1.25rem;
+	}
+
+	.hero--overlay .hero__trust-item {
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.7);
+		white-space: nowrap;
+	}
+
+	.hero--overlay .hero__trust-separator {
+		font-size: 1rem;
+		line-height: 1;
+		color: rgba(255, 255, 255, 0.4);
+	}
+
+	@media (max-width: 1024px) {
+		.hero--overlay .hero__bottom {
+			grid-template-columns: 1fr;
+		}
+
+		.hero--overlay .hero__heading {
+			max-width: none;
+		}
+
+		.hero--overlay .hero__right {
+			justify-content: flex-start;
+		}
+
+		.hero--overlay .hero__right-inner {
+			align-items: flex-start;
+			width: 100%;
+			max-width: none;
+		}
+
+		.hero--overlay .hero__description {
+			max-width: none;
+			text-align: left;
+		}
+
+		.hero--overlay .hero__actions {
+			justify-content: flex-start;
+			width: 100%;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero--overlay .hero__trust {
+			display: none;
+		}
+
+		.hero--overlay .hero__actions {
+			flex-direction: column;
+		}
+
+		.hero--overlay .hero__cta {
+			width: 100%;
+			white-space: normal;
+		}
+	}
+</style>

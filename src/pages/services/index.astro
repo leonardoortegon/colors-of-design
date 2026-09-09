@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServicesList from '../../components/ServicesList.astro';
+import ConversionSection from '../../components/ConversionSection.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { services } from '../../data/services';
+import { absoluteUrl, site } from '../../data/site';
+
+const title = 'Miami Interior Design Services | Colors of Design Group';
+const description =
+	'Luxury interior design services in Miami by Colors of Design Group, including space planning, turn key services, 3D rendering, custom woodwork, project management, lighting design, furniture design, and more.';
+const pageUrl = absoluteUrl('/services');
+
+const jsonLd = [
+	{
+		'@type': 'CollectionPage',
+		'@id': `${pageUrl}#page`,
+		url: pageUrl,
+		name: title,
+		description,
+		isPartOf: { '@id': `${site.url}/#website` },
+		about: {
+			'@type': 'Thing',
+			name: 'Interior design services',
+		},
+		mainEntity: {
+			'@type': 'ItemList',
+			name: 'Interior design services',
+			numberOfItems: services.length,
+			itemListElement: services.map((service, index) => ({
+				'@type': 'ListItem',
+				position: index + 1,
+				url: `${pageUrl}#${service.slug}`,
+				name: service.name,
+				description: service.summary,
+			})),
+		},
+	},
+	{
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: 'Home',
+				item: site.url,
+			},
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: 'Services',
+				item: pageUrl,
+			},
+		],
+	},
+	...services.map((service) => ({
+		'@type': 'Service',
+		'@id': `${pageUrl}#${service.slug}`,
+		name: service.name,
+		description: service.description,
+		image: absoluteUrl(service.imageSrc),
+		provider: { '@id': `${site.url}/#studio` },
+		areaServed: ['Miami', 'South Florida', 'United States'],
+	})),
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/services" jsonLd={jsonLd}>
+	<main class="page" id="main">
+		<div class="services-page">
+			<div class="services-page__crumbs">
+				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
+			</div>
+			<ServicesList
+				heading="What We Do"
+				headingLevel="h1"
+				sectionId="offerings"
+				alternateBackgrounds
+				introduction="Our services include a wide range of design services—from full residential design analysis to space planning, design concept development, furniture plans, custom design, construction drawings, product specifications, purchasing, installation of materials, and project management. We work throughout the United States and Latin America."
+				services={services}
+			/>
+		</div>
+		<ConversionSection
+			heading="Your Home Should Feel Unmistakably Yours."
+			copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
+		/>
+	</main>
+</BaseLayout>
+
+<style>
+	.services-page {
+		background-color: var(--color-bg);
+		--services-page-max-width: 1400px;
+	}
+
+	.services-page__crumbs {
+		width: 100%;
+		max-width: var(--services-page-max-width, 1400px);
+		margin-inline: auto;
+		padding: 2rem var(--site-gutter) 0;
+	}
+
+	.services-page :global(.services-list__inner) {
+		max-width: var(--services-page-max-width, 1400px);
+		padding-top: 1.5rem;
+	}
+</style>

@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+:root {
+	--color-bg: #ffffff;
+	--color-text: #1a1a1a;
+	--color-text-muted: #5c5c5c;
+	--color-accent: #1a1a1a;
+	--color-accent-hover: #333333;
+	--font-body: 'Inter', system-ui, sans-serif;
+	--font-heading: 'DM Serif Display', Georgia, serif;
+	--hero-max-width: 1920px;
+	--site-gutter: clamp(1rem, 3vw, 2rem);
+	--color-earth: #faf8f3;
+	--color-earth-pink: #d9b0a5;
+	--color-earth-pink-hover: #cba398;
+}
+
+html {
+	font-size: 16px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	overflow-x: clip;
+}
+
+body {
+	font-family: var(--font-body);
+	background-color: var(--color-bg);
+	color: var(--color-text);
+	line-height: 1.6;
+	overflow-x: clip;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	font-family: inherit;
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+:target {
+	scroll-margin-top: 4.5rem;
+}
+
+.page {
+	padding-top: 4.75rem;
+}
+
+html.nav-menu-open {
+	overflow: hidden;
+}

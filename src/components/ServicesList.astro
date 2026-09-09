@@ -1,0 +1,229 @@
+---
+import type { Service } from '../data/services';
+
+interface Props {
+	heading: string;
+	introduction: string;
+	services: Service[];
+	headingLevel?: 'h1' | 'h2';
+	sectionId?: string;
+	alternateBackgrounds?: boolean;
+}
+
+const {
+	heading,
+	introduction,
+	services,
+	headingLevel = 'h2',
+	sectionId = 'services',
+	alternateBackgrounds = false,
+} = Astro.props;
+
+const HeadingTag = headingLevel;
+---
+
+<section
+	class:list={['services-list', alternateBackgrounds && 'services-list--banded']}
+	id={sectionId}
+	aria-labelledby="services-list-heading"
+>
+	<div class="services-list__inner">
+		<header class="services-list__header">
+			<HeadingTag id="services-list-heading" class="services-list__heading">{heading}</HeadingTag>
+			<p class="services-list__intro">{introduction}</p>
+		</header>
+
+		<div class="services-list__list">
+			{services.map((service, index) => (
+				<article
+					class:list={[
+						'services-list__card',
+						alternateBackgrounds && index % 2 === 0 && 'services-list__card--muted',
+					]}
+					id={service.slug}
+					data-nav-surface={alternateBackgrounds && index % 2 === 0 ? 'earth' : undefined}
+				>
+					<div class="services-list__row">
+						<div class="services-list__media">
+							<img
+								src={service.imageSrc}
+								alt={service.imageAlt}
+								width={service.imageWidth}
+								height={service.imageHeight}
+								loading="lazy"
+							/>
+						</div>
+						<div class="services-list__body">
+							{headingLevel === 'h1' ? (
+								<h2 class="services-list__name">{service.name}</h2>
+							) : (
+								<h3 class="services-list__name">{service.name}</h3>
+							)}
+							<p class="services-list__scope">{service.scope}</p>
+							<p class="services-list__copy">{service.description}</p>
+							<p class="services-list__included">{service.included.join(' · ')}</p>
+							<a class="services-list__action" href="#inquiry">Start Your Project</a>
+						</div>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.services-list {
+		width: 100%;
+		background-color: var(--color-bg);
+		--services-gutter: var(--site-gutter);
+	}
+
+	.services-list__inner {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding: clamp(4rem, 8vw, 7rem) var(--services-gutter);
+	}
+
+	.services-list__header {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-bottom: clamp(3rem, 6vw, 4.5rem);
+		text-align: left;
+	}
+
+	.services-list__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+	}
+
+	.services-list__intro {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+		max-width: 34rem;
+	}
+
+	.services-list__list {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(4rem, 8vw, 7rem);
+	}
+
+	.services-list--banded .services-list__list {
+		gap: 0;
+	}
+
+	.services-list--banded .services-list__card {
+		position: relative;
+		isolation: isolate;
+		margin-inline: calc(-1 * var(--services-gutter));
+		padding: clamp(4rem, 8vw, 7rem) var(--services-gutter);
+	}
+
+	.services-list--banded .services-list__card--muted::before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		inset: 0;
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		background-color: var(--color-earth);
+	}
+
+	.services-list__row {
+		display: grid;
+		grid-template-columns: minmax(0, 13fr) minmax(0, 7fr);
+		align-items: center;
+		gap: clamp(2rem, 3.5vw, 3.25rem);
+	}
+
+	.services-list__body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		order: 2;
+		align-self: center;
+	}
+
+	.services-list__media {
+		order: 1;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.services-list__media img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.services-list__name {
+		font-family: var(--font-heading);
+		font-size: clamp(1.5rem, 2.4vw, 2rem);
+		font-weight: 400;
+		letter-spacing: -0.02em;
+		line-height: 1.2;
+		color: var(--color-text);
+	}
+
+	.services-list__scope,
+	.services-list__included {
+		font-family: var(--font-body);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+		line-height: 1.6;
+	}
+
+	.services-list__copy {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+	}
+
+	.services-list__action {
+		display: inline-flex;
+		width: fit-content;
+		margin-top: 0.5rem;
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+	}
+
+	.services-list__action:hover {
+		border-color: var(--color-text);
+	}
+
+	@media (max-width: 900px) {
+		.services-list__intro {
+			max-width: none;
+		}
+
+		.services-list__row {
+			grid-template-columns: 1fr;
+		}
+
+		.services-list__body {
+			order: 0;
+		}
+
+		.services-list__media {
+			order: -1;
+		}
+	}
+</style>

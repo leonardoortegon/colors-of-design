@@ -1,0 +1,220 @@
+---
+interface Props {
+	heading: string;
+	copy: string[];
+	linkLabel: string;
+	linkStyle?: 'button' | 'text';
+	imageSrc?: string;
+	imageAlt?: string;
+	imageWidth?: number;
+	imageHeight?: number;
+	imagePosition?: 'left' | 'right';
+	imageMaxWidth?: string;
+	sectionId?: string;
+}
+
+const {
+	heading,
+	copy,
+	linkLabel,
+	linkStyle = 'button',
+	imageSrc,
+	imageAlt,
+	imageWidth,
+	imageHeight,
+	imagePosition = 'right',
+	imageMaxWidth,
+	sectionId,
+} = Astro.props;
+
+const hasImage = Boolean(imageSrc);
+---
+
+<section
+	id={sectionId}
+	class:list={['split', imagePosition === 'left' && 'split--image-left', !hasImage && 'split--text-only']}
+	aria-label={heading}
+	data-nav-surface="earth"
+>
+	<div class="split__inner">
+		<div class="split__content">
+			<h2 class="split__heading">{heading}</h2>
+			<div class="split__copy">
+				{copy.map((paragraph) => (
+					<p>{paragraph}</p>
+				))}
+			</div>
+			<button
+				type="button"
+				class:list={['split__link', linkStyle === 'text' && 'split__link--text']}
+			>
+				{linkLabel}
+			</button>
+		</div>
+		{hasImage && (
+			<div
+				class="split__media"
+				style={imageMaxWidth ? `--split-image-max-width: ${imageMaxWidth}` : undefined}
+			>
+				<img
+					class="split__image"
+					src={imageSrc}
+					alt={imageAlt ?? ''}
+					width={imageWidth}
+					height={imageHeight}
+					loading="lazy"
+				/>
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.split {
+		width: 100%;
+		background-color: var(--color-bg);
+		--split-gutter: var(--site-gutter);
+	}
+
+	.split--text-only {
+		background-color: var(--color-earth);
+	}
+
+	.split__inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		gap: clamp(2.5rem, 6vw, 5rem);
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding: clamp(4rem, 8vw, 7rem) var(--split-gutter);
+	}
+
+	.split__content {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.5rem, 3vw, 2rem);
+		max-width: 34rem;
+		text-align: left;
+	}
+
+	@media (min-width: 901px) {
+		.split__content {
+			width: 100%;
+			margin-inline: auto;
+		}
+
+		.split__media {
+			max-width: var(--split-image-max-width, 100%);
+			justify-self: center;
+		}
+
+		.split--image-left .split__media {
+			justify-self: end;
+		}
+	}
+
+	.split__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+		white-space: pre-line;
+	}
+
+	.split__copy {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.split__copy p {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+	}
+
+	.split__link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		padding: 0.875rem 2rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text);
+		background-color: transparent;
+		border: 1px solid var(--color-accent);
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.split__link:hover {
+		color: var(--color-accent-hover);
+		border-color: var(--color-accent-hover);
+	}
+
+	.split__link--text {
+		padding: 0;
+		padding-bottom: 0.125rem;
+		color: var(--color-text);
+		background-color: transparent;
+		border: none;
+		border-bottom: 1px solid currentColor;
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.split__link--text:hover {
+		color: var(--color-accent-hover);
+		background-color: transparent;
+		border-color: currentColor;
+	}
+
+	.split__media {
+		width: 100%;
+	}
+
+	.split__image {
+		width: 100%;
+		height: auto;
+	}
+
+	.split--image-left .split__content {
+		order: 2;
+	}
+
+	.split--image-left .split__media {
+		order: 1;
+	}
+
+	.split--text-only .split__inner {
+		display: flex;
+		justify-content: center;
+	}
+
+	.split--text-only .split__content {
+		align-items: center;
+		max-width: 44rem;
+		text-align: center;
+	}
+
+	.split--text-only .split__link {
+		margin-inline: auto;
+	}
+
+	@media (max-width: 900px) {
+		.split__inner {
+			grid-template-columns: 1fr;
+		}
+
+		.split__content {
+			max-width: none;
+		}
+	}
+</style>

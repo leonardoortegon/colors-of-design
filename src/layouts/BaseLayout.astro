@@ -1,0 +1,103 @@
+---
+import '../styles/global.css';
+import SiteNav from '../components/SiteNav.astro';
+import { site, absoluteUrl } from '../data/site';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	canonicalPath?: string;
+	jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+	noIndex?: boolean;
+}
+
+const {
+	title = site.defaultTitle,
+	description = site.defaultDescription,
+	image = site.ogImage,
+	canonicalPath = Astro.url.pathname,
+	jsonLd,
+	noIndex = false,
+} = Astro.props;
+
+const canonical = absoluteUrl(canonicalPath);
+const ogImage = image.startsWith('http') ? image : absoluteUrl(image);
+const organizationLd = {
+	'@type': 'InteriorDesigner',
+	'@id': `${site.url}/#studio`,
+	name: site.name,
+	url: site.url,
+	image: absoluteUrl(site.ogImage),
+	telephone: site.phoneE164,
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: site.locality,
+		addressRegion: site.region,
+		addressCountry: site.country,
+	},
+	areaServed: [
+		'Miami',
+		'Coral Gables',
+		'Delray Beach',
+		'Brickell',
+		'South Florida',
+		'United States',
+	],
+	founder: {
+		'@type': 'Person',
+		name: site.founder,
+	},
+};
+
+const websiteLd = {
+	'@type': 'WebSite',
+	'@id': `${site.url}/#website`,
+	url: site.url,
+	name: site.name,
+	publisher: { '@id': `${site.url}/#studio` },
+};
+
+const graph = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@graph': [organizationLd, websiteLd, ...graph],
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<meta name="robots" content={noIndex ? 'noindex, follow' : 'index, follow'} />
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content={site.locale} />
+		<meta property="og:site_name" content={site.name} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<SiteNav currentPath={Astro.url.pathname} />
+		<slot />
+	</body>
+</html>

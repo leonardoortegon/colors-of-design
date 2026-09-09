@@ -1,0 +1,200 @@
+---
+interface Props {
+	heading: string;
+	copy: string;
+	submitLabel?: string;
+	privacyNote?: string;
+}
+
+const {
+	heading,
+	copy,
+	submitLabel = 'Send Message',
+	privacyNote = 'Your information is used only to respond to this project inquiry.',
+} = Astro.props;
+---
+
+<section class="conversion" id="inquiry" aria-labelledby="conversion-heading" data-nav-surface="earth">
+	<div class="conversion__inner">
+		<div class="conversion__stack">
+			<div class="conversion__content">
+				<h2 id="conversion-heading" class="conversion__heading">{heading}</h2>
+				<p class="conversion__copy">{copy}</p>
+			</div>
+
+			<div class="conversion__form-panel">
+				<form class="conversion__form" id="conversion-form">
+				<div class="conversion__field">
+					<label class="conversion__label" for="conversion-name">Name</label>
+					<input
+						class="conversion__input"
+						type="text"
+						id="conversion-name"
+						name="name"
+						autocomplete="name"
+						required
+					/>
+				</div>
+
+				<div class="conversion__field">
+					<label class="conversion__label" for="conversion-phone">Phone</label>
+					<input
+						class="conversion__input"
+						type="tel"
+						id="conversion-phone"
+						name="phone"
+						autocomplete="tel"
+						required
+					/>
+				</div>
+
+				<div class="conversion__field">
+					<label class="conversion__label" for="conversion-message">Message</label>
+					<textarea
+						class="conversion__textarea"
+						id="conversion-message"
+						name="message"
+						rows="4"
+						required
+					></textarea>
+				</div>
+
+				<button type="button" class="conversion__submit">{submitLabel}</button>
+			</form>
+
+			<p class="conversion__privacy">{privacyNote}</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.conversion {
+		width: 100%;
+		background-color: var(--color-earth);
+	}
+
+	.conversion__inner {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding: clamp(4rem, 8vw, 7rem) var(--site-gutter);
+	}
+
+	.conversion__stack {
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		gap: clamp(2.5rem, 5vw, 3.5rem);
+		width: 100%;
+		max-width: 30rem;
+		margin-inline: auto;
+	}
+
+	.conversion__content {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.25rem, 2.5vw, 1.5rem);
+		width: 100%;
+		text-align: left;
+	}
+
+	.conversion__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+	}
+
+	.conversion__copy {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+	}
+
+	.conversion__form-panel {
+		width: 100%;
+	}
+
+	.conversion__form {
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+	}
+
+	.conversion__field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.625rem;
+	}
+
+	.conversion__label {
+		font-family: var(--font-body);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+	}
+
+	.conversion__input,
+	.conversion__textarea {
+		width: 100%;
+		padding: 0.625rem 0;
+		font-family: var(--font-body);
+		font-size: 0.9375rem;
+		line-height: 1.5;
+		color: var(--color-text);
+		background-color: transparent;
+		border: none;
+		border-bottom: 1px solid rgba(26, 26, 26, 0.16);
+		border-radius: 0;
+		transition: border-color 0.2s ease;
+	}
+
+	.conversion__input:focus,
+	.conversion__textarea:focus {
+		outline: none;
+		border-bottom-color: var(--color-text);
+	}
+
+	.conversion__textarea {
+		resize: vertical;
+		min-height: 6rem;
+	}
+
+	.conversion__submit {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		margin-top: 0.5rem;
+		padding: 0.875rem 2rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text);
+		background-color: transparent;
+		border: 1px solid var(--color-accent);
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.conversion__submit:hover {
+		color: var(--color-accent-hover);
+		border-color: var(--color-accent-hover);
+	}
+
+	.conversion__privacy {
+		margin-top: 1.25rem;
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		opacity: 0.85;
+	}
+</style>

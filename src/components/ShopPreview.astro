@@ -1,0 +1,319 @@
+---
+export interface Product {
+	name: string;
+	details: string;
+	price?: string;
+}
+
+interface Props {
+	heading: string;
+	copy: string;
+	products: Product[];
+	ctaLabel: string;
+}
+
+const { heading, copy, products, ctaLabel } = Astro.props;
+---
+
+<section class="shop" aria-labelledby="shop-heading">
+	<div class="shop__inner">
+		<header class="shop__header">
+			<h2 id="shop-heading" class="shop__heading">{heading}</h2>
+			<p class="shop__copy">{copy}</p>
+		</header>
+	</div>
+
+	<div class="shop__slider" data-shop-slider>
+		<div class="shop__viewport" data-shop-viewport tabindex="0" aria-label="Product collection">
+			<div class="shop__track" data-shop-track>
+				{products.map((product) => (
+					<article class="shop__product">
+						<div class="shop__product-card">
+							<div class="shop__product-media" aria-hidden="true"></div>
+							<div class="shop__product-body">
+								<h3 class="shop__product-name">{product.name}</h3>
+								<p class="shop__product-details">{product.details}</p>
+								{product.price && <p class="shop__product-price">{product.price}</p>}
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<div class="shop__inner">
+		<div class="shop__footer">
+			<button type="button" class="shop__cta">{ctaLabel}</button>
+		</div>
+	</div>
+</section>
+
+<style>
+	.shop {
+		width: 100%;
+		background-color: var(--color-bg);
+		--shop-gutter: var(--site-gutter);
+	}
+
+	.shop__inner {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding-inline: var(--site-gutter);
+	}
+
+	.shop__inner:first-of-type {
+		padding-top: clamp(4rem, 8vw, 7rem);
+	}
+
+	.shop__inner:last-of-type {
+		padding-bottom: clamp(4rem, 8vw, 7rem);
+	}
+
+	.shop__header {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-bottom: clamp(3rem, 6vw, 4.5rem);
+	}
+
+	.shop__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+	}
+
+	.shop__copy {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+		max-width: 32rem;
+	}
+
+	.shop__slider {
+		width: 100%;
+		margin-bottom: clamp(3rem, 6vw, 4.5rem);
+	}
+
+	.shop__viewport {
+		overflow-x: auto;
+		overflow-y: hidden;
+		padding-left: var(--shop-gutter);
+		overscroll-behavior-x: none;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		cursor: grab;
+	}
+
+	.shop__viewport::-webkit-scrollbar {
+		display: none;
+	}
+
+	.shop__viewport.is-dragging {
+		cursor: grabbing;
+	}
+
+	.shop__viewport:focus-visible {
+		outline: 2px solid var(--color-text);
+		outline-offset: 2px;
+	}
+
+	.shop__track {
+		display: flex;
+		gap: clamp(1.25rem, 2vw, 2rem);
+		width: max-content;
+	}
+
+	.shop__product {
+		flex: 0 0 clamp(200px, 22vw, 280px);
+	}
+
+	.shop__product-card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		color: inherit;
+	}
+
+	.shop__product-media {
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		margin-bottom: clamp(1.25rem, 2vw, 1.5rem);
+		background-color: #e8e8e8;
+	}
+
+	.shop__product-body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.625rem;
+		text-align: center;
+	}
+
+	.shop__product-name {
+		font-family: var(--font-heading);
+		font-size: clamp(1rem, 1.25vw, 1.125rem);
+		font-weight: 400;
+		line-height: 1.35;
+		letter-spacing: -0.01em;
+		color: var(--color-text);
+	}
+
+	.shop__product-details,
+	.shop__product-price {
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: var(--color-text-muted);
+	}
+
+	.shop__product-price {
+		margin-top: 0.125rem;
+	}
+
+	.shop__footer {
+		display: flex;
+		justify-content: center;
+	}
+
+	.shop__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.875rem 2rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text);
+		background-color: transparent;
+		border: 1px solid var(--color-accent);
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.shop__cta:hover {
+		color: var(--color-accent-hover);
+		border-color: var(--color-accent-hover);
+	}
+
+	@media (max-width: 768px) {
+		.shop__copy {
+			max-width: none;
+		}
+
+		.shop__product {
+			flex-basis: clamp(180px, 72vw, 260px);
+		}
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		function getMaxScroll(viewport, track) {
+			var last = track.querySelector('.shop__product:last-child');
+			if (!last) return 0;
+
+			var paddingLeft = parseFloat(getComputedStyle(viewport).paddingLeft) || 0;
+			return Math.max(
+				0,
+				paddingLeft + track.offsetLeft + last.offsetLeft + last.offsetWidth - viewport.clientWidth,
+			);
+		}
+
+		function clampScroll(viewport, track) {
+			var maxScroll = getMaxScroll(viewport, track);
+			if (viewport.scrollLeft < 0) {
+				viewport.scrollLeft = 0;
+			} else if (viewport.scrollLeft > maxScroll) {
+				viewport.scrollLeft = maxScroll;
+			}
+		}
+
+		function initShopSlider(slider) {
+			var viewport = slider.querySelector('[data-shop-viewport]');
+			var track = slider.querySelector('[data-shop-track]');
+			if (!viewport || !track) return;
+
+			var isDragging = false;
+			var moved = false;
+			var startX = 0;
+			var scrollLeft = 0;
+
+			function updateScrollBounds() {
+				clampScroll(viewport, track);
+			}
+
+			viewport.addEventListener('scroll', function () {
+				clampScroll(viewport, track);
+			});
+
+			viewport.addEventListener('scrollend', updateScrollBounds);
+
+			if (typeof ResizeObserver !== 'undefined') {
+				var resizeObserver = new ResizeObserver(updateScrollBounds);
+				resizeObserver.observe(viewport);
+				resizeObserver.observe(track);
+			}
+
+			window.addEventListener('resize', updateScrollBounds);
+			updateScrollBounds();
+
+			// Mouse drag only — touch uses native horizontal scroll so vertical page scroll still works.
+			if (window.matchMedia('(pointer: fine)').matches) {
+				viewport.addEventListener('mousedown', function (e) {
+					if (e.button !== 0) return;
+					isDragging = true;
+					moved = false;
+					startX = e.pageX;
+					scrollLeft = viewport.scrollLeft;
+					viewport.classList.add('is-dragging');
+				});
+
+				window.addEventListener('mousemove', function (e) {
+					if (!isDragging) return;
+					var walk = e.pageX - startX;
+					if (Math.abs(walk) > 3) moved = true;
+					e.preventDefault();
+					var maxScroll = getMaxScroll(viewport, track);
+					viewport.scrollLeft = Math.max(0, Math.min(scrollLeft - walk, maxScroll));
+				});
+
+				window.addEventListener('mouseup', function () {
+					if (!isDragging) return;
+					isDragging = false;
+					viewport.classList.remove('is-dragging');
+					clampScroll(viewport, track);
+				});
+			}
+
+			viewport.addEventListener(
+				'click',
+				function (e) {
+					if (moved) {
+						e.preventDefault();
+						e.stopPropagation();
+						moved = false;
+					}
+				},
+				true,
+			);
+		}
+
+		function boot() {
+			document.querySelectorAll('[data-shop-slider]').forEach(initShopSlider);
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', boot);
+		} else {
+			boot();
+		}
+	})();
+</script>

@@ -1,0 +1,720 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ConversionSection from '../../components/ConversionSection.astro';
+import { getProjectBySlug, getRelatedProjects, projects } from '../../data/projects';
+import { absoluteUrl, site } from '../../data/site';
+
+export function getStaticPaths() {
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+	}));
+}
+
+const { slug } = Astro.params;
+const project = getProjectBySlug(slug ?? '');
+
+if (!project) {
+	throw new Error(`Unknown project: ${slug}`);
+}
+
+const related = getRelatedProjects(project.slug);
+const pageUrl = absoluteUrl(`/work/${project.slug}`);
+
+const jsonLd = [
+	{
+		'@type': 'CreativeWork',
+		'@id': `${pageUrl}#project`,
+		url: pageUrl,
+		name: `${project.name} Interior Design`,
+		headline: project.name,
+		description: project.seoDescription,
+		image: project.gallery.map((image) => absoluteUrl(image.src)),
+		creator: { '@id': `${site.url}/#studio` },
+		author: { '@id': `${site.url}/#studio` },
+		locationCreated: {
+			'@type': 'Place',
+			name: project.location,
+		},
+		about: project.services.map((service) => ({
+			'@type': 'Service',
+			name: service,
+			provider: { '@id': `${site.url}/#studio` },
+		})),
+		keywords: [
+			'interior design',
+			project.location,
+			project.name,
+			'luxury residential interiors',
+			...project.services,
+		].join(', '),
+	},
+	{
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: 'Home',
+				item: site.url,
+			},
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: 'Work',
+				item: absoluteUrl('/work'),
+			},
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: project.name,
+				item: pageUrl,
+			},
+		],
+	},
+	{
+		'@type': 'ImageGallery',
+		name: `${project.name} interior photography`,
+		url: pageUrl,
+		mainEntity: {
+			'@type': 'ItemList',
+			itemListElement: project.gallery.map((image, index) => ({
+				'@type': 'ListItem',
+				position: index + 1,
+				item: {
+					'@type': 'ImageObject',
+					contentUrl: absoluteUrl(image.src),
+					name: image.caption,
+					caption: image.description,
+					creator: { '@id': `${site.url}/#studio` },
+				},
+			})),
+		},
+	},
+];
+---
+
+<BaseLayout
+	title={project.seoTitle}
+	description={project.seoDescription}
+	image={project.imageSrc}
+	canonicalPath={`/work/${project.slug}`}
+	jsonLd={jsonLd}
+>
+	<main class="page project" id="main">
+		<article>
+			<section
+				class="project__article"
+				aria-labelledby="project-title"
+				data-nav-surface="earth"
+				data-nav-earth-top
+				style={{ '--image-max-width': `${project.imageWidth}px` }}
+			>
+				<div class="project__article-inner">
+					<Breadcrumbs
+						items={[
+							{ label: 'Home', href: '/' },
+							{ label: 'Work', href: '/work' },
+							{ label: project.name },
+						]}
+					/>
+
+					<header class="project__article-header">
+						<p class="project__eyebrow">Interior Design Project</p>
+						<h1 id="project-title" class="project__title">{project.name}</h1>
+						<p class="project__meta">
+							{project.location} · {project.scope} · {project.year}
+						</p>
+						<p class="project__meta">{project.services.join(' · ')}</p>
+					</header>
+
+					<figure class="project__hero">
+						<img
+							class="project__hero-image"
+							src={project.imageSrc}
+							alt={project.imageAlt}
+							width={project.imageWidth}
+							height={project.imageHeight}
+							fetchpriority="high"
+						/>
+					</figure>
+
+					<p class="project__meta project__materials">{project.materials.join(' · ')}</p>
+
+					<div class="project__prose">
+						<p class="project__lead">{project.challenge}</p>
+
+						<h2 class="project__subhead">The approach</h2>
+						<p>{project.approach}</p>
+
+						<h2 class="project__subhead">The result</h2>
+						<p>{project.outcome}</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="project__gallery" aria-labelledby="project-gallery">
+				<div class="project__gallery-inner">
+					<h2 id="project-gallery" class="project__section-title">Rooms & Details</h2>
+					<ul class="project__gallery-list">
+						{project.gallery.map((image, index) => (
+							<li class="project__gallery-item">
+								<div
+									class:list={[
+										'project__gallery-row',
+										index % 2 === 1 && 'project__gallery-row--flip',
+									]}
+								>
+									<div class="project__gallery-media">
+										<img
+											src={image.src}
+											alt={image.alt}
+											width={image.width}
+											height={image.height}
+											loading="lazy"
+										/>
+									</div>
+									<div class="project__gallery-body">
+										<h3 class="project__gallery-title">{image.caption}</h3>
+										<p class="project__gallery-description">{image.description}</p>
+									</div>
+								</div>
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+
+			{related.length > 0 && (
+				<section class="project__related" aria-labelledby="related-work" data-nav-surface="earth">
+					<div class="project__related-inner">
+						<h2 id="related-work" class="project__section-title">More Projects</h2>
+					</div>
+					<div class="project__related-slider" data-related-slider>
+						<div
+							class="project__related-viewport"
+							data-related-viewport
+							tabindex="0"
+							aria-label="More projects"
+						>
+							<ul class="project__related-track" data-related-track>
+								{related.map((item) => (
+									<li class="project__related-item">
+										<a class="project__related-card" href={`/work/${item.slug}`}>
+											<img
+												src={item.imageSrc}
+												alt={item.imageAlt}
+												width={item.imageWidth}
+												height={item.imageHeight}
+												loading="lazy"
+											/>
+											<div class="project__related-body">
+												<p class="project__related-name">{item.name}</p>
+												<p class="project__related-location">{item.location}</p>
+												<span class="project__related-action">View Project</span>
+											</div>
+										</a>
+									</li>
+								))}
+							</ul>
+						</div>
+					</div>
+				</section>
+			)}
+		</article>
+
+		<ConversionSection
+			heading="Your Home Should Feel Unmistakably Yours."
+			copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
+		/>
+	</main>
+</BaseLayout>
+
+<style>
+	.project__article {
+		background-color: var(--color-earth);
+		--project-content-width: 56rem;
+		margin-top: -4.75rem;
+		padding-top: 4.75rem;
+	}
+
+	.project__article-inner,
+	.project__gallery-inner,
+	.project__related-inner {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding-inline: var(--site-gutter);
+	}
+
+	.project__article-inner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-block: clamp(2rem, 4vw, 3.5rem) clamp(4rem, 8vw, 6.5rem);
+	}
+
+	.project__article-inner :global(.crumbs) {
+		align-self: stretch;
+		width: min(100%, var(--project-content-width));
+		margin-bottom: clamp(2rem, 4vw, 3rem);
+	}
+
+	.project__article-header {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.75rem;
+		width: min(100%, var(--project-content-width));
+		margin-bottom: clamp(2rem, 4vw, 3rem);
+		text-align: center;
+	}
+
+	.project__eyebrow {
+		font-family: var(--font-body);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+	}
+
+	.project__title {
+		font-family: var(--font-heading);
+		font-size: clamp(2.25rem, 4vw, 3.25rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+	}
+
+	.project__meta {
+		font-family: var(--font-body);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+		line-height: 1.6;
+	}
+
+	.project__hero {
+		width: min(100%, var(--project-content-width));
+		margin: 0 0 clamp(1.25rem, 2.5vw, 1.75rem);
+	}
+
+	.project__hero-image {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.project__materials {
+		width: min(100%, var(--project-content-width));
+		margin: 0 0 clamp(2.5rem, 5vw, 3.5rem);
+		text-align: center;
+	}
+
+	.project__prose {
+		display: flex;
+		flex-direction: column;
+		gap: 0.875rem;
+		width: min(100%, var(--project-content-width));
+	}
+
+	.project__lead {
+		font-family: var(--font-body);
+		font-size: clamp(1rem, 1.2vw, 1.125rem);
+		line-height: 1.8;
+		color: var(--color-text);
+		margin-bottom: 0.5rem;
+	}
+
+	.project__subhead {
+		font-family: var(--font-body);
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text);
+		margin-top: 1.25rem;
+	}
+
+	.project__prose .project__subhead:first-of-type {
+		margin-top: 0.5rem;
+	}
+
+	.project__prose p {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+	}
+
+	.project__section-title {
+		font-family: var(--font-heading);
+		font-size: clamp(1.5rem, 2.4vw, 2rem);
+		font-weight: 400;
+		letter-spacing: -0.02em;
+		line-height: 1.2;
+		margin-bottom: 0.5rem;
+	}
+
+	.project__gallery-inner {
+		max-width: 1400px;
+		padding-block: clamp(4rem, 8vw, 6.5rem);
+	}
+
+	.project__gallery-list {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(4rem, 8vw, 7rem);
+		list-style: none;
+		margin-top: 2rem;
+	}
+
+	.project__gallery-row {
+		display: grid;
+		grid-template-columns: minmax(0, 13fr) minmax(0, 7fr);
+		align-items: center;
+		gap: clamp(2rem, 3.5vw, 3.25rem);
+	}
+
+	.project__gallery-row--flip {
+		grid-template-columns: minmax(0, 7fr) minmax(0, 13fr);
+	}
+
+	.project__gallery-row--flip .project__gallery-body {
+		order: 1;
+	}
+
+	.project__gallery-row--flip .project__gallery-media {
+		order: 2;
+	}
+
+	.project__gallery-media {
+		width: 100%;
+	}
+
+	.project__gallery-media img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.project__gallery-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.625rem;
+		max-width: 22rem;
+	}
+
+	.project__gallery-title {
+		font-family: var(--font-heading);
+		font-size: clamp(1.375rem, 2vw, 1.625rem);
+		font-weight: 400;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
+		color: var(--color-text);
+		margin-top: 0;
+	}
+
+	.project__gallery-description {
+		font-family: var(--font-body);
+		font-size: clamp(0.875rem, 1vw, 0.9375rem);
+		line-height: 1.65;
+		color: var(--color-text-muted);
+	}
+
+	.project__related {
+		background-color: var(--color-earth);
+		--related-max-width: 1400px;
+		--related-gutter: var(--site-gutter);
+		--related-gap: clamp(1rem, 2vw, 1.5rem);
+		--related-columns: 1;
+		padding-bottom: clamp(4rem, 8vw, 6.5rem);
+	}
+
+	.project__related-inner {
+		max-width: var(--related-max-width);
+		padding-top: clamp(4rem, 8vw, 6.5rem);
+		padding-bottom: 2rem;
+	}
+
+	.project__related-slider {
+		width: min(100%, var(--related-max-width));
+		margin-inline: auto;
+		padding-inline: var(--related-gutter);
+	}
+
+	.project__related-viewport {
+		overflow-x: auto;
+		overflow-y: hidden;
+		container-type: inline-size;
+		overscroll-behavior-x: none;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+		cursor: grab;
+	}
+
+	.project__related-viewport::-webkit-scrollbar {
+		display: none;
+	}
+
+	.project__related-viewport.is-dragging {
+		cursor: grabbing;
+	}
+
+	.project__related-viewport:focus-visible {
+		outline: 2px solid var(--color-text);
+		outline-offset: 2px;
+	}
+
+	.project__related-track {
+		display: flex;
+		gap: var(--related-gap);
+		width: max-content;
+		list-style: none;
+	}
+
+	.project__related-item {
+		flex: 0 0
+			calc(
+				(100cqw - (var(--related-gap) * (var(--related-columns) - 1))) / var(--related-columns)
+			);
+	}
+
+	@media (min-width: 641px) {
+		.project__related {
+			--related-columns: 2;
+		}
+	}
+
+	@media (min-width: 1025px) {
+		.project__related {
+			--related-columns: 4;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.project__related-viewport {
+			overflow: visible;
+			container-type: normal;
+			cursor: default;
+		}
+
+		.project__related-track {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			width: 100%;
+		}
+
+		.project__related-item {
+			min-width: 0;
+		}
+	}
+
+	.project__related-card {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		color: inherit;
+	}
+
+	.project__related-card img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 10;
+		object-fit: cover;
+		display: block;
+	}
+
+	.project__related-name {
+		font-family: var(--font-heading);
+		font-size: 1.375rem;
+		font-weight: 400;
+		letter-spacing: -0.01em;
+	}
+
+	.project__related-location {
+		font-size: 0.6875rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+		margin-top: 0.25rem;
+	}
+
+	.project__related-action {
+		display: inline-flex;
+		width: fit-content;
+		margin-top: 0.625rem;
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+	}
+
+	.project__related-card:hover .project__related-action {
+		border-color: var(--color-text);
+	}
+
+	@media (max-width: 900px) {
+		.project__related-name {
+			font-size: 1.0625rem;
+		}
+
+		.project__related-location {
+			font-size: 0.625rem;
+		}
+
+		.project__related-action {
+			font-size: 0.6875rem;
+			margin-top: 0.5rem;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.project__article-inner :global(.crumbs) {
+			width: 100%;
+		}
+
+		.project__article-header {
+			align-items: flex-start;
+			text-align: left;
+		}
+
+		.project__materials {
+			text-align: left;
+		}
+
+		.project__gallery-row,
+		.project__gallery-row--flip {
+			grid-template-columns: 1fr;
+		}
+
+		.project__gallery-row--flip .project__gallery-body,
+		.project__gallery-row--flip .project__gallery-media {
+			order: unset;
+		}
+
+		.project__gallery-body {
+			max-width: none;
+			order: 0;
+		}
+
+		.project__gallery-media {
+			order: -1;
+		}
+	}
+</style>
+
+<script is:inline>
+	(function () {
+		function getMaxScroll(viewport, track) {
+			var last = track.querySelector('.project__related-item:last-child');
+			if (!last) return 0;
+
+			var styles = getComputedStyle(viewport);
+			var paddingLeft = parseFloat(styles.paddingLeft) || 0;
+			var paddingRight = parseFloat(styles.paddingRight) || 0;
+			return Math.max(
+				0,
+				paddingLeft +
+					track.offsetLeft +
+					last.offsetLeft +
+					last.offsetWidth +
+					paddingRight -
+					viewport.clientWidth,
+			);
+		}
+
+		function clampScroll(viewport, track) {
+			var maxScroll = getMaxScroll(viewport, track);
+			if (viewport.scrollLeft < 0) {
+				viewport.scrollLeft = 0;
+			} else if (viewport.scrollLeft > maxScroll) {
+				viewport.scrollLeft = maxScroll;
+			}
+		}
+
+		function initRelatedSlider(slider) {
+			var viewport = slider.querySelector('[data-related-viewport]');
+			var track = slider.querySelector('[data-related-track]');
+			if (!viewport || !track) return;
+
+			var isDragging = false;
+			var moved = false;
+			var startX = 0;
+			var scrollLeft = 0;
+
+			function updateScrollBounds() {
+				clampScroll(viewport, track);
+			}
+
+			viewport.addEventListener('scroll', function () {
+				clampScroll(viewport, track);
+			});
+
+			viewport.addEventListener('scrollend', updateScrollBounds);
+
+			if (typeof ResizeObserver !== 'undefined') {
+				var resizeObserver = new ResizeObserver(updateScrollBounds);
+				resizeObserver.observe(viewport);
+				resizeObserver.observe(track);
+			}
+
+			window.addEventListener('resize', updateScrollBounds);
+			updateScrollBounds();
+
+			if (window.matchMedia('(pointer: fine)').matches) {
+				viewport.addEventListener('mousedown', function (e) {
+					if (e.button !== 0) return;
+					isDragging = true;
+					moved = false;
+					startX = e.pageX;
+					scrollLeft = viewport.scrollLeft;
+					viewport.classList.add('is-dragging');
+				});
+
+				window.addEventListener('mousemove', function (e) {
+					if (!isDragging) return;
+					var walk = e.pageX - startX;
+					if (Math.abs(walk) > 3) moved = true;
+					e.preventDefault();
+					var maxScroll = getMaxScroll(viewport, track);
+					viewport.scrollLeft = Math.max(0, Math.min(scrollLeft - walk, maxScroll));
+				});
+
+				window.addEventListener('mouseup', function () {
+					if (!isDragging) return;
+					isDragging = false;
+					viewport.classList.remove('is-dragging');
+					clampScroll(viewport, track);
+				});
+			}
+
+			viewport.addEventListener(
+				'click',
+				function (e) {
+					if (moved) {
+						e.preventDefault();
+						e.stopPropagation();
+						moved = false;
+					}
+				},
+				true,
+			);
+		}
+
+		function boot() {
+			document.querySelectorAll('[data-related-slider]').forEach(initRelatedSlider);
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', boot);
+		} else {
+			boot();
+		}
+	})();
+</script>

@@ -1,0 +1,344 @@
+---
+export interface Project {
+	name: string;
+	location: string;
+	scope: string;
+	concept: string;
+	imageSrc: string;
+	imageAlt: string;
+	imageWidth?: number;
+	imageHeight?: number;
+	href?: string;
+}
+
+interface Props {
+	heading: string;
+	introduction: string;
+	projects: Project[];
+	ctaLabel?: string;
+	ctaHref?: string;
+	headingLevel?: 'h1' | 'h2';
+	sectionId?: string;
+	cardLayout?: 'alternating' | 'image-left';
+	alternateBackgrounds?: boolean;
+}
+
+const {
+	heading,
+	introduction,
+	projects,
+	ctaLabel,
+	ctaHref = '/work',
+	headingLevel = 'h2',
+	sectionId = 'work',
+	cardLayout = 'alternating',
+	alternateBackgrounds = false,
+} = Astro.props;
+
+const HeadingTag = headingLevel;
+---
+
+<section
+	class:list={['work', alternateBackgrounds && 'work--banded']}
+	id={sectionId}
+	aria-labelledby="work-heading"
+>
+	<div class="work__inner">
+		<header class="work__header">
+			<HeadingTag id="work-heading" class="work__heading">{heading}</HeadingTag>
+			<p class="work__intro">{introduction}</p>
+		</header>
+
+		<div class="work__list">
+			{projects.map((project, index) => (
+				<article
+					class:list={[
+						'work__card',
+						cardLayout === 'alternating' && index % 2 === 0 && 'work__card--alternate-left',
+						cardLayout === 'image-left' && 'work__card--listing',
+						alternateBackgrounds && index % 2 === 0 && 'work__card--muted',
+					]}
+					data-nav-surface={alternateBackgrounds && index % 2 === 0 ? 'earth' : undefined}
+				>
+					<a href={project.href ?? '/work'} class="work__card-link">
+						<div class="work__card-body">
+							{headingLevel === 'h1' ? (
+								<h2 class="work__card-name">{project.name}</h2>
+							) : (
+								<h3 class="work__card-name">{project.name}</h3>
+							)}
+							<p class="work__card-location">{project.location}</p>
+							<p class="work__card-scope">{project.scope}</p>
+							<p class="work__card-concept">{project.concept}</p>
+							<span class="work__card-action">View Project</span>
+						</div>
+						<div class="work__card-media">
+							<img
+								class="work__card-image"
+								src={project.imageSrc}
+								alt={project.imageAlt}
+								width={project.imageWidth ?? 1200}
+								height={project.imageHeight ?? 800}
+								loading="lazy"
+							/>
+						</div>
+					</a>
+				</article>
+			))}
+		</div>
+
+		{ctaLabel && (
+			<div class="work__footer">
+				<a href={ctaHref} class="work__cta">{ctaLabel}</a>
+			</div>
+		)}
+	</div>
+</section>
+
+<style>
+	.work {
+		width: 100%;
+		background-color: var(--color-bg);
+		--work-gutter: var(--site-gutter);
+	}
+
+	.work__inner {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding: clamp(4rem, 8vw, 7rem) var(--work-gutter);
+	}
+
+	.work__header {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-bottom: clamp(3rem, 6vw, 4.5rem);
+		text-align: left;
+	}
+
+	.work__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+	}
+
+	.work__intro {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+		max-width: 34rem;
+	}
+
+	.work__list {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(4rem, 8vw, 7rem);
+	}
+
+	.work--banded .work__list {
+		gap: 0;
+	}
+
+	.work--banded .work__card {
+		position: relative;
+		isolation: isolate;
+		margin-inline: calc(-1 * var(--work-gutter));
+		padding: clamp(4rem, 8vw, 7rem) var(--work-gutter);
+	}
+
+	.work--banded .work__card--muted::before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		inset: 0;
+		left: 50%;
+		width: 100vw;
+		transform: translateX(-50%);
+		background-color: var(--color-earth);
+	}
+
+	.work__card-link {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1.85fr);
+		align-items: center;
+		gap: clamp(2rem, 4vw, 4rem);
+		color: inherit;
+	}
+
+	.work__card--alternate-left .work__card-link {
+		grid-template-columns: minmax(0, 1.85fr) minmax(0, 1fr);
+	}
+
+	.work__card--alternate-left .work__card-body {
+		order: 2;
+	}
+
+	.work__card--alternate-left .work__card-media {
+		order: 1;
+	}
+
+	.work__card--listing .work__card-link {
+		grid-template-columns: minmax(0, 13fr) minmax(0, 7fr);
+		align-items: center;
+		gap: clamp(2rem, 3.5vw, 3.25rem);
+	}
+
+	.work__card--listing .work__card-body {
+		order: 2;
+		align-self: center;
+	}
+
+	.work__card--listing .work__card-media {
+		order: 1;
+		width: 100%;
+		max-width: 100%;
+		align-self: start;
+	}
+
+	.work__card--listing .work__card-image {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.work__card-link:hover .work__card-action {
+		border-color: var(--color-text);
+	}
+
+	.work__card-media {
+		width: 100%;
+	}
+
+	.work__card-image {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.work__card-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.625rem;
+		width: 100%;
+		max-width: 22rem;
+		justify-self: center;
+		text-align: left;
+	}
+
+	.work__card-name {
+		font-family: var(--font-heading);
+		font-size: clamp(1.375rem, 2vw, 1.625rem);
+		font-weight: 400;
+		line-height: 1.2;
+		letter-spacing: -0.01em;
+		color: var(--color-text);
+		margin-top: 0;
+	}
+
+	.work__card-location {
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+	}
+
+	.work__card-scope {
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: var(--color-text-muted);
+		opacity: 0.85;
+	}
+
+	.work__card-concept {
+		font-family: var(--font-body);
+		font-size: clamp(0.875rem, 1vw, 0.9375rem);
+		line-height: 1.65;
+		color: var(--color-text-muted);
+		margin-top: 0.375rem;
+	}
+
+	.work__card-action {
+		display: inline-flex;
+		width: fit-content;
+		margin-top: 0.75rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text);
+		border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+		transition: border-color 0.2s ease;
+	}
+
+	.work__footer {
+		display: flex;
+		justify-content: center;
+		margin-top: clamp(3rem, 6vw, 4.5rem);
+	}
+
+	.work__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.875rem 2rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text);
+		background-color: transparent;
+		border: 1px solid var(--color-accent);
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.work__cta:hover {
+		color: var(--color-accent-hover);
+		border-color: var(--color-accent-hover);
+	}
+
+	@media (max-width: 900px) {
+		.work__intro {
+			max-width: none;
+		}
+
+		.work__list {
+			gap: clamp(5.5rem, 12vw, 9rem);
+		}
+
+		.work--banded .work__list {
+			gap: 0;
+		}
+
+		.work__card-link,
+		.work__card--alternate-left .work__card-link,
+		.work__card--listing .work__card-link {
+			grid-template-columns: 1fr;
+		}
+
+		.work__card-body,
+		.work__card--alternate-left .work__card-body,
+		.work__card--listing .work__card-body {
+			max-width: none;
+			justify-self: stretch;
+			order: 0;
+		}
+
+		.work__card-media,
+		.work__card--alternate-left .work__card-media,
+		.work__card--listing .work__card-media {
+			order: -1;
+		}
+	}
+</style>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" fill="none" role="img" aria-label="Abstract color composition">
+  <rect width="960" height="720" fill="#f5f5f5"/>
+  <circle cx="480" cy="360" r="180" fill="#e8e0d4"/>
+  <circle cx="620" cy="280" r="120" fill="#c4b5a0" opacity="0.7"/>
+  <circle cx="340" cy="420" r="100" fill="#8b7355" opacity="0.5"/>
+  <rect x="200" y="180" width="140" height="140" rx="8" fill="#d4c4b0" opacity="0.6" transform="rotate(-12 270 250)"/>
+  <rect x="620" y="400" width="120" height="120" rx="8" fill="#a69076" opacity="0.4" transform="rotate(18 680 460)"/>
+</svg>

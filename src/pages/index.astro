@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroOverlay from '../components/HeroOverlay.astro';
+import SplitSection from '../components/SplitSection.astro';
+import SelectedWork from '../components/SelectedWork.astro';
+import ServicesSection from '../components/ServicesSection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import ShopPreview from '../components/ShopPreview.astro';
+import ConversionSection from '../components/ConversionSection.astro';
+import { projects } from '../data/projects';
+import { services, featuredServices } from '../data/services';
+import { site } from '../data/site';
+
+const homepageProjectSlugs = [
+	'delray-beach-interior-design',
+	'coral-gables-estate',
+	'brickell-penthouse',
+];
+
+const listedProjects = homepageProjectSlugs
+	.map((slug) => projects.find((project) => project.slug === slug))
+	.filter((project): project is NonNullable<typeof project> => project !== undefined)
+	.map((project) => ({
+		name: project.name,
+		location: project.location,
+		scope: project.scope,
+		concept: project.concept,
+		imageSrc: project.imageSrc,
+		imageAlt: project.imageAlt,
+		imageWidth: project.imageWidth,
+		imageHeight: project.imageHeight,
+		href: `/work/${project.slug}`,
+	}));
+---
+
+<BaseLayout title={site.defaultTitle} description={site.defaultDescription}>
+	<HeroOverlay
+		eyebrow="Luxury interior design · Miami & beyond"
+		heading="Interiors shaped around the way you live."
+		description="Colors of Design is a Miami-based interior design studio creating refined, deeply personal residences, from the first concept to the final installation."
+		ctas={[
+			{ label: 'Start Your Project' },
+			{ label: 'Explore Our Work', href: '/work' },
+		]}
+		trustItems={[
+			'Award-winning interior design',
+			'Residential projects',
+			'Concept-to-completion service',
+			'Miami and projects across the United States',
+		]}
+		imageSrc="/hero.jpg"
+		imageAlt="Luxury residential interior by Colors of Design Group in Miami"
+	/>
+	<SplitSection
+		heading={'Distinctive by design.\nPersonal by nature.'}
+		copy={[
+			'We create interiors that feel considered, comfortable, and unmistakably personal. Our multidisciplinary team brings together interior design, architecture, custom furnishings, lighting, and project management to shape every detail into one cohesive home.',
+		]}
+		linkLabel="Meet the Studio"
+	/>
+	<SelectedWork
+		heading="Selected Work"
+		introduction="A collection of homes defined by thoughtful planning, expressive materials, and the people who inhabit them."
+		projects={listedProjects}
+		ctaLabel="Explore All Projects"
+		ctaHref="/work"
+	/>
+	<ServicesSection
+		heading="How We Can Work Together"
+		introduction="From full-scale residences and renovations to furnishings and finishing touches, we tailor our services to your vision and guide every detail with clarity and care."
+		services={featuredServices.map((service) => ({
+			title: service.name,
+			description: service.summary,
+			imageSrc: service.imageSrc,
+			imageAlt: service.imageAlt,
+			href: `/services#${service.slug}`,
+		}))}
+		linkLabel="Explore All Services"
+		linkHref="/services"
+	/>
+	<ProcessSection
+		heading="A Clear Path From Vision to Home"
+		steps={[
+			{
+				title: 'Discover',
+				description:
+					'We begin by understanding your property, priorities, lifestyle, aesthetic, timeline, and design investment.',
+			},
+			{
+				title: 'Define',
+				description:
+					'We define the scope, design direction, project roadmap, working budget, and milestones ahead.',
+			},
+			{
+				title: 'Design',
+				description:
+					'Our team develops the space plan, concepts, renderings, materials, lighting, furnishings, and details.',
+			},
+			{
+				title: 'Deliver',
+				description:
+					'We coordinate purchasing, fabrication, installation, and styling to bring your complete vision to life.',
+			},
+		]}
+		linkLabel="See Our Process"
+	/>
+	<SplitSection
+		sectionId="studio"
+		heading="An Artistic Eye. An Architectural Approach."
+		copy={[
+			'Founded by Margaret Van Puffelen, Colors of Design combines a foundation in decorative arts with formal training in interior design and interior architecture. Together with a multidisciplinary team, Margaret has created residences for clients throughout the United States and Latin America—balancing creative expression with careful planning and execution.',
+		]}
+		linkLabel="Meet Margaret and the Team"
+		linkStyle="text"
+		imageSrc="/margaret.jpg"
+		imageAlt="Margaret Van Puffelen and the Colors of Design team"
+		imageWidth={1200}
+		imageHeight={1500}
+		imagePosition="left"
+		imageMaxWidth="34rem"
+	/>
+	<ShopPreview
+		heading="Objects That Finish the Room"
+		copy="Discover lighting, furniture, and decorative objects selected for their materiality, character, and ability to transform a space."
+		products={[
+			{
+				name: 'Sculptural Table Lamp',
+				details: 'Brushed Brass, Linen Shade, Dimmer Switch',
+				price: '$ 680',
+			},
+			{
+				name: 'Woven Lounge Chair',
+				details: 'Natural Oak, Woven Cane, Linen Upholstery',
+				price: '$ 3,200',
+			},
+			{
+				name: 'Hand-Thrown Ceramic Vase',
+				details: 'Ivory Glaze, Stoneware, Matte Finish',
+				price: '$ 420',
+			},
+			{
+				name: 'Brushed Brass Sconce',
+				details: 'Brushed Brass, Opal Glass, Hardwired',
+				price: '$ 540',
+			},
+			{
+				name: 'Linen Throw Pillow',
+				details: 'Belgian Linen, Down Insert, Hidden Zipper',
+				price: '$ 185',
+			},
+			{
+				name: 'Marble Side Table',
+				details: 'Carrara Marble, Bronze Base, Hand-Finished',
+				price: '$ 1,450',
+			},
+			{
+				name: 'Olive Wood Bowl',
+				details: 'Olive Wood, Natural Grain, Food-Safe Finish',
+				price: '$ 320',
+			},
+			{
+				name: 'Cashmere Throw',
+				details: 'Mongolian Cashmere, Ribbed Weave, Warm Taupe',
+				price: '$ 395',
+			},
+		]}
+		ctaLabel="Visit the Collection"
+	/>
+	<ConversionSection
+		heading="Your Home Should Feel Unmistakably Yours."
+		copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
+	/>
+</BaseLayout>

@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SelectedWork from '../../components/SelectedWork.astro';
+import ConversionSection from '../../components/ConversionSection.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { projects } from '../../data/projects';
+import { absoluteUrl, site } from '../../data/site';
+
+const title = 'Interior Design Portfolio | Colors of Design Group';
+const description =
+	'Browse residential interior design projects by Colors of Design Group, including homes in Delray Beach, Coral Gables, and Brickell, Miami.';
+const pageUrl = absoluteUrl('/work');
+
+const listedProjects = projects.map((project) => ({
+	name: project.name,
+	location: project.location,
+	scope: project.scope,
+	concept: project.concept,
+	imageSrc: project.imageSrc,
+	imageAlt: project.imageAlt,
+	imageWidth: project.imageWidth,
+	imageHeight: project.imageHeight,
+	href: `/work/${project.slug}`,
+}));
+
+const jsonLd = [
+	{
+		'@type': 'CollectionPage',
+		'@id': `${pageUrl}#page`,
+		url: pageUrl,
+		name: title,
+		description,
+		isPartOf: { '@id': `${site.url}/#website` },
+		about: {
+			'@type': 'Thing',
+			name: 'Residential interior design',
+		},
+		mainEntity: {
+			'@type': 'ItemList',
+			name: 'Interior design projects',
+			numberOfItems: projects.length,
+			itemListElement: projects.map((project, index) => ({
+				'@type': 'ListItem',
+				position: index + 1,
+				url: absoluteUrl(`/work/${project.slug}`),
+				name: `${project.name} interior design`,
+			})),
+		},
+	},
+	{
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: 'Home',
+				item: site.url,
+			},
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: 'Work',
+				item: pageUrl,
+			},
+		],
+	},
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/work" jsonLd={jsonLd}>
+	<main class="page" id="main">
+		<div class="work-page">
+			<div class="work-page__crumbs">
+				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Work' }]} />
+			</div>
+			<SelectedWork
+				heading="Interior Design Portfolio"
+				headingLevel="h1"
+				sectionId="projects"
+				cardLayout="image-left"
+				alternateBackgrounds
+				introduction="A collection of residences by Colors of Design Group—full-service interior design, interior architecture, and furnishings for homes in Miami, Delray Beach, Coral Gables, and beyond. Select a project to see the brief, materials, and rooms."
+				projects={listedProjects}
+			/>
+		</div>
+		<ConversionSection
+			heading="Your Home Should Feel Unmistakably Yours."
+			copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
+		/>
+	</main>
+</BaseLayout>
+
+<style>
+	.work-page {
+		background-color: var(--color-bg);
+		--work-page-max-width: 1400px;
+	}
+
+	.work-page__crumbs {
+		width: 100%;
+		max-width: var(--work-page-max-width);
+		margin-inline: auto;
+		padding: 2rem var(--site-gutter) 0;
+	}
+
+	.work-page :global(.work__inner) {
+		max-width: var(--work-page-max-width);
+		padding-top: 1.5rem;
+	}
+</style>
