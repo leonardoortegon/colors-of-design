@@ -888,53 +888,6 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 			},
 		],
 	},
-	'coral-gables-estate': {
-		scope: 'Residencia completa · Arquitectura de interiores y mobiliario',
-		concept:
-			'Las proporciones clásicas se encuentran con la fluidez contemporánea a través de carpintería a medida, arte curado y estancias diseñadas tanto para reunirse como para el retiro.',
-		services: [
-			'Diseño de interiores integral',
-			'Renovación y arquitectura de interiores',
-		],
-		imageAlt:
-			'Interior de Coral Gables Estate con carpintería a medida, proporciones clásicas y mobiliario contemporáneo, por Colors of Design',
-		seoTitle: 'Coral Gables Estate | Diseño de interiores | Colors of Design Group',
-		seoDescription:
-			'Arquitectura de interiores y mobiliario para Coral Gables Estate: proporciones clásicas, carpintería a medida y estancias diseñadas para reunirse y para el retiro, por Colors of Design Group.',
-		challenge:
-			'La arquitectura de Coral Gables Estate ya portaba una estructura clásica sólida. El trabajo consistió en honrar esas proporciones y, a la vez, hacer que los interiores se sintieran actuales, habitables y adecuados para una familia que recibe con frecuencia, sin sacrificar estancias privadas para el descanso.',
-		approach:
-			'El estudio desarrolló un paquete completo de arquitectura de interiores: carpintería, iluminación, acabados y mobiliario especificados como una sola composición. El arte y las piezas a medida se colocaron para dar a cada estancia un punto focal, mientras se aclaraban circulación y visuales para que las áreas públicas y privadas se sientan distintas.',
-		outcome:
-			'La residencia sostiene ahora formalidad y fluidez. Las estancias de reunión se sienten compuestas para recibir; los interiores más pausados ofrecen retiro. Materiales y carpintería se leen como originales de la casa, no como añadidos posteriores.',
-		materials: [
-			'Carpintería a medida',
-			'Piedra natural',
-			'Arte curado',
-			'Tapicería a medida',
-			'Iluminación arquitectónica',
-		],
-		gallery: [
-			{
-				alt: 'Arquitectura de interiores de Coral Gables Estate con carpintería y mobiliario compuesto',
-				caption: 'Residencia',
-				description:
-					'Proporciones clásicas enmarcadas por carpintería a medida y mobiliario compuesto para reunirse.',
-			},
-			{
-				alt: 'Detalle de diseño de interiores integral en una vivienda de Coral Gables',
-				caption: 'Detalle',
-				description:
-					'Selecciones de material y acabado llevadas a través de carpintería, piedra e iluminación arquitectónica.',
-			},
-			{
-				alt: 'Interior residencial refinado en Coral Gables, por Colors of Design Group',
-				caption: 'Estar',
-				description:
-					'Una sala equilibrada entre formalidad y fluidez, con arte y tapicería en diálogo.',
-			},
-		],
-	},
 	'sunny-isles': {
 		scope: 'Sala · Diseño de interiores y mobiliario',
 		concept:

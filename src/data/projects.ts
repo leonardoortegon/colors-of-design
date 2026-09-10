@@ -1220,60 +1220,6 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		slug: 'coral-gables-estate',
-		name: 'Coral Gables Estate',
-		location: 'Coral Gables, FL',
-		scope: 'Full Residence · Interior Architecture & Furnishings',
-		year: '2023',
-		services: ['Full-Service Interior Design', 'Renovation & Interior Architecture'],
-		concept:
-			'Classical proportions meet contemporary ease through custom millwork, curated art, and rooms designed for both gathering and retreat.',
-		imageSrc: '/builder.jpg',
-		imageAlt:
-			'Coral Gables estate interior with custom millwork, classical proportions, and contemporary furnishings by Colors of Design',
-		imageWidth: 1600,
-		imageHeight: 1000,
-		seoTitle: 'Coral Gables Estate Interior Design | Colors of Design Group',
-		seoDescription:
-			'Interior architecture and furnishings for a Coral Gables estate, classical proportions, custom millwork, and rooms designed for gathering and retreat by Colors of Design Group.',
-		challenge:
-			'The estate’s architecture already carried strong classical bones. The work was to honor those proportions while making the interiors feel current, livable, and suited to a family that entertains often without sacrificing private rooms for rest.',
-		approach:
-			'The studio developed a full interior architecture package: millwork, lighting, finishes, and furnishings specified as one composition. Art and custom pieces were placed to give each room a focal point, while circulation and sightlines were clarified so public and private areas feel distinct.',
-		outcome:
-			'The residence now holds both formality and ease. Gathering rooms feel composed for entertaining; quieter interiors offer retreat. Materials and millwork read as original to the house rather than applied after the fact.',
-		materials: ['Custom millwork', 'Natural stone', 'Curated art', 'Tailored upholstery', 'Architectural lighting'],
-		gallery: [
-			{
-				src: '/builder.jpg',
-				alt: 'Coral Gables estate interior architecture with millwork and composed furnishings',
-				width: 1600,
-				height: 1000,
-				caption: 'Residence',
-				description:
-					'Classical proportions framed by custom millwork and furnishings composed for gathering.',
-			},
-			{
-				src: '/full-service-interior-design.jpg',
-				alt: 'Full-service interior design detailing in a Coral Gables home',
-				width: 1200,
-				height: 1200,
-				caption: 'Detail',
-				description:
-					'Material and finish selections carried through millwork, stone, and architectural lighting.',
-			},
-			{
-				src: '/hero.jpg',
-				alt: 'Refined residential interior in Coral Gables by Colors of Design Group',
-				width: 1500,
-				height: 1500,
-				caption: 'Living',
-				description:
-					'A living room balanced between formality and ease, with art and upholstery in dialogue.',
-			},
-		],
-	},
-	{
 		slug: 'sunny-isles',
 		name: 'Sunny Isles',
 		location: 'Sunny Isles Beach, FL',

@@ -19,7 +19,7 @@ const featuredServices = featuredServiceSlugs
 	.map((slug) => services.find((service) => service.slug === slug))
 	.filter((service): service is NonNullable<typeof service> => service !== undefined);
 
-const homepageProjectSlugs = ['solaris', 'coral-gables-estate', 'sunny-isles'];
+const homepageProjectSlugs = ['solaris', 'park-grove', 'sunny-isles'];
 
 const listedProjects = homepageProjectSlugs
 	.map((slug) => localizeProjects(locale).find((project) => project.slug === slug))

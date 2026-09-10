@@ -33,7 +33,7 @@
     },
     {
       "source": "/projects-item/coral-gables",
-      "destination": "/work/coral-gables-estate/",
+      "destination": "/work/",
       "permanent": true
     },
     {
@@ -223,7 +223,7 @@
     },
     {
       "source": "/es/projects-item/coral-gables-2",
-      "destination": "/es/work/coral-gables-estate/",
+      "destination": "/es/work/",
       "permanent": true
     },
     {
