@@ -92,6 +92,211 @@
       "permanent": true
     },
     {
+      "source": "/es/nosotros",
+      "destination": "/es/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/es/contacto",
+      "destination": "/es/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/es/proceso-de-trabajo",
+      "destination": "/es/work-process/",
+      "permanent": true
+    },
+    {
+      "source": "/es/servicios-de-disenos-de-interiores",
+      "destination": "/es/services/",
+      "permanent": true
+    },
+    {
+      "source": "/es/proyectos-diseno-interior",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/blog-de-diseno-de-interiores",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tienda-online-de-diseno-de-interiores",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tienda-online",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/politicas-de-privacidad",
+      "destination": "/es/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/es/terminos-y-condiciones",
+      "destination": "/es/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/es/asesoria-profesional-diseno-interior",
+      "destination": "/es/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/es/servicio-de-diseno-de-interior-profesional-key-biscayne",
+      "destination": "/es/services/",
+      "permanent": true
+    },
+    {
+      "source": "/es/servicio-de-diseno-de-interior-profesional-vero-beach",
+      "destination": "/es/services/",
+      "permanent": true
+    },
+    {
+      "source": "/es/servicio-de-diseno-de-interior-profesional-carolina-del-norte",
+      "destination": "/es/services/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/planificacion-de-espacio",
+      "destination": "/es/services/space-planning/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/gestion-de-proyectos",
+      "destination": "/es/services/project-management/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/diseno-de-iluminacion",
+      "destination": "/es/services/lighting-design/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/diseno-de-muebles",
+      "destination": "/es/services/furniture-design/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/administracion-de-presupuesto",
+      "destination": "/es/services/budget-management/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/arquitectura-de-interiores",
+      "destination": "/es/services/interior-architecture/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/diseno-de-interiores",
+      "destination": "/es/services/interior-design/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/servicio-turn-key",
+      "destination": "/es/services/turn-key-services/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/renderizado-3d",
+      "destination": "/es/services/3d-rendering/",
+      "permanent": true
+    },
+    {
+      "source": "/es/services/carpinteria-personalizada",
+      "destination": "/es/services/custom-woodwork/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/delray-beach-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/coral-gables-2",
+      "destination": "/es/work/coral-gables-estate/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/asheville-nc",
+      "destination": "/es/work/asheville/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/sunny-isles-2",
+      "destination": "/es/work/sunny-isles/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/park-grove-2",
+      "destination": "/es/work/park-grove/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/massi-2",
+      "destination": "/es/work/massis/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/ninos",
+      "destination": "/es/work/baby-room/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/key-biscayne-2",
+      "destination": "/es/work/casa-del-mar/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/zelenger-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/renders-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/chicago-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/miami-beach-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/builder-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/south-point-miami-beach-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/mc-intyre-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/pinecrest-2",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
       "source": "/online-shopping/:slug",
       "destination": "/interior-design-online-shop/:slug/",
       "permanent": true

@@ -4,53 +4,54 @@ import Breadcrumbs from '../components/Breadcrumbs.astro';
 import InquiryForm from '../components/InquiryForm.astro';
 import InquiryFormIntro from '../components/InquiryFormIntro.astro';
 import { site, absoluteUrl } from '../data/site';
+import { getLocale, localizedPath } from '../i18n/locale';
+import { pageCopy } from '../i18n/pages';
+import { copy } from '../i18n/ui';
+
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
+const t = copy(locale);
+const contactPath = localizedPath(locale, '/contact-us/');
 ---
 
 <BaseLayout
-	title="Contact Our Miami Interior Design Studio | Colors of Design"
-	description="Contact Colors of Design Group, a Miami interior design studio creating refined residential interiors across South Florida and beyond."
-	canonicalPath="/contact-us/"
+	title={pages.contact.title}
+	description={pages.contact.description}
+	canonicalPath={contactPath}
 	jsonLd={{
 		'@type': 'ContactPage',
-		name: 'Contact Colors of Design',
-		url: absoluteUrl('/contact-us/'),
+		name: pages.contact.jsonName,
+		url: absoluteUrl(contactPath),
 		mainEntity: { '@id': `${site.url}/#studio` },
 	}}
 >
 	<main class="page contact-page" id="main">
 		<section class="contact-page__main">
 			<div class="editorial-container">
-				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
+				<Breadcrumbs items={[{ label: t.home, href: localizedPath(locale, '/') }, { label: t.crumbs.contact }]} />
 
 				<div class="contact-page__split">
 					<div class="contact-page__info editorial-copy">
-						<p class="eyebrow">Contact</p>
+						<p class="eyebrow">{t.crumbs.contact}</p>
 						<h1>{site.name}</h1>
-						<p>
-							Colors of Design is a Miami interior design studio creating harmonious, modern, and
-							timeless homes, from first concept to final installation.
-						</p>
-						<p>
-							Founded by {site.founder}, our team works with clients across South Florida, North
-							Carolina, and beyond on space planning, custom design, furnishings, and turnkey
-							installation.
-						</p>
+						<p>{pages.contact.p1}</p>
+						<p>{pages.contact.p2}</p>
 
 						<dl class="contact-page__details">
 							<div class="contact-page__detail">
-								<dt>Email</dt>
+								<dt>{pages.contact.email}</dt>
 								<dd>
 									<a href={`mailto:${site.email}`}>{site.email}</a>
 								</dd>
 							</div>
 							<div class="contact-page__detail">
-								<dt>Phone</dt>
+								<dt>{pages.contact.phone}</dt>
 								<dd>
 									<a href={site.phoneHref}>{site.phone}</a>
 								</dd>
 							</div>
 							<div class="contact-page__detail">
-								<dt>Studio</dt>
+								<dt>{pages.contact.studio}</dt>
 								<dd>
 									2451 Brickell Avenue
 									<br />
@@ -58,12 +59,12 @@ import { site, absoluteUrl } from '../data/site';
 								</dd>
 							</div>
 							<div class="contact-page__detail">
-								<dt>Hours</dt>
-								<dd>Monday–Friday · 8 am–5 pm</dd>
+								<dt>{pages.contact.hours}</dt>
+								<dd>{pages.contact.hoursValue}</dd>
 							</div>
 						</dl>
 
-						<a class="text-link" href="/about-us/">Meet the studio</a>
+						<a class="text-link" href={localizedPath(locale, '/about-us/')}>{pages.contact.meetStudio}</a>
 					</div>
 
 					<div class="contact-page__form">

@@ -1,24 +1,32 @@
 ---
-import { journalPosts } from '../data/journal';
+import { copy } from '../i18n/ui';
+import { getLocale, localizedPath, type Locale } from '../i18n/locale';
+import { localizeJournal } from '../i18n/content';
+import { pageCopy } from '../i18n/pages';
 
 interface Props {
 	fullPage?: boolean;
 	related?: boolean;
-	posts?: typeof journalPosts;
+	posts?: ReturnType<typeof localizeJournal>;
 	heading?: string;
 	introduction?: string;
 	eyebrow?: string;
 	headingLevel?: 'h1' | 'h2';
 	centerHeaderOnDesktop?: boolean;
+	locale?: Locale;
 }
+
+const locale = Astro.props.locale ?? getLocale(Astro.url.pathname);
+const t = copy(locale);
+const pages = pageCopy(locale);
 
 const {
 	fullPage = false,
 	related = false,
 	posts,
-	heading = 'A considered way of living.',
+	heading = pages.journal.previewHeading,
 	introduction,
-	eyebrow = 'From the journal',
+	eyebrow = pages.journal.previewEyebrow,
 	headingLevel = 'h2',
 	centerHeaderOnDesktop = false,
 } = Astro.props;
@@ -26,14 +34,15 @@ const {
 const HeadingTag = headingLevel;
 const CardTitleTag = headingLevel === 'h1' ? 'h2' : 'h3';
 const usePageCards = fullPage || related;
-const displayedPosts = posts ?? (fullPage || related ? journalPosts : journalPosts.slice(0, 3));
+const localizedPosts = localizeJournal(locale);
+const displayedPosts = posts ?? (fullPage || related ? localizedPosts : localizedPosts.slice(0, 3));
 ---
 
 <section
 	class:list={['journal-list', fullPage && 'journal-list--page', related && 'journal-list--related']}
 	id={related ? undefined : 'journal'}
 	aria-labelledby={fullPage ? 'journal-list-heading' : undefined}
-	aria-label={fullPage || related ? undefined : 'From the journal'}
+	aria-label={fullPage || related ? undefined : t.journalAria}
 >
 	<div class="journal-list__inner">
 		{
@@ -81,10 +90,10 @@ const displayedPosts = posts ?? (fullPage || related ? journalPosts : journalPos
 							<CardTitleTag class="journal-list__title">{post.title}</CardTitleTag>
 							<p class="journal-list__copy">{post.description}</p>
 							{usePageCards ? (
-								<span class="journal-list__action">Read</span>
+								<span class="journal-list__action">{t.read}</span>
 							) : (
-								<a class="journal-list__action" href={post.url} aria-label={`Read ${post.title}`}>
-									Read the story
+								<a class="journal-list__action" href={post.url} aria-label={t.readAria(post.title)}>
+									{t.readStory}
 								</a>
 							)}
 						</div>
@@ -92,7 +101,7 @@ const displayedPosts = posts ?? (fullPage || related ? journalPosts : journalPos
 				);
 
 				return usePageCards ? (
-					<a class="journal-list__card journal-list__card--page" href={post.url} aria-label={`Read ${post.title}`}>
+					<a class="journal-list__card journal-list__card--page" href={post.url} aria-label={t.readAria(post.title)}>
 						{cardContent}
 					</a>
 				) : (
@@ -104,8 +113,8 @@ const displayedPosts = posts ?? (fullPage || related ? journalPosts : journalPos
 							<h3 class="journal-list__title">{post.title}</h3>
 						</a>
 						<p class="journal-list__copy">{post.description}</p>
-						<a class="journal-list__action" href={post.url} aria-label={`Read ${post.title}`}>
-							Read the story
+						<a class="journal-list__action" href={post.url} aria-label={t.readAria(post.title)}>
+							{t.readStory}
 						</a>
 					</article>
 				);
@@ -115,7 +124,7 @@ const displayedPosts = posts ?? (fullPage || related ? journalPosts : journalPos
 		{
 			!usePageCards && (
 				<div class="journal-list__footer">
-					<a class="journal-list__cta" href="/interior-design-blog/">Explore the journal</a>
+					<a class="journal-list__cta" href={localizedPath(locale, '/interior-design-blog/')}>{t.exploreJournal}</a>
 				</div>
 			)
 		}

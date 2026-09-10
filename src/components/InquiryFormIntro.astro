@@ -1,21 +1,25 @@
 ---
-import { inquiryFormIntro, site } from '../data/site';
+import { site } from '../data/site';
+import { copy } from '../i18n/ui';
+import { getLocale, type Locale } from '../i18n/locale';
 
 interface Props {
 	headingLevel?: 'h1' | 'h2';
 	id?: string;
+	locale?: Locale;
 }
 
-const { headingLevel = 'h2', id } = Astro.props;
+const { headingLevel = 'h2', id, locale = getLocale(Astro.url.pathname) } = Astro.props;
 const HeadingTag = headingLevel;
+const t = copy(locale);
 ---
 
 <div class="inquiry-form-intro">
 	<p class="inquiry-form-intro__phone">
 		<a href={site.phoneHref}>{site.phone}</a>
 	</p>
-	<HeadingTag id={id} class="inquiry-form-intro__heading">{inquiryFormIntro.heading}</HeadingTag>
-	<p class="inquiry-form-intro__copy">{inquiryFormIntro.copy}</p>
+	<HeadingTag id={id} class="inquiry-form-intro__heading">{t.inquiryHeading}</HeadingTag>
+	<p class="inquiry-form-intro__copy">{t.inquiryCopy}</p>
 </div>
 
 <style>

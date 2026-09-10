@@ -1,11 +1,15 @@
 ---
 import Breadcrumbs from './Breadcrumbs.astro';
+import { copy } from '../i18n/ui';
+import { getLocale, localizedPath } from '../i18n/locale';
 interface Props { label: string; heading: string; description: string; eyebrow?: string; }
 const { label, heading, description, eyebrow = label } = Astro.props;
+const locale = getLocale(Astro.url.pathname);
+const t = copy(locale);
 ---
 <header class="editorial-intro" data-nav-earth-top>
   <div class="editorial-container">
-    <Breadcrumbs items={[{label: 'Home', href: '/'}, {label}]} />
+    <Breadcrumbs items={[{label: t.home, href: localizedPath(locale, '/')}, {label}]} />
     <div class="editorial-intro__body">
       <p class="eyebrow">{eyebrow}</p>
       <h1>{heading}</h1>

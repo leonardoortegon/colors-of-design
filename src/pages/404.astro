@@ -1,7 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageIntro from '../components/PageIntro.astro';
+import { getLocale, localizedPath } from '../i18n/locale';
+import { pageCopy } from '../i18n/pages';
+
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
 ---
-<BaseLayout title="Page Not Found | Colors of Design" noIndex>
-  <main class="page" id="main"><PageIntro label="Page not found" eyebrow="404 · A different direction" heading="Let’s find your way home." description="This page may have moved or is no longer available. Explore our recent work or get in touch with the studio." /><div class="editorial-section editorial-container"><a class="text-link" href="/work/">Explore our work</a><br /><a class="text-link" href="/contact-us/">Contact the studio</a></div></main>
+<BaseLayout title={pages.notFound.title} noIndex>
+  <main class="page" id="main"><PageIntro label={pages.notFound.label} eyebrow={pages.notFound.eyebrow} heading={pages.notFound.heading} description={pages.notFound.description} /><div class="editorial-section editorial-container"><a class="text-link" href={localizedPath(locale, '/work/')}>{pages.notFound.exploreWork}</a><br /><a class="text-link" href={localizedPath(locale, '/contact-us/')}>{pages.notFound.contactStudio}</a></div></main>
 </BaseLayout>

@@ -12,6 +12,7 @@ interface Props {
 	imageMaxWidth?: string;
 	sectionId?: string;
 	banded?: boolean;
+	linkHref?: string;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
 	imageMaxWidth,
 	sectionId,
 	banded = false,
+	linkHref = '/about-us/',
 } = Astro.props;
 
 const hasImage = Boolean(imageSrc);
@@ -52,7 +54,7 @@ const hasImage = Boolean(imageSrc);
 				))}
 			</div>
 			<a
-				href="/about-us/"
+				href={linkHref}
 				class:list={['split__link', linkStyle === 'text' && 'split__link--text']}
 			>
 				{linkLabel}

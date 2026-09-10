@@ -7,10 +7,10 @@ export interface ProcessStep {
 interface Props {
 	heading: string;
 	steps: ProcessStep[];
-	linkLabel: string;
+	linkHref?: string;
 }
 
-const { heading, steps, linkLabel } = Astro.props;
+const { heading, steps, linkLabel, linkHref = '/work-process/' } = Astro.props;
 ---
 
 <section class="process" id="process" aria-labelledby="process-heading">
@@ -27,7 +27,7 @@ const { heading, steps, linkLabel } = Astro.props;
 		</div>
 
 		<div class="process__footer">
-			<a href="/work-process/" class="process__link">{linkLabel}</a>
+			<a href={linkHref} class="process__link">{linkLabel}</a>
 		</div>
 	</div>
 </section>

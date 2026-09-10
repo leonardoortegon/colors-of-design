@@ -1,5 +1,8 @@
 ---
-import { navLanguages } from '../data/site';
+import { site } from '../data/site';
+import { copy } from '../i18n/ui';
+import { localizedPath, switchLocalePath, type Locale } from '../i18n/locale';
+import { pageCopy } from '../i18n/pages';
 
 interface NavLink {
 	label: string;
@@ -15,30 +18,33 @@ interface Props {
 	currentPath?: string;
 	transparentOverHero?: boolean;
 	hideOnScroll?: boolean;
+	locale?: Locale;
 }
 
 const {
 	companyName = 'Colors of Design Group',
 	phone = '(786) 675-1484',
 	phoneHref = 'tel:+17866751484',
-	ctaLabel = 'Get Started',
 	currentPath = '/',
 	transparentOverHero = false,
 	hideOnScroll = false,
-	links = [
-		{ label: 'Portfolio', href: '/work/' },
-		{ label: 'Services', href: '/services/' },
-		{ label: 'About', href: '/about-us/' },
-		{ label: 'Awards', href: '/awards-and-recognitions/' },
-		{ label: 'Shop', href: '/interior-design-online-shop/' },
-		{ label: 'Contact', href: '/contact-us/' },
-	],
-
+	locale = 'en',
+	ctaLabel,
+	links,
 } = Astro.props;
 
-const activeLanguageCode = 'en';
-const currentLanguage =
-	navLanguages.find((language) => language.code === activeLanguageCode) ?? navLanguages[0];
+const t = copy(locale);
+const pages = pageCopy(locale);
+const resolvedCtaLabel = ctaLabel ?? t.navCta;
+const resolvedLinks = links ?? pages.navLinks;
+const homeHref = localizedPath(locale, '/');
+const isNotFound = /404/.test(currentPath);
+const activeLanguageCode = locale;
+const currentLanguageLabel = locale === 'es' ? 'Español' : 'English';
+const languageOptions = [
+	{ code: 'en' as const, label: 'English', href: isNotFound ? localizedPath('en', '/') : switchLocalePath(currentPath, 'en') },
+	{ code: 'es' as const, label: 'Español', href: isNotFound ? localizedPath('es', '/') : switchLocalePath(currentPath, 'es') },
+];
 ---
 
 <header
@@ -48,15 +54,15 @@ const currentLanguage =
 	data-nav-scroll-hide={hideOnScroll ? 'true' : undefined}
 >
 	<div class="nav__inner">
-		<a href="/" class="nav__brand" aria-label={`${companyName}, home`}>
-			<img class="nav__logo" src="/logo.svg" alt="" width="28" height="28" decoding="async" />
+		<a href={homeHref} class="nav__brand" aria-label={`${companyName}, ${t.home.toLowerCase()}`}>
+			<img class="nav__logo" src="/logo.svg" alt="Colors of Design" width="28" height="28" decoding="async" />
 			<span class="nav__brand-text">{companyName}</span>
 		</a>
 
 		<div class="nav__menu" id="site-nav-menu" data-nav-menu>
 			<div class="nav__menu-center">
-				<nav class="nav__links" aria-label="Primary">
-					{links.map((link) => {
+				<nav class="nav__links" aria-label={t.primaryNav}>
+					{resolvedLinks.map((link) => {
 					const isCurrent =
 						currentPath.replace(/\/$/, '') === link.href.replace(/\/$/, '') || currentPath.startsWith(link.href.replace(/\/$/, '') + '/');
 						return (
@@ -76,9 +82,9 @@ const currentLanguage =
 							data-nav-language-trigger
 							aria-expanded="false"
 							aria-haspopup="listbox"
-							aria-label={`Language: ${currentLanguage.label}`}
+							aria-label={`${t.languagePrefix}: ${currentLanguageLabel}`}
 						>
-							{currentLanguage.label}
+							{currentLanguageLabel}
 							<svg class="nav__language-icon" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
 								<path
 									d="M1 1 L5 5 L9 1"
@@ -88,21 +94,23 @@ const currentLanguage =
 									stroke-linecap="round"></path>
 							</svg>
 						</button>
-						<ul class="nav__language-dropdown" role="listbox" aria-label="Select language">
+						<ul class="nav__language-dropdown" role="listbox" aria-label={t.selectLanguage}>
 							{
-								navLanguages.map((language) => (
+								languageOptions.map((language) => (
 									<li class="nav__language-item" role="presentation">
-										<span
+										<a
 											class:list={[
 												'nav__language-option',
 												language.code === activeLanguageCode && 'is-active',
 											]}
+											href={language.href}
 											role="option"
 											aria-selected={language.code === activeLanguageCode ? 'true' : 'false'}
+											hreflang={language.code}
 											lang={language.code}
 										>
 											{language.label}
-										</span>
+										</a>
 									</li>
 								))
 							}
@@ -111,14 +119,14 @@ const currentLanguage =
 				</nav>
 
 				<button type="button" class="nav__cta nav__cta--menu" data-inquiry-open>
-					Start Your Project
+					{t.startProject}
 				</button>
 			</div>
 		</div>
 
 		<div class="nav__actions">
 			<a href={phoneHref} class="nav__phone">{phone}</a>
-			<button type="button" class="nav__cta" data-inquiry-open>{ctaLabel}</button>
+			<button type="button" class="nav__cta" data-inquiry-open>{resolvedCtaLabel}</button>
 		</div>
 
 		<button
@@ -126,8 +134,10 @@ const currentLanguage =
 			class="nav__toggle"
 			aria-expanded="false"
 			aria-controls="site-nav-menu"
-			aria-label="Menu"
+			aria-label={t.menu}
 			data-nav-toggle
+			data-label-menu={t.menu}
+			data-label-close={t.closeMenu}
 		>
 			<span class="nav__toggle-icon" aria-hidden="true"></span>
 		</button>
@@ -392,7 +402,9 @@ const currentLanguage =
 		width: 100%;
 		padding: 0.625rem 1rem;
 		text-align: left;
-		cursor: default;
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
 	}
 
 	.nav__actions {
@@ -636,7 +648,7 @@ const currentLanguage =
 		function setNavOpen(nav, toggle, isOpen) {
 			nav.classList.toggle('is-open', isOpen);
 			toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-			toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Menu');
+			toggle.setAttribute('aria-label', isOpen ? (toggle.getAttribute('data-label-close') || 'Close menu') : (toggle.getAttribute('data-label-menu') || 'Menu'));
 			document.documentElement.classList.toggle('nav-menu-open', isOpen);
 			document.querySelectorAll('main, footer').forEach(function (element) { element.inert = isOpen; });
 			var languageRoot = nav.querySelector('[data-nav-language]');

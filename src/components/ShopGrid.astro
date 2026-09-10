@@ -1,11 +1,10 @@
 ---
 import {
-	formatShopPrice,
-	getShopProductHref,
-	shopIntro,
-	shopProducts,
 	type ShopProduct,
 } from '../data/shop';
+import { copy } from '../i18n/ui';
+import { getLocale, type Locale } from '../i18n/locale';
+import { formatLocalizedPrice, localizeShopIntro, localizeShopProducts, shopHref } from '../i18n/content';
 
 interface Props {
 	fullPage?: boolean;
@@ -15,14 +14,20 @@ interface Props {
 	eyebrow?: string;
 	headingLevel?: 'h1' | 'h2';
 	centerHeaderOnDesktop?: boolean;
+	locale?: Locale;
 }
+
+const locale = Astro.props.locale ?? getLocale(Astro.url.pathname);
+const t = copy(locale);
+const intro = localizeShopIntro(locale);
+const localizedProducts = localizeShopProducts(locale);
 
 const {
 	fullPage = false,
-	products = shopProducts,
-	heading = shopIntro.heading,
-	description = shopIntro.description,
-	eyebrow = shopIntro.eyebrow,
+	products = localizedProducts,
+	heading = intro.heading,
+	description = intro.description,
+	eyebrow = intro.eyebrow,
 	headingLevel = 'h2',
 	centerHeaderOnDesktop = false,
 } = Astro.props;
@@ -50,14 +55,14 @@ const CardTitleTag = headingLevel === 'h1' ? 'h2' : 'h3';
 
 		<div class="shop-grid__cards">
 			{products.map((product) => {
-				const href = getShopProductHref(product.slug);
+				const href = shopHref(locale, product.slug);
 				const priceLabel =
 					product.slug === 'interior-design-gift-card'
-						? formatShopPrice(product.price, { from: true })
-						: formatShopPrice(product.price);
+						? formatLocalizedPrice(locale, product.price, { from: true })
+						: formatLocalizedPrice(locale, product.price);
 
 				return (
-					<a class="shop-grid__card" href={href} aria-label={`View ${product.name}`}>
+					<a class="shop-grid__card" href={href} aria-label={t.viewProduct(product.name)}>
 						<div class="shop-grid__media">
 							<img
 								src={product.imageSrc}
@@ -66,7 +71,7 @@ const CardTitleTag = headingLevel === 'h1' ? 'h2' : 'h3';
 								height={product.imageHeight}
 								loading="lazy"
 							/>
-							{product.onSale && <span class="shop-grid__badge">Sale</span>}
+							{product.onSale && <span class="shop-grid__badge">{t.sale}</span>}
 						</div>
 						<div class="shop-grid__body">
 							<CardTitleTag class="shop-grid__title">{product.name}</CardTitleTag>

@@ -1,27 +1,30 @@
 ---
 import InquiryFormIntro from './InquiryFormIntro.astro';
 import { site } from '../data/site';
+import { copy } from '../i18n/ui';
+import { getLocale, type Locale } from '../i18n/locale';
 
 interface Props {
 	submitLabel?: string;
 	privacyNote?: string;
+	locale?: Locale;
 }
 
-const {
-	submitLabel = 'Send Message',
-	privacyNote = 'Your information is used only to respond to this project inquiry.',
-} = Astro.props;
+const { locale = getLocale(Astro.url.pathname), submitLabel, privacyNote } = Astro.props;
+const t = copy(locale);
+const resolvedSubmit = submitLabel ?? t.submitLabel;
+const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 ---
 
 <section class="conversion" id="inquiry" aria-labelledby="conversion-heading" data-nav-surface="earth">
 	<div class="conversion__inner">
 		<div class="conversion__stack">
-			<InquiryFormIntro id="conversion-heading" />
+			<InquiryFormIntro id="conversion-heading" locale={locale} />
 
 			<div class="conversion__form-panel">
-				<form class="conversion__form" data-conversion-form data-recipient={site.email}>
+				<form class="conversion__form" data-conversion-form data-recipient={site.email} data-mail-hello={t.mailHello} data-mail-name={t.mailName} data-mail-phone={t.mailPhone} data-subject-from={t.mailSubjectFrom('__NAME__')}>
 					<div class="conversion__field">
-						<label class="conversion__label" for="conversion-name">Name</label>
+						<label class="conversion__label" for="conversion-name">{t.name}</label>
 						<input
 							class="conversion__input"
 							type="text"
@@ -34,7 +37,7 @@ const {
 					</div>
 
 					<div class="conversion__field">
-						<label class="conversion__label" for="conversion-phone">Phone</label>
+						<label class="conversion__label" for="conversion-phone">{t.phone}</label>
 						<input
 							class="conversion__input"
 							type="tel"
@@ -47,7 +50,7 @@ const {
 					</div>
 
 					<div class="conversion__field">
-						<label class="conversion__label" for="conversion-message">Message</label>
+						<label class="conversion__label" for="conversion-message">{t.message}</label>
 						<textarea
 							class="conversion__textarea"
 							id="conversion-message"
@@ -58,10 +61,10 @@ const {
 						></textarea>
 					</div>
 
-					<button type="submit" class="conversion__submit">{submitLabel}</button>
+					<button type="submit" class="conversion__submit">{resolvedSubmit}</button>
 				</form>
 
-				<p class="conversion__privacy">{privacyNote}</p>
+				<p class="conversion__privacy">{resolvedPrivacy}</p>
 			</div>
 		</div>
 	</div>
@@ -183,8 +186,10 @@ const {
 
 			const data = new FormData(form);
 			const value = (key: string) => String(data.get(key) || '').trim();
-			const subject = `Project inquiry from ${value('name')}`;
-			const body = `Hello Colors of Design,\n\n${value('message')}\n\nName: ${value('name')}\nPhone: ${value('phone')}`;
+			const subjectTemplate = form.dataset.subjectFrom || 'Project inquiry from __NAME__';
+			const subject = subjectTemplate.replace('__NAME__', value('name'));
+			const hello = form.dataset.mailHello || 'Hello Colors of Design,';
+			const body = `${hello}\n\n${value('message')}\n\n${form.dataset.mailName || 'Name'}: ${value('name')}\n${form.dataset.mailPhone || 'Phone'}: ${value('phone')}`;
 			window.location.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 		});
 	});

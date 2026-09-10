@@ -1,109 +1,128 @@
 ---
 import { site } from '../data/site';
+import { copy } from '../i18n/ui';
+import { getLocale, type Locale } from '../i18n/locale';
 
 interface Props {
 	simple?: boolean;
 	submitLabel?: string;
 	idPrefix?: string;
 	showPrivacyNote?: boolean;
+	locale?: Locale;
 }
 
 const {
 	simple = false,
-	submitLabel = simple ? 'Send Message' : 'Prepare email draft',
 	idPrefix = '',
+	locale = getLocale(Astro.url.pathname),
+	submitLabel,
 	showPrivacyNote = simple,
 } = Astro.props;
 
+const t = copy(locale);
+const resolvedSubmit = submitLabel ?? (simple ? t.sendMessage : t.prepareDraft);
 const fieldId = (name: string) => `${idPrefix}${name}`;
-const privacyNote = 'Your information is used only to respond to this project inquiry.';
 ---
 
 {
 	simple ? (
-		<form class="inquiry-form inquiry-form--simple" data-inquiry-form data-inquiry-simple data-recipient={site.email}>
+		<form class="inquiry-form inquiry-form--simple" data-inquiry-form data-inquiry-simple data-recipient={site.email} data-mail-hello={t.mailHello} data-mail-name={t.mailName} data-mail-phone={t.mailPhone} data-subject-from={t.mailSubjectFrom('__NAME__')}>
 			<div>
-				<label for={fieldId('inquiry-name')}>Name</label>
+				<label for={fieldId('inquiry-name')}>{t.name}</label>
 				<input id={fieldId('inquiry-name')} name="name" autocomplete="name" required maxlength="100" />
 			</div>
 			<div>
-				<label for={fieldId('inquiry-phone')}>Phone</label>
+				<label for={fieldId('inquiry-phone')}>{t.phone}</label>
 				<input id={fieldId('inquiry-phone')} name="phone" type="tel" autocomplete="tel" required maxlength="40" />
 			</div>
 			<div>
-				<label for={fieldId('inquiry-message')}>Message</label>
+				<label for={fieldId('inquiry-message')}>{t.message}</label>
 				<textarea id={fieldId('inquiry-message')} name="message" rows="4" required maxlength="1800" />
 			</div>
-			<button class="inquiry-form__button" type="submit">{submitLabel}</button>
-			{showPrivacyNote && <p class="inquiry-form__privacy">{privacyNote}</p>}
+			<button class="inquiry-form__button" type="submit">{resolvedSubmit}</button>
+			{showPrivacyNote && <p class="inquiry-form__privacy">{t.privacyNote}</p>}
 		</form>
 	) : (
-		<form class="inquiry-form" data-inquiry-form data-recipient={site.email}>
+		<form
+			class="inquiry-form"
+			data-inquiry-form
+			data-recipient={site.email}
+			data-mail-hello={t.mailHello}
+			data-mail-name={t.mailName}
+			data-mail-phone={t.mailPhone}
+			data-mail-email={t.mailEmail}
+			data-mail-location={t.mailLocation}
+			data-mail-service={t.mailService}
+			data-not-provided={t.notProvided}
+			data-to-discuss={t.toDiscuss}
+			data-draft-ready={t.draftReady}
+			data-draft-copied={t.draftCopied}
+			data-select-copy={t.selectCopy}
+			data-subject-prefix={t.mailSubject('__DETAIL__')}
+		>
 			<div class="inquiry-form__pair">
 				<div>
-					<label for="inquiry-name">Name <span>(required)</span></label>
+					<label for="inquiry-name">{t.name} <span>{t.required}</span></label>
 					<input id="inquiry-name" name="name" autocomplete="name" required maxlength="100" />
 				</div>
 				<div>
-					<label for="inquiry-email">Email <span>(required)</span></label>
+					<label for="inquiry-email">{t.email} <span>{t.required}</span></label>
 					<input id="inquiry-email" name="email" type="email" autocomplete="email" required maxlength="160" />
 				</div>
 			</div>
 			<div class="inquiry-form__pair">
 				<div>
-					<label for="inquiry-phone">Phone <span>(optional)</span></label>
+					<label for="inquiry-phone">{t.phone} <span>{t.optional}</span></label>
 					<input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
 				</div>
 				<div>
-					<label for="inquiry-location">Project location</label>
-					<input id="inquiry-location" name="location" placeholder="City, state" maxlength="150" />
+					<label for="inquiry-location">{t.projectLocation}</label>
+					<input id="inquiry-location" name="location" placeholder={t.cityState} maxlength="150" />
 				</div>
 			</div>
 			<div>
-				<label for="inquiry-service">How can we help?</label>
+				<label for="inquiry-service">{t.howCanWeHelp}</label>
 				<select id="inquiry-service" name="service">
-					<option value="Not yet sure">Let’s explore together</option>
-					<option>Full-service interior design</option>
-					<option>Renovation & interior architecture</option>
-					<option>Furniture & finishing touches</option>
-					<option>Turnkey project</option>
-					<option>Design consultation</option>
+					<option value={t.serviceExplore}>{t.serviceExplore}</option>
+					<option>{t.serviceFull}</option>
+					<option>{t.serviceReno}</option>
+					<option>{t.serviceFurniture}</option>
+					<option>{t.serviceTurnkey}</option>
+					<option>{t.serviceConsult}</option>
 				</select>
 			</div>
 			<div>
-				<label for="inquiry-message">Tell us about your project <span>(required)</span></label>
+				<label for="inquiry-message">{t.tellUsProject} <span>{t.required}</span></label>
 				<textarea
 					id="inquiry-message"
 					name="message"
 					rows="4"
 					required
 					maxlength="1800"
-					placeholder="Your vision, priorities, and timing…"
+					placeholder={t.visionPlaceholder}
 				/>
 			</div>
 			<p class="inquiry-form__note" id="inquiry-help">
-				Prepare your inquiry below, then open it in your email app to review and send. Nothing is sent
-				automatically.
+				{t.prepareNote}
 			</p>
 			<button class="inquiry-form__button" type="submit" disabled aria-describedby="inquiry-help">
-				{submitLabel}
+				{resolvedSubmit}
 			</button>
 			<div class="inquiry-form__draft" data-draft-panel hidden>
 				<p role="status" data-draft-status>
-					Your draft is ready. Open your email app to send it, or copy the text below.
+					{t.draftReady}
 				</p>
-				<label for="inquiry-draft">Your email draft</label>
+				<label for="inquiry-draft">{t.yourDraft}</label>
 				<textarea id="inquiry-draft" data-draft-text readonly rows="9" />
-				<a class="inquiry-form__button" data-draft-link href={`mailto:${site.email}`}>Open email app</a>
-				<button class="text-link" type="button" data-copy-draft>Copy draft</button>
+				<a class="inquiry-form__button" data-draft-link href={`mailto:${site.email}`}>{t.openEmail}</a>
+				<button class="text-link" type="button" data-copy-draft>{t.copyDraft}</button>
 				<p class="inquiry-form__note">
-					Send to <a href={`mailto:${site.email}`}>{site.email}</a>. Your message has not been sent from
-					this website.
+					{t.sendTo} <a href={`mailto:${site.email}`}>{site.email}</a>. {t.notSent}
 				</p>
 			</div>
 			<noscript>
 				<p>
-					Email us directly at <a href={`mailto:${site.email}`}>{site.email}</a>, or call{' '}
+					{t.emailDirectly} <a href={`mailto:${site.email}`}>{site.email}</a>, {t.orCall}{' '}
 					<a href={site.phoneHref}>{site.phone}</a>.
 				</p>
 			</noscript>
@@ -245,8 +264,12 @@ const privacyNote = 'Your information is used only to respond to this project in
 
 				const data = new FormData(form);
 				const value = (key: string) => String(data.get(key) || '').trim();
-				const subject = `Project inquiry from ${value('name')}`;
-				const body = `Hello Colors of Design,\n\n${value('message')}\n\nName: ${value('name')}\nPhone: ${value('phone')}`;
+				const subjectTemplate = form.dataset.subjectFrom || 'Project inquiry from __NAME__';
+				const subject = subjectTemplate.replace('__NAME__', value('name'));
+				const hello = form.dataset.mailHello || 'Hello Colors of Design,';
+				const nameLabel = form.dataset.mailName || 'Name';
+				const phoneLabel = form.dataset.mailPhone || 'Phone';
+				const body = `${hello}\n\n${value('message')}\n\n${nameLabel}: ${value('name')}\n${phoneLabel}: ${value('phone')}`;
 				window.location.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 			});
 			return;
@@ -268,11 +291,13 @@ const privacyNote = 'Your information is used only to respond to this project in
 				return;
 			}
 
-			const subject = `Project inquiry: ${value('location') || value('service')}`;
-			const body = `Hello Colors of Design,\n\n${value('message')}\n\nName: ${value('name')}\nEmail: ${value('email')}\nPhone: ${value('phone') || 'Not provided'}\nLocation: ${value('location') || 'To discuss'}\nService: ${value('service')}`;
+			const subjectTemplate = form.dataset.subjectPrefix || 'Project inquiry: __DETAIL__';
+			const subject = subjectTemplate.replace('__DETAIL__', value('location') || value('service'));
+			const hello = form.dataset.mailHello || 'Hello Colors of Design,';
+			const body = `${hello}\n\n${value('message')}\n\n${form.dataset.mailName || 'Name'}: ${value('name')}\n${form.dataset.mailEmail || 'Email'}: ${value('email')}\n${form.dataset.mailPhone || 'Phone'}: ${value('phone') || form.dataset.notProvided || 'Not provided'}\n${form.dataset.mailLocation || 'Location'}: ${value('location') || form.dataset.toDiscuss || 'To discuss'}\n${form.dataset.mailService || 'Service'}: ${value('service')}`;
 			draft.value = `To: ${form.dataset.recipient}\nSubject: ${subject}\n\n${body}`;
 			link.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-			status.textContent = 'Your draft is ready. Open your email app to send it, or copy the text below.';
+			status.textContent = form.dataset.draftReady || 'Your draft is ready. Open your email app to send it, or copy the text below.';
 			panel.hidden = false;
 			link.focus();
 		});
@@ -280,11 +305,11 @@ const privacyNote = 'Your information is used only to respond to this project in
 		form.querySelector('[data-copy-draft]')?.addEventListener('click', async () => {
 			try {
 				await navigator.clipboard.writeText(draft.value);
-				status.textContent = 'Draft copied. Paste it into your email app, review, and send.';
+				status.textContent = form.dataset.draftCopied || 'Draft copied. Paste it into your email app, review, and send.';
 			} catch {
 				draft.focus();
 				draft.select();
-				status.textContent = 'Select and copy the draft, then paste it into your email app.';
+				status.textContent = form.dataset.selectCopy || 'Select and copy the draft, then paste it into your email app.';
 			}
 		});
 

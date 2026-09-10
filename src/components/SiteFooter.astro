@@ -1,13 +1,23 @@
 ---
 import {site} from '../data/site';
+import { copy } from '../i18n/ui';
+import { localizedPath, type Locale } from '../i18n/locale';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = copy(locale);
+const home = localizedPath(locale, '/');
 ---
 <footer class="site-footer">
   <div class="editorial-container">
     <div class="site-footer__grid">
-      <div><a class="site-footer__brand" href="/">Colors of Design</a><p>Thoughtfully composed.<br />Unmistakably yours.</p><p>Interior design · Miami & beyond</p></div>
-      <nav aria-label="Footer"><p class="eyebrow">Explore</p><a href="/work/">Our work</a><a href="/services/">Services</a><a href="/work-process/">Our process</a><a href="/about-us/">The studio</a><a href="/interior-design-blog/">Blog</a><a href="/contact-us/">Contact</a></nav>
-      <div><p class="eyebrow">Let’s begin</p><a href="/contact-us/">Tell us about your project</a><a href={site.phoneHref}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><p>2451 Brickell Avenue<br />Miami, FL 33129</p></div>
+      <div><a class="site-footer__brand" href={home}>Colors of Design</a><p>{t.footerTagline.split('\n')[0]}<br />{t.footerTagline.split('\n')[1]}</p><p>{t.footerDiscipline}</p></div>
+      <nav aria-label={t.explore}><p class="eyebrow">{t.explore}</p><a href={localizedPath(locale, '/work/')}>{t.footerExplore.work}</a><a href={localizedPath(locale, '/services/')}>{t.footerExplore.services}</a><a href={localizedPath(locale, '/work-process/')}>{t.footerExplore.process}</a><a href={localizedPath(locale, '/about-us/')}>{t.footerExplore.studio}</a><a href={localizedPath(locale, '/interior-design-blog/')}>{t.footerExplore.blog}</a><a href={localizedPath(locale, '/contact-us/')}>{t.footerExplore.contact}</a></nav>
+      <div><p class="eyebrow">{t.letsBegin}</p><a href={localizedPath(locale, '/contact-us/')}>{t.tellUsAboutProject}</a><a href={site.phoneHref}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><p>2451 Brickell Avenue<br />Miami, FL 33129</p></div>
     </div>
-    <div class="site-footer__bottom"><p>© {new Date().getFullYear()} {site.name}</p><a href="/privacy-policy/">Privacy</a></div>
+    <div class="site-footer__bottom"><p>© {new Date().getFullYear()} {site.name}</p><a href={localizedPath(locale, '/privacy-policy/')}>{t.privacy}</a></div>
   </div>
 </footer>

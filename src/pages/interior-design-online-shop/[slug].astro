@@ -4,37 +4,49 @@ import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ConversionSection from '../../components/ConversionSection.astro';
 import ShopGrid from '../../components/ShopGrid.astro';
 import {
-	formatShopPrice,
 	getProductDetailLines,
 	getRelatedProducts,
 	shopBasePath,
 	shopProducts,
 } from '../../data/shop';
 import { absoluteUrl, site } from '../../data/site';
+import { getLocale, localizedPath } from '../../i18n/locale';
+import { pageCopy } from '../../i18n/pages';
+import { copy } from '../../i18n/ui';
+import { formatLocalizedPrice, localizeShopProducts } from '../../i18n/content';
 
 export function getStaticPaths() {
 	return shopProducts.map((product) => ({
 		params: { slug: product.slug },
-		props: { product },
 	}));
 }
 
-const { product } = Astro.props;
-const related = getRelatedProducts(product.slug, 4);
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
+const t = copy(locale);
+const localized = localizeShopProducts(locale);
+const product = localized.find((item) => item.slug === Astro.params.slug);
+
+if (!product) {
+	throw new Error(`Unknown product: ${Astro.params.slug}`);
+}
+const related = getRelatedProducts(product.slug, 4).map(
+	(item) => localized.find((localizedItem) => localizedItem.slug === item.slug) ?? item,
+);
 const detailLines = getProductDetailLines(product.description);
-const pageUrl = absoluteUrl(`${shopBasePath}/${product.slug}/`);
-const inquiryHref = `/contact-us/?product=${encodeURIComponent(product.name)}`;
+const pageUrl = absoluteUrl(localizedPath(locale, `${shopBasePath}/${product.slug}/`));
+const inquiryHref = `${localizedPath(locale, '/contact-us/')}?product=${encodeURIComponent(product.name)}`;
 const priceLabel =
 	product.slug === 'interior-design-gift-card'
-		? formatShopPrice(product.price, { from: true })
-		: formatShopPrice(product.price);
+		? formatLocalizedPrice(locale, product.price, { from: true })
+		: formatLocalizedPrice(locale, product.price);
 ---
 
 <BaseLayout
-	title={`${product.name} | Colors of Design Shop`}
+	title={pages.shop.titleSuffix(product.name)}
 	description={product.summary}
 	image={product.imageSrc}
-	canonicalPath={`${shopBasePath}/${product.slug}/`}
+	canonicalPath={localizedPath(locale, `${shopBasePath}/${product.slug}/`)}
 	jsonLd={{
 		'@type': 'Product',
 		name: product.name,
@@ -57,8 +69,8 @@ const priceLabel =
 			<div class="editorial-container shop-product__container">
 				<Breadcrumbs
 					items={[
-						{ label: 'Home', href: '/' },
-						{ label: 'Shop', href: `${shopBasePath}/` },
+						{ label: t.home, href: localizedPath(locale, '/') },
+						{ label: t.crumbs.shop, href: localizedPath(locale, `${shopBasePath}/`) },
 						{ label: product.name },
 					]}
 				/>
@@ -69,7 +81,7 @@ const priceLabel =
 							class="shop-product__gallery-viewport"
 							data-product-gallery-viewport
 							tabindex="0"
-							aria-label={`${product.name} images`}
+							aria-label={pages.shop.imagesAria(product.name)}
 						>
 							<div class="shop-product__gallery-track" data-product-gallery-track>
 								{
@@ -113,14 +125,14 @@ const priceLabel =
 							</div>
 
 							<div class="shop-product__row">
-								<p class="shop-product__label">About</p>
+								<p class="shop-product__label">{pages.shop.about}</p>
 								<p class="shop-product__text">{product.summary}</p>
 							</div>
 
 							{
 								detailLines.length > 0 && (
 									<div class="shop-product__row">
-										<p class="shop-product__label">Details</p>
+										<p class="shop-product__label">{pages.shop.details}</p>
 										<ul class="shop-product__details">
 											{detailLines.map((line) => (
 												<li>{line}</li>
@@ -131,16 +143,15 @@ const priceLabel =
 							}
 
 							<div class="shop-product__row">
-								<p class="shop-product__label">Availability</p>
+								<p class="shop-product__label">{pages.shop.availability}</p>
 								<p class="shop-product__text">
-									Special-order piece. Lead times vary by item. Contact the studio to inquire,
-									confirm timing, and arrange purchase.
+									{pages.shop.availabilityCopy}
 								</p>
 							</div>
 
 							<div class="shop-product__row shop-product__row--cta">
 								<a class="shop-product__button" href={inquiryHref}>
-									Inquire to purchase
+									{pages.shop.inquire}
 								</a>
 							</div>
 						</div>
@@ -152,7 +163,7 @@ const priceLabel =
 		<section class="editorial-section shop-related">
 			<div class="editorial-container">
 				<header class="shop-related__header">
-					<h2 class="shop-related__heading">You may also like</h2>
+					<h2 class="shop-related__heading">{pages.shop.youMayLike}</h2>
 				</header>
 				<ShopGrid products={related} heading="" description="" eyebrow="" />
 			</div>

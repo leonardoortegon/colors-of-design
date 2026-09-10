@@ -2,22 +2,33 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ConversionSection from '../../components/ConversionSection.astro';
-import { services } from '../../data/services';
+import { services as allServices } from '../../data/services';
 import { site, absoluteUrl } from '../../data/site';
+import { getLocale, localizedPath } from '../../i18n/locale';
+import { pageCopy } from '../../i18n/pages';
+import { copy } from '../../i18n/ui';
+import { localizeServices } from '../../i18n/content';
 
 export function getStaticPaths() {
-	return services.map((service) => ({
+	return allServices.map((service) => ({
 		params: { slug: service.slug },
-		props: { service },
 	}));
 }
 
-const { service } = Astro.props;
-const url = `/services/${service.slug}/`;
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
+const t = copy(locale);
+const services = localizeServices(locale);
+const service = services.find((item) => item.slug === Astro.params.slug);
+
+if (!service) {
+	throw new Error(`Unknown service: ${Astro.params.slug}`);
+}
+const url = localizedPath(locale, `/services/${service.slug}/`);
 ---
 
 <BaseLayout
-	title={`${service.name} in Miami | Colors of Design`}
+	title={pages.services.titleSuffix(service.name)}
 	description={service.summary}
 	image={service.imageSrc}
 	canonicalPath={url}
@@ -35,8 +46,8 @@ const url = `/services/${service.slug}/`;
 			<div class="editorial-container">
 				<Breadcrumbs
 					items={[
-						{ label: 'Home', href: '/' },
-						{ label: 'Services', href: '/services/' },
+						{ label: t.home, href: localizedPath(locale, '/') },
+						{ label: t.crumbs.services, href: localizedPath(locale, '/services/') },
 						{ label: service.name },
 					]}
 				/>
@@ -59,10 +70,9 @@ const url = `/services/${service.slug}/`;
 							))}
 						</ul>
 						<p>
-							We define the right scope for your property during our initial conversations. Your
-							proposal sets out the services and responsibilities for your project.
+							{pages.services.detailNote}
 						</p>
-						<a class="text-link" href="/work-process/">See how we work</a>
+						<a class="text-link" href={localizedPath(locale, '/work-process/')}>{pages.services.seeHow}</a>
 					</div>
 				</div>
 			</div>
@@ -72,19 +82,19 @@ const url = `/services/${service.slug}/`;
 			<div class="editorial-container">
 				<div class="service-related__layout">
 					<div class="editorial-copy service-related__intro">
-						<p class="eyebrow">In practice</p>
-						<h2>A home is more than its individual rooms.</h2>
-						<p>See how planning, materials, and furnishings come together in our residential work.</p>
-						<a class="text-link" href="/work/">Explore our projects</a>
+						<p class="eyebrow">{pages.services.inPractice}</p>
+						<h2>{pages.services.moreThanRooms}</h2>
+						<p>{pages.services.seeHowPlanning}</p>
+						<a class="text-link" href={localizedPath(locale, '/work/')}>{pages.services.exploreProjects}</a>
 					</div>
 					<div class="service-related__services">
-						<h2 class="service-related__heading">Explore our services.</h2>
+						<h2 class="service-related__heading">{pages.services.exploreServices}</h2>
 						<ul class="service-related__list">
 							{services
 								.filter((item) => item.slug !== service.slug)
 								.map((item) => (
 									<li>
-										<a class="service-related__link" href={`/services/${item.slug}/`}>
+										<a class="service-related__link" href={localizedPath(locale, `/services/${item.slug}/`)}>
 											{item.name}
 										</a>
 									</li>

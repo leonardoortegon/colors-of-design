@@ -2,26 +2,33 @@
 import BaseLayout from './BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import JournalPreview from '../components/JournalPreview.astro';
-import { journalPosts } from '../data/journal';
 import { site, absoluteUrl } from '../data/site';
+import { getLocale, localizedPath } from '../i18n/locale';
+import { pageCopy } from '../i18n/pages';
+import { copy } from '../i18n/ui';
+import { localizeJournal } from '../i18n/content';
 
 const { frontmatter } = Astro.props;
 const { title, description, category, image, imageAlt, canonicalPath } = frontmatter;
-const related = journalPosts.filter((post) => post.url !== canonicalPath);
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
+const t = copy(locale);
+const related = localizeJournal(locale).filter((post) => post.url !== localizedPath(locale, canonicalPath));
 ---
 <BaseLayout
 	openGraphType="article"
 	title={`${title} | Colors of Design`}
 	description={description}
 	image={image}
-	canonicalPath={canonicalPath}
+	canonicalPath={localizedPath(locale, canonicalPath)}
 	jsonLd={{
 		'@type': 'BlogPosting',
 		headline: title,
 		description,
 		image: absoluteUrl(image),
-		mainEntityOfPage: absoluteUrl(canonicalPath),
-		author: { '@type': 'Organization', name: site.name, url: absoluteUrl('/about-us/') },
+		inLanguage: locale,
+		mainEntityOfPage: absoluteUrl(localizedPath(locale, canonicalPath)),
+		author: { '@type': 'Organization', name: site.name, url: absoluteUrl(localizedPath(locale, '/about-us/')) },
 		publisher: { '@id': `${site.url}/#studio` },
 	}}
 >
@@ -30,8 +37,8 @@ const related = journalPosts.filter((post) => post.url !== canonicalPath);
 			<header class="article-header">
 				<Breadcrumbs
 					items={[
-						{ label: 'Home', href: '/' },
-						{ label: 'Journal', href: '/interior-design-blog/' },
+						{ label: t.home, href: localizedPath(locale, '/') },
+						{ label: t.crumbs.journal, href: localizedPath(locale, '/interior-design-blog/') },
 						{ label: title },
 					]}
 				/>
@@ -45,13 +52,13 @@ const related = journalPosts.filter((post) => post.url !== canonicalPath);
 			<article class="article-body">
 				<slot />
 				<p>
-					<a href="/contact-us/">Tell us about your home</a> or explore
-					<a href="/work/">our residential portfolio</a> to see these ideas in practice.
+					<a href={localizedPath(locale, '/contact-us/')}>{pages.journal.articleCta1}</a>{pages.journal.articleCtaMid}
+					<a href={localizedPath(locale, '/work/')}>{pages.journal.articleCta2}</a>{pages.journal.articleCtaEnd}
 				</p>
 			</article>
 		</div>
 		<aside class="earth editorial-section">
-			<JournalPreview related posts={related} eyebrow="Continue reading" />
+			<JournalPreview related posts={related} eyebrow={pages.journal.continueReading} />
 		</aside>
 	</main>
 </BaseLayout>

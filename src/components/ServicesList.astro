@@ -1,5 +1,7 @@
 ---
 import type { Service } from '../data/services';
+import { copy } from '../i18n/ui';
+import { getLocale, localizedPath, type Locale } from '../i18n/locale';
 
 interface Props {
 	heading: string;
@@ -10,6 +12,7 @@ interface Props {
 	alternateBackgrounds?: boolean;
 	centerHeaderOnDesktop?: boolean;
 	gridLayout?: boolean;
+	locale?: Locale;
 }
 
 const {
@@ -21,9 +24,11 @@ const {
 	alternateBackgrounds = false,
 	centerHeaderOnDesktop = false,
 	gridLayout = false,
+	locale = getLocale(Astro.url.pathname),
 } = Astro.props;
 
 const HeadingTag = headingLevel;
+const t = copy(locale);
 ---
 
 <section
@@ -74,10 +79,10 @@ const HeadingTag = headingLevel;
 							<p class="services-list__copy">{gridLayout ? service.summary : service.description}</p>
 							{!gridLayout && <p class="services-list__included">{service.included.join(' · ')}</p>}
 							{gridLayout ? (
-								<span class="services-list__action">Explore</span>
+								<span class="services-list__action">{t.exploreWord}</span>
 							) : (
-								<a class="services-list__action" href={`/services/${service.slug}/`}>
-									Explore {service.name}
+								<a class="services-list__action" href={localizedPath(locale, `/services/${service.slug}/`)}>
+									{t.exploreService(service.name)}
 								</a>
 							)}
 						</div>
@@ -87,9 +92,9 @@ const HeadingTag = headingLevel;
 				return gridLayout ? (
 					<a
 						class:list={cardClasses}
-						href={`/services/${service.slug}/`}
+						href={localizedPath(locale, `/services/${service.slug}/`)}
 						id={service.slug}
-						aria-label={`Explore ${service.name}`}
+						aria-label={t.exploreService(service.name)}
 					>
 						{cardContent}
 					</a>

@@ -1,4 +1,7 @@
 ---
+import { copy } from '../i18n/ui';
+import { getLocale, type Locale } from '../i18n/locale';
+
 export interface Project {
 	name: string;
 	location: string;
@@ -23,6 +26,7 @@ interface Props {
 	alternateBackgrounds?: boolean;
 	centerHeader?: boolean;
 	centerHeaderOnDesktop?: boolean;
+	locale?: Locale;
 }
 
 const {
@@ -37,9 +41,11 @@ const {
 	alternateBackgrounds = false,
 	centerHeader = false,
 	centerHeaderOnDesktop = false,
+	locale = getLocale(Astro.url.pathname),
 } = Astro.props;
 
 const HeadingTag = headingLevel;
+const t = copy(locale);
 ---
 
 <section
@@ -79,7 +85,7 @@ const HeadingTag = headingLevel;
 							<p class="work__card-location">{project.location}</p>
 							<p class="work__card-scope">{project.scope}</p>
 							<p class="work__card-concept">{project.concept}</p>
-							<span class="work__card-action">View Project</span>
+							<span class="work__card-action">{t.viewProject}</span>
 						</div>
 						<div class="work__card-media">
 							<img
@@ -98,7 +104,7 @@ const HeadingTag = headingLevel;
 					<a
 						class:list={[...cardClasses, 'work__card--link']}
 						href={href}
-						aria-label={`View ${project.name} project`}
+						aria-label={t.viewProjectAria(project.name)}
 						data-nav-surface={alternateBackgrounds && index % 2 === 1 ? 'earth' : undefined}
 					>
 						{cardContent}

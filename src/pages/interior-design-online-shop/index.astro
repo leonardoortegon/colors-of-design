@@ -3,19 +3,26 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ConversionSection from '../../components/ConversionSection.astro';
 import ShopGrid from '../../components/ShopGrid.astro';
-import { shopBasePath, shopProducts } from '../../data/shop';
+import { shopBasePath } from '../../data/shop';
 import { absoluteUrl, site } from '../../data/site';
+import { getLocale, localizedPath } from '../../i18n/locale';
+import { pageCopy } from '../../i18n/pages';
+import { copy } from '../../i18n/ui';
+import { localizeShopProducts } from '../../i18n/content';
 
-const title = 'Home Decor Online Shop | Colors of Design Group';
-const description =
-	'Shop one-of-a-kind home decor, lighting, and furniture from Colors of Design Group, special-order pieces curated for luxurious interiors.';
-const pageUrl = absoluteUrl(`${shopBasePath}/`);
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
+const t = copy(locale);
+const products = localizeShopProducts(locale);
+const title = pages.shop.title;
+const description = pages.shop.description;
+const pageUrl = absoluteUrl(localizedPath(locale, `${shopBasePath}/`));
 ---
 
 <BaseLayout
 	title={title}
 	description={description}
-	canonicalPath={`${shopBasePath}/`}
+	canonicalPath={localizedPath(locale, `${shopBasePath}/`)}
 	jsonLd={{
 		'@type': 'CollectionPage',
 		name: title,
@@ -24,12 +31,12 @@ const pageUrl = absoluteUrl(`${shopBasePath}/`);
 		isPartOf: { '@id': `${site.url}/#website` },
 		mainEntity: {
 			'@type': 'ItemList',
-			name: 'Colors of Design shop',
-			numberOfItems: shopProducts.length,
-			itemListElement: shopProducts.map((product, index) => ({
+			name: pages.shop.listName,
+			numberOfItems: products.length,
+			itemListElement: products.map((product, index) => ({
 				'@type': 'ListItem',
 				position: index + 1,
-				url: absoluteUrl(`${shopBasePath}/${product.slug}/`),
+				url: absoluteUrl(localizedPath(locale, `${shopBasePath}/${product.slug}/`)),
 				name: product.name,
 			})),
 		},
@@ -38,9 +45,9 @@ const pageUrl = absoluteUrl(`${shopBasePath}/`);
 	<main class="page" id="main">
 		<div class="shop-page">
 			<div class="shop-page__crumbs">
-				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Shop' }]} />
+				<Breadcrumbs items={[{ label: t.home, href: localizedPath(locale, '/') }, { label: t.crumbs.shop }]} />
 			</div>
-			<ShopGrid fullPage headingLevel="h1" centerHeaderOnDesktop />
+			<ShopGrid fullPage headingLevel="h1" centerHeaderOnDesktop heading={pages.shop.heading} description={pages.shop.descriptionPage} eyebrow={pages.shop.eyebrow} />
 		</div>
 		<ConversionSection />
 	</main>

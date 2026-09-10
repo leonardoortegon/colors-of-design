@@ -1,6 +1,15 @@
 ---
 import InquiryForm from './InquiryForm.astro';
 import InquiryFormIntro from './InquiryFormIntro.astro';
+import { copy } from '../i18n/ui';
+import type { Locale } from '../i18n/locale';
+
+interface Props {
+	locale?: Locale;
+}
+
+const { locale = 'en' } = Astro.props;
+const t = copy(locale);
 ---
 
 <div class="inquiry-modal" data-inquiry-modal hidden aria-hidden="true">
@@ -12,17 +21,17 @@ import InquiryFormIntro from './InquiryFormIntro.astro';
 		tabindex="-1"
 		data-inquiry-panel
 	>
-		<button type="button" class="inquiry-modal__close" data-inquiry-close aria-label="Close">
+		<button type="button" class="inquiry-modal__close" data-inquiry-close aria-label={t.close}>
 			<svg class="inquiry-modal__close-icon" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
 				<path d="M4 4 L14 14 M14 4 L4 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
 			</svg>
-			<span>Close</span>
+			<span>{t.close}</span>
 		</button>
 
 		<div class="inquiry-modal__inner">
-			<InquiryFormIntro id="inquiry-modal-heading" />
+			<InquiryFormIntro id="inquiry-modal-heading" locale={locale} />
 
-			<InquiryForm simple idPrefix="modal-" />
+			<InquiryForm simple idPrefix="modal-" locale={locale} />
 		</div>
 	</div>
 </div>
@@ -111,7 +120,7 @@ import InquiryFormIntro from './InquiryFormIntro.astro';
 			if (nav && nav.classList.contains('is-open') && toggle) {
 				nav.classList.remove('is-open');
 				toggle.setAttribute('aria-expanded', 'false');
-				toggle.setAttribute('aria-label', 'Menu');
+				toggle.setAttribute('aria-label', toggle.getAttribute('data-label-menu') || 'Menu');
 				document.documentElement.classList.remove('nav-menu-open');
 				document.querySelectorAll('main, footer').forEach(function (element) {
 					element.inert = false;

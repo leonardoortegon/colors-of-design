@@ -5,6 +5,8 @@ import InquiryModal from '../components/InquiryModal.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteNav from '../components/SiteNav.astro';
 import { site, absoluteUrl } from '../data/site';
+import { copy } from '../i18n/ui';
+import { getLocale, localeMeta, localizedPath, stripLocalePrefix } from '../i18n/locale';
 
 interface Props {
 	title?: string;
@@ -28,8 +30,14 @@ const {
 	transparentNav = false,
 } = Astro.props;
 
-const canonical = absoluteUrl(canonicalPath);
-const normalizedPath = canonicalPath.replace(/\/$/, '') || '/';
+const locale = getLocale(canonicalPath || Astro.url.pathname);
+const t = copy(locale);
+const meta = localeMeta(locale);
+const unprefixed = stripLocalePrefix(canonicalPath);
+const englishPath = localizedPath('en', unprefixed);
+const spanishPath = localizedPath('es', unprefixed);
+const canonical = absoluteUrl(localizedPath(locale, unprefixed));
+const normalizedPath = unprefixed.replace(/\/$/, '') || '/';
 const hideNavOnScroll = normalizedPath === '/work' || normalizedPath.startsWith('/work/');
 const ogImage = image.startsWith('http') ? image : absoluteUrl(image);
 const organizationLd = {
@@ -66,6 +74,7 @@ const websiteLd = {
 	'@id': `${site.url}/#website`,
 	url: site.url,
 	name: site.name,
+	inLanguage: meta.htmlLang,
 	publisher: { '@id': `${site.url}/#studio` },
 };
 
@@ -77,7 +86,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={meta.htmlLang}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -87,9 +96,13 @@ const structuredData = {
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
+		<link rel="alternate" hreflang="en" href={absoluteUrl(englishPath)} />
+		<link rel="alternate" hreflang="es" href={absoluteUrl(spanishPath)} />
+		<link rel="alternate" hreflang="x-default" href={absoluteUrl(englishPath)} />
 		<meta name="robots" content={noIndex ? 'noindex, follow' : 'index, follow'} />
 		<meta property="og:type" content={openGraphType} />
-		<meta property="og:locale" content={site.locale} />
+		<meta property="og:locale" content={meta.ogLocale} />
+		<meta property="og:locale:alternate" content={locale === 'es' ? 'en_US' : 'es_US'} />
 		<meta property="og:site_name" content={site.name} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -108,14 +121,15 @@ const structuredData = {
 		/>
 	</head>
 	<body>
-		<a class="skip-link" href="#main">Skip to content</a>
+		<a class="skip-link" href="#main">{t.skipToContent}</a>
 		<SiteNav
 			currentPath={Astro.url.pathname}
 			transparentOverHero={transparentNav}
 			hideOnScroll={hideNavOnScroll}
+			locale={locale}
 		/>
 		<slot />
-		<SiteFooter />
-		<InquiryModal />
+		<SiteFooter locale={locale} />
+		<InquiryModal locale={locale} />
 	</body>
 </html>

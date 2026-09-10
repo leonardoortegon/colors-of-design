@@ -3,13 +3,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SelectedWork from '../../components/SelectedWork.astro';
 import ConversionSection from '../../components/ConversionSection.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
-import { projects } from '../../data/projects';
 import { absoluteUrl, site } from '../../data/site';
+import { getLocale, localizedPath } from '../../i18n/locale';
+import { pageCopy } from '../../i18n/pages';
+import { copy } from '../../i18n/ui';
+import { localizeProjects } from '../../i18n/content';
 
-const title = 'Interior Design Portfolio | Colors of Design Group';
-const description =
-	'Browse residential interior design projects by Colors of Design Group, including homes in Coral Gables, Miami Beach, and Brickell.';
-const pageUrl = absoluteUrl('/work');
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
+const t = copy(locale);
+const projects = localizeProjects(locale);
+const title = pages.work.title;
+const description = pages.work.description;
+const pageUrl = absoluteUrl(localizedPath(locale, '/work/'));
 
 const listedProjects = projects.map((project) => ({
 	name: project.name,
@@ -20,7 +26,7 @@ const listedProjects = projects.map((project) => ({
 	imageAlt: project.imageAlt,
 	imageWidth: project.imageWidth,
 	imageHeight: project.imageHeight,
-	href: `/work/${project.slug}/`,
+	href: localizedPath(locale, `/work/${project.slug}/`),
 }));
 
 const jsonLd = [
@@ -33,17 +39,17 @@ const jsonLd = [
 		isPartOf: { '@id': `${site.url}/#website` },
 		about: {
 			'@type': 'Thing',
-			name: 'Residential interior design',
+			name: pages.work.thingName,
 		},
 		mainEntity: {
 			'@type': 'ItemList',
-			name: 'Interior design projects',
+			name: pages.work.listName,
 			numberOfItems: projects.length,
 			itemListElement: projects.map((project, index) => ({
 				'@type': 'ListItem',
 				position: index + 1,
-				url: absoluteUrl(`/work/${project.slug}/`),
-				name: `${project.name} interior design`,
+				url: absoluteUrl(localizedPath(locale, `/work/${project.slug}/`)),
+				name: pages.work.itemName(project.name),
 			})),
 		},
 	},
@@ -53,13 +59,13 @@ const jsonLd = [
 			{
 				'@type': 'ListItem',
 				position: 1,
-				name: 'Home',
-				item: site.url,
+				name: pages.work.jsonHome,
+				item: absoluteUrl(localizedPath(locale, '/')),
 			},
 			{
 				'@type': 'ListItem',
 				position: 2,
-				name: 'Work',
+				name: t.crumbs.work,
 				item: pageUrl,
 			},
 		],
@@ -67,19 +73,19 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/work" jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} canonicalPath={localizedPath(locale, '/work/')} jsonLd={jsonLd}>
 	<main class="page" id="main">
 		<div class="work-page">
 			<div class="work-page__crumbs">
-				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Work' }]} />
+				<Breadcrumbs items={[{ label: t.home, href: localizedPath(locale, '/') }, { label: t.crumbs.work }]} />
 			</div>
 			<SelectedWork
-				heading="Interior Design Portfolio"
+				heading={pages.work.heading}
 				headingLevel="h1"
 				sectionId="projects"
 				cardLayout="image-left"
 				centerHeaderOnDesktop
-				introduction="A collection of residences by Colors of Design Group, full-service interior design, interior architecture, and furnishings for homes in Miami, Coral Gables, and beyond. Select a project to see the brief, materials, and rooms."
+				introduction={pages.work.introduction}
 				projects={listedProjects}
 			/>
 		</div>

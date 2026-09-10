@@ -3,23 +3,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import AwardSection from '../components/AwardSection.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import ConversionSection from '../components/ConversionSection.astro';
-import { awards, awardsIntro } from '../data/awards';
 import { absoluteUrl, site } from '../data/site';
+import { getLocale, localizedPath } from '../i18n/locale';
+import { pageCopy } from '../i18n/pages';
+import { copy } from '../i18n/ui';
+import { localizeAwards } from '../i18n/content';
 
-const title = 'Awards & Recognitions | Colors of Design Group';
-const description =
-	'Explore awards and recognitions for Colors of Design Group, including Luxury Lifestyle Awards, Design Minds, and Best of Houzz honors in Miami.';
+const locale = getLocale(Astro.url.pathname);
+const pages = pageCopy(locale);
+const t = copy(locale);
+const { intro: awardsIntro, items: awards } = localizeAwards(locale);
+const title = pages.awards.title;
+const description = pages.awards.description;
 ---
 
 <BaseLayout
 	title={title}
 	description={description}
-	canonicalPath="/awards-and-recognitions/"
+	canonicalPath={localizedPath(locale, '/awards-and-recognitions/')}
 	jsonLd={{
 		'@type': 'WebPage',
 		name: title,
 		description,
-		url: absoluteUrl('/awards-and-recognitions/'),
+		url: absoluteUrl(localizedPath(locale, '/awards-and-recognitions/')),
 		isPartOf: { '@id': `${site.url}/#website` },
 		about: { '@id': `${site.url}/#studio` },
 	}}
@@ -27,7 +33,7 @@ const description =
 	<main class="page" id="main">
 		<div class="awards-page">
 			<div class="awards-page__crumbs">
-				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Awards' }]} />
+				<Breadcrumbs items={[{ label: t.home, href: localizedPath(locale, '/') }, { label: t.crumbs.awards }]} />
 			</div>
 
 			<header class="awards-page__header">
