@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ConversionSection from '../../components/ConversionSection.astro';
+import ShopGrid from '../../components/ShopGrid.astro';
+import { shopBasePath, shopProducts } from '../../data/shop';
+import { absoluteUrl, site } from '../../data/site';
+
+const title = 'Home Decor Online Shop | Colors of Design Group';
+const description =
+	'Shop one-of-a-kind home decor, lighting, and furniture from Colors of Design Group—special-order pieces curated for luxurious interiors.';
+const pageUrl = absoluteUrl(`${shopBasePath}/`);
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+	canonicalPath={`${shopBasePath}/`}
+	jsonLd={{
+		'@type': 'CollectionPage',
+		name: title,
+		description,
+		url: pageUrl,
+		isPartOf: { '@id': `${site.url}/#website` },
+		mainEntity: {
+			'@type': 'ItemList',
+			name: 'Colors of Design shop',
+			numberOfItems: shopProducts.length,
+			itemListElement: shopProducts.map((product, index) => ({
+				'@type': 'ListItem',
+				position: index + 1,
+				url: absoluteUrl(`${shopBasePath}/${product.slug}/`),
+				name: product.name,
+			})),
+		},
+	}}
+>
+	<main class="page" id="main">
+		<div class="shop-page">
+			<div class="shop-page__crumbs">
+				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Shop' }]} />
+			</div>
+			<ShopGrid fullPage headingLevel="h1" centerHeaderOnDesktop />
+		</div>
+		<ConversionSection />
+	</main>
+</BaseLayout>
+
+<style>
+	.shop-page {
+		background-color: var(--color-bg);
+		--hero-max-width: 1400px;
+	}
+
+	.shop-page__crumbs {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding: 2rem var(--site-gutter) 0;
+	}
+</style>

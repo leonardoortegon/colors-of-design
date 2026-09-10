@@ -5,16 +5,16 @@ import SplitSection from '../components/SplitSection.astro';
 import SelectedWork from '../components/SelectedWork.astro';
 import ServicesSection from '../components/ServicesSection.astro';
 import ProcessSection from '../components/ProcessSection.astro';
-import ShopPreview from '../components/ShopPreview.astro';
+import JournalPreview from '../components/JournalPreview.astro';
 import ConversionSection from '../components/ConversionSection.astro';
 import { projects } from '../data/projects';
-import { services, featuredServices } from '../data/services';
+import { featuredServices } from '../data/services';
 import { site } from '../data/site';
 
 const homepageProjectSlugs = [
 	'delray-beach-interior-design',
 	'coral-gables-estate',
-	'brickell-penthouse',
+	'sunny-isles',
 ];
 
 const listedProjects = homepageProjectSlugs
@@ -29,18 +29,19 @@ const listedProjects = homepageProjectSlugs
 		imageAlt: project.imageAlt,
 		imageWidth: project.imageWidth,
 		imageHeight: project.imageHeight,
-		href: `/work/${project.slug}`,
+		href: `/work/${project.slug}/`,
 	}));
 ---
 
-<BaseLayout title={site.defaultTitle} description={site.defaultDescription}>
+<BaseLayout title={site.defaultTitle} description={site.defaultDescription} transparentNav>
+	<main id="main">
 	<HeroOverlay
 		eyebrow="Luxury interior design · Miami & beyond"
 		heading="Interiors shaped around the way you live."
 		description="Colors of Design is a Miami-based interior design studio creating refined, deeply personal residences, from the first concept to the final installation."
 		ctas={[
-			{ label: 'Start Your Project' },
-			{ label: 'Explore Our Work', href: '/work' },
+			{ label: 'Start Your Project', href: '/contact-us/' },
+			{ label: 'Explore Our Work', href: '/work/' },
 		]}
 		trustItems={[
 			'Award-winning interior design',
@@ -51,6 +52,7 @@ const listedProjects = homepageProjectSlugs
 		imageSrc="/hero.jpg"
 		imageAlt="Luxury residential interior by Colors of Design Group in Miami"
 	/>
+	<div class="home-page__sections">
 	<SplitSection
 		heading={'Distinctive by design.\nPersonal by nature.'}
 		copy={[
@@ -64,6 +66,7 @@ const listedProjects = homepageProjectSlugs
 		projects={listedProjects}
 		ctaLabel="Explore All Projects"
 		ctaHref="/work"
+		centerHeader
 	/>
 	<ServicesSection
 		heading="How We Can Work Together"
@@ -73,7 +76,7 @@ const listedProjects = homepageProjectSlugs
 			description: service.summary,
 			imageSrc: service.imageSrc,
 			imageAlt: service.imageAlt,
-			href: `/services#${service.slug}`,
+			href: `/services/#${service.slug}`,
 		}))}
 		linkLabel="Explore All Services"
 		linkHref="/services"
@@ -106,6 +109,7 @@ const listedProjects = homepageProjectSlugs
 	/>
 	<SplitSection
 		sectionId="studio"
+		banded
 		heading="An Artistic Eye. An Architectural Approach."
 		copy={[
 			'Founded by Margaret Van Puffelen, Colors of Design combines a foundation in decorative arts with formal training in interior design and interior architecture. Together with a multidisciplinary team, Margaret has created residences for clients throughout the United States and Latin America—balancing creative expression with careful planning and execution.',
@@ -119,55 +123,14 @@ const listedProjects = homepageProjectSlugs
 		imagePosition="left"
 		imageMaxWidth="34rem"
 	/>
-	<ShopPreview
-		heading="Objects That Finish the Room"
-		copy="Discover lighting, furniture, and decorative objects selected for their materiality, character, and ability to transform a space."
-		products={[
-			{
-				name: 'Sculptural Table Lamp',
-				details: 'Brushed Brass, Linen Shade, Dimmer Switch',
-				price: '$ 680',
-			},
-			{
-				name: 'Woven Lounge Chair',
-				details: 'Natural Oak, Woven Cane, Linen Upholstery',
-				price: '$ 3,200',
-			},
-			{
-				name: 'Hand-Thrown Ceramic Vase',
-				details: 'Ivory Glaze, Stoneware, Matte Finish',
-				price: '$ 420',
-			},
-			{
-				name: 'Brushed Brass Sconce',
-				details: 'Brushed Brass, Opal Glass, Hardwired',
-				price: '$ 540',
-			},
-			{
-				name: 'Linen Throw Pillow',
-				details: 'Belgian Linen, Down Insert, Hidden Zipper',
-				price: '$ 185',
-			},
-			{
-				name: 'Marble Side Table',
-				details: 'Carrara Marble, Bronze Base, Hand-Finished',
-				price: '$ 1,450',
-			},
-			{
-				name: 'Olive Wood Bowl',
-				details: 'Olive Wood, Natural Grain, Food-Safe Finish',
-				price: '$ 320',
-			},
-			{
-				name: 'Cashmere Throw',
-				details: 'Mongolian Cashmere, Ribbed Weave, Warm Taupe',
-				price: '$ 395',
-			},
-		]}
-		ctaLabel="Visit the Collection"
-	/>
-	<ConversionSection
-		heading="Your Home Should Feel Unmistakably Yours."
-		copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
-	/>
+	<JournalPreview />
+	<ConversionSection />
+	</div>
+	</main>
 </BaseLayout>
+
+<style>
+	.home-page__sections {
+		--hero-max-width: 1400px;
+	}
+</style>

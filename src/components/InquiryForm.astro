@@ -1,0 +1,296 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+	simple?: boolean;
+	submitLabel?: string;
+	idPrefix?: string;
+	showPrivacyNote?: boolean;
+}
+
+const {
+	simple = false,
+	submitLabel = simple ? 'Send Message' : 'Prepare email draft',
+	idPrefix = '',
+	showPrivacyNote = simple,
+} = Astro.props;
+
+const fieldId = (name: string) => `${idPrefix}${name}`;
+const privacyNote = 'Your information is used only to respond to this project inquiry.';
+---
+
+{
+	simple ? (
+		<form class="inquiry-form inquiry-form--simple" data-inquiry-form data-inquiry-simple data-recipient={site.email}>
+			<div>
+				<label for={fieldId('inquiry-name')}>Name</label>
+				<input id={fieldId('inquiry-name')} name="name" autocomplete="name" required maxlength="100" />
+			</div>
+			<div>
+				<label for={fieldId('inquiry-phone')}>Phone</label>
+				<input id={fieldId('inquiry-phone')} name="phone" type="tel" autocomplete="tel" required maxlength="40" />
+			</div>
+			<div>
+				<label for={fieldId('inquiry-message')}>Message</label>
+				<textarea id={fieldId('inquiry-message')} name="message" rows="4" required maxlength="1800" />
+			</div>
+			<button class="inquiry-form__button" type="submit">{submitLabel}</button>
+			{showPrivacyNote && <p class="inquiry-form__privacy">{privacyNote}</p>}
+		</form>
+	) : (
+		<form class="inquiry-form" data-inquiry-form data-recipient={site.email}>
+			<div class="inquiry-form__pair">
+				<div>
+					<label for="inquiry-name">Name <span>(required)</span></label>
+					<input id="inquiry-name" name="name" autocomplete="name" required maxlength="100" />
+				</div>
+				<div>
+					<label for="inquiry-email">Email <span>(required)</span></label>
+					<input id="inquiry-email" name="email" type="email" autocomplete="email" required maxlength="160" />
+				</div>
+			</div>
+			<div class="inquiry-form__pair">
+				<div>
+					<label for="inquiry-phone">Phone <span>(optional)</span></label>
+					<input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+				</div>
+				<div>
+					<label for="inquiry-location">Project location</label>
+					<input id="inquiry-location" name="location" placeholder="City, state" maxlength="150" />
+				</div>
+			</div>
+			<div>
+				<label for="inquiry-service">How can we help?</label>
+				<select id="inquiry-service" name="service">
+					<option value="Not yet sure">Let’s explore together</option>
+					<option>Full-service interior design</option>
+					<option>Renovation & interior architecture</option>
+					<option>Furniture & finishing touches</option>
+					<option>Turnkey project</option>
+					<option>Design consultation</option>
+				</select>
+			</div>
+			<div>
+				<label for="inquiry-message">Tell us about your project <span>(required)</span></label>
+				<textarea
+					id="inquiry-message"
+					name="message"
+					rows="4"
+					required
+					maxlength="1800"
+					placeholder="Your vision, priorities, and timing…"
+				/>
+			</div>
+			<p class="inquiry-form__note" id="inquiry-help">
+				Prepare your inquiry below, then open it in your email app to review and send. Nothing is sent
+				automatically.
+			</p>
+			<button class="inquiry-form__button" type="submit" disabled aria-describedby="inquiry-help">
+				{submitLabel}
+			</button>
+			<div class="inquiry-form__draft" data-draft-panel hidden>
+				<p role="status" data-draft-status>
+					Your draft is ready. Open your email app to send it, or copy the text below.
+				</p>
+				<label for="inquiry-draft">Your email draft</label>
+				<textarea id="inquiry-draft" data-draft-text readonly rows="9" />
+				<a class="inquiry-form__button" data-draft-link href={`mailto:${site.email}`}>Open email app</a>
+				<button class="text-link" type="button" data-copy-draft>Copy draft</button>
+				<p class="inquiry-form__note">
+					Send to <a href={`mailto:${site.email}`}>{site.email}</a>. Your message has not been sent from
+					this website.
+				</p>
+			</div>
+			<noscript>
+				<p>
+					Email us directly at <a href={`mailto:${site.email}`}>{site.email}</a>, or call{' '}
+					<a href={site.phoneHref}>{site.phone}</a>.
+				</p>
+			</noscript>
+		</form>
+	)
+}
+
+<style>
+	.inquiry-form {
+		display: grid;
+		gap: 1.75rem;
+	}
+
+	.inquiry-form__pair {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+	}
+
+	label {
+		display: block;
+		font-size: 0.6875rem;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: 0.5rem;
+	}
+
+	label span {
+		font-weight: 400;
+		color: var(--color-text-muted);
+	}
+
+	input,
+	textarea,
+	select {
+		width: 100%;
+		color: var(--color-text);
+		background: transparent;
+		font: inherit;
+		font-size: 0.9375rem;
+		padding: 0.75rem 0;
+		border: 0;
+		border-bottom: 1px solid #aaa59b;
+		border-radius: 0;
+	}
+
+	textarea {
+		resize: vertical;
+	}
+
+	select {
+		padding-right: 1rem;
+	}
+
+	.inquiry-form__button {
+		display: block;
+		text-align: center;
+		padding: 1rem;
+		border: 1px solid var(--color-text);
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		transition: background 0.2s;
+	}
+
+	.inquiry-form__button:hover {
+		background: #ece6dc;
+	}
+
+	.inquiry-form--simple .inquiry-form__button {
+		color: var(--color-text);
+		background-color: transparent;
+		border-color: var(--color-accent);
+		padding: 0.875rem 2rem;
+		font-size: 0.8125rem;
+		letter-spacing: 0.12em;
+	}
+
+	.inquiry-form--simple .inquiry-form__button:hover {
+		color: var(--color-accent-hover);
+		background-color: transparent;
+		border-color: var(--color-accent-hover);
+	}
+
+	.inquiry-form__privacy {
+		margin: 0;
+		font-size: 0.75rem;
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		opacity: 0.85;
+	}
+
+	.inquiry-form__note {
+		font-size: 0.75rem;
+		line-height: 1.8;
+		color: var(--color-text-muted);
+	}
+
+	.inquiry-form__note a {
+		text-decoration: underline;
+	}
+
+	.inquiry-form__draft {
+		padding: 1.5rem;
+		border: 1px solid #c5b9a5;
+		background: white;
+	}
+
+	.inquiry-form__draft > p:first-child {
+		margin-bottom: 1rem;
+		font-size: 0.9rem;
+	}
+
+	.inquiry-form__draft textarea {
+		margin-bottom: 1.25rem;
+	}
+
+	.inquiry-form__draft .inquiry-form__note {
+		margin-top: 1rem;
+	}
+
+	@media (max-width: 540px) {
+		.inquiry-form__pair {
+			grid-template-columns: 1fr;
+			gap: 1.75rem;
+		}
+	}
+</style>
+
+<script>
+	document.querySelectorAll<HTMLFormElement>('[data-inquiry-form]').forEach((form) => {
+		const isSimple = form.hasAttribute('data-inquiry-simple');
+
+		if (isSimple) {
+			form.addEventListener('submit', (event) => {
+				event.preventDefault();
+				if (!form.reportValidity()) return;
+
+				const data = new FormData(form);
+				const value = (key: string) => String(data.get(key) || '').trim();
+				const subject = `Project inquiry from ${value('name')}`;
+				const body = `Hello Colors of Design,\n\n${value('message')}\n\nName: ${value('name')}\nPhone: ${value('phone')}`;
+				window.location.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+			});
+			return;
+		}
+
+		const panel = form.querySelector<HTMLElement>('[data-draft-panel]')!;
+		const draft = form.querySelector<HTMLTextAreaElement>('[data-draft-text]')!;
+		const link = form.querySelector<HTMLAnchorElement>('[data-draft-link]')!;
+		const status = form.querySelector<HTMLElement>('[data-draft-status]')!;
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			if (!form.reportValidity()) return;
+
+			const data = new FormData(form);
+			const value = (key: string) => String(data.get(key) || '').trim();
+			if (!value('name') || !value('message')) {
+				form.querySelector<HTMLTextAreaElement>('#inquiry-message')?.focus();
+				return;
+			}
+
+			const subject = `Project inquiry: ${value('location') || value('service')}`;
+			const body = `Hello Colors of Design,\n\n${value('message')}\n\nName: ${value('name')}\nEmail: ${value('email')}\nPhone: ${value('phone') || 'Not provided'}\nLocation: ${value('location') || 'To discuss'}\nService: ${value('service')}`;
+			draft.value = `To: ${form.dataset.recipient}\nSubject: ${subject}\n\n${body}`;
+			link.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+			status.textContent = 'Your draft is ready. Open your email app to send it, or copy the text below.';
+			panel.hidden = false;
+			link.focus();
+		});
+
+		form.querySelector('[data-copy-draft]')?.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(draft.value);
+				status.textContent = 'Draft copied. Paste it into your email app, review, and send.';
+			} catch {
+				draft.focus();
+				draft.select();
+				status.textContent = 'Select and copy the draft, then paste it into your email app.';
+			}
+		});
+
+		form.addEventListener('input', () => {
+			panel.hidden = true;
+		});
+		form.querySelector<HTMLButtonElement>('[type=submit]')!.disabled = false;
+	});
+</script>

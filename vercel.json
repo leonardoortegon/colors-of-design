@@ -1,0 +1,95 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/interior-design-portfolio",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/miami-interior-design-services",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/services/fengshui",
+      "destination": "/services/feng-shui/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/delray-beach",
+      "destination": "/work/delray-beach-interior-design/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/asheville-north-carolina",
+      "destination": "/work/asheville/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/coral-gables",
+      "destination": "/work/coral-gables-estate/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/sunny-isles",
+      "destination": "/work/sunny-isles/",
+      "permanent": true
+    },
+    {
+      "source": "/work/brickell-penthouse",
+      "destination": "/work/sunny-isles/",
+      "permanent": true
+    },
+    {
+      "source": "/work/brickell-penthouse/",
+      "destination": "/work/sunny-isles/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/studio",
+      "destination": "/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/process",
+      "destination": "/work-process/",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/journal",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/:slug",
+      "destination": "/interior-design-online-shop/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/online-store/:path*",
+      "destination": "/interior-design-online-shop/",
+      "permanent": true
+    }
+  ]
+}

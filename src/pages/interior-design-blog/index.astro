@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import JournalPreview from '../../components/JournalPreview.astro';
+import ConversionSection from '../../components/ConversionSection.astro';
+import { journalPosts } from '../../data/journal';
+import { absoluteUrl, site } from '../../data/site';
+
+const title = 'Interior Design Journal & Ideas | Colors of Design';
+const description =
+	'Interior design ideas and practical advice from the Colors of Design journal. Explore lighting, thoughtful planning, and preparing for your design consultation.';
+const pageUrl = absoluteUrl('/interior-design-blog/');
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+	canonicalPath="/interior-design-blog/"
+	jsonLd={{
+		'@type': 'Blog',
+		name: 'Colors of Design Journal',
+		url: pageUrl,
+		blogPost: journalPosts.map((post) => ({
+			'@type': 'BlogPosting',
+			headline: post.title,
+			url: absoluteUrl(post.url),
+		})),
+	}}
+>
+	<main class="page" id="main">
+		<div class="journal-page">
+			<div class="journal-page__crumbs">
+				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Journal' }]} />
+			</div>
+			<JournalPreview
+				fullPage
+				heading="Notes on the art of living."
+				headingLevel="h1"
+				eyebrow="The journal · Ideas for a considered home"
+				centerHeaderOnDesktop
+				introduction="Perspectives on interiors, the details that make a room, and the decisions that bring a home together."
+			/>
+		</div>
+		<ConversionSection />
+	</main>
+</BaseLayout>
+
+<style>
+	.journal-page {
+		background-color: var(--color-bg);
+		--journal-page-max-width: 1400px;
+	}
+
+	.journal-page__crumbs {
+		width: 100%;
+		max-width: var(--journal-page-max-width);
+		margin-inline: auto;
+		padding: 2rem var(--site-gutter) 0;
+	}
+
+	.journal-page :global(.journal-list__inner) {
+		max-width: var(--journal-page-max-width);
+		padding-top: 1.5rem;
+	}
+</style>

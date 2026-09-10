@@ -1,0 +1,335 @@
+---
+import { journalPosts } from '../data/journal';
+
+interface Props {
+	fullPage?: boolean;
+	heading?: string;
+	introduction?: string;
+	eyebrow?: string;
+	headingLevel?: 'h1' | 'h2';
+	centerHeaderOnDesktop?: boolean;
+}
+
+const {
+	fullPage = false,
+	heading = 'A considered way of living.',
+	introduction,
+	eyebrow = 'From the journal',
+	headingLevel = 'h2',
+	centerHeaderOnDesktop = false,
+} = Astro.props;
+
+const HeadingTag = headingLevel;
+const CardTitleTag = headingLevel === 'h1' ? 'h2' : 'h3';
+const displayedPosts = fullPage ? journalPosts : journalPosts.slice(0, 3);
+---
+
+<section
+	class:list={['journal-list', fullPage && 'journal-list--page']}
+	id="journal"
+	aria-labelledby={fullPage ? 'journal-list-heading' : undefined}
+	aria-label={fullPage ? undefined : 'From the journal'}
+>
+	<div class="journal-list__inner">
+		<header
+			class:list={[
+				'journal-list__header',
+				centerHeaderOnDesktop && 'journal-list__header--center-desktop',
+				!fullPage && 'journal-list__header--preview',
+			]}
+		>
+			{fullPage ? (
+				<>
+					{eyebrow && <p class="eyebrow">{eyebrow}</p>}
+					<HeadingTag id="journal-list-heading" class="journal-list__heading">{heading}</HeadingTag>
+					{introduction && <p class="journal-list__intro">{introduction}</p>}
+				</>
+			) : (
+				<>
+					<p class="eyebrow">{eyebrow}</p>
+					<h2 class="journal-list__heading">{heading}</h2>
+				</>
+			)}
+		</header>
+
+		<div
+			class:list={[
+				'journal-list__grid',
+				fullPage && 'journal-list__grid--page',
+				!fullPage && 'journal-list__grid--preview',
+			]}
+		>
+			{displayedPosts.map((post) => {
+				const cardContent = (
+					<>
+						<div class="journal-list__media">
+							<img src={post.image} alt={post.alt} width="2000" height="1334" loading="lazy" />
+						</div>
+						<div class="journal-list__body">
+							<CardTitleTag class="journal-list__title">{post.title}</CardTitleTag>
+							<p class="journal-list__copy">{post.description}</p>
+							{fullPage ? (
+								<span class="journal-list__action">Read</span>
+							) : (
+								<a class="journal-list__action" href={post.url} aria-label={`Read ${post.title}`}>
+									Read the story
+								</a>
+							)}
+						</div>
+					</>
+				);
+
+				return fullPage ? (
+					<a class="journal-list__card journal-list__card--page" href={post.url} aria-label={`Read ${post.title}`}>
+						{cardContent}
+					</a>
+				) : (
+					<article class="journal-list__card journal-list__card--preview">
+						<a class="journal-list__card-link" href={post.url}>
+							<div class="journal-list__media">
+								<img src={post.image} alt={post.alt} width="2000" height="1334" loading="lazy" />
+							</div>
+							<h3 class="journal-list__title">{post.title}</h3>
+						</a>
+						<p class="journal-list__copy">{post.description}</p>
+						<a class="journal-list__action" href={post.url} aria-label={`Read ${post.title}`}>
+							Read the story
+						</a>
+					</article>
+				);
+			})}
+		</div>
+
+		{
+			!fullPage && (
+				<div class="journal-list__footer">
+					<a class="journal-list__cta" href="/interior-design-blog/">Explore the journal</a>
+				</div>
+			)
+		}
+	</div>
+</section>
+
+<style>
+	.journal-list {
+		width: 100%;
+		background-color: var(--color-bg);
+	}
+
+	.journal-list__inner {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding: clamp(4rem, 8vw, 7rem) var(--site-gutter);
+	}
+
+	.journal-list--page {
+		background-color: var(--color-bg);
+	}
+
+	.journal-list--page .journal-list__inner {
+		padding-top: 0;
+		padding-bottom: clamp(4rem, 8vw, 7rem);
+	}
+
+	.journal-list__header {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-bottom: clamp(3rem, 6vw, 4.5rem);
+		text-align: left;
+	}
+
+	.journal-list__header--preview {
+		margin-bottom: 2.5rem;
+	}
+
+	.journal-list__header .eyebrow {
+		margin-bottom: 0;
+	}
+
+	.journal-list__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+	}
+
+	.journal-list__intro {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+		max-width: 34rem;
+	}
+
+	.journal-list__grid {
+		display: grid;
+		gap: clamp(1.5rem, 3vw, 2.5rem);
+	}
+
+	.journal-list__grid--page {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.journal-list__grid--preview {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(1.25rem, 2.5vw, 2rem);
+	}
+
+	a.journal-list__card--page {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+		text-decoration: none;
+		color: inherit;
+		background-color: var(--color-earth);
+		transition: box-shadow 0.2s ease;
+	}
+
+	a.journal-list__card--page:hover {
+		box-shadow: 0 12px 32px rgba(26, 26, 26, 0.08);
+	}
+
+	a.journal-list__card--page:hover .journal-list__action {
+		border-color: var(--color-text);
+	}
+
+	.journal-list__card--preview {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		height: 100%;
+		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+		background-color: var(--color-earth);
+	}
+
+	.journal-list__card-link {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.25rem, 2.5vw, 1.5rem);
+		width: 100%;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.journal-list__media {
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.journal-list__media img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.journal-list__body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		gap: 0.75rem;
+		padding-top: clamp(1.25rem, 2.5vw, 1.5rem);
+	}
+
+	.journal-list__title {
+		font-family: var(--font-heading);
+		font-size: clamp(1.375rem, 2vw, 1.625rem);
+		font-weight: 400;
+		line-height: 1.25;
+		letter-spacing: -0.01em;
+		color: var(--color-text);
+	}
+
+	.journal-list__copy {
+		font-family: var(--font-body);
+		font-size: clamp(0.875rem, 1vw, 0.9375rem);
+		line-height: 1.7;
+		color: var(--color-text-muted);
+	}
+
+	.journal-list__card--preview .journal-list__copy {
+		font-size: 0.9375rem;
+		line-height: 1.75;
+	}
+
+	.journal-list__action {
+		display: inline-flex;
+		width: fit-content;
+		margin-top: auto;
+		padding-bottom: 0.125rem;
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+	}
+
+	.journal-list__action:hover {
+		border-color: var(--color-text);
+	}
+
+	.journal-list__card--preview .journal-list__action {
+		margin-top: auto;
+	}
+
+	.journal-list__footer {
+		display: flex;
+		justify-content: center;
+		margin-top: clamp(3rem, 6vw, 4.5rem);
+	}
+
+	.journal-list__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.875rem 2rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-text);
+		background-color: transparent;
+		border: 1px solid var(--color-accent);
+		transition: color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.journal-list__cta:hover {
+		color: var(--color-accent-hover);
+		border-color: var(--color-accent-hover);
+	}
+
+	@media (min-width: 901px) {
+		.journal-list__header--center-desktop {
+			align-items: center;
+			text-align: center;
+		}
+
+		.journal-list__header--center-desktop .journal-list__intro {
+			margin-inline: auto;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.journal-list__grid--page {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 900px) {
+		.journal-list__intro {
+			max-width: none;
+		}
+
+		.journal-list__grid--page,
+		.journal-list__grid--preview {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

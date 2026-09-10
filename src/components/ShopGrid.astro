@@ -1,0 +1,228 @@
+---
+import {
+	formatShopPrice,
+	getShopProductHref,
+	shopIntro,
+	shopProducts,
+	type ShopProduct,
+} from '../data/shop';
+
+interface Props {
+	fullPage?: boolean;
+	products?: ShopProduct[];
+	heading?: string;
+	description?: string;
+	eyebrow?: string;
+	headingLevel?: 'h1' | 'h2';
+	centerHeaderOnDesktop?: boolean;
+}
+
+const {
+	fullPage = false,
+	products = shopProducts,
+	heading = shopIntro.heading,
+	description = shopIntro.description,
+	eyebrow = shopIntro.eyebrow,
+	headingLevel = 'h2',
+	centerHeaderOnDesktop = false,
+} = Astro.props;
+
+const HeadingTag = headingLevel;
+const CardTitleTag = headingLevel === 'h1' ? 'h2' : 'h3';
+---
+
+<section
+	class:list={['shop-grid', fullPage && 'shop-grid--page']}
+	id="shop"
+	aria-labelledby={fullPage ? 'shop-grid-heading' : undefined}
+>
+	<div class="shop-grid__inner">
+		<header
+			class:list={[
+				'shop-grid__header',
+				centerHeaderOnDesktop && 'shop-grid__header--center-desktop',
+			]}
+		>
+			{eyebrow && <p class="eyebrow">{eyebrow}</p>}
+			<HeadingTag id="shop-grid-heading" class="shop-grid__heading">{heading}</HeadingTag>
+			{description && <p class="shop-grid__intro">{description}</p>}
+		</header>
+
+		<div class="shop-grid__cards">
+			{products.map((product) => {
+				const href = getShopProductHref(product.slug);
+				const priceLabel =
+					product.slug === 'interior-design-gift-card'
+						? formatShopPrice(product.price, { from: true })
+						: formatShopPrice(product.price);
+
+				return (
+					<a class="shop-grid__card" href={href} aria-label={`View ${product.name}`}>
+						<div class="shop-grid__media">
+							<img
+								src={product.imageSrc}
+								alt={product.imageAlt}
+								width={product.imageWidth}
+								height={product.imageHeight}
+								loading="lazy"
+							/>
+							{product.onSale && <span class="shop-grid__badge">Sale</span>}
+						</div>
+						<div class="shop-grid__body">
+							<CardTitleTag class="shop-grid__title">{product.name}</CardTitleTag>
+							<p class="shop-grid__price">{priceLabel}</p>
+						</div>
+					</a>
+				);
+			})}
+		</div>
+	</div>
+</section>
+
+<style>
+	.shop-grid {
+		width: 100%;
+		background-color: var(--color-bg);
+	}
+
+	.shop-grid__inner {
+		width: 100%;
+		max-width: var(--hero-max-width);
+		margin-inline: auto;
+		padding: clamp(4rem, 8vw, 7rem) var(--site-gutter);
+	}
+
+	.shop-grid--page .shop-grid__inner {
+		padding-top: 0;
+		padding-bottom: clamp(4rem, 8vw, 7rem);
+	}
+
+	.shop-grid__header {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		margin-bottom: clamp(3rem, 6vw, 4.5rem);
+		text-align: left;
+	}
+
+	.shop-grid__header .eyebrow {
+		margin-bottom: 0;
+	}
+
+	.shop-grid__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+	}
+
+	.shop-grid__intro {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+		max-width: 40rem;
+	}
+
+	.shop-grid__cards {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: clamp(1.25rem, 2.5vw, 2rem);
+	}
+
+	.shop-grid__card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		padding: clamp(1rem, 2vw, 1.25rem);
+		text-decoration: none;
+		color: inherit;
+		background-color: #f3f1ec;
+	}
+
+	.shop-grid__media {
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.shop-grid__media img {
+		display: block;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	.shop-grid__badge {
+		position: absolute;
+		top: 0.75rem;
+		left: 0.75rem;
+		padding: 0.375rem 0.625rem;
+		font-family: var(--font-body);
+		font-size: 0.625rem;
+		font-weight: 500;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #ffffff;
+		background-color: var(--color-text);
+	}
+
+	.shop-grid__body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		flex: 1;
+		gap: 0.5rem;
+		padding-top: clamp(1rem, 2vw, 1.25rem);
+		text-align: center;
+	}
+
+	.shop-grid__title {
+		font-family: var(--font-heading);
+		font-size: clamp(1rem, 1.35vw, 1.125rem);
+		font-weight: 400;
+		line-height: 1.3;
+		letter-spacing: -0.01em;
+		color: var(--color-text);
+	}
+
+	.shop-grid__price {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		line-height: 1.5;
+		color: var(--color-text-muted);
+	}
+
+	@media (min-width: 901px) {
+		.shop-grid__header--center-desktop {
+			align-items: center;
+			text-align: center;
+		}
+
+		.shop-grid__header--center-desktop .shop-grid__intro {
+			margin-inline: auto;
+		}
+	}
+
+	@media (max-width: 1100px) {
+		.shop-grid__cards {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 820px) {
+		.shop-grid__cards {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 640px) {
+		.shop-grid__cards {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

@@ -1,14 +1,13 @@
 ---
+import InquiryFormIntro from './InquiryFormIntro.astro';
+import { site } from '../data/site';
+
 interface Props {
-	heading: string;
-	copy: string;
 	submitLabel?: string;
 	privacyNote?: string;
 }
 
 const {
-	heading,
-	copy,
 	submitLabel = 'Send Message',
 	privacyNote = 'Your information is used only to respond to this project inquiry.',
 } = Astro.props;
@@ -17,52 +16,52 @@ const {
 <section class="conversion" id="inquiry" aria-labelledby="conversion-heading" data-nav-surface="earth">
 	<div class="conversion__inner">
 		<div class="conversion__stack">
-			<div class="conversion__content">
-				<h2 id="conversion-heading" class="conversion__heading">{heading}</h2>
-				<p class="conversion__copy">{copy}</p>
-			</div>
+			<InquiryFormIntro id="conversion-heading" />
 
 			<div class="conversion__form-panel">
-				<form class="conversion__form" id="conversion-form">
-				<div class="conversion__field">
-					<label class="conversion__label" for="conversion-name">Name</label>
-					<input
-						class="conversion__input"
-						type="text"
-						id="conversion-name"
-						name="name"
-						autocomplete="name"
-						required
-					/>
-				</div>
+				<form class="conversion__form" data-conversion-form data-recipient={site.email}>
+					<div class="conversion__field">
+						<label class="conversion__label" for="conversion-name">Name</label>
+						<input
+							class="conversion__input"
+							type="text"
+							id="conversion-name"
+							name="name"
+							autocomplete="name"
+							required
+							maxlength="100"
+						/>
+					</div>
 
-				<div class="conversion__field">
-					<label class="conversion__label" for="conversion-phone">Phone</label>
-					<input
-						class="conversion__input"
-						type="tel"
-						id="conversion-phone"
-						name="phone"
-						autocomplete="tel"
-						required
-					/>
-				</div>
+					<div class="conversion__field">
+						<label class="conversion__label" for="conversion-phone">Phone</label>
+						<input
+							class="conversion__input"
+							type="tel"
+							id="conversion-phone"
+							name="phone"
+							autocomplete="tel"
+							required
+							maxlength="40"
+						/>
+					</div>
 
-				<div class="conversion__field">
-					<label class="conversion__label" for="conversion-message">Message</label>
-					<textarea
-						class="conversion__textarea"
-						id="conversion-message"
-						name="message"
-						rows="4"
-						required
-					></textarea>
-				</div>
+					<div class="conversion__field">
+						<label class="conversion__label" for="conversion-message">Message</label>
+						<textarea
+							class="conversion__textarea"
+							id="conversion-message"
+							name="message"
+							rows="4"
+							required
+							maxlength="1800"
+						></textarea>
+					</div>
 
-				<button type="button" class="conversion__submit">{submitLabel}</button>
-			</form>
+					<button type="submit" class="conversion__submit">{submitLabel}</button>
+				</form>
 
-			<p class="conversion__privacy">{privacyNote}</p>
+				<p class="conversion__privacy">{privacyNote}</p>
 			</div>
 		</div>
 	</div>
@@ -89,30 +88,6 @@ const {
 		width: 100%;
 		max-width: 30rem;
 		margin-inline: auto;
-	}
-
-	.conversion__content {
-		display: flex;
-		flex-direction: column;
-		gap: clamp(1.25rem, 2.5vw, 1.5rem);
-		width: 100%;
-		text-align: left;
-	}
-
-	.conversion__heading {
-		font-family: var(--font-heading);
-		font-size: clamp(2rem, 3.5vw, 3rem);
-		font-weight: 400;
-		line-height: 1.1;
-		letter-spacing: -0.02em;
-		color: var(--color-text);
-	}
-
-	.conversion__copy {
-		font-family: var(--font-body);
-		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
-		line-height: 1.75;
-		color: var(--color-text-muted);
 	}
 
 	.conversion__form-panel {
@@ -198,3 +173,18 @@ const {
 		opacity: 0.85;
 	}
 </style>
+
+<script>
+	document.querySelectorAll<HTMLFormElement>('[data-conversion-form]').forEach((form) => {
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			if (!form.reportValidity()) return;
+
+			const data = new FormData(form);
+			const value = (key: string) => String(data.get(key) || '').trim();
+			const subject = `Project inquiry from ${value('name')}`;
+			const body = `Hello Colors of Design,\n\n${value('message')}\n\nName: ${value('name')}\nPhone: ${value('phone')}`;
+			window.location.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+		});
+	});
+</script>

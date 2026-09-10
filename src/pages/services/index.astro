@@ -67,7 +67,7 @@ const jsonLd = [
 
 <BaseLayout title={title} description={description} canonicalPath="/services" jsonLd={jsonLd}>
 	<main class="page" id="main">
-		<div class="services-page">
+		<div class="services-page" data-nav-earth-top data-nav-surface="earth">
 			<div class="services-page__crumbs">
 				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Services' }]} />
 			</div>
@@ -75,21 +75,19 @@ const jsonLd = [
 				heading="What We Do"
 				headingLevel="h1"
 				sectionId="offerings"
-				alternateBackgrounds
+				centerHeaderOnDesktop
+				gridLayout
 				introduction="Our services include a wide range of design services—from full residential design analysis to space planning, design concept development, furniture plans, custom design, construction drawings, product specifications, purchasing, installation of materials, and project management. We work throughout the United States and Latin America."
 				services={services}
 			/>
 		</div>
-		<ConversionSection
-			heading="Your Home Should Feel Unmistakably Yours."
-			copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
-		/>
+		<ConversionSection />
 	</main>
 </BaseLayout>
 
 <style>
 	.services-page {
-		background-color: var(--color-bg);
+		background-color: var(--color-earth);
 		--services-page-max-width: 1400px;
 	}
 

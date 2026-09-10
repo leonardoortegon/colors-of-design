@@ -11,6 +11,7 @@ interface Props {
 	imagePosition?: 'left' | 'right';
 	imageMaxWidth?: string;
 	sectionId?: string;
+	banded?: boolean;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
 	imagePosition = 'right',
 	imageMaxWidth,
 	sectionId,
+	banded = false,
 } = Astro.props;
 
 const hasImage = Boolean(imageSrc);
@@ -32,7 +34,12 @@ const hasImage = Boolean(imageSrc);
 
 <section
 	id={sectionId}
-	class:list={['split', imagePosition === 'left' && 'split--image-left', !hasImage && 'split--text-only']}
+	class:list={[
+		'split',
+		imagePosition === 'left' && 'split--image-left',
+		!hasImage && 'split--text-only',
+		banded && 'split--banded',
+	]}
 	aria-label={heading}
 	data-nav-surface="earth"
 >
@@ -44,12 +51,12 @@ const hasImage = Boolean(imageSrc);
 					<p>{paragraph}</p>
 				))}
 			</div>
-			<button
-				type="button"
+			<a
+				href="/about-us/"
 				class:list={['split__link', linkStyle === 'text' && 'split__link--text']}
 			>
 				{linkLabel}
-			</button>
+			</a>
 		</div>
 		{hasImage && (
 			<div
@@ -76,7 +83,8 @@ const hasImage = Boolean(imageSrc);
 		--split-gutter: var(--site-gutter);
 	}
 
-	.split--text-only {
+	.split--text-only,
+	.split--banded {
 		background-color: var(--color-earth);
 	}
 

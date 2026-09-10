@@ -1,0 +1,68 @@
+---
+import type { TeamMember } from '../data/team';
+
+interface Props extends TeamMember {}
+
+const { name, role, imageSrc, imageAlt, paragraphs = [] } = Astro.props;
+---
+
+<section class="team-member editorial-section">
+	<div class="editorial-container">
+		<div class="editorial-grid">
+			<figure>
+				<img class="editorial-image" src={imageSrc} alt={imageAlt} width="1200" height="1500" loading="lazy" />
+			</figure>
+			<div class="editorial-copy">
+				<h2>{name}</h2>
+				<p class="eyebrow team-member__role">{role}</p>
+				{
+					paragraphs.length > 0 &&
+						paragraphs.map((paragraph) => (
+							<p>{paragraph}</p>
+						))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.team-member {
+		background-color: var(--color-bg);
+	}
+
+	.team-member + .team-member {
+		padding-top: 0;
+	}
+
+	.team-member figure {
+		max-width: min(100%, 380px);
+		margin: 0;
+	}
+
+	.team-member__role {
+		margin-top: 0.75rem;
+		color: var(--color-text-muted);
+	}
+
+	@media (max-width: 720px) {
+		.team-member .editorial-copy {
+			order: 1;
+		}
+
+		.team-member figure {
+			order: 2;
+		}
+	}
+
+	@media (min-width: 721px) {
+		.team-member .editorial-grid {
+			grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+		}
+
+		.team-member figure {
+			max-width: clamp(340px, 34vw, 460px);
+			justify-self: start;
+		}
+	}
+</style>

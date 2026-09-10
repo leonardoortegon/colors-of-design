@@ -8,6 +8,8 @@ interface Props {
 	headingLevel?: 'h1' | 'h2';
 	sectionId?: string;
 	alternateBackgrounds?: boolean;
+	centerHeaderOnDesktop?: boolean;
+	gridLayout?: boolean;
 }
 
 const {
@@ -17,33 +19,42 @@ const {
 	headingLevel = 'h2',
 	sectionId = 'services',
 	alternateBackgrounds = false,
+	centerHeaderOnDesktop = false,
+	gridLayout = false,
 } = Astro.props;
 
 const HeadingTag = headingLevel;
 ---
 
 <section
-	class:list={['services-list', alternateBackgrounds && 'services-list--banded']}
+	class:list={[
+		'services-list',
+		alternateBackgrounds && 'services-list--banded',
+		gridLayout && 'services-list--grid-page',
+	]}
 	id={sectionId}
 	aria-labelledby="services-list-heading"
 >
 	<div class="services-list__inner">
-		<header class="services-list__header">
+		<header
+			class:list={[
+				'services-list__header',
+				centerHeaderOnDesktop && 'services-list__header--center-desktop',
+			]}
+		>
 			<HeadingTag id="services-list-heading" class="services-list__heading">{heading}</HeadingTag>
 			<p class="services-list__intro">{introduction}</p>
 		</header>
 
-		<div class="services-list__list">
-			{services.map((service, index) => (
-				<article
-					class:list={[
-						'services-list__card',
-						alternateBackgrounds && index % 2 === 0 && 'services-list__card--muted',
-					]}
-					id={service.slug}
-					data-nav-surface={alternateBackgrounds && index % 2 === 0 ? 'earth' : undefined}
-				>
-					<div class="services-list__row">
+		<div class:list={['services-list__list', gridLayout && 'services-list__list--grid']}>
+			{services.map((service, index) => {
+				const cardClasses = [
+					'services-list__card',
+					gridLayout && 'services-list__card--grid',
+					alternateBackgrounds && index % 2 === 0 && 'services-list__card--muted',
+				];
+				const cardContent = (
+					<div class:list={['services-list__row', gridLayout && 'services-list__row--grid']}>
 						<div class="services-list__media">
 							<img
 								src={service.imageSrc}
@@ -59,14 +70,39 @@ const HeadingTag = headingLevel;
 							) : (
 								<h3 class="services-list__name">{service.name}</h3>
 							)}
-							<p class="services-list__scope">{service.scope}</p>
-							<p class="services-list__copy">{service.description}</p>
-							<p class="services-list__included">{service.included.join(' · ')}</p>
-							<a class="services-list__action" href="#inquiry">Start Your Project</a>
+							{!gridLayout && <p class="services-list__scope">{service.scope}</p>}
+							<p class="services-list__copy">{gridLayout ? service.summary : service.description}</p>
+							{!gridLayout && <p class="services-list__included">{service.included.join(' · ')}</p>}
+							{gridLayout ? (
+								<span class="services-list__action">Explore</span>
+							) : (
+								<a class="services-list__action" href={`/services/${service.slug}/`}>
+									Explore {service.name}
+								</a>
+							)}
 						</div>
 					</div>
-				</article>
-			))}
+				);
+
+				return gridLayout ? (
+					<a
+						class:list={cardClasses}
+						href={`/services/${service.slug}/`}
+						id={service.slug}
+						aria-label={`Explore ${service.name}`}
+					>
+						{cardContent}
+					</a>
+				) : (
+					<article
+						class:list={cardClasses}
+						id={service.slug}
+						data-nav-surface={alternateBackgrounds && index % 2 === 0 ? 'earth' : undefined}
+					>
+						{cardContent}
+					</article>
+				);
+			})}
 		</div>
 	</div>
 </section>
@@ -209,6 +245,77 @@ const HeadingTag = headingLevel;
 		border-color: var(--color-text);
 	}
 
+	@media (min-width: 901px) {
+		.services-list__header--center-desktop {
+			align-items: center;
+			text-align: center;
+		}
+
+		.services-list__header--center-desktop .services-list__intro {
+			margin-inline: auto;
+		}
+	}
+
+	.services-list__list--grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(1.5rem, 3vw, 2.5rem);
+	}
+
+	.services-list--grid-page {
+		background-color: var(--color-earth);
+	}
+
+	a.services-list__card--grid {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+		transition: box-shadow 0.2s ease, transform 0.2s ease;
+	}
+
+	a.services-list__card--grid:hover {
+		box-shadow: 0 12px 32px rgba(26, 26, 26, 0.08);
+	}
+
+	a.services-list__card--grid:hover .services-list__action {
+		border-color: var(--color-text);
+	}
+
+	.services-list__card--grid {
+		height: 100%;
+		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+		background-color: var(--color-bg);
+	}
+
+	.services-list__row--grid {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		gap: 0;
+	}
+
+	.services-list__row--grid .services-list__media {
+		order: 0;
+		width: 100%;
+	}
+
+	.services-list__row--grid .services-list__body {
+		order: 0;
+		flex: 1;
+		padding-top: clamp(1.25rem, 2.5vw, 1.5rem);
+	}
+
+	.services-list__row--grid .services-list__action {
+		margin-top: auto;
+		padding-bottom: 0.125rem;
+	}
+
+	@media (max-width: 1024px) {
+		.services-list__list--grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
 	@media (max-width: 900px) {
 		.services-list__intro {
 			max-width: none;
@@ -224,6 +331,10 @@ const HeadingTag = headingLevel;
 
 		.services-list__media {
 			order: -1;
+		}
+
+		.services-list__list--grid {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>

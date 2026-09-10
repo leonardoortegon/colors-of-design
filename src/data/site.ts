@@ -1,8 +1,9 @@
 export const site = {
 	name: 'Colors of Design Group',
 	shortName: 'Colors of Design',
-	url: 'https://colors-of-design.vercel.app',
+	url: 'https://colorsofdesign.com',
 	locale: 'en_US',
+	email: 'interiors@colorsofdesign.com',
 	phone: '(786) 675-1484',
 	phoneHref: 'tel:+17866751484',
 	phoneE164: '+17866751484',
@@ -16,7 +17,14 @@ export const site = {
 	ogImage: '/hero.jpg',
 } as const;
 
+export const inquiryFormIntro = {
+	heading: 'Start your project',
+	copy: 'Tell us about your property, what you hope to create, and where you are in the process.',
+} as const;
+
 export function absoluteUrl(path: string): string {
 	const normalized = path.startsWith('/') ? path : `/${path}`;
-	return new URL(normalized, `${site.url}/`).toString();
+	const url = new URL(normalized, `${site.url}/`);
+	if (!url.pathname.endsWith('/') && !/\.[^/]+$/.test(url.pathname)) url.pathname += '/';
+	return url.toString();
 }

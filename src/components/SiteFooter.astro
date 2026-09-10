@@ -1,0 +1,13 @@
+---
+import {site} from '../data/site';
+---
+<footer class="site-footer">
+  <div class="editorial-container">
+    <div class="site-footer__grid">
+      <div><a class="site-footer__brand" href="/">Colors of Design</a><p>Thoughtfully composed.<br />Unmistakably yours.</p><p>Interior design · Miami & beyond</p></div>
+      <nav aria-label="Footer"><p class="eyebrow">Explore</p><a href="/work/">Our work</a><a href="/services/">Services</a><a href="/work-process/">Our process</a><a href="/about-us/">The studio</a><a href="/interior-design-blog/">Journal</a><a href="/contact-us/">Contact</a></nav>
+      <div><p class="eyebrow">Let’s begin</p><a href="/contact-us/">Tell us about your project</a><a href={site.phoneHref}>{site.phone}</a><a href={`mailto:${site.email}`}>{site.email}</a><p>2451 Brickell Avenue<br />Miami, FL 33129</p></div>
+    </div>
+    <div class="site-footer__bottom"><p>© {new Date().getFullYear()} {site.name}</p><a href="/privacy-policy/">Privacy</a></div>
+  </div>
+</footer>

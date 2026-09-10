@@ -19,7 +19,7 @@ if (!project) {
 }
 
 const related = getRelatedProjects(project.slug);
-const pageUrl = absoluteUrl(`/work/${project.slug}`);
+const pageUrl = absoluteUrl(`/work/${project.slug}/`);
 
 const jsonLd = [
 	{
@@ -98,7 +98,7 @@ const jsonLd = [
 	title={project.seoTitle}
 	description={project.seoDescription}
 	image={project.imageSrc}
-	canonicalPath={`/work/${project.slug}`}
+	canonicalPath={`/work/${project.slug}/`}
 	jsonLd={jsonLd}
 >
 	<main class="page project" id="main">
@@ -114,7 +114,7 @@ const jsonLd = [
 					<Breadcrumbs
 						items={[
 							{ label: 'Home', href: '/' },
-							{ label: 'Work', href: '/work' },
+							{ label: 'Work', href: '/work/' },
 							{ label: project.name },
 						]}
 					/>
@@ -200,7 +200,7 @@ const jsonLd = [
 							<ul class="project__related-track" data-related-track>
 								{related.map((item) => (
 									<li class="project__related-item">
-										<a class="project__related-card" href={`/work/${item.slug}`}>
+										<article class="project__related-card">
 											<img
 												src={item.imageSrc}
 												alt={item.imageAlt}
@@ -211,9 +211,9 @@ const jsonLd = [
 											<div class="project__related-body">
 												<p class="project__related-name">{item.name}</p>
 												<p class="project__related-location">{item.location}</p>
-												<span class="project__related-action">View Project</span>
+												<a class="project__related-action" href={`/work/${item.slug}/`}>View Project</a>
 											</div>
-										</a>
+										</article>
 									</li>
 								))}
 							</ul>
@@ -223,10 +223,7 @@ const jsonLd = [
 			)}
 		</article>
 
-		<ConversionSection
-			heading="Your Home Should Feel Unmistakably Yours."
-			copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
-		/>
+		<ConversionSection />
 	</main>
 </BaseLayout>
 
@@ -234,8 +231,6 @@ const jsonLd = [
 	.project__article {
 		background-color: var(--color-earth);
 		--project-content-width: 56rem;
-		margin-top: -4.75rem;
-		padding-top: 4.75rem;
 	}
 
 	.project__article-inner,
@@ -548,14 +543,17 @@ const jsonLd = [
 		display: inline-flex;
 		width: fit-content;
 		margin-top: 0.625rem;
+		padding-bottom: 0.125rem;
 		font-size: 0.8125rem;
 		font-weight: 500;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
+		color: var(--color-text);
 		border-bottom: 1px solid rgba(26, 26, 26, 0.35);
+		transition: border-color 0.2s ease;
 	}
 
-	.project__related-card:hover .project__related-action {
+	.project__related-action:hover {
 		border-color: var(--color-text);
 	}
 

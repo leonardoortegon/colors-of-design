@@ -1,0 +1,15 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+interface Props { label: string; heading: string; description: string; eyebrow?: string; }
+const { label, heading, description, eyebrow = label } = Astro.props;
+---
+<header class="editorial-intro" data-nav-earth-top>
+  <div class="editorial-container">
+    <Breadcrumbs items={[{label: 'Home', href: '/'}, {label}]} />
+    <div class="editorial-intro__body">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{heading}</h1>
+      <p class="lead">{description}</p>
+    </div>
+  </div>
+</header>

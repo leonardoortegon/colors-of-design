@@ -13,7 +13,7 @@ interface Props {
 const { heading, steps, linkLabel } = Astro.props;
 ---
 
-<section class="process" id="process" aria-labelledby="process-heading" data-nav-surface="earth">
+<section class="process" id="process" aria-labelledby="process-heading">
 	<div class="process__inner">
 		<h2 id="process-heading" class="process__heading">{heading}</h2>
 
@@ -27,7 +27,7 @@ const { heading, steps, linkLabel } = Astro.props;
 		</div>
 
 		<div class="process__footer">
-			<button type="button" class="process__link">{linkLabel}</button>
+			<a href="/work-process/" class="process__link">{linkLabel}</a>
 		</div>
 	</div>
 </section>
@@ -35,7 +35,7 @@ const { heading, steps, linkLabel } = Astro.props;
 <style>
 	.process {
 		width: 100%;
-		background-color: var(--color-earth);
+		background-color: var(--color-bg);
 	}
 
 	.process__inner {

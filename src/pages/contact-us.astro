@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import InquiryFormIntro from '../components/InquiryFormIntro.astro';
+import { site, absoluteUrl } from '../data/site';
+---
+
+<BaseLayout
+	title="Contact Our Miami Interior Design Studio | Colors of Design"
+	description="Contact Colors of Design Group, a Miami interior design studio creating refined residential interiors across South Florida and beyond."
+	canonicalPath="/contact-us/"
+	jsonLd={{
+		'@type': 'ContactPage',
+		name: 'Contact Colors of Design',
+		url: absoluteUrl('/contact-us/'),
+		mainEntity: { '@id': `${site.url}/#studio` },
+	}}
+>
+	<main class="page contact-page" id="main">
+		<section class="contact-page__main">
+			<div class="editorial-container">
+				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
+
+				<div class="contact-page__split">
+					<div class="contact-page__info editorial-copy">
+						<p class="eyebrow">Contact</p>
+						<h1>{site.name}</h1>
+						<p>
+							Colors of Design is a Miami interior design studio creating harmonious, modern, and
+							timeless homes—from first concept to final installation.
+						</p>
+						<p>
+							Founded by {site.founder}, our team works with clients across South Florida, North
+							Carolina, and beyond on space planning, custom design, furnishings, and turnkey
+							installation.
+						</p>
+
+						<dl class="contact-page__details">
+							<div class="contact-page__detail">
+								<dt>Email</dt>
+								<dd>
+									<a href={`mailto:${site.email}`}>{site.email}</a>
+								</dd>
+							</div>
+							<div class="contact-page__detail">
+								<dt>Phone</dt>
+								<dd>
+									<a href={site.phoneHref}>{site.phone}</a>
+								</dd>
+							</div>
+							<div class="contact-page__detail">
+								<dt>Studio</dt>
+								<dd>
+									2451 Brickell Avenue
+									<br />
+									Miami, FL 33129
+								</dd>
+							</div>
+							<div class="contact-page__detail">
+								<dt>Hours</dt>
+								<dd>Monday–Friday · 8 am–5 pm</dd>
+							</div>
+						</dl>
+
+						<a class="text-link" href="/about-us/">Meet the studio</a>
+					</div>
+
+					<div class="contact-page__form">
+						<div class="contact-page__form-stack">
+							<InquiryFormIntro />
+							<InquiryForm simple idPrefix="contact-" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</BaseLayout>

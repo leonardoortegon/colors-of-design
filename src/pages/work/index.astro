@@ -20,7 +20,7 @@ const listedProjects = projects.map((project) => ({
 	imageAlt: project.imageAlt,
 	imageWidth: project.imageWidth,
 	imageHeight: project.imageHeight,
-	href: `/work/${project.slug}`,
+	href: `/work/${project.slug}/`,
 }));
 
 const jsonLd = [
@@ -42,7 +42,7 @@ const jsonLd = [
 			itemListElement: projects.map((project, index) => ({
 				'@type': 'ListItem',
 				position: index + 1,
-				url: absoluteUrl(`/work/${project.slug}`),
+				url: absoluteUrl(`/work/${project.slug}/`),
 				name: `${project.name} interior design`,
 			})),
 		},
@@ -78,15 +78,12 @@ const jsonLd = [
 				headingLevel="h1"
 				sectionId="projects"
 				cardLayout="image-left"
-				alternateBackgrounds
+				centerHeaderOnDesktop
 				introduction="A collection of residences by Colors of Design Group—full-service interior design, interior architecture, and furnishings for homes in Miami, Delray Beach, Coral Gables, and beyond. Select a project to see the brief, materials, and rooms."
 				projects={listedProjects}
 			/>
 		</div>
-		<ConversionSection
-			heading="Your Home Should Feel Unmistakably Yours."
-			copy="Tell us about your property, what you hope to create, and where you are in the process. Our studio will be in touch to discuss the next step."
-		/>
+		<ConversionSection />
 	</main>
 </BaseLayout>
 
@@ -106,5 +103,17 @@ const jsonLd = [
 	.work-page :global(.work__inner) {
 		max-width: var(--work-page-max-width);
 		padding-top: 1.5rem;
+	}
+
+	@media (min-width: 901px) {
+		.work-page :global(.work__header--center-desktop) {
+			align-items: center;
+			text-align: center;
+			margin-bottom: clamp(4.5rem, 9vw, 6.5rem);
+		}
+
+		.work-page :global(.work__header--center-desktop .work__intro) {
+			margin-inline: auto;
+		}
 	}
 </style>

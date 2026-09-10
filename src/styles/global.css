@@ -62,6 +62,7 @@ button {
 	padding-top: 4.75rem;
 }
 
-html.nav-menu-open {
+html.nav-menu-open,
+html.inquiry-modal-open {
 	overflow: hidden;
 }

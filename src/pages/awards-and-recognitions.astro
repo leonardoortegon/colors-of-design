@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AwardSection from '../components/AwardSection.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ConversionSection from '../components/ConversionSection.astro';
+import { awards, awardsIntro } from '../data/awards';
+import { absoluteUrl, site } from '../data/site';
+
+const title = 'Awards & Recognitions | Colors of Design Group';
+const description =
+	'Explore awards and recognitions for Colors of Design Group, including Luxury Lifestyle Awards, Design Minds, and Best of Houzz honors in Miami.';
+---
+
+<BaseLayout
+	title={title}
+	description={description}
+	canonicalPath="/awards-and-recognitions/"
+	jsonLd={{
+		'@type': 'WebPage',
+		name: title,
+		description,
+		url: absoluteUrl('/awards-and-recognitions/'),
+		isPartOf: { '@id': `${site.url}/#website` },
+		about: { '@id': `${site.url}/#studio` },
+	}}
+>
+	<main class="page" id="main">
+		<div class="awards-page">
+			<div class="awards-page__crumbs">
+				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Awards' }]} />
+			</div>
+
+			<header class="awards-page__header">
+				<h1 class="awards-page__heading">{awardsIntro.heading}</h1>
+				<p class="awards-page__intro">{awardsIntro.description}</p>
+			</header>
+
+			{awards.map((award) => (
+				<AwardSection {...award} />
+			))}
+		</div>
+
+		<ConversionSection />
+	</main>
+</BaseLayout>
+
+<style>
+	.awards-page {
+		background-color: var(--color-bg);
+		--awards-page-max-width: 1400px;
+	}
+
+	.awards-page__crumbs {
+		width: 100%;
+		max-width: var(--awards-page-max-width);
+		margin-inline: auto;
+		padding: 2rem var(--site-gutter) 0;
+	}
+
+	.awards-page__header {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		width: 100%;
+		max-width: var(--awards-page-max-width);
+		margin-inline: auto;
+		padding: 1.5rem var(--site-gutter) clamp(3rem, 6vw, 4.5rem);
+		text-align: left;
+	}
+
+	.awards-page__heading {
+		font-family: var(--font-heading);
+		font-size: clamp(2rem, 3.5vw, 3rem);
+		font-weight: 400;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: var(--color-text);
+	}
+
+	.awards-page__intro {
+		font-family: var(--font-body);
+		font-size: clamp(0.9375rem, 1.15vw, 1.0625rem);
+		line-height: 1.75;
+		color: var(--color-text-muted);
+		max-width: 34rem;
+	}
+
+	@media (min-width: 901px) {
+		.awards-page__header {
+			align-items: center;
+			text-align: center;
+		}
+
+		.awards-page__intro {
+			margin-inline: auto;
+		}
+	}
+
+	.awards-page :global(.award-entry:first-of-type) {
+		padding-top: 0;
+	}
+</style>

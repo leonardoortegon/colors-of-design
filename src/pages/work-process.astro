@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ConversionSection from '../components/ConversionSection.astro';
+
+const steps = [
+	[
+		'Consultation',
+		'We listen first: how you live, what your home needs, and what you hope to change. We discuss the property, your priorities, and your expectations.',
+	],
+	[
+		'Proposal',
+		'The proposal defines our role, the scope of services, and the design fees. You can see how we will work together before the design begins.',
+	],
+	[
+		'Research & planning',
+		'We explore layouts, materials, textures, and the people who will help realize the design. Space planning connects your brief with the possibilities of the property.',
+	],
+	[
+		'Design presentation',
+		'Concepts, material selections, furnishings, and visualizations make the direction tangible. Your feedback helps refine the design into a home that feels personal.',
+	],
+	[
+		'Budget & coordination',
+		'With the direction agreed, we review the project budget, timeline, and requirements. Selections and priorities are considered together before execution.',
+	],
+	[
+		'Execution & installation',
+		'The approved design moves into construction coordination, purchasing, and installation. Furniture, lighting, and finishing details come together in the completed space.',
+	],
+];
+---
+
+<BaseLayout
+	title="Our Interior Design Process | Colors of Design, Miami"
+	description="Explore the Colors of Design process, from your first consultation and design proposal to planning, material selections, project coordination, and installation."
+	canonicalPath="/work-process/"
+>
+	<main class="page" id="main">
+		<section class="editorial-section process-hero">
+			<div class="editorial-container">
+				<Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Process' }]} />
+				<div class="editorial-grid process-hero__grid">
+					<div class="editorial-copy">
+						<p class="eyebrow">From first conversation to finishing touches</p>
+						<h1>A clear path from vision to home.</h1>
+						<p class="process-hero__lead">
+							Good design grows from a thoughtful process. We bring structure to the decisions,
+							create space for collaboration, and keep the whole home in view.
+						</p>
+						<p>
+							Each project has its own starting point. Whether you are building, renovating, or
+							furnishing, we shape the scope around your home and your priorities.
+						</p>
+						<a class="process-hero__button" href="/services/">Explore our design services</a>
+					</div>
+					<img
+						class="wide-image"
+						src="/solaris/solaris-dinning-room-01.avif"
+						alt="Sculptural lighting and dining furnishings in the Solaris residence"
+						width="2000"
+						height="1334"
+					/>
+				</div>
+			</div>
+		</section>
+
+		<section class="editorial-section editorial-container">
+			<ol class="step-list">
+				{steps.map(([title, copy], i) => (
+					<li class="step-row">
+						<p class="step-number">0{i + 1}</p>
+						<h3>{title}</h3>
+						<p>{copy}</p>
+					</li>
+				))}
+			</ol>
+		</section>
+
+		<section class="editorial-section earth">
+			<div class="editorial-container">
+				<p class="eyebrow">Before we begin</p>
+				<h2 class="section-heading process-faq__heading">A few things you may be wondering.</h2>
+				<div class="faq">
+					<details>
+						<summary>When should I bring an interior designer into the project?</summary>
+						<p>
+							As early as you can, especially for a renovation or new home. Early conversations help
+							align the layout, finishes, and furnishings before decisions become difficult to change.
+						</p>
+					</details>
+					<details>
+						<summary>What should I prepare for our first conversation?</summary>
+						<p>
+							A few photos, available floor plans, your priorities, and an idea of your timing and
+							investment are a useful start. Read our{' '}
+							<a href="/home-decor-tips/5-ways-to-prepare-for-your-design-consultation/">
+								consultation preparation guide
+							</a>
+							.
+						</p>
+					</details>
+					<details>
+						<summary>Can you help if I live elsewhere?</summary>
+						<p>
+							Our <a href="/services#turn-key-services">turnkey service</a> supports owners who need
+							project coordination while they are away. Share your property’s location and we can discuss
+							the scope.
+						</p>
+					</details>
+					<details>
+						<summary>How long will my project take?</summary>
+						<p>
+							Timing depends on the property, scope, approvals, and the availability of materials and
+							furnishings. We discuss these factors with you as the project is defined.
+						</p>
+					</details>
+				</div>
+			</div>
+		</section>
+
+		<ConversionSection />
+	</main>
+</BaseLayout>
+
+<style>
+	.process-hero {
+		background-color: var(--color-bg);
+	}
+
+	.process-hero__grid {
+		margin-top: clamp(2rem, 5vw, 4rem);
+		align-items: center;
+	}
+
+	.process-hero__lead {
+		color: var(--color-text-muted);
+		margin-top: 1.25rem;
+		line-height: 1.85;
+	}
+
+	.process-hero__button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		margin-top: 1.75rem;
+		padding: 0.875rem 2rem;
+		font-family: var(--font-body);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #ffffff;
+		text-decoration: none;
+		background-color: var(--color-text);
+		border: 1px solid var(--color-text);
+		transition: background-color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.process-hero__button:hover {
+		color: #ffffff;
+		background-color: var(--color-accent-hover);
+		border-color: var(--color-accent-hover);
+	}
+
+	.process-faq__heading {
+		margin-top: 1rem;
+	}
+</style>

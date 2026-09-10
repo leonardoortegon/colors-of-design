@@ -41,26 +41,7 @@ const { heading, introduction, services, linkLabel, linkHref = '/services' } = A
 					<div class="services__card-body">
 						<h3 class="services__card-title">{service.title}</h3>
 						<p class="services__card-description">{service.description}</p>
-						<a class="services__card-link" href={service.href ?? '/services'}>
-							Explore
-							<svg
-								class="services__card-link-arrow"
-								width="10"
-								height="10"
-								viewBox="0 0 10 10"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-								aria-hidden="true"
-							>
-								<path
-									d="M2 1l5 4-5 4"
-									stroke="currentColor"
-									stroke-width="1"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-							</svg>
-						</a>
+						<a class="services__card-link" href={service.href ?? '/services'}>Explore</a>
 					</div>
 				</article>
 			))}
@@ -75,7 +56,7 @@ const { heading, introduction, services, linkLabel, linkHref = '/services' } = A
 <style>
 	.services {
 		width: 100%;
-		background-color: var(--color-bg);
+		background-color: var(--color-earth);
 	}
 
 	.services__inner {
@@ -131,6 +112,8 @@ const { heading, introduction, services, linkLabel, linkHref = '/services' } = A
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+		background-color: var(--color-bg);
 	}
 
 	.services__card-media {
@@ -150,7 +133,7 @@ const { heading, introduction, services, linkLabel, linkHref = '/services' } = A
 		flex-direction: column;
 		gap: 0.875rem;
 		flex: 1;
-		padding: clamp(1.25rem, 2.5vw, 1.75rem) 0;
+		padding-top: clamp(1.25rem, 2.5vw, 1.5rem);
 	}
 
 	.services__card-title {
@@ -170,32 +153,21 @@ const { heading, introduction, services, linkLabel, linkHref = '/services' } = A
 	}
 
 	.services__card-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.375rem;
 		width: fit-content;
 		margin-top: auto;
-		padding: 0.75rem 0 0;
+		padding-block: 0.2rem;
+		border-bottom: 1px solid currentColor;
 		font-family: var(--font-body);
-		font-size: 0.8125rem;
+		font-size: 0.75rem;
 		font-weight: 500;
-		letter-spacing: 0.12em;
+		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		color: var(--color-text-muted);
-		transition: color 0.2s ease;
+		color: var(--color-text);
+		transition: color 0.2s ease, border-color 0.2s ease;
 	}
 
 	.services__card-link:hover {
-		color: var(--color-text);
-	}
-
-	.services__card-link-arrow {
-		flex-shrink: 0;
-		transition: transform 0.2s ease;
-	}
-
-	.services__card-link:hover .services__card-link-arrow {
-		transform: translateX(0.2rem);
+		color: var(--color-accent-hover);
 	}
 
 	.services__footer {
