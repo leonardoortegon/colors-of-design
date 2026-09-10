@@ -23,7 +23,7 @@
     },
     {
       "source": "/projects-item/delray-beach",
-      "destination": "/work/delray-beach-interior-design/",
+      "destination": "/work/",
       "permanent": true
     },
     {
@@ -39,6 +39,16 @@
     {
       "source": "/projects-item/sunny-isles",
       "destination": "/work/sunny-isles/",
+      "permanent": true
+    },
+    {
+      "source": "/work/delray-beach-interior-design",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/work/delray-beach-interior-design/",
+      "destination": "/work/",
       "permanent": true
     },
     {

@@ -60,16 +60,15 @@ const HeadingTag = headingLevel;
 		</header>
 
 		<div class="work__list">
-			{projects.map((project, index) => (
-				<article
-					class:list={[
-						'work__card',
-						cardLayout === 'alternating' && index % 2 === 0 && 'work__card--alternate-left',
-						cardLayout === 'image-left' && 'work__card--listing',
-						alternateBackgrounds && index % 2 === 1 && 'work__card--muted',
-					]}
-					data-nav-surface={alternateBackgrounds && index % 2 === 1 ? 'earth' : undefined}
-				>
+			{projects.map((project, index) => {
+				const href = project.href ?? '/work/';
+				const cardClasses = [
+					'work__card',
+					cardLayout === 'alternating' && index % 2 === 0 && 'work__card--alternate-left',
+					cardLayout === 'image-left' && 'work__card--listing',
+					alternateBackgrounds && index % 2 === 1 && 'work__card--muted',
+				];
+				const cardContent = (
 					<div class="work__card-layout">
 						<div class="work__card-body">
 							{headingLevel === 'h1' ? (
@@ -80,7 +79,7 @@ const HeadingTag = headingLevel;
 							<p class="work__card-location">{project.location}</p>
 							<p class="work__card-scope">{project.scope}</p>
 							<p class="work__card-concept">{project.concept}</p>
-							<a href={project.href ?? '/work'} class="work__card-action">View Project</a>
+							<span class="work__card-action">View Project</span>
 						</div>
 						<div class="work__card-media">
 							<img
@@ -93,8 +92,19 @@ const HeadingTag = headingLevel;
 							/>
 						</div>
 					</div>
-				</article>
-			))}
+				);
+
+				return (
+					<a
+						class:list={[...cardClasses, 'work__card--link']}
+						href={href}
+						aria-label={`View ${project.name} project`}
+						data-nav-surface={alternateBackgrounds && index % 2 === 1 ? 'earth' : undefined}
+					>
+						{cardContent}
+					</a>
+				);
+			})}
 		</div>
 
 		{ctaLabel && (
@@ -165,11 +175,22 @@ const HeadingTag = headingLevel;
 		gap: 0;
 	}
 
-	.work--banded .work__card {
+	.work--banded .work__card,
+	.work--banded a.work__card--link {
 		position: relative;
 		isolation: isolate;
 		margin-inline: calc(-1 * var(--work-gutter));
 		padding: clamp(4rem, 8vw, 7rem) var(--work-gutter);
+	}
+
+	a.work__card--link {
+		display: block;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	a.work__card--link:hover .work__card-action {
+		border-color: var(--color-text);
 	}
 
 	.work--banded .work__card--muted::before {

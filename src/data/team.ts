@@ -15,7 +15,7 @@ export const teamMembers: TeamMember[] = [
 		paragraphs: [
 			'Born in Viña del Mar, Chile, Margaret studied decorative arts at Bellas Artes before exploring these disciplines in the United States, working for Smith Architects, Leonard Pardon, and Richard Palmer Design in Palm Beach, Florida, decorating large homes.',
 			'The path of decorative art led her to study interior design and interior architecture at Miami International University of Art and Design, where she graduated with a Bachelor of Fine Arts in Interior Design.',
-			'Margaret pursued her career as an interior designer while working on projects for clients from the United States and Latin America. Today, Margaret and her team at Colors of Design develop projects for clients across the country, surrounded by experienced, talented professionals committed to delivering above and beyond the standard—for projects big or small.',
+			'Margaret pursued her career as an interior designer while working on projects for clients from the United States and Latin America. Today, Margaret and her team at Colors of Design develop projects for clients across the country, surrounded by experienced, talented professionals committed to delivering above and beyond the standard for projects big or small.',
 		],
 	},
 	{
@@ -25,7 +25,7 @@ export const teamMembers: TeamMember[] = [
 		imageAlt: 'William Riveros, architect at Colors of Design',
 		paragraphs: [
 			'William is a talented interior designer. He completed his academic studies as an architect in Bolivia and moved to Miami to continue his education and professional practice. His outgoing personality always leads him to new challenges and learning experiences. William has worked on projects in London, New York, and Miami.',
-			'Driven by passion and achievement, William’s talents are an asset to our interior design firm. His love for design is fueled by travel and exploration—visiting art exhibitions, immersing himself in projects on weekends, and discovering creative outlets such as virtual reality for interior design, new software, and painting.',
+			'Driven by passion and achievement, William’s talents are an asset to our interior design firm. His love for design is fueled by travel and exploration, visiting art exhibitions, immersing himself in projects on weekends, and discovering creative outlets such as virtual reality for interior design, new software, and painting.',
 			'William combines these interests with his daily work, creating environments where he can thrive and evolve ideas that lead to great interior design concepts.',
 		],
 	},

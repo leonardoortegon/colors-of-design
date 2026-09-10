@@ -29,6 +29,8 @@ const {
 } = Astro.props;
 
 const canonical = absoluteUrl(canonicalPath);
+const normalizedPath = canonicalPath.replace(/\/$/, '') || '/';
+const hideNavOnScroll = normalizedPath === '/work' || normalizedPath.startsWith('/work/');
 const ogImage = image.startsWith('http') ? image : absoluteUrl(image);
 const organizationLd = {
 	'@type': 'LocalBusiness',
@@ -101,13 +103,17 @@ const structuredData = {
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap"
+			href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300..600&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
 	<body>
 		<a class="skip-link" href="#main">Skip to content</a>
-		<SiteNav currentPath={Astro.url.pathname} transparentOverHero={transparentNav} />
+		<SiteNav
+			currentPath={Astro.url.pathname}
+			transparentOverHero={transparentNav}
+			hideOnScroll={hideNavOnScroll}
+		/>
 		<slot />
 		<SiteFooter />
 		<InquiryModal />

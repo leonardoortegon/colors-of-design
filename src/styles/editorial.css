@@ -73,12 +73,15 @@
 .journal-card h2, .journal-card h3 { font-family: var(--font-heading); font-size: clamp(1.7rem, 2.4vw, 2.5rem); font-weight: 400; line-height: 1.2; margin-top: .75rem; max-width: 32rem; }
 .journal-card p:not(.eyebrow) { margin-top: 1rem; color: var(--color-text-muted); max-width: 32rem; }
 .journal-card .text-link { margin-top: 1rem; }
-.article-header { max-width: 940px; margin-inline: auto; padding-block: 2rem 3rem; }
+.article-header { max-width: 900px; margin-inline: auto; padding-block: 2rem 3rem; }
 .article-header .eyebrow { margin-top: 3rem; }
-.article-body { max-width: 720px; margin-inline: auto; padding-block: 3rem 5rem; }
+.article-hero { max-width: 900px; margin-inline: auto; padding-bottom: 1rem; }
+.article-hero .wide-image { width: 100%; max-height: none; aspect-ratio: 4 / 3; object-fit: cover; }
+.article-body { max-width: 900px; margin-inline: auto; padding-block: 3rem 5rem; }
 .article-body p, .article-body ul, .article-body ol { margin-block: 1.4rem; color: var(--color-text-muted); font-size: 1.0625rem; line-height: 1.9; }
 .article-body h2 { margin-top: 2.75rem; font-size: 2rem; }
 .article-body li { margin: .65rem 0 .65rem 1.25rem; }
+.article-body img { display: block; width: 100%; height: auto; margin-block: 2rem; }
 .site-footer { padding-block: 4rem 1.5rem; }
 .site-footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; }
 .site-footer__brand { font-family: var(--font-heading); font-size: 2rem; }

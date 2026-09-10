@@ -24,7 +24,7 @@ export const shopIntro = {
 	eyebrow: 'Shop',
 	heading: 'One of a Kind',
 	description:
-		'These beautiful products are special order—they will take 4 to 12 weeks to arrive. Most are custom made or special orders. Buy with confidence to receive something extraordinary and special that will enhance with luxury your interiors.',
+		'These beautiful products are special order, they will take 4 to 12 weeks to arrive. Most are custom made or special orders. Buy with confidence to receive something extraordinary and special that will enhance with luxury your interiors.',
 };
 
 export const shopProducts: ShopProduct[] = [
@@ -98,7 +98,7 @@ export const shopProducts: ShopProduct[] = [
 		slug: 'crystal-floor-lamp',
 		name: 'Crystal floor lamp',
 		summary:
-			'Our portable cordless Soul floor lamps are created with crystal quartz, housed in brass and set in a concrete base—an accent jewel for your home.',
+			'Our portable cordless Soul floor lamps are created with crystal quartz, housed in brass and set in a concrete base, an accent jewel for your home.',
 		description:
 			'Indoor use. Features dimmable LED light, ceramic wheels to move them around, and a rechargeable LED bulb with cable. Guarantee: 3 weeks. Lead time: 12 weeks depending on availability. Custom sizes and colors available. Made in USA.',
 		categories: ['One of a Kind'],
@@ -188,7 +188,7 @@ export const shopProducts: ShopProduct[] = [
 		slug: 'outdoor-swing',
 		name: 'Outdoor swing',
 		summary:
-			'A beautiful and chic accent for your patio—fun, elegant, and ready to install.',
+			'A beautiful and chic accent for your patio, fun, elegant, and ready to install.',
 		description:
 			'Dimensions: width 23 in, depth 12 in, height 90 in. Material: aluminum structure, nautical rope, and teak wood. Lead time: 4 weeks. Guarantee: 1 year. Custom sizes available at an extra cost.',
 		categories: ['Furniture', 'One of a Kind'],
@@ -210,7 +210,7 @@ export const shopProducts: ShopProduct[] = [
 		slug: 'interior-design-gift-card',
 		name: 'Gift Card',
 		summary:
-			'Need a last-minute gift, or want to surprise someone right now? Send a gift card via email immediately—the perfect present for design lovers.',
+			'Need a last-minute gift, or want to surprise someone right now? Send a gift card via email immediately, the perfect present for design lovers.',
 		description:
 			'Purchasing this digital gift card creates a unique code. The recipient can enter this code at checkout to subtract the gift card value from their order total. This gift card never expires.',
 		categories: ['One of a Kind'],

@@ -265,7 +265,7 @@ const { heading, copy, products, ctaLabel } = Astro.props;
 			window.addEventListener('resize', updateScrollBounds);
 			updateScrollBounds();
 
-			// Mouse drag only — touch uses native horizontal scroll so vertical page scroll still works.
+			// Mouse drag only ,  touch uses native horizontal scroll so vertical page scroll still works.
 			if (window.matchMedia('(pointer: fine)').matches) {
 				viewport.addEventListener('mousedown', function (e) {
 					if (e.button !== 0) return;

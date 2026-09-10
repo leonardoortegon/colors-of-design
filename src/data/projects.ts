@@ -35,7 +35,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Miami residence composed room by room—living areas, kitchen, and dining shaped by balanced proportions, warm materials, and a palette that feels calm, collected, and lived-in.',
+			'A Miami residence composed room by room, living areas, kitchen, and dining shaped by balanced proportions, warm materials, and a palette that feels calm, collected, and lived-in.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/petretta/petretta-living-room-01.avif',
@@ -45,13 +45,13 @@ export const projects: Project[] = [
 		imageHeight: 1350,
 		seoTitle: 'Petretta Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Petretta, a Miami residence—living room, kitchen, and dining spaces composed with layered furnishings, warm materials, and everyday ease by Colors of Design Group.',
+			'Interior design for Petretta, a Miami residence, living room, kitchen, and dining spaces composed with layered furnishings, warm materials, and everyday ease by Colors of Design Group.',
 		challenge:
 			'The home needed to feel finished across multiple rooms without losing flexibility. The clients wanted spaces that could support daily life and occasional entertaining, with furnishings and finishes that read as intentional rather than staged.',
 		approach:
 			'Colors of Design developed a cohesive palette and material language carried from the living room through the kitchen and dining areas. Proportional seating, tailored millwork, and lighting were specified to soften the architecture while keeping each room distinct and personal.',
 		outcome:
-			'The completed residence feels settled and personal—rooms that support conversation, everyday routines, and the slower rhythm of home.',
+			'The completed residence feels settled and personal, rooms that support conversation, everyday routines, and the slower rhythm of home.',
 		materials: [
 			'Warm neutrals',
 			'Layered textiles',
@@ -222,7 +222,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Miami residence shaped across living, kitchen, corridor, and bedroom—warm materials, clear circulation, and rooms that feel composed without losing everyday ease.',
+			'A Miami residence shaped across living, kitchen, corridor, and bedroom, warm materials, clear circulation, and rooms that feel composed without losing everyday ease.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/massis/massis-living-room-01.avif',
@@ -232,13 +232,13 @@ export const projects: Project[] = [
 		imageHeight: 1125,
 		seoTitle: 'Massis Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Massis, a Miami residence—living room, kitchen, corridor, and bedroom spaces composed with warm materials and tailored furnishings by Colors of Design Group.',
+			'Interior design for Massis, a Miami residence, living room, kitchen, corridor, and bedroom spaces composed with warm materials and tailored furnishings by Colors of Design Group.',
 		challenge:
 			'The home needed a consistent design language across public and private rooms. The clients wanted spaces that felt finished and personal, with furnishings and finishes that could support daily routines and quiet retreat.',
 		approach:
 			'Colors of Design developed a cohesive palette carried from the living room through the kitchen, circulation spaces, and bedrooms. Proportional furnishings, layered lighting, and material selections were specified to soften the architecture while giving each room its own character.',
 		outcome:
-			'The completed residence reads as one thoughtful whole—rooms for gathering, cooking, and rest that share a calm, collected atmosphere.',
+			'The completed residence reads as one thoughtful whole, rooms for gathering, cooking, and rest that share a calm, collected atmosphere.',
 		materials: [
 			'Warm neutrals',
 			'Layered textiles',
@@ -306,7 +306,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Park Grove residence composed across living, kitchen, work, and circulation—warm materials, layered furnishings, and rooms shaped for both gathering and focused everyday life.',
+			'A Park Grove residence composed across living, kitchen, work, and circulation, warm materials, layered furnishings, and rooms shaped for both gathering and focused everyday life.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/park-grove/park-grove-living-room-01.avif',
@@ -316,13 +316,13 @@ export const projects: Project[] = [
 		imageHeight: 1335,
 		seoTitle: 'Park Grove Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for a Park Grove residence in Miami—living room, kitchen, work area, and tailored furnishings composed for everyday ease by Colors of Design Group.',
+			'Interior design for a Park Grove residence in Miami, living room, kitchen, work area, and tailored furnishings composed for everyday ease by Colors of Design Group.',
 		challenge:
 			'The residence needed to feel complete across open living areas, a functional kitchen, and spaces for work and daily routine. The clients wanted a home that could host comfortably while still offering quieter moments and clear circulation.',
 		approach:
 			'Colors of Design developed a cohesive palette and furnishing plan carried through the living room, kitchen, corridor, and work area. Proportional seating, layered lighting, and material selections soften the architecture while keeping each room distinct and personal.',
 		outcome:
-			'The finished home reads as one thoughtful whole—spaces for gathering, cooking, and work that share a calm, collected atmosphere.',
+			'The finished home reads as one thoughtful whole, spaces for gathering, cooking, and work that share a calm, collected atmosphere.',
 		materials: [
 			'Warm neutrals',
 			'Layered textiles',
@@ -440,7 +440,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Miami residence shaped across living, bedroom, and circulation—custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
+			'A Miami residence shaped across living, bedroom, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/selassie/selassie-living-room-01.avif',
@@ -450,13 +450,13 @@ export const projects: Project[] = [
 		imageHeight: 1335,
 		seoTitle: 'Selassie Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Selassie, a Miami residence—living room, bedroom, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
+			'Interior design for Selassie, a Miami residence, living room, bedroom, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
 		challenge:
 			'The home needed to feel complete across open living areas and private rooms, with storage and millwork that integrated cleanly into the architecture. The clients wanted spaces that could host comfortably while still offering quiet retreat.',
 		approach:
 			'Colors of Design developed a cohesive palette carried through the living room, bedroom, corridor, and built-in storage. Proportional furnishings, custom cabinetry, and layered lighting soften the architecture while giving each room its own character.',
 		outcome:
-			'The finished residence reads as one thoughtful whole—rooms for gathering and rest that share a calm, collected atmosphere.',
+			'The finished residence reads as one thoughtful whole, rooms for gathering and rest that share a calm, collected atmosphere.',
 		materials: [
 			'Warm neutrals',
 			'Layered textiles',
@@ -558,13 +558,13 @@ export const projects: Project[] = [
 		imageHeight: 1125,
 		seoTitle: 'Kitchen Interior Design | Colors of Design Group',
 		seoDescription:
-			'Kitchen interior design by Colors of Design Group—custom cabinetry, warm materials, and a space composed for everyday ease in Miami.',
+			'Kitchen interior design by Colors of Design Group, custom cabinetry, warm materials, and a space composed for everyday ease in Miami.',
 		challenge:
 			'The kitchen needed to feel finished and functional without reading as purely utilitarian. The clients wanted storage, surfaces, and lighting that could support daily routines while still feeling personal and collected.',
 		approach:
 			'Colors of Design developed a material palette and millwork plan shaped around circulation, storage, and light. Cabinetry, fixtures, and finishing details were specified to integrate with the architecture and keep the room visually quiet.',
 		outcome:
-			'The completed kitchen feels warm, practical, and composed—a space ready for everyday cooking and the slower rhythm of home.',
+			'The completed kitchen feels warm, practical, and composed, a space ready for everyday cooking and the slower rhythm of home.',
 		materials: ['Custom cabinetry', 'Stone surfaces', 'Warm wood tones', 'Layered lighting', 'Tailored hardware'],
 		gallery: [
 			{
@@ -602,55 +602,12 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		slug: 'bathroom',
-		name: 'Bathroom',
-		location: 'Miami, FL',
-		scope: 'Bathroom · Interior Design & Furnishings',
-		concept:
-			'A bathroom shaped by stone, warm materials, and lighting that turns daily routines into a calm, collected experience.',
-		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
-		year: '2024',
-		imageSrc: '/bathroom/bathroom-bathroom-01.avif',
-		imageAlt:
-			'Bathroom interior with stone surfaces and tailored design by Colors of Design Group',
-		imageWidth: 2000,
-		imageHeight: 2996,
-		seoTitle: 'Bathroom Interior Design | Colors of Design Group',
-		seoDescription:
-			'Bathroom interior design by Colors of Design Group—stone surfaces, warm materials, and a space composed for everyday ease in Miami.',
-		challenge:
-			'The bathroom needed to feel spa-like without losing practicality. The clients wanted surfaces, storage, and lighting that could support daily routines while still feeling personal and refined.',
-		approach:
-			'Colors of Design developed a material palette and fixture plan shaped around light, proportion, and ease of use. Stone, millwork, and finishing details were specified to integrate with the architecture and keep the room visually quiet.',
-		outcome:
-			'The completed bathroom feels warm, practical, and composed—a space ready for everyday use and quiet retreat.',
-		materials: ['Natural stone', 'Custom millwork', 'Layered lighting', 'Tailored fixtures', 'Warm wood tones'],
-		gallery: [
-			{
-				src: '/bathroom/bathroom-bathroom-01.avif',
-				alt: 'Bathroom interior with stone surfaces and tailored design by Colors of Design Group',
-				width: 2000,
-				height: 2996,
-				caption: 'Bathroom',
-				description: 'Stone, surfaces, and lighting composed for daily use with a calm, residential tone.',
-			},
-			{
-				src: '/bathroom/bathroom-bathroom-02.avif',
-				alt: 'Bathroom view with warm materials and considered detailing',
-				width: 2000,
-				height: 2768,
-				caption: 'Bathroom detail',
-				description: 'Finishes and fixtures selected to keep the room warm, functional, and visually quiet.',
-			},
-		],
-	},
-	{
 		slug: 'placeres',
 		name: 'Placeres',
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A living room composed in warm neutrals, layered textures, and quiet symmetry—designed to feel collected, calm, and unmistakably residential.',
+			'A living room composed in warm neutrals, layered textures, and quiet symmetry, designed to feel collected, calm, and unmistakably residential.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/placeres/placeres-living-room-01.avif',
@@ -660,13 +617,13 @@ export const projects: Project[] = [
 		imageHeight: 1334,
 		seoTitle: 'Placeres Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Placeres, a Miami residence—warm neutrals, layered furnishings, and a living room designed for ease and everyday gathering by Colors of Design Group.',
+			'Interior design for Placeres, a Miami residence, warm neutrals, layered furnishings, and a living room designed for ease and everyday gathering by Colors of Design Group.',
 		challenge:
 			'The living room needed to feel complete without becoming formal. The clients wanted a space that could hold daily life and occasional entertaining, with furnishings and finishes that read as intentional rather than staged.',
 		approach:
 			'Colors of Design built the room around a restrained palette, proportional seating, and lighting that softens the architecture. Textiles, art, and accent pieces were selected to add depth while keeping the overall atmosphere calm and cohesive.',
 		outcome:
-			'The finished living room feels settled and personal—a room that supports conversation, quiet evenings, and the slower rhythm of home.',
+			'The finished living room feels settled and personal, a room that supports conversation, quiet evenings, and the slower rhythm of home.',
 		materials: ['Warm neutrals', 'Layered textiles', 'Tailored upholstery', 'Sculptural lighting', 'Curated accents'],
 		gallery: [
 			{
@@ -820,7 +777,7 @@ export const projects: Project[] = [
 				height: 2999,
 				caption: 'Interior overview',
 				description:
-					'An elevated perspective on the room’s layers—from structure and lighting to the final styling.',
+					'An elevated perspective on the room’s layers, from structure and lighting to the final styling.',
 			},
 		],
 	},
@@ -833,18 +790,17 @@ export const projects: Project[] = [
 			'An eco-chic mid-century apartment by Morris Lapidus, reimagined with organic modernism, refined naturalism, and understated luxury for a serene Miami Beach retreat.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
-		imageSrc: '/solaris/solaris-living-room-01.avif',
-		imageAlt:
-			'Solaris living room interior with natural light, layered furnishings, and warm neutral tones by Colors of Design',
+		imageSrc: '/solaris/solaris-dinning-room-02.avif',
+		imageAlt: 'Solaris dining area with layered lighting and refined table setting',
 		imageWidth: 2000,
-		imageHeight: 2800,
+		imageHeight: 1333,
 		seoTitle: 'Solaris Interior Design | Colors of Design Group',
 		seoDescription:
-			'Colors of Design transformed a Morris Lapidus mid-century apartment in Miami Beach into an eco-chic retreat—organic modernism, layered textures, and a sculptural fireplace anchoring the living space.',
+			'Colors of Design transformed a Morris Lapidus mid-century apartment in Miami Beach into an eco-chic retreat, organic modernism, layered textures, and a sculptural fireplace anchoring the living space.',
 		challenge:
-			'With a vision grounded in organic modernism and refined naturalism, Colors of Design transformed this mid-century apartment—originally designed by architect Morris Lapidus—into an eco-chic retreat in the heart of Miami Beach. The project blends understated luxury with sustainability, offering its South American owners a serene escape from their fast-paced lives.',
+			'With a vision grounded in organic modernism and refined naturalism, Colors of Design transformed this mid-century apartment, originally designed by architect Morris Lapidus, into an eco-chic retreat in the heart of Miami Beach. The project blends understated luxury with sustainability, offering its South American owners a serene escape from their fast-paced lives.',
 		approach:
-			'Led by a multidisciplinary team, the firm approached this full remodel with an emphasis on functionality, balance, and timeless elegance. Neutral palettes, layered textures, and custom-crafted furnishings came together to evoke a sense of calm and coastal sophistication. A standout feature: the sculptural fireplace, which anchors the living space while seamlessly integrating lighting, storage, and entertainment—form and function in perfect harmony.',
+			'Led by a multidisciplinary team, the firm approached this full remodel with an emphasis on functionality, balance, and timeless elegance. Neutral palettes, layered textures, and custom-crafted furnishings came together to evoke a sense of calm and coastal sophistication. A standout feature: the sculptural fireplace, which anchors the living space while seamlessly integrating lighting, storage, and entertainment, form and function in perfect harmony.',
 		outcome:
 			'Known for designing homes from concept to completion, Colors of Design brings an architectural mindset to their interior design work, with strong attention to spatial planning, lighting design, and selection of timeless materials and textures. This project reflects not only the client’s aesthetic but the firm’s commitment to spaces that feel soulful, timelessly elegant, and intentionally composed.',
 		materials: [
@@ -961,7 +917,7 @@ export const projects: Project[] = [
 				height: 2800,
 				caption: 'Outdoor living',
 				description:
-					'An outdoor room that extends the interior language—comfortable, durable, and open to the light.',
+					'An outdoor room that extends the interior language, comfortable, durable, and open to the light.',
 			},
 		],
 	},
@@ -971,7 +927,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Nursery · Interior Design & Furnishings',
 		concept:
-			'A nursery composed in soft neutrals, gentle texture, and thoughtful details—a calm room designed to grow with a family.',
+			'A nursery composed in soft neutrals, gentle texture, and thoughtful details, a calm room designed to grow with a family.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/baby-room/baby-room.avif',
@@ -981,13 +937,13 @@ export const projects: Project[] = [
 		imageHeight: 1080,
 		seoTitle: 'Baby Room Interior Design | Colors of Design Group',
 		seoDescription:
-			'Nursery interior design by Colors of Design Group—a calm, layered baby room with soft neutrals, tailored furnishings, and details designed to grow with the family.',
+			'Nursery interior design by Colors of Design Group, a calm, layered baby room with soft neutrals, tailored furnishings, and details designed to grow with the family.',
 		challenge:
 			'The nursery needed to feel serene and complete without becoming overly themed. The clients wanted a room that would work from early months onward, with furnishings and finishes that could adapt as needs changed.',
 		approach:
 			'Colors of Design built the room around a restrained palette, comfortable proportions, and storage and styling that keep daily life simple. Textiles, lighting, and accent pieces add warmth while maintaining a quiet, restful atmosphere.',
 		outcome:
-			'The finished nursery feels soft, personal, and ready for everyday use—a room that supports rest, routine, and the slower rhythm of home.',
+			'The finished nursery feels soft, personal, and ready for everyday use, a room that supports rest, routine, and the slower rhythm of home.',
 		materials: ['Soft neutrals', 'Layered textiles', 'Tailored furnishings', 'Gentle lighting', 'Curated accents'],
 		gallery: [
 			{
@@ -1007,23 +963,22 @@ export const projects: Project[] = [
 		location: 'Asheville, NC',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A mountain residence shaped by warm materials, clear circulation, and rooms that feel grounded— from the entry and kitchen to private suites and everyday spaces.',
+			'A mountain residence shaped by warm materials, clear circulation, and rooms that feel grounded,  from the entry and kitchen to private suites and everyday spaces.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
-		imageSrc: '/asheville/asheville-kitchen-01.avif',
-		imageAlt:
-			'Asheville kitchen interior with warm wood tones, stone surfaces, and tailored design by Colors of Design',
+		imageSrc: '/asheville/asheville-dinning-room-01.avif',
+		imageAlt: 'Asheville dining room with tailored furnishings and warm interior tones',
 		imageWidth: 2000,
 		imageHeight: 1331,
 		seoTitle: 'Asheville Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for an Asheville residence—kitchen, dining, halls, bedroom, baths, and laundry composed in warm materials and everyday ease by Colors of Design Group.',
+			'Interior design for an Asheville residence, kitchen, dining, halls, bedroom, baths, and laundry composed in warm materials and everyday ease by Colors of Design Group.',
 		challenge:
 			'The home needed to feel welcoming and practical without losing refinement. The clients wanted open circulation, kitchens and baths that support daily life, and a material palette suited to the mountain setting.',
 		approach:
-			'Colors of Design planned the residence room by room—entry halls for first impressions, kitchen and dining for gathering, private suites for retreat, and utility spaces that work as hard as they look. Finishes, furnishings, and lighting were specified as one composition across the home.',
+			'Colors of Design planned the residence room by room, entry halls for first impressions, kitchen and dining for gathering, private suites for retreat, and utility spaces that work as hard as they look. Finishes, furnishings, and lighting were specified as one composition across the home.',
 		outcome:
-			'Asheville now reads as a cohesive residence—warm, composed, and shaped for the way the family actually lives from morning routines to quiet evenings.',
+			'Asheville now reads as a cohesive residence, warm, composed, and shaped for the way the family actually lives from morning routines to quiet evenings.',
 		materials: [
 			'Warm wood tones',
 			'Natural stone',
@@ -1129,7 +1084,7 @@ export const projects: Project[] = [
 				height: 1331,
 				caption: 'Laundry',
 				description:
-					'A utility room designed with the same care as the rest of the home—functional, durable, and composed.',
+					'A utility room designed with the same care as the rest of the home, functional, durable, and composed.',
 			},
 		],
 	},
@@ -1139,23 +1094,22 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A coastal residence composed in light, art, and layered furnishings—from welcoming halls and living rooms to curated objects and an indoor balcony open to the sea air.',
+			'A coastal residence composed in light, art, and layered furnishings, from welcoming halls and living rooms to curated objects and an indoor balcony open to the sea air.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling', 'Art Curation'],
 		year: '2024',
-		imageSrc: '/casa-del-mar/living-room-01.avif',
-		imageAlt:
-			'Casa del Mar living room with coastal interior design, layered furnishings, and natural light by Colors of Design',
-		imageWidth: 2000,
-		imageHeight: 1334,
+		imageSrc: '/casa-del-mar/living-room-05.avif',
+		imageAlt: 'Casa del Mar living room detail with art and neutral furnishings',
+		imageWidth: 1350,
+		imageHeight: 900,
 		seoTitle: 'Casa del Mar Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Casa del Mar, a Miami residence—living rooms, halls, art, and an indoor balcony composed in light, texture, and coastal ease by Colors of Design Group.',
+			'Interior design for Casa del Mar, a Miami residence, living rooms, halls, art, and an indoor balcony composed in light, texture, and coastal ease by Colors of Design Group.',
 		challenge:
 			'The residence needed to honor its coastal setting without leaning on cliché. The clients wanted open living spaces, art and objects with real presence, and interiors that could hold daily life and entertaining with equal ease.',
 		approach:
-			'Colors of Design planned the home around circulation, proportion, and a restrained palette that lets light and views lead. Furnishings, sculpture, and paintings were curated as part of one composition—rooms shaped for gathering, with quieter moments in halls and alcoves.',
+			'Colors of Design planned the home around circulation, proportion, and a restrained palette that lets light and views lead. Furnishings, sculpture, and paintings were curated as part of one composition, rooms shaped for gathering, with quieter moments in halls and alcoves.',
 		outcome:
-			'Casa del Mar now feels luminous and personal—a home where art, furnishings, and architecture work together, and the indoor balcony extends living toward the water.',
+			'Casa del Mar now feels luminous and personal, a home where art, furnishings, and architecture work together, and the indoor balcony extends living toward the water.',
 		materials: [
 			'Coastal neutrals',
 			'Natural stone',
@@ -1234,7 +1188,7 @@ export const projects: Project[] = [
 				height: 900,
 				caption: 'Indoor balcony',
 				description:
-					'An indoor balcony that extends living toward the water—comfortable, open, and composed.',
+					'An indoor balcony that extends living toward the water, comfortable, open, and composed.',
 			},
 			{
 				src: '/casa-del-mar/painting-01.avif',
@@ -1266,60 +1220,6 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		slug: 'delray-beach-interior-design',
-		name: 'Delray Beach',
-		location: 'Delray Beach, FL',
-		scope: 'Full Residence · Interior Architecture & Furnishings',
-		concept:
-			'A coastal retreat layered in limestone, bleached oak, and quiet tonal contrasts that soften the transition from sea to shelter.',
-		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
-		year: '2024',
-		imageSrc: '/Delray-Beach-Interior-Design-Miami.jpg',
-		imageAlt:
-			'Delray Beach living room with limestone floors, bleached oak furnishings, and coastal natural light by Colors of Design',
-		imageWidth: 1273,
-		imageHeight: 707,
-		seoTitle: 'Delray Beach Interior Design | Colors of Design Group',
-		seoDescription:
-			'A full-residence interior design project in Delray Beach, Florida—coastal materials, custom furnishings, and rooms planned for indoor-outdoor living by Colors of Design Group.',
-		challenge:
-			'This Delray Beach residence needed to feel open to the Atlantic light without reading as a typical beach house. The clients asked for rooms that could host family gatherings, then settle into quiet evenings, with a material palette that would age well in South Florida humidity and sun.',
-		approach:
-			'Colors of Design planned the interior architecture around circulation from the entry to the garden and pool. Limestone, bleached oak, and a restrained tonal range keep the rooms cool and continuous. Custom furnishings, layered lighting, and considered art placement give each space a personal cadence rather than a showroom finish.',
-		outcome:
-			'The completed home reads as a coastal retreat with architectural clarity: living, dining, and private rooms share one language of texture and proportion, while still supporting the way the family actually lives day to day.',
-		materials: ['Limestone', 'Bleached oak', 'Linen textiles', 'Custom millwork', 'Layered lighting'],
-		gallery: [
-			{
-				src: '/Delray-Beach-Interior-Design-Miami.jpg',
-				alt: 'Primary living area in a Delray Beach interior design project with limestone and oak',
-				width: 1273,
-				height: 707,
-				caption: 'Living',
-				description:
-					'Limestone and bleached oak set the tone for a light-filled coastal living room.',
-			},
-			{
-				src: '/furnishings-and-styling.jpg',
-				alt: 'Styled seating and textiles in a South Florida residence by Colors of Design',
-				width: 1200,
-				height: 1200,
-				caption: 'Furnishings',
-				description:
-					'Tailored upholstery and textiles selected to soften the architecture and add depth.',
-			},
-			{
-				src: '/living-room-01.jpg',
-				alt: 'Sitting area with curated furniture and natural materials in Delray Beach',
-				width: 1600,
-				height: 1000,
-				caption: 'Gathering',
-				description:
-					'A sitting area composed for conversation, with natural materials and quiet contrast.',
-			},
-		],
-	},
-	{
 		slug: 'coral-gables-estate',
 		name: 'Coral Gables Estate',
 		location: 'Coral Gables, FL',
@@ -1335,7 +1235,7 @@ export const projects: Project[] = [
 		imageHeight: 1000,
 		seoTitle: 'Coral Gables Estate Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior architecture and furnishings for a Coral Gables estate—classical proportions, custom millwork, and rooms designed for gathering and retreat by Colors of Design Group.',
+			'Interior architecture and furnishings for a Coral Gables estate, classical proportions, custom millwork, and rooms designed for gathering and retreat by Colors of Design Group.',
 		challenge:
 			'The estate’s architecture already carried strong classical bones. The work was to honor those proportions while making the interiors feel current, livable, and suited to a family that entertains often without sacrificing private rooms for rest.',
 		approach:
@@ -1389,13 +1289,13 @@ export const projects: Project[] = [
 		imageHeight: 1166,
 		seoTitle: 'Sunny Isles Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for a Sunny Isles residence—layered furnishings, coastal light, and a living room composed for everyday ease by Colors of Design Group.',
+			'Interior design for a Sunny Isles residence, layered furnishings, coastal light, and a living room composed for everyday ease by Colors of Design Group.',
 		challenge:
 			'The living room needed to feel complete without becoming formal. The clients wanted a space that could hold daily life and occasional entertaining, with furnishings and finishes that read as intentional rather than staged.',
 		approach:
 			'Colors of Design built the room around a restrained palette, proportional seating, and lighting that softens the architecture. Textiles, art, and accent pieces were selected to add depth while keeping the overall atmosphere calm and cohesive.',
 		outcome:
-			'The finished living room feels settled and personal—a room that supports conversation, quiet evenings, and the slower rhythm of home.',
+			'The finished living room feels settled and personal, a room that supports conversation, quiet evenings, and the slower rhythm of home.',
 		materials: ['Warm neutrals', 'Layered textiles', 'Tailored upholstery', 'Sculptural lighting', 'Curated accents'],
 		gallery: [
 			{
@@ -1442,6 +1342,48 @@ export const projects: Project[] = [
 				caption: 'Room view',
 				description:
 					'Lighting, textiles, and proportion work together to settle the architecture into a lived-in room.',
+			},
+		],
+	},
+	{
+		slug: 'bathroom',
+		name: 'Bathroom',
+		location: 'Miami, FL',
+		scope: 'Bathroom · Interior Design & Furnishings',
+		concept:
+			'A bathroom shaped by stone, warm materials, and lighting that turns daily routines into a calm, collected experience.',
+		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
+		year: '2024',
+		imageSrc: '/bathroom/bathroom-bathroom-02.avif',
+		imageAlt: 'Bathroom view with warm materials and considered detailing',
+		imageWidth: 2000,
+		imageHeight: 2768,
+		seoTitle: 'Bathroom Interior Design | Colors of Design Group',
+		seoDescription:
+			'Bathroom interior design by Colors of Design Group, stone surfaces, warm materials, and a space composed for everyday ease in Miami.',
+		challenge:
+			'The bathroom needed to feel spa-like without losing practicality. The clients wanted surfaces, storage, and lighting that could support daily routines while still feeling personal and refined.',
+		approach:
+			'Colors of Design developed a material palette and fixture plan shaped around light, proportion, and ease of use. Stone, millwork, and finishing details were specified to integrate with the architecture and keep the room visually quiet.',
+		outcome:
+			'The completed bathroom feels warm, practical, and composed, a space ready for everyday use and quiet retreat.',
+		materials: ['Natural stone', 'Custom millwork', 'Layered lighting', 'Tailored fixtures', 'Warm wood tones'],
+		gallery: [
+			{
+				src: '/bathroom/bathroom-bathroom-01.avif',
+				alt: 'Bathroom interior with stone surfaces and tailored design by Colors of Design Group',
+				width: 2000,
+				height: 2996,
+				caption: 'Bathroom',
+				description: 'Stone, surfaces, and lighting composed for daily use with a calm, residential tone.',
+			},
+			{
+				src: '/bathroom/bathroom-bathroom-02.avif',
+				alt: 'Bathroom view with warm materials and considered detailing',
+				width: 2000,
+				height: 2768,
+				caption: 'Bathroom detail',
+				description: 'Finishes and fixtures selected to keep the room warm, functional, and visually quiet.',
 			},
 		],
 	},

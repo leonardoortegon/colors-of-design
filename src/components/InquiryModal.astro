@@ -99,9 +99,6 @@ import InquiryFormIntro from './InquiryFormIntro.astro';
 		var modal = document.querySelector('[data-inquiry-modal]');
 		if (!modal) return;
 
-		var panel = modal.querySelector('[data-inquiry-panel]');
-		var lastTrigger = null;
-
 		function setPageInert(inert) {
 			document.querySelectorAll('main, footer, header[data-nav]').forEach(function (element) {
 				element.inert = inert;
@@ -122,16 +119,12 @@ import InquiryFormIntro from './InquiryFormIntro.astro';
 			}
 		}
 
-		function openModal(trigger) {
+		function openModal() {
 			closeNavMenu();
-			lastTrigger = trigger || null;
 			modal.removeAttribute('hidden');
 			modal.setAttribute('aria-hidden', 'false');
 			document.documentElement.classList.add('inquiry-modal-open');
 			setPageInert(true);
-			panel.focus();
-			var firstField = modal.querySelector('input, textarea');
-			if (firstField) firstField.focus();
 		}
 
 		function closeModal() {
@@ -139,14 +132,12 @@ import InquiryFormIntro from './InquiryFormIntro.astro';
 			modal.setAttribute('aria-hidden', 'true');
 			document.documentElement.classList.remove('inquiry-modal-open');
 			setPageInert(false);
-			if (lastTrigger && typeof lastTrigger.focus === 'function') lastTrigger.focus();
-			else lastTrigger = null;
 		}
 
 		document.querySelectorAll('[data-inquiry-open]').forEach(function (trigger) {
 			trigger.addEventListener('click', function (event) {
 				event.preventDefault();
-				openModal(trigger);
+				openModal();
 			});
 		});
 

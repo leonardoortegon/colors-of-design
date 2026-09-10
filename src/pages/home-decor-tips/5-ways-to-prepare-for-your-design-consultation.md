@@ -16,7 +16,7 @@ Think about the moments your home needs to support. Where do you have coffee? Ho
 
 Be specific. “We need somewhere comfortable to read after dinner” gives a designer more to work with than “we want a better living room.” Include the needs of everyone who uses the space, and separate daily frustrations from occasional inconveniences.
 
-## 2. Gather a few images—and explain why
+## 2. Gather a few images and explain why
 
 A small selection of references is more useful than a large folder of unrelated rooms. For each image, note what draws you in: the light, a color combination, a furniture arrangement, or simply the feeling of calm.
 

@@ -13,9 +13,15 @@ export const site = {
 	country: 'US',
 	defaultTitle: 'Luxury Interior Design in Miami | Colors of Design Group',
 	defaultDescription:
-		'Colors of Design is a Miami interior design studio creating refined, personal residences—from first concept to final installation—across South Florida and beyond.',
+		'Colors of Design is a Miami interior design studio creating refined, personal residences, from first concept to final installation, across South Florida and beyond.',
 	ogImage: '/hero.jpg',
+	spanishUrl: 'https://colorsofdesign.com/es/',
 } as const;
+
+export const navLanguages = [
+	{ code: 'en', label: 'English', href: '/' },
+	{ code: 'es', label: 'Español', href: site.spanishUrl },
+] as const;
 
 export const inquiryFormIntro = {
 	heading: 'Start your project',

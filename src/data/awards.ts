@@ -40,7 +40,7 @@ export const awards: AwardRecognition[] = [
 		imageCaption: 'Luxury Lifestyle Awards · 2023',
 		paragraphs: [
 			'Colors of Design was recognized at the Luxury Lifestyle Awards 2023, celebrating studios that combine exceptional craftsmanship with a deeply personal approach to residential design.',
-			'The honor reflects our commitment to creating harmonious, timeless interiors throughout Miami and beyond—spaces shaped around how our clients live, gather, and unwind.',
+			'The honor reflects our commitment to creating harmonious, timeless interiors throughout Miami and beyond, spaces shaped around how our clients live, gather, and unwind.',
 		],
 	},
 	{
@@ -55,7 +55,7 @@ export const awards: AwardRecognition[] = [
 		imageCaption: 'Design Minds · Miami',
 		paragraphs: [
 			'Our studio was invited to Design Minds 2023, a gathering that brings together Miami’s design community to share ideas, inspiration, and new perspectives on the home.',
-			'The event was presented by Magazine Key Biscayne and Magazine Brickell—publications at the center of South Florida’s architecture, interiors, and lifestyle culture.',
+			'The event was presented by Magazine Key Biscayne and Magazine Brickell, publications at the center of South Florida’s architecture, interiors, and lifestyle culture.',
 		],
 	},
 	{

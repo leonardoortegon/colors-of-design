@@ -3,6 +3,8 @@ import { journalPosts } from '../data/journal';
 
 interface Props {
 	fullPage?: boolean;
+	related?: boolean;
+	posts?: typeof journalPosts;
 	heading?: string;
 	introduction?: string;
 	eyebrow?: string;
@@ -12,6 +14,8 @@ interface Props {
 
 const {
 	fullPage = false,
+	related = false,
+	posts,
 	heading = 'A considered way of living.',
 	introduction,
 	eyebrow = 'From the journal',
@@ -21,42 +25,50 @@ const {
 
 const HeadingTag = headingLevel;
 const CardTitleTag = headingLevel === 'h1' ? 'h2' : 'h3';
-const displayedPosts = fullPage ? journalPosts : journalPosts.slice(0, 3);
+const usePageCards = fullPage || related;
+const displayedPosts = posts ?? (fullPage || related ? journalPosts : journalPosts.slice(0, 3));
 ---
 
 <section
-	class:list={['journal-list', fullPage && 'journal-list--page']}
-	id="journal"
+	class:list={['journal-list', fullPage && 'journal-list--page', related && 'journal-list--related']}
+	id={related ? undefined : 'journal'}
 	aria-labelledby={fullPage ? 'journal-list-heading' : undefined}
-	aria-label={fullPage ? undefined : 'From the journal'}
+	aria-label={fullPage || related ? undefined : 'From the journal'}
 >
 	<div class="journal-list__inner">
-		<header
-			class:list={[
-				'journal-list__header',
-				centerHeaderOnDesktop && 'journal-list__header--center-desktop',
-				!fullPage && 'journal-list__header--preview',
-			]}
-		>
-			{fullPage ? (
-				<>
-					{eyebrow && <p class="eyebrow">{eyebrow}</p>}
-					<HeadingTag id="journal-list-heading" class="journal-list__heading">{heading}</HeadingTag>
-					{introduction && <p class="journal-list__intro">{introduction}</p>}
-				</>
-			) : (
-				<>
-					<p class="eyebrow">{eyebrow}</p>
-					<h2 class="journal-list__heading">{heading}</h2>
-				</>
-			)}
-		</header>
+		{
+			(related ? eyebrow : true) && (
+				<header
+					class:list={[
+						'journal-list__header',
+						centerHeaderOnDesktop && 'journal-list__header--center-desktop',
+						!usePageCards && 'journal-list__header--preview',
+						related && 'journal-list__header--related',
+					]}
+				>
+					{related ? (
+						eyebrow && <p class="eyebrow">{eyebrow}</p>
+					) : fullPage ? (
+						<>
+							{eyebrow && <p class="eyebrow">{eyebrow}</p>}
+							<HeadingTag id="journal-list-heading" class="journal-list__heading">{heading}</HeadingTag>
+							{introduction && <p class="journal-list__intro">{introduction}</p>}
+						</>
+					) : (
+						<>
+							<p class="eyebrow">{eyebrow}</p>
+							<h2 class="journal-list__heading">{heading}</h2>
+						</>
+					)}
+				</header>
+			)
+		}
 
 		<div
 			class:list={[
 				'journal-list__grid',
-				fullPage && 'journal-list__grid--page',
-				!fullPage && 'journal-list__grid--preview',
+				usePageCards && 'journal-list__grid--page',
+				!usePageCards && 'journal-list__grid--preview',
 			]}
 		>
 			{displayedPosts.map((post) => {
@@ -68,7 +80,7 @@ const displayedPosts = fullPage ? journalPosts : journalPosts.slice(0, 3);
 						<div class="journal-list__body">
 							<CardTitleTag class="journal-list__title">{post.title}</CardTitleTag>
 							<p class="journal-list__copy">{post.description}</p>
-							{fullPage ? (
+							{usePageCards ? (
 								<span class="journal-list__action">Read</span>
 							) : (
 								<a class="journal-list__action" href={post.url} aria-label={`Read ${post.title}`}>
@@ -79,7 +91,7 @@ const displayedPosts = fullPage ? journalPosts : journalPosts.slice(0, 3);
 					</>
 				);
 
-				return fullPage ? (
+				return usePageCards ? (
 					<a class="journal-list__card journal-list__card--page" href={post.url} aria-label={`Read ${post.title}`}>
 						{cardContent}
 					</a>
@@ -101,7 +113,7 @@ const displayedPosts = fullPage ? journalPosts : journalPosts.slice(0, 3);
 		</div>
 
 		{
-			!fullPage && (
+			!usePageCards && (
 				<div class="journal-list__footer">
 					<a class="journal-list__cta" href="/interior-design-blog/">Explore the journal</a>
 				</div>
@@ -130,6 +142,22 @@ const displayedPosts = fullPage ? journalPosts : journalPosts.slice(0, 3);
 	.journal-list--page .journal-list__inner {
 		padding-top: 0;
 		padding-bottom: clamp(4rem, 8vw, 7rem);
+	}
+
+	.journal-list--related {
+		background-color: transparent;
+	}
+
+	.journal-list--related .journal-list__inner {
+		padding-block: 0;
+	}
+
+	.journal-list__header--related {
+		margin-bottom: clamp(2rem, 4vw, 3rem);
+	}
+
+	.journal-list--related a.journal-list__card--page {
+		background-color: var(--color-bg);
 	}
 
 	.journal-list__header {

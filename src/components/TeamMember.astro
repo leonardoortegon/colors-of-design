@@ -32,7 +32,7 @@ const { name, role, imageSrc, imageAlt, paragraphs = [] } = Astro.props;
 	}
 
 	.team-member + .team-member {
-		padding-top: 0;
+		padding-top: clamp(4rem, 10vw, 7rem);
 	}
 
 	.team-member figure {
@@ -46,12 +46,8 @@ const { name, role, imageSrc, imageAlt, paragraphs = [] } = Astro.props;
 	}
 
 	@media (max-width: 720px) {
-		.team-member .editorial-copy {
-			order: 1;
-		}
-
 		.team-member figure {
-			order: 2;
+			max-width: 100%;
 		}
 	}
 

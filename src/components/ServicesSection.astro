@@ -26,25 +26,34 @@ const { heading, introduction, services, linkLabel, linkHref = '/services' } = A
 		</header>
 
 		<div class="services__grid">
-			{services.map((service) => (
-				<article class="services__card">
-					<div class="services__card-media">
-						<img
-							class="services__card-image"
-							src={service.imageSrc}
-							alt={service.imageAlt}
-							width="600"
-							height="600"
-							loading="lazy"
-						/>
-					</div>
-					<div class="services__card-body">
-						<h3 class="services__card-title">{service.title}</h3>
-						<p class="services__card-description">{service.description}</p>
-						<a class="services__card-link" href={service.href ?? '/services'}>Explore</a>
-					</div>
-				</article>
-			))}
+			{services.map((service) => {
+				const href = service.href ?? '/services/';
+				const cardContent = (
+					<>
+						<div class="services__card-media">
+							<img
+								class="services__card-image"
+								src={service.imageSrc}
+								alt={service.imageAlt}
+								width="600"
+								height="600"
+								loading="lazy"
+							/>
+						</div>
+						<div class="services__card-body">
+							<h3 class="services__card-title">{service.title}</h3>
+							<p class="services__card-description">{service.description}</p>
+							<span class="services__card-link">Explore</span>
+						</div>
+					</>
+				);
+
+				return (
+					<a class="services__card" href={href} aria-label={`Explore ${service.title}`}>
+						{cardContent}
+					</a>
+				);
+			})}
 		</div>
 
 		<div class="services__footer">
@@ -108,12 +117,23 @@ const { heading, introduction, services, linkLabel, linkHref = '/services' } = A
 		gap: clamp(1.5rem, 3vw, 2.5rem);
 	}
 
-	.services__card {
+	a.services__card {
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		padding: clamp(1.25rem, 2.5vw, 1.75rem);
+		text-decoration: none;
+		color: inherit;
 		background-color: var(--color-bg);
+		transition: box-shadow 0.2s ease;
+	}
+
+	a.services__card:hover {
+		box-shadow: 0 12px 32px rgba(26, 26, 26, 0.08);
+	}
+
+	a.services__card:hover .services__card-link {
+		color: var(--color-accent-hover);
 	}
 
 	.services__card-media {

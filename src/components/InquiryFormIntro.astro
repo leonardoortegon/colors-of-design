@@ -11,7 +11,7 @@ const HeadingTag = headingLevel;
 ---
 
 <div class="inquiry-form-intro">
-	<p class="eyebrow inquiry-form-intro__phone">
+	<p class="inquiry-form-intro__phone">
 		<a href={site.phoneHref}>{site.phone}</a>
 	</p>
 	<HeadingTag id={id} class="inquiry-form-intro__heading">{inquiryFormIntro.heading}</HeadingTag>
@@ -28,6 +28,12 @@ const HeadingTag = headingLevel;
 
 	.inquiry-form-intro__phone {
 		margin: 0;
+		font-family: var(--font-body);
+		font-size: 0.875rem;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+		color: var(--color-text-muted);
+		white-space: nowrap;
 	}
 
 	.inquiry-form-intro__phone a {
