@@ -5,7 +5,7 @@ import { teamMembers, type TeamMember } from '../data/team';
 import { awards, awardsIntro, type AwardRecognition } from '../data/awards';
 import { journalPosts } from '../data/journal';
 import { shopIntro, shopProducts, type ShopProduct } from '../data/shop';
-import { projects, type Project } from '../data/projects';
+import { getPortfolioProjects, type Project } from '../data/projects';
 import { projectsEs } from './projects.es';
 import { copy } from './ui';
 
@@ -18,7 +18,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'La planificación espacial es un componente importante para el trabajo de diseñadores de interiores y arquitectos. Define las zonas del espacio y las actividades que tendrán lugar en esas zonas.',
 		included: ['Plan de zonas', 'Mapa de actividades', 'Flujo espacial', 'Distribución de mobiliario', 'Programación funcional'],
-		imageAlt: 'Planificación espacial de una cocina residencial por Colors of Design Group',
+		imageAlt: 'Zonas de estar, comedor y cocina conectadas que muestran la planificación espacial residencial por Colors of Design Group',
 	},
 	'turn-key-services': {
 		name: 'Servicios llave en mano',
@@ -28,7 +28,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Si es un propietario ausente, puede estar seguro de que su proyecto estará en buenas manos, de la idea a la entrega. Cuidamos de obtener excelentes resultados finales.',
 		included: ['Desarrollo de concepto', 'Dirección de diseño', 'Compras', 'Instalación', 'Supervisión del proyecto'],
-		imageAlt: 'Proyecto de diseño de interiores llave en mano por Colors of Design Group',
+		imageAlt: 'Residencia concluida con estar, cocina y carpintería entregada llave en mano por Colors of Design Group',
 	},
 	'3d-rendering': {
 		name: 'Renderizado 3D',
@@ -37,7 +37,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Los renders arquitectónicos 3D se usan para escenificar y visualizar espacios antes de construirlos. Un render 3D es un plus para visualizar su interior.',
 		included: ['Renders de interiores', 'Estudios de materiales', 'Previsualización de iluminación', 'Presentaciones de diseño', 'Visualización previa a la obra'],
-		imageAlt: 'Visualización 3D para un proyecto de diseño de interiores',
+		imageAlt: 'Render arquitectónico 3D de un espacio interior por Colors of Design Group',
 	},
 	'custom-woodwork': {
 		name: 'Carpintería a medida',
@@ -46,7 +46,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Trabajamos con los mejores artesanos para ofrecer lo mejor a nuestros clientes. Los oficios garantizan diseños exclusivos para su lugar favorito.',
 		included: ['Carpintería a medida', 'Gabinetes empotrados', 'Detalle artesanal', 'Tocadores y ebanistería', 'Diseños exclusivos en madera'],
-		imageAlt: 'Carpintería a medida en un interior residencial por Colors of Design Group',
+		imageAlt: 'Carpintería de nogal a medida y bar con listones acanalados por Colors of Design Group',
 	},
 	'project-management': {
 		name: 'Gestión de proyectos',
@@ -64,7 +64,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Diseño de iluminación con lámparas icónicas e innovadoras para el hogar, iluminación exterior y luces arquitectónicas. Creamos planes de iluminación según su espacio y necesidades.',
 		included: ['Planes de iluminación', 'Selección de luminarias', 'Iluminación arquitectónica', 'Iluminación exterior', 'Iluminación en capas'],
-		imageAlt: 'Diseño de iluminación en una sala residencial por Colors of Design Group',
+		imageAlt: 'Lámpara de pie escultórica e iluminación en capas en un interior residencial por Colors of Design Group',
 	},
 	'furniture-design': {
 		name: 'Diseño de mobiliario',
@@ -73,7 +73,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Ofrecemos mobiliario a medida, diseños exclusivos y el uso de materiales sostenibles. Contará también con la mejor artesanía.',
 		included: ['Mobiliario a medida', 'Diseños exclusivos', 'Materiales sostenibles', 'Dirección de tapicería', 'Oficio artesanal'],
-		imageAlt: 'Diseño de mobiliario a medida por Colors of Design Group',
+		imageAlt: 'Consola de mármol a medida diseñada para un interior residencial por Colors of Design Group',
 	},
 	'budget-management': {
 		name: 'Administración de presupuesto',
@@ -82,7 +82,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Sin un presupuesto, un proyecto de diseño de interiores puede desbordarse con facilidad. Aproveche al máximo su inversión. Trabajamos dentro del presupuesto de nuestros clientes.',
 		included: ['Planificación presupuestaria', 'Seguimiento de costos', 'Estrategia de compras', 'Ingeniería de valor', 'Guía de inversión'],
-		imageAlt: 'Proyecto de diseño de interiores con gestión de presupuesto por Colors of Design Group',
+		imageAlt: 'Cocina con materiales y acabados especificados por Colors of Design Group',
 	},
 	'feng-shui': {
 		name: 'Feng shui',
@@ -91,7 +91,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'El feng shui trabaja el despeje del desorden y la disposición intencionada del entorno para que refleje y sostenga a quien lo habita, mejorando el flujo de buena energía y bienestar.',
 		included: ['Armonía espacial', 'Despeje del desorden', 'Colocación intencionada', 'Flujo de energía', 'Entornos equilibrados'],
-		imageAlt: 'Dormitorio inspirado en feng shui por Colors of Design Group',
+		imageAlt: 'Dormitorio principal de descanso con mobiliario equilibrado y paleta serena por Colors of Design Group',
 	},
 	'interior-architecture': {
 		name: 'Arquitectura de interiores',
@@ -100,7 +100,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'La arquitectura de interiores es el diseño de un interior en términos arquitectónicos: el arte espacial del diseño ambiental. Diseñamos interiores para seguridad, funcionalidad y estética.',
 		included: ['Planificación espacial', 'Detalle arquitectónico', 'Especificación de acabados', 'Dibujos de construcción', 'Diseño consciente de normativa'],
-		imageAlt: 'Proyecto de arquitectura de interiores por Colors of Design Group en Miami',
+		imageAlt: 'Arquitectura de interiores con balcón interior y vistas costeras por Colors of Design Group',
 	},
 	'interior-design': {
 		name: 'Diseño de interiores',
@@ -109,7 +109,135 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Escuchamos con atención las necesidades, proyecciones e intenciones del cliente para cada espacio. Esto incluye la revisión y comprensión de sus deseos.',
 		included: ['Conceptos de diseño', 'Selección de materiales', 'Planos de mobiliario', 'Paletas de acabados', 'Instalación'],
-		imageAlt: 'Proyecto de diseño de interiores por Colors of Design Group en Delray Beach',
+		imageAlt: 'Sala residencial amueblada de diseño de interiores integral por Colors of Design Group',
+	},
+	'custom-window-treatment': {
+		name: 'Tratamientos de ventana a medida',
+		scope: 'Cortinería · Persianas · Instalación a medida',
+		summary:
+			'Tratamientos de ventana especificados para proporción, control de luz y un acabado que complementa la arquitectura.',
+		description:
+			'Los tratamientos de ventana definen cómo se siente una estancia a lo largo del día. Colors of Design especifica cortinería, persianas y herrajes a medida para cada vano, equilibrando privacidad, luz y la composición general del diseño.',
+		included: [
+			'Selección de telas y materiales',
+			'Cortinería a medida',
+			'Persianas y stores',
+			'Coordinación de herrajes',
+			'Instalación profesional',
+		],
+		imageAlt: 'Cortinería a medida enmarcando ventanas de piso a techo en una sala por Colors of Design Group',
+	},
+	'custom-millwork-cabinetry': {
+		name: 'Carpintería y gabinetes a medida',
+		scope: 'Empotrados · Tocadores · Ebanistería a medida',
+		summary:
+			'Gabinetes y carpintería a medida diseñados para integrarse a la arquitectura y sostener la vida cotidiana con detalle refinado.',
+		description:
+			'Desde empotrados y tocadores hasta paquetes completos de ebanistería, nuestra carpintería se especifica como parte de la composición interior, con materiales, proporciones y herrajes elegidos para una calidad duradera.',
+		included: [
+			'Diseño de gabinetes',
+			'Almacenamiento empotrado',
+			'Tocadores y ebanistería',
+			'Selección de acabados',
+			'Supervisión de instalación',
+		],
+		imageAlt: 'Gabinetes empotrados de carpintería con acabados en madera cálida por Colors of Design Group',
+	},
+	'wallpaper-selections-and-installation': {
+		name: 'Selección e instalación de papel tapiz',
+		scope: 'Revestimientos · Patrón · Instalación profesional',
+		summary:
+			'Selección de papeles tapiz curada por escala, tono y carácter de la estancia, con instalación supervisada para un acabado preciso y duradero.',
+		description:
+			'Los revestimientos aportan profundidad, textura y personalidad a una estancia. Seleccionamos papeles adecuados a cada espacio, coordinamos patrón y paleta con el diseño general y supervisamos la instalación para un resultado limpio y refinado.',
+		included: [
+			'Selección de revestimientos',
+			'Revisión de patrón y escala',
+			'Coordinación de muestras',
+			'Coordinación con instaladores',
+			'Detalle de acabados',
+		],
+		imageAlt: 'Revestimiento texturizado detrás de un cabecero a medida por Colors of Design Group',
+	},
+	'sustainable-green-outdoor-design': {
+		name: 'Diseño exterior sostenible',
+		scope: 'Terrazas · Jardines · Vida al aire libre consciente',
+		summary:
+			'Espacios exteriores diseñados con materiales sostenibles, plantación y mobiliario que extienden la vida cómoda más allá del interior.',
+		description:
+			'El diseño exterior debe sentirse tan intencional como las estancias interiores. Desarrollamos terrazas, jardines y áreas de estar al aire libre con selecciones duraderas y ecológicas, y distribuciones adecuadas para vivir en el sur de Florida.',
+		included: [
+			'Planificación del exterior',
+			'Selección de materiales sostenibles',
+			'Mobiliario y sombra',
+			'Dirección de plantación',
+			'Coordinación de instalación',
+		],
+		imageAlt: 'Área de estar exterior con mobiliario para vivir en el sur de Florida por Colors of Design Group',
+	},
+	'sustainable-green-indoor-design': {
+		name: 'Diseño interior sostenible',
+		scope: 'Materiales · Acabados · Interiores conscientes',
+		summary:
+			'Especificaciones interiores que priorizan materiales sostenibles, acabados más saludables y diseño atemporal con menor huella ambiental.',
+		description:
+			'El diseño interior sostenible equilibra belleza y responsabilidad. Especificamos materiales, acabados y mobiliario que apoyan interiores más saludables, preservando la atmósfera refinada y de colección que nuestros clientes esperan.',
+		included: [
+			'Abastecimiento de materiales sostenibles',
+			'Selección de acabados de bajo impacto',
+			'Mobiliario y textiles',
+			'Investigación de proveedores',
+			'Documentación de especificaciones',
+		],
+		imageAlt: 'Interior sostenible con superficies de piedra y madera cálida por Colors of Design Group',
+	},
+	'plants-selections': {
+		name: 'Selección de plantas',
+		scope: 'Plantación interior · Escala · Colocación',
+		summary:
+			'Selección de plantas para suavizar la arquitectura, dar vida a la estancia y complementar la composición interior.',
+		description:
+			'Las plantas aportan movimiento, textura y calidez a un interior. Seleccionamos especies y ubicaciones adecuadas a la luz, escala y mantenimiento de cada estancia, integrando la vegetación como parte del diseño concluido.',
+		included: [
+			'Selección de plantas',
+			'Escala y colocación',
+			'Coordinación de contenedores',
+			'Evaluación de luz',
+			'Estilismo e instalación',
+		],
+		imageAlt: 'Planta de interior de gran formato en una sala residencial por Colors of Design Group',
+	},
+	'art-selections': {
+		name: 'Selección de arte',
+		scope: 'Curaduría · Colocación · Desarrollo de colección',
+		summary:
+			'Selección de arte curada para dar a cada estancia un punto focal y un carácter personal.',
+		description:
+			'El arte completa una estancia cuando se elige con intención. Curamos piezas, esculturas y composiciones murales que reflejan el gusto del cliente y fortalecen la narrativa general del diseño.',
+		included: [
+			'Búsqueda de arte',
+			'Planificación de colocación',
+			'Revisión de escala y proporción',
+			'Coordinación de instalación',
+			'Desarrollo de colección',
+		],
+		imageAlt: 'Cuadro curado como punto focal de un pasillo residencial por Colors of Design Group',
+	},
+	'luxury-accessories-selections': {
+		name: 'Selección de accesorios de lujo',
+		scope: 'Estilismo · Objetos · Capas de acabado',
+		summary:
+			'Accesorios de lujo seleccionados para completar cada estancia con textura, contraste y una sensación de colección serena.',
+		description:
+			'Los accesorios son la capa final que hace que un espacio se sienta personal y completo. Seleccionamos objetos, piezas de mesa y acentos de estilismo que elevan el interior sin saturarlo.',
+		included: [
+			'Búsqueda de accesorios',
+			'Estilismo de mesa y objetos',
+			'Acentos textiles',
+			'Acentos de iluminación decorativa',
+			'Instalación y colocación',
+		],
+		imageAlt: 'Estilismo de lujo con jarrón escultórico y acentos curados por Colors of Design Group',
 	},
 };
 
@@ -427,7 +555,7 @@ export function localizeProject(project: Project, locale: Locale): Project {
 }
 
 export function localizeProjects(locale: Locale): Project[] {
-	return projects.map((project) => localizeProject(project, locale));
+	return getPortfolioProjects().map((project) => localizeProject(project, locale));
 }
 
 export function formatLocalizedPrice(locale: Locale, amount: number, options?: { from?: boolean }): string {

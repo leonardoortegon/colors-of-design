@@ -321,13 +321,13 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 	selassie: {
 		scope: 'Residencia completa · Diseño de interiores y mobiliario',
 		concept:
-			'Una residencia en Miami definida a lo largo del estar, el dormitorio y la circulación: almacenamiento a medida, materiales cálidos y estancias compuestas tanto para reunirse como para el retiro sereno.',
+			'Una residencia en Miami definida a lo largo del estar, el dormitorio, el baño y la circulación: almacenamiento a medida, materiales cálidos y estancias compuestas tanto para reunirse como para el retiro sereno.',
 		services: ['Diseño de interiores integral', 'Mobiliario y estilismo'],
 		imageAlt:
 			'Sala de Selassie con mobiliario en capas y luz natural, por Colors of Design Group',
 		seoTitle: 'Selassie | Diseño de interiores | Colors of Design Group',
 		seoDescription:
-			'Diseño de interiores para Selassie, una residencia en Miami: sala, dormitorio, almacenamiento a medida y mobiliario compuesto para la fluidez cotidiana, por Colors of Design Group.',
+			'Diseño de interiores para Selassie, una residencia en Miami: sala, dormitorio, baño, almacenamiento a medida y mobiliario compuesto para la fluidez cotidiana, por Colors of Design Group.',
 		challenge:
 			'La vivienda debía sentirse completa a lo largo de áreas de estar abiertas y estancias privadas, con almacenamiento y carpintería integrados con limpieza a la arquitectura. Los clientes querían espacios capaces de recibir con holgura y, a la vez, ofrecer un retiro sereno.',
 		approach:
@@ -396,6 +396,18 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				caption: 'Estilismo',
 				description:
 					'Capas de acabado que completan cada estancia sin alterar la paleta serena del conjunto.',
+			},
+			{
+				alt: 'Interior de baño de Selassie con superficies de piedra y diseño a medida, por Colors of Design Group',
+				caption: 'Baño',
+				description:
+					'Piedra, superficies e iluminación compuestos para el uso diario, con un tono sereno y residencial.',
+			},
+			{
+				alt: 'Vista del baño de Selassie con materiales cálidos y detalle considerado',
+				caption: 'Detalle del baño',
+				description:
+					'Acabados y accesorios seleccionados para mantener la estancia cálida, funcional y visualmente serena.',
 			},
 		],
 	},
@@ -941,43 +953,6 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				caption: 'Vista del espacio',
 				description:
 					'Iluminación, textiles y proporción trabajan juntos para asentar la arquitectura en una estancia habitada.',
-			},
-		],
-	},
-	bathroom: {
-		scope: 'Baño · Diseño de interiores y mobiliario',
-		concept:
-			'Un baño definido por la piedra, materiales cálidos e iluminación que convierte las rutinas diarias en una experiencia serena y de colección.',
-		services: ['Diseño de interiores integral', 'Mobiliario y estilismo'],
-		imageAlt: 'Vista de baño con materiales cálidos y detalle considerado',
-		seoTitle: 'Baño | Diseño de interiores | Colors of Design Group',
-		seoDescription:
-			'Diseño de interiores de baño por Colors of Design Group: superficies de piedra, materiales cálidos y un espacio compuesto para la fluidez cotidiana en Miami.',
-		challenge:
-			'El baño debía sentirse de spa sin perder practicidad. Los clientes querían superficies, almacenamiento e iluminación capaces de sostener las rutinas diarias y, a la vez, sentirse personales y refinados.',
-		approach:
-			'Colors of Design desarrolló una paleta material y un plan de accesorios definidos en torno a la luz, la proporción y la facilidad de uso. Se especificaron piedra, carpintería y detalles de acabado para integrarse a la arquitectura y mantener la estancia visualmente serena.',
-		outcome:
-			'El baño concluido se siente cálido, práctico y compuesto: un espacio listo para el uso cotidiano y el retiro sereno.',
-		materials: [
-			'Piedra natural',
-			'Carpintería a medida',
-			'Iluminación en capas',
-			'Grifería y accesorios a medida',
-			'Tonos de madera cálidos',
-		],
-		gallery: [
-			{
-				alt: 'Interior de baño con superficies de piedra y diseño a medida, por Colors of Design Group',
-				caption: 'Baño',
-				description:
-					'Piedra, superficies e iluminación compuestos para el uso diario, con un tono sereno y residencial.',
-			},
-			{
-				alt: 'Vista de baño con materiales cálidos y detalle considerado',
-				caption: 'Detalle del baño',
-				description:
-					'Acabados y accesorios seleccionados para mantener la estancia cálida, funcional y visualmente serena.',
 			},
 		],
 	},

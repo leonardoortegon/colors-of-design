@@ -42,6 +42,16 @@
       "permanent": true
     },
     {
+      "source": "/work/bathroom",
+      "destination": "/work/selassie/",
+      "permanent": true
+    },
+    {
+      "source": "/es/work/bathroom",
+      "destination": "/es/work/selassie/",
+      "permanent": true
+    },
+    {
       "source": "/work/delray-beach-interior-design",
       "destination": "/work/",
       "permanent": true

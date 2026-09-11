@@ -440,7 +440,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Miami residence shaped across living, bedroom, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
+			'A Miami residence shaped across living, bedroom, bathroom, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/selassie/selassie-living-room-01.avif',
@@ -450,7 +450,7 @@ export const projects: Project[] = [
 		imageHeight: 1335,
 		seoTitle: 'Selassie Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Selassie, a Miami residence, living room, bedroom, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
+			'Interior design for Selassie, a Miami residence, living room, bedroom, bathroom, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
 		challenge:
 			'The home needed to feel complete across open living areas and private rooms, with storage and millwork that integrated cleanly into the architecture. The clients wanted spaces that could host comfortably while still offering quiet retreat.',
 		approach:
@@ -539,6 +539,22 @@ export const projects: Project[] = [
 				height: 2996,
 				caption: 'Styling',
 				description: 'Finishing layers that complete each room without disrupting the overall calm palette.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-01.avif',
+				alt: 'Selassie bathroom interior with stone surfaces and tailored design by Colors of Design Group',
+				width: 2000,
+				height: 2996,
+				caption: 'Bathroom',
+				description: 'Stone, surfaces, and lighting composed for daily use with a calm, residential tone.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-02.avif',
+				alt: 'Selassie bathroom view with warm materials and considered detailing',
+				width: 2000,
+				height: 2768,
+				caption: 'Bathroom detail',
+				description: 'Finishes and fixtures selected to keep the room warm, functional, and visually quiet.',
 			},
 		],
 	},
@@ -1291,54 +1307,36 @@ export const projects: Project[] = [
 			},
 		],
 	},
-	{
-		slug: 'bathroom',
-		name: 'Bathroom',
-		location: 'Miami, FL',
-		scope: 'Bathroom · Interior Design & Furnishings',
-		concept:
-			'A bathroom shaped by stone, warm materials, and lighting that turns daily routines into a calm, collected experience.',
-		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
-		year: '2024',
-		imageSrc: '/bathroom/bathroom-bathroom-02.avif',
-		imageAlt: 'Bathroom view with warm materials and considered detailing',
-		imageWidth: 2000,
-		imageHeight: 2768,
-		seoTitle: 'Bathroom Interior Design | Colors of Design Group',
-		seoDescription:
-			'Bathroom interior design by Colors of Design Group, stone surfaces, warm materials, and a space composed for everyday ease in Miami.',
-		challenge:
-			'The bathroom needed to feel spa-like without losing practicality. The clients wanted surfaces, storage, and lighting that could support daily routines while still feeling personal and refined.',
-		approach:
-			'Colors of Design developed a material palette and fixture plan shaped around light, proportion, and ease of use. Stone, millwork, and finishing details were specified to integrate with the architecture and keep the room visually quiet.',
-		outcome:
-			'The completed bathroom feels warm, practical, and composed, a space ready for everyday use and quiet retreat.',
-		materials: ['Natural stone', 'Custom millwork', 'Layered lighting', 'Tailored fixtures', 'Warm wood tones'],
-		gallery: [
-			{
-				src: '/bathroom/bathroom-bathroom-01.avif',
-				alt: 'Bathroom interior with stone surfaces and tailored design by Colors of Design Group',
-				width: 2000,
-				height: 2996,
-				caption: 'Bathroom',
-				description: 'Stone, surfaces, and lighting composed for daily use with a calm, residential tone.',
-			},
-			{
-				src: '/bathroom/bathroom-bathroom-02.avif',
-				alt: 'Bathroom view with warm materials and considered detailing',
-				width: 2000,
-				height: 2768,
-				caption: 'Bathroom detail',
-				description: 'Finishes and fixtures selected to keep the room warm, functional, and visually quiet.',
-			},
-		],
-	},
 ];
+
+const portfolioSlugs = [
+	'solaris',
+	'park-grove',
+	'petretta',
+	'casa-del-mar',
+	'massis',
+	'selassie',
+	'kitchen',
+	'placeres',
+	'baby-room',
+	'asheville',
+	'sunny-isles',
+] as const;
+
+export function getPortfolioProjects(): Project[] {
+	const ordered = portfolioSlugs
+		.map((slug) => projects.find((project) => project.slug === slug))
+		.filter((project): project is Project => project !== undefined);
+	const remaining = projects.filter(
+		(project) => !portfolioSlugs.includes(project.slug as (typeof portfolioSlugs)[number]),
+	);
+	return [...ordered, ...remaining];
+}
 
 export function getProjectBySlug(slug: string): Project | undefined {
 	return projects.find((project) => project.slug === slug);
 }
 
 export function getRelatedProjects(slug: string): Project[] {
-	return projects.filter((project) => project.slug !== slug);
+	return getPortfolioProjects().filter((project) => project.slug !== slug);
 }

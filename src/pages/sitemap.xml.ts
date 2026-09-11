@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { journalPosts } from '../data/journal';
 import { services } from '../data/services';
-import { projects } from '../data/projects';
+import { getPortfolioProjects } from '../data/projects';
 import { shopBasePath, shopProducts } from '../data/shop';
 import { absoluteUrl } from '../data/site';
 import { localizedPath, stripLocalePrefix, type Locale } from '../i18n/locale';
@@ -19,7 +19,7 @@ const englishPaths = [
 	'/privacy-policy/',
 	...journalPosts.map((post) => post.url),
 	...services.map((service) => `/services/${service.slug}/`),
-	...projects.map((project) => `/work/${project.slug}/`),
+	...getPortfolioProjects().map((project) => `/work/${project.slug}/`),
 	...shopProducts.map((product) => `${shopBasePath}/${product.slug}/`),
 ];
 
