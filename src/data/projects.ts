@@ -2202,13 +2202,13 @@ const portfolioSlugs = [
 	'casa-del-mar',
 	'massis',
 	'selassie',
-	'kitchen',
 	'placeres',
 	'baby-room',
 	'asheville',
 	'sunny-isles',
 	'bathroom-design',
 	'greenberg',
+	'kitchen',
 	'renders',
 ] as const;
 
