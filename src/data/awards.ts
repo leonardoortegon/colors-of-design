@@ -7,6 +7,12 @@ export interface AwardRecognition {
 		width?: number;
 		height?: number;
 	};
+	stackedImage?: {
+		src: string;
+		alt: string;
+		width?: number;
+		height?: number;
+	};
 	imageCaption?: string;
 	logos?: {
 		src: string;
@@ -72,6 +78,29 @@ export const awards: AwardRecognition[] = [
 		paragraphs: [
 			'When she first set eyes on the Italian Renaissance estate on Pine Tree Drive in Miami Beach that would become her first design project, Margaret Van Puffelen of Colors of Design knew her future in the field was bright. Born in Chile, she studied decorative arts and earned a degree in interior design & architecture, completing certifications for ADA Interior Design, Universal Design Techniques and Feng Shui.',
 			'“I’m inspired by form and space planning and how architecture and design impact the lives of people,” she says. “My aesthetics are modern and contemporary with pops of colors, ethnic touches, luxury finishes, fine textures and all that is inspired.” ColorsofDesign.com.',
+		],
+	},
+	{
+		eyebrow: 'Decor Magazine',
+		heading: 'Margaret Van Puffelen',
+		stackedImage: {
+			src: '/decor-01.avif',
+			alt: 'Margaret Van Puffelen portrait from Decor magazine',
+			width: 1086,
+			height: 1335,
+		},
+		image: {
+			src: '/decor-01.jpg',
+			alt: 'Decor magazine spread featuring Colors of Design Group',
+			width: 1448,
+			height: 1086,
+		},
+		imageCaption: 'Decor · page 312',
+		lead: 'Colors of Design',
+		paragraphs: [
+			'With a vision grounded in organic modernism and refined naturalism, Colors of Design transformed this mid-century apartment—originally designed by architect Morris Lapidus—into an eco-chic retreat in the heart of Miami Beach. The project blends understated luxury with sustainability, offering its South American owners a serene escape from their fast-paced lives.',
+			'Led by a multidisciplinary team, the firm approached this full remodel with an emphasis on functionality, balance, and timeless elegance. Neutral palettes, layered textures, and custom-crafted furnishings came together to evoke a sense of calm and coastal sophistication. A standout feature: the sculptural fireplace, which anchors the living area while seamlessly integrating lighting, storage, and home technology.',
+			'Known for designing homes from concept to completion, Colors of Design brings an architectural mindset to their interior work, with strong attention to spatial planning, natural light, and material longevity. This project reflects not only the client’s aesthetic but the firm’s commitment to spaces that feel personal, grounded, and enduring.',
 		],
 	},
 	{

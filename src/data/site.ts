@@ -10,6 +10,8 @@ export const site = {
 	founder: 'Margaret Van Puffelen',
 	locality: 'Miami',
 	region: 'FL',
+	postalCode: '33129',
+	streetAddress: '400 Brickell Ave.',
 	country: 'US',
 	defaultTitle: 'Luxury Interior Design in Miami | Colors of Design Group',
 	defaultDescription:

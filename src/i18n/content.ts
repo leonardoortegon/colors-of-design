@@ -46,7 +46,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Trabajamos con los mejores artesanos para ofrecer lo mejor a nuestros clientes. Los oficios garantizan diseños exclusivos para su lugar favorito.',
 		included: ['Carpintería a medida', 'Gabinetes empotrados', 'Detalle artesanal', 'Tocadores y ebanistería', 'Diseños exclusivos en madera'],
-		imageAlt: 'Carpintería de nogal a medida y bar con listones acanalados por Colors of Design Group',
+		imageAlt: 'Carpintería de cocina en madera oscura a medida con superficies de mármol por Colors of Design Group',
 	},
 	'project-management': {
 		name: 'Gestión de proyectos',
@@ -64,7 +64,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 		description:
 			'Diseño de iluminación con lámparas icónicas e innovadoras para el hogar, iluminación exterior y luces arquitectónicas. Creamos planes de iluminación según su espacio y necesidades.',
 		included: ['Planes de iluminación', 'Selección de luminarias', 'Iluminación arquitectónica', 'Iluminación exterior', 'Iluminación en capas'],
-		imageAlt: 'Lámpara de pie escultórica e iluminación en capas en un interior residencial por Colors of Design Group',
+		imageAlt: 'Iluminación en riel e iluminación en capas en una sala moderna con pared de listones de madera por Colors of Design Group',
 	},
 	'furniture-design': {
 		name: 'Diseño de mobiliario',
@@ -205,7 +205,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 			'Evaluación de luz',
 			'Estilismo e instalación',
 		],
-		imageAlt: 'Planta de interior de gran formato en una sala residencial por Colors of Design Group',
+		imageAlt: 'Sala Placeres con plantación interior y detalles de diseño en capas por Colors of Design Group',
 	},
 	'art-selections': {
 		name: 'Selección de arte',
@@ -237,7 +237,7 @@ const servicesEs: Record<string, Pick<Service, 'name' | 'scope' | 'summary' | 'd
 			'Acentos de iluminación decorativa',
 			'Instalación y colocación',
 		],
-		imageAlt: 'Estilismo de lujo con jarrón escultórico y acentos curados por Colors of Design Group',
+		imageAlt: 'Detalle de mobiliario de lujo con contraste suave y materiales a medida por Colors of Design Group',
 	},
 };
 
@@ -343,9 +343,32 @@ const awardsEs: AwardRecognition[] = [
 		],
 	},
 	{
+		eyebrow: 'Decor Magazine',
+		heading: 'Margaret Van Puffelen',
+		stackedImage: {
+			src: '/decor-01.avif',
+			alt: 'Retrato de Margaret Van Puffelen en Decor magazine',
+			width: 1086,
+			height: 1335,
+		},
+		image: {
+			src: '/decor-01.jpg',
+			alt: 'Página de Decor magazine con Colors of Design Group',
+			width: 1448,
+			height: 1086,
+		},
+		imageCaption: 'Decor · página 312',
+		lead: 'Colors of Design',
+		paragraphs: [
+			'Con una visión anclada en el modernismo orgánico y el naturalismo refinado, Colors of Design transformó este apartamento mid-century—diseñado originalmente por el arquitecto Morris Lapidus—en un retiro eco-chic en el corazón de Miami Beach. El proyecto une lujo contenido y sostenibilidad, y ofrece a sus propietarios sudamericanos un escape sereno de una vida de ritmo intenso.',
+			'Dirigido por un equipo multidisciplinario, el estudio abordó esta remodelación integral con énfasis en funcionalidad, equilibrio y elegancia atemporal. Paletas neutras, texturas en capas y mobiliario a medida se unieron para evocar calma y sofisticación costera. Un elemento destacado: la chimenea escultórica, que ancla el área de estar mientras integra a la perfección iluminación, almacenamiento y tecnología doméstica.',
+			'Conocido por diseñar hogares de concepto a finalización, Colors of Design aporta una mentalidad arquitectónica a su trabajo de interiores, con especial atención a la planificación espacial, la luz natural y la longevidad de los materiales. Este proyecto refleja no solo la estética del cliente, sino el compromiso del estudio con espacios que se sienten personales, arraigados y duraderos.',
+		],
+	},
+	{
 		eyebrow: 'Elección de clientes',
 		heading: 'Best of Houzz',
-		badges: awards[3].badges,
+		badges: awards[4].badges,
 		lead: 'El premio anual de elección popular reconoce a profesionales de la comunidad Houzz que destacan tanto en talento como en servicio al cliente.',
 		paragraphs: [
 			'Colors of Design Group ha sido reconocido de forma constante por excelencia en diseño de interiores y satisfacción del cliente. El estudio ha recibido el premio Best of Houzz – Service durante cinco años (2020, 2022–2025), reflejando comentarios destacados de clientes.',
@@ -355,7 +378,7 @@ const awardsEs: AwardRecognition[] = [
 	{
 		eyebrow: 'Afiliación profesional',
 		heading: 'American Society of Interior Designers',
-		badges: awards[4].badges,
+		badges: awards[5].badges,
 		paragraphs: [
 			'Colors of Design también está afiliado a la American Society of Interior Designers (ASID), lo que subraya su compromiso con los estándares de la industria y la excelencia en el diseño.',
 		],

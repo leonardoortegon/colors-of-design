@@ -521,7 +521,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Miami residence shaped across living, bedroom, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
+			'A Miami residence shaped across living, bedroom, bathroom, kids room, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/selassie/selassie-living-room-01.avif',
@@ -531,11 +531,11 @@ export const projects: Project[] = [
 		imageHeight: 1335,
 		seoTitle: 'Selassie Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Selassie, a Miami residence, living room, bedroom, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
+			'Interior design for Selassie, a Miami residence, living room, bedroom, bathroom, kids room, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
 		challenge:
 			'The home needed to feel complete across open living areas and private rooms, with storage and millwork that integrated cleanly into the architecture. The clients wanted spaces that could host comfortably while still offering quiet retreat.',
 		approach:
-			'Colors of Design developed a cohesive palette carried through the living room, bedroom, corridor, and built-in storage. Proportional furnishings, custom cabinetry, and layered lighting soften the architecture while giving each room its own character.',
+			'Colors of Design developed a cohesive palette carried through the living room, bedroom, bathroom, corridor, and built-in storage. Proportional furnishings, custom cabinetry, and layered lighting soften the architecture while giving each room its own character.',
 		outcome:
 			'The finished residence reads as one thoughtful whole, rooms for gathering and rest that share a calm, collected atmosphere.',
 		materials: [
@@ -566,12 +566,57 @@ export const projects: Project[] = [
 					'A vertical view of the living room showing volume, seating, and the project’s tonal range.',
 			},
 			{
+				src: '/selassie/selassie-entrance-01.avif',
+				alt: 'Selassie entry with console table, mirror, and abstract rug',
+				width: 2000,
+				height: 2667,
+				caption: 'Entry',
+				description:
+					'A welcoming entry composed with a console, mirror, lamp, and an abstract rug leading into the home.',
+			},
+			{
+				src: '/selassie/selassie-entrance-02.avif',
+				alt: 'Selassie entry hall with console, mirror, and wood-slat wall',
+				width: 2000,
+				height: 2996,
+				caption: 'Entry hall',
+				description:
+					'An entry hall with a console, round mirror, and wood-slat wall shaping a calm first impression.',
+			},
+			{
 				src: '/selassie/selassie-bedroom-01.avif',
 				alt: 'Selassie bedroom with tailored furnishings and soft neutral palette',
 				width: 2000,
 				height: 1335,
 				caption: 'Bedroom',
 				description: 'A restful bedroom composed with proportional furnishings, textiles, and quiet contrast.',
+			},
+			{
+				src: '/selassie/selassie-room-01.avif',
+				alt: 'Selassie bedroom with media console, yellow chair, and ocean views',
+				width: 2000,
+				height: 2996,
+				caption: 'Bedroom view',
+				description:
+					'A bedroom corner with a media console, yellow accent chair, and floor-to-ceiling windows overlooking the water.',
+			},
+			{
+				src: '/selassie/selassie-room-02.avif',
+				alt: 'Selassie bedroom seating area with yellow chairs and leaning mirror',
+				width: 2000,
+				height: 2996,
+				caption: 'Seating area',
+				description:
+					'Yellow accent chairs and a leaning mirror arranged beside a media console and soft curtains.',
+			},
+			{
+				src: '/selassie/selassie-kids-room-01.avif',
+				alt: 'Selassie kids room with map mural, trundle bed, and hexagonal shelves',
+				width: 2000,
+				height: 2667,
+				caption: 'Kids room',
+				description:
+					'A kids room with a map mural, trundle bed, hexagonal shelves, and a playful ceiling fixture.',
 			},
 			{
 				src: '/selassie/selassie-corridor-01.avif',
@@ -588,6 +633,15 @@ export const projects: Project[] = [
 				height: 3028,
 				caption: 'Cabinetry',
 				description: 'Custom millwork composed with warm materials and hardware chosen for quiet contrast.',
+			},
+			{
+				src: '/selassie/selassie-cabinet-02.avif',
+				alt: 'Selassie built-in desk with upper cabinetry and wood-slat divider',
+				width: 2000,
+				height: 2996,
+				caption: 'Work desk',
+				description:
+					'A built-in desk with upper cabinetry, cube stools, and a wood-slat divider defining the workspace.',
 			},
 			{
 				src: '/selassie/selassie-storage-01.avif',
@@ -620,6 +674,141 @@ export const projects: Project[] = [
 				height: 2996,
 				caption: 'Styling',
 				description: 'Finishing layers that complete each room without disrupting the overall calm palette.',
+			},
+			{
+				src: '/selassie/selassie-detail-04.avif',
+				alt: 'Selassie styling detail with gold starburst sculpture on a mirrored tray',
+				width: 2000,
+				height: 2996,
+				caption: 'Accessories',
+				description:
+					'A gold starburst sculpture and acrylic candleholders styled on a mirrored tray with quiet contrast.',
+			},
+			{
+				src: '/selassie/selassie-detail-06.avif',
+				alt: 'Selassie coffee table styling with tulips, hydrangeas, and layered books',
+				width: 2000,
+				height: 1335,
+				caption: 'Table styling',
+				description:
+					'Tulips, hydrangeas, and layered books arranged on a glass coffee table beside a yellow accent pillow.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-01.avif',
+				alt: 'Selassie bathroom with freestanding tub, marble walls, and bubble chandelier',
+				width: 2000,
+				height: 2996,
+				caption: 'Bathroom',
+				description:
+					'A freestanding tub set against marble walls with a bubble chandelier and recessed television.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-02.avif',
+				alt: 'Selassie bathroom with shower, wood vanity, and freestanding tub',
+				width: 2000,
+				height: 2768,
+				caption: 'Bathroom view',
+				description:
+					'A glass-enclosed shower, wood vanity, and freestanding tub composed under a bubble chandelier.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-03.avif',
+				alt: 'Selassie bathroom vanity with marble countertop and wood drawers',
+				width: 2000,
+				height: 1335,
+				caption: 'Vanity detail',
+				description:
+					'A wood vanity with a marble countertop, chrome fixtures, and curated accessories from above.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-04.avif',
+				alt: 'Selassie bathtub with marble walls, recessed TV, and lit niche',
+				width: 2000,
+				height: 2996,
+				caption: 'Bathtub',
+				description:
+					'A freestanding tub beneath a bubble chandelier, recessed television, and backlit wall niche.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-05.avif',
+				alt: 'Selassie bathroom with glass shower, wood vanity, and marble floors',
+				width: 2000,
+				height: 1438,
+				caption: 'Bathroom',
+				description:
+					'Marble floors, a glass shower, and a floating wood vanity arranged for everyday use.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-06.avif',
+				alt: 'Selassie bathroom with tub, shower, vanity, and bubble chandelier',
+				width: 2000,
+				height: 2768,
+				caption: 'Bathroom view',
+				description:
+					'A full bathroom view with freestanding tub, glass shower, wood vanity, and layered lighting.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-07.avif',
+				alt: 'Selassie water closet with wall-hung toilet and lit wall niche',
+				width: 2000,
+				height: 1335,
+				caption: 'Water closet',
+				description:
+					'A wall-hung toilet with dual-flush plate and a backlit niche holding a small succulent.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-08.avif',
+				alt: 'Selassie water closet detail with wall-hung toilet and lit niche',
+				width: 2000,
+				height: 1335,
+				caption: 'Water closet detail',
+				description:
+					'An overhead view of a wall-hung toilet, lit niche, and marble floors in a minimalist water closet.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-09.avif',
+				alt: 'Selassie powder room with wall-hung toilet, lit niche, and wall art',
+				width: 2000,
+				height: 2996,
+				caption: 'Powder room',
+				description:
+					'A powder room with a wall-hung toilet, backlit niche, and framed art above marble floors.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-10.avif',
+				alt: 'Selassie bathroom tub area with frosted glass doors and marble walls',
+				width: 2000,
+				height: 2996,
+				caption: 'Bathroom detail',
+				description:
+					'A freestanding tub beside frosted glass doors, marble walls, and a recessed television.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-11.avif',
+				alt: 'Selassie bathtub with bubble chandelier and marble surround',
+				width: 2000,
+				height: 2996,
+				caption: 'Bathtub',
+				description:
+					'A freestanding tub centered beneath a bubble chandelier with marble walls and glass shower beyond.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-12.avif',
+				alt: 'Selassie bathroom vanity with wood drawers and marble walls',
+				width: 2000,
+				height: 2996,
+				caption: 'Vanity',
+				description:
+					'A floating wood vanity with marble countertop and mirror reflecting the glass shower beyond.',
+			},
+			{
+				src: '/selassie/selassie-bathroom-13.avif',
+				alt: 'Selassie bathroom with tub, glass shower, and marble surfaces',
+				width: 2000,
+				height: 2996,
+				caption: 'Bathroom view',
+				description:
+					'A bathroom view with freestanding tub, glass shower, bubble chandelier, and marble throughout.',
 			},
 		],
 	},
@@ -1567,6 +1756,443 @@ export const projects: Project[] = [
 			},
 		],
 	},
+	{
+		slug: 'greenberg',
+		name: 'Greenberg',
+		location: 'Miami, FL',
+		scope: 'Full Residence · 3D Rendering',
+		concept:
+			'A Miami residence visualized in 3D across living, dining, kitchen, bedrooms, bathrooms, kids rooms, and outdoor pool, warm materials, layered furnishings, and rooms shaped for gathering and everyday ease.',
+		services: ['3D Rendering', 'Full-Service Interior Design'],
+		year: '2024',
+		imageSrc: '/greenberg/greenberg-living-room-01.avif',
+		imageAlt:
+			'3D rendering of the Greenberg living room with layered furnishings and blue botanical wallpaper by Colors of Design Group',
+		imageWidth: 2000,
+		imageHeight: 1125,
+		seoTitle: 'Greenberg · 3D Rendering | Colors of Design Group',
+		seoDescription:
+			'3D architectural renderings for Greenberg, a Miami residence, living room, dining, kitchen, bedrooms, bathrooms, kids rooms, and pool terrace visualized before construction by Colors of Design Group.',
+		challenge:
+			'The clients needed to see the full residence before build-out, across open living areas, private suites, and outdoor spaces. Each room had to read as complete and livable, with materials, storage, and furnishings that integrated cleanly into the architecture.',
+		approach:
+			'Colors of Design developed the interior concept and translated it into photorealistic 3D renderings carried through the living room, dining room, kitchen, bedrooms, bathrooms, and pool terrace. Proportional furnishings, custom millwork, and layered lighting were modeled to soften the architecture and give each room its own character.',
+		outcome:
+			'The rendering set reads as one thoughtful whole, spaces for gathering, cooking, rest, and outdoor living that share a calm, collected atmosphere and help guide decisions before construction.',
+		materials: [
+			'Warm neutrals',
+			'Layered textiles',
+			'Natural stone',
+			'Custom millwork',
+			'Sculptural lighting',
+			'Curated accents',
+		],
+		gallery: [
+			{
+				src: '/greenberg/greenberg-living-room-01.avif',
+				alt: 'Greenberg living room with layered furnishings and blue botanical wallpaper by Colors of Design Group',
+				width: 2000,
+				height: 1125,
+				caption: 'Living room',
+				description:
+					'Layered furnishings, a built-in bar, and blue botanical wallpaper arranged for everyday ease and quiet gathering.',
+			},
+			{
+				src: '/greenberg/greenberg-living-room-02.avif',
+				alt: 'Greenberg living room with media wall, built-in storage, and pool views',
+				width: 2000,
+				height: 1125,
+				caption: 'Living area',
+				description:
+					'A media wall, built-in shelving, and floor-to-ceiling glass opening to the pool terrace.',
+			},
+			{
+				src: '/greenberg/greenberg-living-room-03.avif',
+				alt: 'Greenberg entry living area with marble floors and built-in shelving',
+				width: 2000,
+				height: 1125,
+				caption: 'Entry living',
+				description:
+					'Marble floors, a shell-back chair, and floor-to-ceiling shelving shaping a bright entry living area.',
+			},
+			{
+				src: '/greenberg/greenberg-area-02.avif',
+				alt: 'Greenberg foyer with marble floors, gallery wall, and garden views',
+				width: 2000,
+				height: 1125,
+				caption: 'Foyer',
+				description:
+					'A foyer with checkered marble floors, gallery walls, and floor-to-ceiling windows overlooking the garden.',
+			},
+			{
+				src: '/greenberg/greenberg-area-03.avif',
+				alt: 'Greenberg hall with marble floors, pendant lighting, and pool views',
+				width: 2000,
+				height: 1125,
+				caption: 'Hall',
+				description:
+					'A central hall with marble floors, pendant lighting, and sightlines through to the pool terrace.',
+			},
+			{
+				src: '/greenberg/greenberg-dinning-room-01.avif',
+				alt: 'Greenberg dining room with wood sideboard, round mirror, and pendant lights',
+				width: 2000,
+				height: 1125,
+				caption: 'Dining room',
+				description:
+					'A dining room with a wood sideboard, round mirror, and pendant lights composed for everyday gathering.',
+			},
+			{
+				src: '/greenberg/greenberg-dinning-room-02.avif',
+				alt: 'Greenberg dining room with oval table, display cabinets, and garden window',
+				width: 2000,
+				height: 1125,
+				caption: 'Dining area',
+				description:
+					'An oval dining table, glass-front cabinets, and a garden window arranged on a blue patterned rug.',
+			},
+			{
+				src: '/greenberg/greenberg-dinning-room-03.avif',
+				alt: 'Greenberg dining room with woven chairs and built-in display cabinets',
+				width: 2000,
+				height: 1125,
+				caption: 'Dining room',
+				description:
+					'Woven dining chairs, built-in display cabinets, and a blue rug shaping a bright dining room.',
+			},
+			{
+				src: '/greenberg/greenberg-dinning-room-04.avif',
+				alt: 'Greenberg dining and living area with sideboard and round mirror',
+				width: 2000,
+				height: 1125,
+				caption: 'Dining and living',
+				description:
+					'A dining table and wood sideboard connected to the living area through an open plan.',
+			},
+			{
+				src: '/greenberg/greenberg-dinning-room-05.avif',
+				alt: 'Greenberg dining room with marble sideboard and glass-front cabinets',
+				width: 2000,
+				height: 1125,
+				caption: 'Dining room view',
+				description:
+					'A dining room with a marble sideboard, glass-front cabinets, and woven chairs on a blue rug.',
+			},
+			{
+				src: '/greenberg/greenberg-kitchen-01.avif',
+				alt: 'Greenberg kitchen with marble island, wood cabinetry, and globe pendants',
+				width: 2000,
+				height: 1125,
+				caption: 'Kitchen',
+				description:
+					'A marble island, light wood cabinetry, and globe pendants composed for everyday cooking and gathering.',
+			},
+			{
+				src: '/greenberg/greenberg-bedroom-01.avif',
+				alt: 'Greenberg bedroom with upholstered bed, grasscloth walls, and garden views',
+				width: 2000,
+				height: 1125,
+				caption: 'Bedroom',
+				description:
+					'An upholstered bed, grasscloth walls, and garden views shaped into a restful bedroom.',
+			},
+			{
+				src: '/greenberg/greenberg-bedroom-02.avif',
+				alt: 'Greenberg bedroom with winged headboard, wood slat wall, and marble pendants',
+				width: 2000,
+				height: 1125,
+				caption: 'Primary bedroom',
+				description:
+					'A winged headboard, wood slat accent wall, and marble pendant lights in a serene primary bedroom.',
+			},
+			{
+				src: '/greenberg/greenberg-kids-room-01.avif',
+				alt: 'Greenberg nursery with cloud mural, twin cribs, and cloud pendant',
+				width: 2000,
+				height: 1125,
+				caption: 'Nursery',
+				description:
+					'A nursery with a cloud mural, twin cribs, and a cloud pendant shaped for calm everyday use.',
+			},
+			{
+				src: '/greenberg/greenberg-kids-room-02.avif',
+				alt: 'Greenberg playroom with built-in bench, activity table, and floral wallpaper',
+				width: 2000,
+				height: 1125,
+				caption: 'Playroom',
+				description:
+					'A playroom with built-in bench storage, an activity table, and floral wallpaper for everyday play.',
+			},
+			{
+				src: '/greenberg/greenberg-bathroom-01.avif',
+				alt: 'Greenberg bathroom with rattan vanity, gold fixtures, and marble shower',
+				width: 2000,
+				height: 1125,
+				caption: 'Bathroom',
+				description:
+					'A rattan-front vanity, gold fixtures, and marble shower tiles composed for daily use.',
+			},
+			{
+				src: '/greenberg/greenberg-bathroom-02.avif',
+				alt: 'Greenberg bathroom with pink walls, floral mirror, and gold fixtures',
+				width: 2000,
+				height: 1125,
+				caption: 'Bathroom',
+				description:
+					'Soft pink walls, a floral-framed mirror, and gold fixtures shaping a refined bathroom.',
+			},
+			{
+				src: '/greenberg/greenberg-bathroom-03.avif',
+				alt: 'Greenberg bathtub with book-matched marble walls and glass doors',
+				width: 2000,
+				height: 1125,
+				caption: 'Bathtub',
+				description:
+					'A freestanding tub set within book-matched marble walls and black-framed glass doors.',
+			},
+			{
+				src: '/greenberg/greenberg-area-01.avif',
+				alt: 'Greenberg primary bath with double vanity and book-matched marble wall',
+				width: 2000,
+				height: 1209,
+				caption: 'Primary bath',
+				description:
+					'A double vanity, book-matched marble wall, and walk-in closet connection in the primary bath.',
+			},
+			{
+				src: '/greenberg/greenberg-pool-01.avif',
+				alt: 'Greenberg pool terrace with white architecture and outdoor lounge seating',
+				width: 2000,
+				height: 1125,
+				caption: 'Pool terrace',
+				description:
+					'A pool terrace with white architecture, outdoor lounge seating, and tropical landscaping.',
+			},
+		],
+	},
+	{
+		slug: 'renders',
+		name: 'Renders',
+		location: 'Miami, FL',
+		scope: '3D Rendering',
+		concept:
+			'A collection of 3D interior visualizations across living, dining, kitchen, bathroom, and outdoor spaces, modeling materials, furnishings, and light before construction.',
+		services: ['3D Rendering'],
+		year: '2024',
+		imageSrc: '/renders/render-living-room-01.avif',
+		imageAlt:
+			'3D rendering of an open living, dining, and kitchen area by Colors of Design Group',
+		imageWidth: 2000,
+		imageHeight: 1125,
+		seoTitle: 'Renders · 3D Rendering | Colors of Design Group',
+		seoDescription:
+			'3D architectural renderings by Colors of Design Group, living, dining, kitchen, bathroom, and outdoor spaces visualized to support design decisions before build-out.',
+		challenge:
+			'Each space needed to read as complete and believable before construction, with accurate materials, proportions, and lighting that help clients and collaborators evaluate the design intent.',
+		approach:
+			'Colors of Design modeled furnishings, finishes, and architectural details room by room, balancing natural and artificial light to produce photorealistic renderings across multiple residential concepts.',
+		outcome:
+			'The render set gives a clear preview of how each space will look and feel, supporting confident decisions on layout, palette, and detailing before construction begins.',
+		materials: [
+			'Natural stone',
+			'Warm wood tones',
+			'Layered textiles',
+			'Custom millwork',
+			'Sculptural lighting',
+			'Curated accents',
+		],
+		gallery: [
+			{
+				src: '/renders/render-living-room-01.avif',
+				alt: '3D rendering of an open living, dining, and kitchen area by Colors of Design Group',
+				width: 2000,
+				height: 1125,
+				caption: 'Living room',
+				description:
+					'An open living, dining, and kitchen area with marble floors, a sectional sofa, and city-facing windows.',
+			},
+			{
+				src: '/renders/render-living-room-02.avif',
+				alt: '3D rendering of a living and dining area with abstract art and marble pillar',
+				width: 2000,
+				height: 1125,
+				caption: 'Living area',
+				description:
+					'A living and dining area with abstract art, a marble-clad pillar, and a white kitchen beyond.',
+			},
+			{
+				src: '/renders/render-living-room-03.avif',
+				alt: '3D rendering of a living room with media wall and arched garden openings',
+				width: 2000,
+				height: 1125,
+				caption: 'Living room',
+				description:
+					'A media wall with marble panel, built-in shelving, and arched openings to a garden beyond.',
+			},
+			{
+				src: '/renders/render-living-room-04.avif',
+				alt: '3D rendering of an open living and dining room with stone fireplace',
+				width: 2000,
+				height: 1125,
+				caption: 'Living and dining',
+				description:
+					'An open living and dining room with built-in media wall, stone fireplace, and garden views.',
+			},
+			{
+				src: '/renders/render-living-room-05.avif',
+				alt: '3D rendering of a living room with city views and gold lighting',
+				width: 2000,
+				height: 1125,
+				caption: 'Living room view',
+				description:
+					'A living room and kitchen bar with marble floors, gold lighting, and panoramic city views.',
+			},
+			{
+				src: '/renders/render-living-room-06.avif',
+				alt: '3D rendering of a living and dining area with marble media wall',
+				width: 2000,
+				height: 1125,
+				caption: 'Living and dining',
+				description:
+					'A living and dining area with a backlit marble media wall, leather sectional, and tropical views.',
+			},
+			{
+				src: '/renders/render-living-room-07.avif',
+				alt: '3D rendering of a media wall with marble panel and built-in shelving',
+				width: 2000,
+				height: 1125,
+				caption: 'Media wall',
+				description:
+					'A media wall with marble panel, wood console, and lit shelving opening to an outdoor terrace.',
+			},
+			{
+				src: '/renders/render-living-room-08.avif',
+				alt: '3D rendering of an open living and dining area with ring chandelier',
+				width: 2000,
+				height: 1125,
+				caption: 'Living and dining',
+				description:
+					'An open living and dining area with a ring chandelier, marble media wall, and garden doors.',
+			},
+			{
+				src: '/renders/render-dining-room-01.avif',
+				alt: '3D rendering of a dining room open to living and kitchen with wood beams',
+				width: 2000,
+				height: 1125,
+				caption: 'Dining room',
+				description:
+					'A dining room with a glass chandelier, stone fireplace, and open connection to the kitchen beyond.',
+			},
+			{
+				src: '/renders/render-kitchen-01.avif',
+				alt: '3D rendering of a kitchen with marble island and cream cabinetry',
+				width: 2000,
+				height: 1125,
+				caption: 'Kitchen',
+				description:
+					'A kitchen with a marble island, cream cabinetry, gold bar stools, and floor-to-ceiling windows.',
+			},
+			{
+				src: '/renders/render-kitchen-02.avif',
+				alt: '3D rendering of a kitchen and dining nook with marble counters and wood beams',
+				width: 2000,
+				height: 1125,
+				caption: 'Kitchen',
+				description:
+					'A kitchen with marble counters, exposed wood beams, and an arched dining nook beyond.',
+			},
+			{
+				src: '/renders/render-kids-room-01.avif',
+				alt: '3D rendering of a nursery with bear mural and blue star rug',
+				width: 2000,
+				height: 1125,
+				caption: 'Nursery',
+				description:
+					'A nursery with a bear mural, white crib, blue star rug, and soft natural light.',
+			},
+			{
+				src: '/renders/render-bathroom-01.avif',
+				alt: '3D rendering of a bathroom with double vanity and ocean views',
+				width: 2000,
+				height: 1125,
+				caption: 'Bathroom',
+				description:
+					'A bathroom with a double vanity, marble surfaces, wood slats, and views to the water.',
+			},
+			{
+				src: '/renders/render-bathroom-02.avif',
+				alt: '3D rendering of a bathroom vanity with marble walls and wood slats',
+				width: 2000,
+				height: 1125,
+				caption: 'Bathroom view',
+				description:
+					'A floating vanity with marble walls, wood slats, and a glass shower beyond.',
+			},
+			{
+				src: '/renders/render-bathroom-03.avif',
+				alt: '3D rendering of a double shower with gold fixtures and lit niche',
+				width: 2000,
+				height: 1125,
+				caption: 'Shower',
+				description:
+					'A double shower with gold fixtures, marble walls, and a backlit niche.',
+			},
+			{
+				src: '/renders/render-bathroom-04.avif',
+				alt: '3D rendering of a double vanity with marble walls and gold sconces',
+				width: 2000,
+				height: 1125,
+				caption: 'Vanity',
+				description:
+					'A double vanity with marble walls, gold sconces, and integrated sinks.',
+			},
+			{
+				src: '/renders/render-bathroom-05.avif',
+				alt: '3D rendering of a bathroom vanity with makeup desk and wood slats',
+				width: 2000,
+				height: 1125,
+				caption: 'Vanity area',
+				description:
+					'A vanity with double sinks, a central makeup desk, and wood-slat panels.',
+			},
+			{
+				src: '/renders/render-bathroom-06.avif',
+				alt: '3D rendering of a bathroom vanity with makeup stool and shower reflection',
+				width: 2000,
+				height: 1125,
+				caption: 'Bathroom',
+				description:
+					'A vanity layout with makeup stool, wood slats, and a walk-in shower reflected in the mirrors.',
+			},
+			{
+				src: '/renders/render-bathroom-07.avif',
+				alt: '3D rendering of a bathroom with dark marble walls and wood vanity',
+				width: 2000,
+				height: 1125,
+				caption: 'Bathroom detail',
+				description:
+					'A bathroom with dark marble walls, a wood vanity, and ocean views through the window.',
+			},
+			{
+				src: '/renders/render-area-01.avif',
+				alt: '3D rendering of a living area with navy chairs and ocean views',
+				width: 2000,
+				height: 1125,
+				caption: 'Living area',
+				description:
+					'A living area with navy accent chairs, marble coffee table, and floor-to-ceiling ocean views.',
+			},
+			{
+				src: '/renders/render-outdoor-01.avif',
+				alt: '3D rendering of a hall with arched doors, wood beams, and garden views',
+				width: 2000,
+				height: 1125,
+				caption: 'Transition space',
+				description:
+					'A transition space with arched stone doors, wood ceiling beams, and views to the garden.',
+			},
+		],
+	},
 ];
 
 const portfolioSlugs = [
@@ -1582,6 +2208,8 @@ const portfolioSlugs = [
 	'asheville',
 	'sunny-isles',
 	'bathroom-design',
+	'greenberg',
+	'renders',
 ] as const;
 
 export function getPortfolioProjects(): Project[] {

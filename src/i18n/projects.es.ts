@@ -375,17 +375,17 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 	selassie: {
 		scope: 'Residencia completa · Diseño de interiores y mobiliario',
 		concept:
-			'Una residencia en Miami definida a lo largo del estar, el dormitorio y la circulación: almacenamiento a medida, materiales cálidos y estancias compuestas tanto para reunirse como para el retiro sereno.',
+			'Una residencia en Miami definida a lo largo del estar, el dormitorio, el baño, el cuarto infantil y la circulación: almacenamiento a medida, materiales cálidos y estancias compuestas tanto para reunirse como para el retiro sereno.',
 		services: ['Diseño de interiores integral', 'Mobiliario y estilismo'],
 		imageAlt:
 			'Sala de Selassie con mobiliario en capas y luz natural, por Colors of Design Group',
 		seoTitle: 'Selassie | Diseño de interiores | Colors of Design Group',
 		seoDescription:
-			'Diseño de interiores para Selassie, una residencia en Miami: sala, dormitorio, almacenamiento a medida y mobiliario compuesto para la fluidez cotidiana, por Colors of Design Group.',
+			'Diseño de interiores para Selassie, una residencia en Miami: sala, dormitorio, baño, cuarto infantil, almacenamiento a medida y mobiliario compuesto para la fluidez cotidiana, por Colors of Design Group.',
 		challenge:
 			'La vivienda debía sentirse completa a lo largo de áreas de estar abiertas y estancias privadas, con almacenamiento y carpintería integrados con limpieza a la arquitectura. Los clientes querían espacios capaces de recibir con holgura y, a la vez, ofrecer un retiro sereno.',
 		approach:
-			'Colors of Design desarrolló una paleta cohesiva, llevada a través de la sala, el dormitorio, el pasillo y el almacenamiento empotrado. Mobiliario proporcional, gabinetes a medida e iluminación en capas suavizan la arquitectura, dando a cada estancia su propio carácter.',
+			'Colors of Design desarrolló una paleta cohesiva, llevada a través de la sala, el dormitorio, el baño, el pasillo y el almacenamiento empotrado. Mobiliario proporcional, gabinetes a medida e iluminación en capas suavizan la arquitectura, dando a cada estancia su propio carácter.',
 		outcome:
 			'La residencia concluida se lee como un conjunto pensado: estancias para reunirse y descansar que comparten una atmósfera serena y de colección.',
 		materials: [
@@ -410,10 +410,40 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 					'Una vista vertical de la sala que muestra el volumen, los asientos y el rango tonal del proyecto.',
 			},
 			{
+				alt: 'Entrada de Selassie con consola, espejo y alfombra abstracta',
+				caption: 'Entrada',
+				description:
+					'Una entrada acogedora compuesta con consola, espejo, lámpara y una alfombra abstracta que conduce al hogar.',
+			},
+			{
+				alt: 'Vestíbulo de entrada de Selassie con consola, espejo y muro de listones de madera',
+				caption: 'Vestíbulo',
+				description:
+					'Un vestíbulo con consola, espejo redondo y muro de listones de madera que define una primera impresión serena.',
+			},
+			{
 				alt: 'Dormitorio de Selassie con mobiliario a medida y paleta neutra suave',
 				caption: 'Dormitorio',
 				description:
 					'Un dormitorio de descanso compuesto con mobiliario proporcional, textiles y un contraste sereno.',
+			},
+			{
+				alt: 'Dormitorio de Selassie con consola multimedia, sillón amarillo y vistas al mar',
+				caption: 'Vista del dormitorio',
+				description:
+					'Un rincón del dormitorio con consola multimedia, sillón de acento amarillo y ventanas de piso a techo con vistas al agua.',
+			},
+			{
+				alt: 'Área de asientos del dormitorio de Selassie con sillones amarillos y espejo inclinado',
+				caption: 'Área de asientos',
+				description:
+					'Sillones de acento amarillos y un espejo inclinado dispuestos junto a una consola multimedia y cortinas suaves.',
+			},
+			{
+				alt: 'Cuarto infantil de Selassie con mural de mapa, cama nido y estanterías hexagonales',
+				caption: 'Cuarto infantil',
+				description:
+					'Un cuarto infantil con mural de mapa, cama nido, estanterías hexagonales y una luminaria lúdica en el techo.',
 			},
 			{
 				alt: 'Pasillo de Selassie con iluminación considerada y acabados interiores cálidos',
@@ -426,6 +456,12 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				caption: 'Gabinetes',
 				description:
 					'Carpintería a medida compuesta con materiales cálidos y herrajes elegidos para un contraste sereno.',
+			},
+			{
+				alt: 'Escritorio empotrado de Selassie con gabinetes superiores y divisor de listones de madera',
+				caption: 'Escritorio',
+				description:
+					'Un escritorio empotrado con gabinetes superiores, taburetes cúbicos y un divisor de listones de madera que define el espacio de trabajo.',
 			},
 			{
 				alt: 'Almacenamiento empotrado de Selassie con acabados de diseño de interiores en capas',
@@ -450,6 +486,96 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				caption: 'Estilismo',
 				description:
 					'Capas de acabado que completan cada estancia sin alterar la paleta serena del conjunto.',
+			},
+			{
+				alt: 'Detalle de estilismo de Selassie con escultura dorada en bandeja espejada',
+				caption: 'Accesorios',
+				description:
+					'Una escultura dorada y portavelas acrílicos dispuestos en una bandeja espejada con contraste sereno.',
+			},
+			{
+				alt: 'Estilismo de mesa de centro de Selassie con tulipanes, hortensias y libros en capas',
+				caption: 'Estilismo de mesa',
+				description:
+					'Tulipanes, hortensias y libros en capas dispuestos sobre una mesa de centro de vidrio junto a un cojín amarillo de acento.',
+			},
+			{
+				alt: 'Baño de Selassie con bañera independiente, paredes de mármol y lámpara de burbujas',
+				caption: 'Baño',
+				description:
+					'Una bañera independiente sobre paredes de mármol con lámpara de burbujas y televisión empotrada.',
+			},
+			{
+				alt: 'Baño de Selassie con ducha, tocador de madera y bañera independiente',
+				caption: 'Vista del baño',
+				description:
+					'Una ducha acristalada, tocador de madera y bañera independiente compuestos bajo una lámpara de burbujas.',
+			},
+			{
+				alt: 'Tocador de baño de Selassie con encimera de mármol y cajones de madera',
+				caption: 'Detalle del tocador',
+				description:
+					'Un tocador de madera con encimera de mármol, accesorios cromados y objetos curados vistos desde arriba.',
+			},
+			{
+				alt: 'Bañera de Selassie con paredes de mármol, TV empotrada y nicho iluminado',
+				caption: 'Bañera',
+				description:
+					'Una bañera independiente bajo una lámpara de burbujas, televisión empotrada y nicho mural retroiluminado.',
+			},
+			{
+				alt: 'Baño de Selassie con ducha de vidrio, tocador de madera y suelos de mármol',
+				caption: 'Baño',
+				description:
+					'Suelos de mármol, ducha de vidrio y tocador flotante de madera dispuestos para el uso cotidiano.',
+			},
+			{
+				alt: 'Baño de Selassie con bañera, ducha, tocador y lámpara de burbujas',
+				caption: 'Vista del baño',
+				description:
+					'Una vista completa del baño con bañera independiente, ducha de vidrio, tocador de madera e iluminación en capas.',
+			},
+			{
+				alt: 'Aseo de Selassie con inodoro suspendido y nicho mural iluminado',
+				caption: 'Aseo',
+				description:
+					'Un inodoro suspendido con placa de doble descarga y un nicho retroiluminado con una pequeña suculenta.',
+			},
+			{
+				alt: 'Detalle de aseo de Selassie con inodoro suspendido y nicho iluminado',
+				caption: 'Detalle del aseo',
+				description:
+					'Una vista cenital de un inodoro suspendido, nicho iluminado y suelos de mármol en un aseo minimalista.',
+			},
+			{
+				alt: 'Medio baño de Selassie con inodoro suspendido, nicho iluminado y arte mural',
+				caption: 'Medio baño',
+				description:
+					'Un medio baño con inodoro suspendido, nicho retroiluminado y cuadro enmarcado sobre suelos de mármol.',
+			},
+			{
+				alt: 'Zona de bañera de Selassie con puertas de vidrio esmerilado y paredes de mármol',
+				caption: 'Detalle del baño',
+				description:
+					'Una bañera independiente junto a puertas de vidrio esmerilado, paredes de mármol y televisión empotrada.',
+			},
+			{
+				alt: 'Bañera de Selassie con lámpara de burbujas y entorno de mármol',
+				caption: 'Bañera',
+				description:
+					'Una bañera independiente centrada bajo una lámpara de burbujas con paredes de mármol y ducha de vidrio al fondo.',
+			},
+			{
+				alt: 'Tocador de baño de Selassie con cajones de madera y paredes de mármol',
+				caption: 'Tocador',
+				description:
+					'Un tocador flotante de madera con encimera de mármol y espejo que refleja la ducha de vidrio al fondo.',
+			},
+			{
+				alt: 'Baño de Selassie con bañera, ducha de vidrio y superficies de mármol',
+				caption: 'Vista del baño',
+				description:
+					'Una vista del baño con bañera independiente, ducha de vidrio, lámpara de burbujas y mármol en todo el espacio.',
 			},
 		],
 	},
@@ -1134,6 +1260,306 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				caption: 'Tocador',
 				description:
 					'Carpintería, grifería y acabados integrados para la función y un tono residencial de colección.',
+			},
+		],
+	},
+	greenberg: {
+		scope: 'Residencia completa · Renderizado 3D',
+		concept:
+			'Una residencia en Miami visualizada en 3D a lo largo del estar, el comedor, la cocina, los dormitorios, los baños, los cuartos infantiles y la terraza junto a la piscina: materiales cálidos, mobiliario en capas y estancias definidas para reunirse y para la fluidez cotidiana.',
+		services: ['Renderizado 3D', 'Diseño de interiores integral'],
+		imageAlt:
+			'Render 3D de la sala de Greenberg con mobiliario en capas y papel tapiz botánico azul, por Colors of Design Group',
+		seoTitle: 'Greenberg · Renderizado 3D | Colors of Design Group',
+		seoDescription:
+			'Renders arquitectónicos 3D para Greenberg, una residencia en Miami: sala, comedor, cocina, dormitorios, baños, cuartos infantiles y terraza junto a la piscina visualizados antes de la construcción, por Colors of Design Group.',
+		challenge:
+			'Los clientes necesitaban ver la residencia completa antes de la obra, a lo largo de áreas de estar abiertas, suites privadas y espacios exteriores. Cada estancia debía leerse como concluida y habitable, con materiales, almacenamiento y mobiliario integrados con limpieza a la arquitectura.',
+		approach:
+			'Colors of Design desarrolló el concepto interior y lo tradujo en renders 3D fotorrealistas llevados a través de la sala, el comedor, la cocina, los dormitorios, los baños y la terraza junto a la piscina. Mobiliario proporcional, carpintería a medida e iluminación en capas se modelaron para suavizar la arquitectura y dar a cada estancia su propio carácter.',
+		outcome:
+			'El conjunto de renders se lee como un todo pensado: espacios para reunirse, cocinar, descansar y vivir al aire libre que comparten una atmósfera serena y de colección, y que orientan las decisiones antes de la construcción.',
+		materials: [
+			'Neutrales cálidos',
+			'Textiles en capas',
+			'Piedra natural',
+			'Carpintería a medida',
+			'Iluminación escultórica',
+			'Acentos curados',
+		],
+		gallery: [
+			{
+				alt: 'Sala de Greenberg con mobiliario en capas y papel tapiz botánico azul, por Colors of Design Group',
+				caption: 'Sala',
+				description:
+					'Mobiliario en capas, un bar empotrado y papel tapiz botánico azul dispuestos para la fluidez cotidiana y reuniones pausadas.',
+			},
+			{
+				alt: 'Sala de Greenberg con muro multimedia, almacenamiento empotrado y vistas a la piscina',
+				caption: 'Estar',
+				description:
+					'Un muro multimedia, estanterías empotradas y cristal de piso a techo que abre hacia la terraza junto a la piscina.',
+			},
+			{
+				alt: 'Estar de entrada de Greenberg con suelos de mármol y estanterías empotradas',
+				caption: 'Estar de entrada',
+				description:
+					'Suelos de mármol, un sillón de respaldo concha y estanterías de piso a techo que definen un estar de entrada luminoso.',
+			},
+			{
+				alt: 'Vestíbulo de Greenberg con suelos de mármol, galería de arte y vistas al jardín',
+				caption: 'Vestíbulo',
+				description:
+					'Un vestíbulo con suelos de mármol en damero, paredes de galería y ventanas de piso a techo con vistas al jardín.',
+			},
+			{
+				alt: 'Pasillo de Greenberg con suelos de mármol, iluminación colgante y vistas a la piscina',
+				caption: 'Pasillo',
+				description:
+					'Un pasillo central con suelos de mármol, iluminación colgante y vistas directas hacia la terraza junto a la piscina.',
+			},
+			{
+				alt: 'Comedor de Greenberg con aparador de madera, espejo redondo y lámparas colgantes',
+				caption: 'Comedor',
+				description:
+					'Un comedor con aparador de madera, espejo redondo y lámparas colgantes compuesto para reuniones cotidianas.',
+			},
+			{
+				alt: 'Comedor de Greenberg con mesa ovalada, vitrinas y ventana al jardín',
+				caption: 'Área de comedor',
+				description:
+					'Una mesa ovalada, vitrinas de vidrio y una ventana al jardín dispuestos sobre una alfombra azul con patrón.',
+			},
+			{
+				alt: 'Comedor de Greenberg con sillas tejidas y vitrinas empotradas',
+				caption: 'Comedor',
+				description:
+					'Sillas tejidas, vitrinas empotradas y una alfombra azul que definen un comedor luminoso.',
+			},
+			{
+				alt: 'Comedor y estar de Greenberg con aparador y espejo redondo',
+				caption: 'Comedor y estar',
+				description:
+					'Una mesa de comedor y aparador de madera conectados al área de estar en un plano abierto.',
+			},
+			{
+				alt: 'Comedor de Greenberg con aparador de mármol y vitrinas de vidrio',
+				caption: 'Vista del comedor',
+				description:
+					'Un comedor con aparador de mármol, vitrinas de vidrio y sillas tejidas sobre una alfombra azul.',
+			},
+			{
+				alt: 'Cocina de Greenberg con isla de mármol, carpintería de madera y lámparas globo',
+				caption: 'Cocina',
+				description:
+					'Una isla de mármol, carpintería de madera clara y lámparas globo compuestas para cocinar y reunirse.',
+			},
+			{
+				alt: 'Dormitorio de Greenberg con cama tapizada, paredes de rafia y vistas al jardín',
+				caption: 'Dormitorio',
+				description:
+					'Una cama tapizada, paredes de rafia y vistas al jardín compuestas en un dormitorio de descanso.',
+			},
+			{
+				alt: 'Dormitorio principal de Greenberg con cabecero alado, muro de listones y lámparas de mármol',
+				caption: 'Dormitorio principal',
+				description:
+					'Un cabecero alado, muro de acento con listones de madera y lámparas colgantes de mármol en un dormitorio principal sereno.',
+			},
+			{
+				alt: 'Cuarto de infantes de Greenberg con mural de nubes, cunas gemelas y lámpara de nube',
+				caption: 'Cuarto de infantes',
+				description:
+					'Un cuarto de infantes con mural de nubes, cunas gemelas y lámpara de nube definido para el uso cotidiano sereno.',
+			},
+			{
+				alt: 'Sala de juegos de Greenberg con banco empotrado, mesa de actividades y papel tapiz floral',
+				caption: 'Sala de juegos',
+				description:
+					'Una sala de juegos con banco empotrado, mesa de actividades y papel tapiz floral para el juego cotidiano.',
+			},
+			{
+				alt: 'Baño de Greenberg con tocador de ratán, accesorios dorados y ducha de mármol',
+				caption: 'Baño',
+				description:
+					'Un tocador con frente de ratán, accesorios dorados y azulejos de mármol en la ducha compuestos para el uso diario.',
+			},
+			{
+				alt: 'Baño de Greenberg con paredes rosadas, espejo floral y accesorios dorados',
+				caption: 'Baño',
+				description:
+					'Paredes rosadas suaves, un espejo con marco floral y accesorios dorados que definen un baño refinado.',
+			},
+			{
+				alt: 'Bañera de Greenberg con paredes de mármol a juego y puertas de vidrio',
+				caption: 'Bañera',
+				description:
+					'Una bañera independiente dentro de paredes de mármol a juego y puertas de vidrio con marco negro.',
+			},
+			{
+				alt: 'Baño principal de Greenberg con tocador doble y pared de mármol a juego',
+				caption: 'Baño principal',
+				description:
+					'Un tocador doble, pared de mármol a juego y conexión al vestidor en el baño principal.',
+			},
+			{
+				alt: 'Terraza junto a la piscina de Greenberg con arquitectura blanca y asientos exteriores',
+				caption: 'Terraza junto a la piscina',
+				description:
+					'Una terraza junto a la piscina con arquitectura blanca, asientos exteriores y paisajismo tropical.',
+			},
+		],
+	},
+	renders: {
+		scope: 'Renderizado 3D',
+		concept:
+			'Una colección de visualizaciones 3D de interiores a lo largo del estar, el comedor, la cocina, el baño y espacios exteriores, modelando materiales, mobiliario e iluminación antes de la construcción.',
+		services: ['Renderizado 3D'],
+		imageAlt:
+			'Render 3D de un área abierta de estar, comedor y cocina, por Colors of Design Group',
+		seoTitle: 'Renders · Renderizado 3D | Colors of Design Group',
+		seoDescription:
+			'Renders arquitectónicos 3D por Colors of Design Group: estar, comedor, cocina, baño y espacios exteriores visualizados para apoyar decisiones de diseño antes de la obra.',
+		challenge:
+			'Cada espacio debía leerse como concluido y creíble antes de la construcción, con materiales, proporciones e iluminación precisos que ayudaran a clientes y colaboradores a evaluar la intención del diseño.',
+		approach:
+			'Colors of Design modeló mobiliario, acabados y detalles arquitectónicos estancia por estancia, equilibrando luz natural y artificial para producir renders fotorrealistas en distintos conceptos residenciales.',
+		outcome:
+			'El conjunto de renders ofrece una vista previa clara de cómo se verá y sentirá cada espacio, apoyando decisiones seguras sobre distribución, paleta y detalle antes de comenzar la obra.',
+		materials: [
+			'Piedra natural',
+			'Tonos de madera cálidos',
+			'Textiles en capas',
+			'Carpintería a medida',
+			'Iluminación escultórica',
+			'Acentos curados',
+		],
+		gallery: [
+			{
+				alt: 'Render 3D de un área abierta de estar, comedor y cocina, por Colors of Design Group',
+				caption: 'Sala',
+				description:
+					'Un área abierta de estar, comedor y cocina con suelos de mármol, sofá seccional y ventanas con vistas urbanas.',
+			},
+			{
+				alt: 'Render 3D de un área de estar y comedor con arte abstracto y pilar de mármol',
+				caption: 'Estar',
+				description:
+					'Un área de estar y comedor con arte abstracto, un pilar revestido de mármol y una cocina blanca al fondo.',
+			},
+			{
+				alt: 'Render 3D de una sala con muro multimedia y arcos hacia el jardín',
+				caption: 'Sala',
+				description:
+					'Un muro multimedia con panel de mármol, estanterías empotradas y arcos que abren hacia un jardín.',
+			},
+			{
+				alt: 'Render 3D de un estar y comedor abiertos con chimenea de piedra',
+				caption: 'Estar y comedor',
+				description:
+					'Un estar y comedor abiertos con muro multimedia empotrado, chimenea de piedra y vistas al jardín.',
+			},
+			{
+				alt: 'Render 3D de una sala con vistas urbanas e iluminación dorada',
+				caption: 'Vista de la sala',
+				description:
+					'Una sala y barra de cocina con suelos de mármol, iluminación dorada y vistas panorámicas urbanas.',
+			},
+			{
+				alt: 'Render 3D de un estar y comedor con muro multimedia de mármol',
+				caption: 'Estar y comedor',
+				description:
+					'Un estar y comedor con muro multimedia de mármol retroiluminado, sofá de cuero y vistas tropicales.',
+			},
+			{
+				alt: 'Render 3D de un muro multimedia con panel de mármol y estanterías empotradas',
+				caption: 'Muro multimedia',
+				description:
+					'Un muro multimedia con panel de mármol, consola de madera y estanterías iluminadas que abren a una terraza.',
+			},
+			{
+				alt: 'Render 3D de un estar y comedor abiertos con lámpara circular',
+				caption: 'Estar y comedor',
+				description:
+					'Un estar y comedor abiertos con lámpara circular, muro multimedia de mármol y puertas al jardín.',
+			},
+			{
+				alt: 'Render 3D de un comedor abierto al estar y cocina con vigas de madera',
+				caption: 'Comedor',
+				description:
+					'Un comedor con lámpara de vidrio, chimenea de piedra y conexión abierta con la cocina al fondo.',
+			},
+			{
+				alt: 'Render 3D de una cocina con isla de mármol y gabinetes crema',
+				caption: 'Cocina',
+				description:
+					'Una cocina con isla de mármol, gabinetes crema, taburetes dorados y ventanas de piso a techo.',
+			},
+			{
+				alt: 'Render 3D de una cocina y rincón de comedor con encimeras de mármol y vigas de madera',
+				caption: 'Cocina',
+				description:
+					'Una cocina con encimeras de mármol, vigas de madera expuestas y un rincón de comedor con arco al fondo.',
+			},
+			{
+				alt: 'Render 3D de un cuarto de infantes con mural de osos y alfombra azul con estrellas',
+				caption: 'Cuarto de infantes',
+				description:
+					'Un cuarto de infantes con mural de osos, cuna blanca, alfombra azul con estrellas y luz natural suave.',
+			},
+			{
+				alt: 'Render 3D de un baño con tocador doble y vistas al mar',
+				caption: 'Baño',
+				description:
+					'Un baño con tocador doble, superficies de mármol, listones de madera y vistas al agua.',
+			},
+			{
+				alt: 'Render 3D de un tocador de baño con paredes de mármol y listones de madera',
+				caption: 'Vista del baño',
+				description:
+					'Un tocador flotante con paredes de mármol, listones de madera y una ducha de vidrio al fondo.',
+			},
+			{
+				alt: 'Render 3D de una ducha doble con accesorios dorados y nicho iluminado',
+				caption: 'Ducha',
+				description:
+					'Una ducha doble con accesorios dorados, paredes de mármol y un nicho retroiluminado.',
+			},
+			{
+				alt: 'Render 3D de un tocador doble con paredes de mármol y apliques dorados',
+				caption: 'Tocador',
+				description:
+					'Un tocador doble con paredes de mármol, apliques dorados y lavabos integrados.',
+			},
+			{
+				alt: 'Render 3D de un tocador de baño con tocador de maquillaje y listones de madera',
+				caption: 'Área de tocador',
+				description:
+					'Un tocador con lavabos dobles, un escritorio central de maquillaje y paneles de listones de madera.',
+			},
+			{
+				alt: 'Render 3D de un tocador de baño con taburete de maquillaje y reflejo de la ducha',
+				caption: 'Baño',
+				description:
+					'Una distribución de tocador con taburete de maquillaje, listones de madera y ducha walk-in reflejada en los espejos.',
+			},
+			{
+				alt: 'Render 3D de un baño con paredes de mármol oscuro y tocador de madera',
+				caption: 'Detalle del baño',
+				description:
+					'Un baño con paredes de mármol oscuro, tocador de madera y vistas al mar desde la ventana.',
+			},
+			{
+				alt: 'Render 3D de un área de estar con sillones azules y vistas al mar',
+				caption: 'Estar',
+				description:
+					'Un área de estar con sillones de acento azul marino, mesa de centro de mármol y vistas al mar de piso a techo.',
+			},
+			{
+				alt: 'Render 3D de un pasillo con puertas arqueadas, vigas de madera y vistas al jardín',
+				caption: 'Espacio de transición',
+				description:
+					'Un espacio de transición con puertas de piedra arqueadas, vigas de madera en el techo y vistas al jardín.',
 			},
 		],
 	},
