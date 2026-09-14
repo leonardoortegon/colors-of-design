@@ -11,7 +11,7 @@ export const site = {
 	locality: 'Miami',
 	region: 'FL',
 	postalCode: '33129',
-	streetAddress: '400 Brickell Ave.',
+	streetAddress: '450 Brickell Ave #239',
 	country: 'US',
 	defaultTitle: 'Luxury Interior Design in Miami | Colors of Design Group',
 	defaultDescription:
