@@ -306,7 +306,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Park Grove residence composed across living, kitchen, work, and circulation, warm materials, layered furnishings, and rooms shaped for both gathering and focused everyday life.',
+			'A Park Grove residence composed across living, kitchen, work, outdoor terrace, and circulation, warm materials, layered furnishings, and rooms shaped for both gathering and focused everyday life.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/park-grove/park-grove-living-room-01.avif',
@@ -316,7 +316,7 @@ export const projects: Project[] = [
 		imageHeight: 1335,
 		seoTitle: 'Park Grove Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for a Park Grove residence in Miami, living room, kitchen, work area, and tailored furnishings composed for everyday ease by Colors of Design Group.',
+			'Interior design for a Park Grove residence in Miami, living room, kitchen, work area, outdoor terrace, and tailored furnishings composed for everyday ease by Colors of Design Group.',
 		challenge:
 			'The residence needed to feel complete across open living areas, a functional kitchen, and spaces for work and daily routine. The clients wanted a home that could host comfortably while still offering quieter moments and clear circulation.',
 		approach:
@@ -385,12 +385,30 @@ export const projects: Project[] = [
 				description: 'A dedicated work space shaped with furnishings and lighting for focus and everyday use.',
 			},
 			{
+				src: '/park-grove/park-grove-work-area-02.avif',
+				alt: 'Park Grove home office with marble desk, Murphy bed, and built-in shelving',
+				width: 2000,
+				height: 1335,
+				caption: 'Home office',
+				description:
+					'A flexible work and guest room with a marble desk, built-in shelving, and a Murphy bed for dual-purpose use.',
+			},
+			{
 				src: '/park-grove/park-grove-corridor-01.avif',
 				alt: 'Park Grove corridor with considered lighting and warm interior finishes',
 				width: 2000,
 				height: 2996,
 				caption: 'Corridor',
 				description: 'Circulation shaped with lighting and finishes that connect the home’s public and private rooms.',
+			},
+			{
+				src: '/park-grove/park-grove-outdoor-01.avif',
+				alt: 'Park Grove terrace with outdoor lounge seating and views into the dining room',
+				width: 2000,
+				height: 2996,
+				caption: 'Terrace',
+				description:
+					'Outdoor lounge seating and a side table arranged on the terrace, with the dining room visible beyond the glass.',
 			},
 			{
 				src: '/park-grove/park-grove-detail-01.avif',
@@ -432,6 +450,69 @@ export const projects: Project[] = [
 				caption: 'Furnishings',
 				description: 'Furniture and accent selections chosen for comfort, scale, and harmony with the architecture.',
 			},
+			{
+				src: '/park-grove/park-grove-detail-06.avif',
+				alt: 'Park Grove terrace detail with outdoor lounge chairs and a hexagonal side table',
+				width: 2000,
+				height: 2996,
+				caption: 'Terrace detail',
+				description:
+					'Outdoor lounge chairs and a hexagonal side table with a topiary, styled for relaxed terrace living.',
+			},
+			{
+				src: '/park-grove/park-grove-detail-07.avif',
+				alt: 'Park Grove terrace styling with topiary, books, and a round side table',
+				width: 2000,
+				height: 2996,
+				caption: 'Outdoor styling',
+				description:
+					'A curated terrace vignette with a topiary, stacked books, and a round side table against the city view.',
+			},
+			{
+				src: '/park-grove/park-grove-detail-08.avif',
+				alt: 'Park Grove art vignette with abstract painting and an antique painted cabinet',
+				width: 2000,
+				height: 2996,
+				caption: 'Art vignette',
+				description:
+					'Abstract art paired with an antique painted cabinet, books, and sculptural accents for a collected interior moment.',
+			},
+			{
+				src: '/park-grove/park-grove-detail-09.avif',
+				alt: 'Park Grove wall art with two framed abstract figurative paintings',
+				width: 2000,
+				height: 2996,
+				caption: 'Wall art',
+				description:
+					'Two framed abstract figurative paintings hung above a textured bench, adding depth and personality to the room.',
+			},
+			{
+				src: '/park-grove/park-grove-detail-10.avif',
+				alt: 'Park Grove bedside detail with smoked-glass lamp and shell sculpture',
+				width: 2000,
+				height: 1335,
+				caption: 'Bedside detail',
+				description:
+					'A bedside vignette with a smoked-glass lamp, shell sculpture, and layered books on a two-tier nightstand.',
+			},
+			{
+				src: '/park-grove/park-grove-detail-11.avif',
+				alt: 'Park Grove terrace detail with hexagonal side table and beaded garland',
+				width: 2000,
+				height: 3047,
+				caption: 'Terrace styling',
+				description:
+					'A hexagonal side table styled with a topiary and beaded garland, flanked by outdoor lounge chairs.',
+			},
+			{
+				src: '/park-grove/park-grove-detail-12.avif',
+				alt: 'Park Grove built-in shelving with books, glass vessels, and sculptural objects',
+				width: 2000,
+				height: 1335,
+				caption: 'Shelving',
+				description:
+					'Built-in wood and metal shelving displaying books, glass vessels, and sculptural objects with quiet contrast.',
+			},
 		],
 	},
 	{
@@ -440,7 +521,7 @@ export const projects: Project[] = [
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Miami residence shaped across living, bedroom, bathroom, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
+			'A Miami residence shaped across living, bedroom, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/selassie/selassie-living-room-01.avif',
@@ -450,7 +531,7 @@ export const projects: Project[] = [
 		imageHeight: 1335,
 		seoTitle: 'Selassie Interior Design | Colors of Design Group',
 		seoDescription:
-			'Interior design for Selassie, a Miami residence, living room, bedroom, bathroom, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
+			'Interior design for Selassie, a Miami residence, living room, bedroom, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
 		challenge:
 			'The home needed to feel complete across open living areas and private rooms, with storage and millwork that integrated cleanly into the architecture. The clients wanted spaces that could host comfortably while still offering quiet retreat.',
 		approach:
@@ -540,22 +621,6 @@ export const projects: Project[] = [
 				caption: 'Styling',
 				description: 'Finishing layers that complete each room without disrupting the overall calm palette.',
 			},
-			{
-				src: '/selassie/selassie-bathroom-01.avif',
-				alt: 'Selassie bathroom interior with stone surfaces and tailored design by Colors of Design Group',
-				width: 2000,
-				height: 2996,
-				caption: 'Bathroom',
-				description: 'Stone, surfaces, and lighting composed for daily use with a calm, residential tone.',
-			},
-			{
-				src: '/selassie/selassie-bathroom-02.avif',
-				alt: 'Selassie bathroom view with warm materials and considered detailing',
-				width: 2000,
-				height: 2768,
-				caption: 'Bathroom detail',
-				description: 'Finishes and fixtures selected to keep the room warm, functional, and visually quiet.',
-			},
 		],
 	},
 	{
@@ -592,28 +657,148 @@ export const projects: Project[] = [
 				description: 'Cabinetry, surfaces, and lighting composed for daily use with a calm, residential tone.',
 			},
 			{
-				src: '/kitchen/kitchen-kitchen-02.avif',
-				alt: 'Kitchen view with custom cabinetry and natural light',
+				src: '/kitchen/kitchen-kitchen-05.avif',
+				alt: 'Kitchen with light wood cabinetry, marble island, and ocean views',
 				width: 2000,
-				height: 1125,
+				height: 1250,
 				caption: 'Kitchen view',
-				description: 'A wider view of the kitchen showing circulation, storage, and the project’s material palette.',
+				description:
+					'Light wood millwork and a marble island arranged for everyday cooking with views across the water.',
 			},
 			{
-				src: '/kitchen/kitchen-kitchen-03.avif',
-				alt: 'Kitchen composition with warm finishes and considered detailing',
+				src: '/kitchen/kitchen-kitchen-06.avif',
+				alt: 'Kitchen island with marble waterfall countertop and bar seating',
+				width: 1600,
+				height: 2000,
+				caption: 'Island',
+				description:
+					'A marble waterfall island with integrated sink, bar stools, and glass-front upper cabinets.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-07.avif',
+				alt: 'Kitchen with dark wood cabinetry, marble surfaces, and integrated appliances',
 				width: 2000,
 				height: 1125,
 				caption: 'Millwork',
-				description: 'Finishes and fixtures selected to keep the room warm, functional, and visually quiet.',
+				description:
+					'Dark wood cabinetry, marble counters, and integrated appliances shaped around a central island and dining table.',
 			},
 			{
-				src: '/kitchen/kitchen-kitchen-04.avif',
-				alt: 'Kitchen detail with layered materials and tailored millwork',
+				src: '/kitchen/kitchen-kitchen-08.avif',
+				alt: 'Kitchen with island dining, marble surfaces, and garden views',
 				width: 2000,
 				height: 1125,
-				caption: 'Detail',
-				description: 'Material contrasts and detailing that give the kitchen depth without visual noise.',
+				caption: 'Kitchen and dining',
+				description:
+					'An island with integrated dining, marble surfaces, and tall cabinetry composed for circulation and light.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-09.avif',
+				alt: 'Kitchen island with wood breakfast bar and integrated appliances',
+				width: 2000,
+				height: 2500,
+				caption: 'Island detail',
+				description:
+					'A marble island with a wood breakfast bar, bar stools, and integrated appliances in light wood cabinetry.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-10.avif',
+				alt: 'Kitchen island with tan cabinetry and tropical window views',
+				width: 2000,
+				height: 1125,
+				caption: 'Gathering space',
+				description:
+					'A marble island with integrated dining, warm cabinetry, and windows framing the surrounding landscape.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-11.avif',
+				alt: 'Light wood kitchen with glass-front cabinets and marble surfaces',
+				width: 2000,
+				height: 2500,
+				caption: 'Kitchen composition',
+				description:
+					'Light wood millwork, glass-front uppers, and a marble island with a wood breakfast bar and bar seating.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-12.avif',
+				alt: 'Kitchen with metallic cabinetry, marble counters, and bar seating',
+				width: 1600,
+				height: 2000,
+				caption: 'Cabinetry',
+				description:
+					'Metallic upper cabinets, taupe base units, and a marble island with integrated sink and bar stools.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-13.avif',
+				alt: 'Kitchen island detail with marble countertop and integrated sink',
+				width: 2000,
+				height: 1250,
+				caption: 'Island detail',
+				description:
+					'A closer view of the marble island with integrated sink, faucet, and handleless base cabinetry.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-14.avif',
+				alt: 'Kitchen appliance wall with metallic cabinetry and marble counters',
+				width: 2000,
+				height: 1250,
+				caption: 'Appliance wall',
+				description:
+					'Floor-to-ceiling metallic millwork integrating ovens, coffee station, and refrigeration with marble counters.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-15.avif',
+				alt: 'Full-height kitchen millwork with integrated appliances and city views',
+				width: 2000,
+				height: 1250,
+				caption: 'Millwork',
+				description:
+					'Full-height light wood cabinetry with integrated appliances, marble surfaces, and views across the city.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-16.avif',
+				alt: 'Kitchen cooking wall with marble backsplash and glass-front cabinets',
+				width: 1600,
+				height: 2000,
+				caption: 'Cooking wall',
+				description:
+					'A cooking wall with marble backsplash, glass-front uppers, and integrated range and oven.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-17.avif',
+				alt: 'Kitchen with metallic taupe cabinetry, marble island, and city views',
+				width: 2000,
+				height: 1250,
+				caption: 'Kitchen view',
+				description:
+					'Metallic taupe cabinetry, a marble island with bar seating, and floor-to-ceiling windows overlooking the city.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-18.avif',
+				alt: 'White kitchen with wood ceiling beams, marble island, and wine storage',
+				width: 2000,
+				height: 1125,
+				caption: 'Kitchen',
+				description:
+					'A bright white kitchen with wood ceiling beams, a marble island with wine storage, and integrated appliances.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-19.avif',
+				alt: 'Minimalist white kitchen open to living area with wood ceiling beams',
+				width: 2000,
+				height: 1125,
+				caption: 'Open kitchen',
+				description:
+					'A minimalist white kitchen with wood beams, marble surfaces, and an open connection to the living area.',
+			},
+			{
+				src: '/kitchen/kitchen-kitchen-20.avif',
+				alt: 'Kitchen and dining area with marble island and wine refrigerators',
+				width: 2000,
+				height: 1135,
+				caption: 'Kitchen and dining',
+				description:
+					'A kitchen and dining area united by a marble island with wine storage, linear lighting, and garden views.',
 			},
 		],
 	},
@@ -946,9 +1131,9 @@ export const projects: Project[] = [
 			'A nursery composed in soft neutrals, gentle texture, and thoughtful details, a calm room designed to grow with a family.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
-		imageSrc: '/baby-room/baby-room.avif',
+		imageSrc: '/baby-room/baby-room-2.avif',
 		imageAlt:
-			'Baby room nursery interior with soft neutral palette and tailored furnishings by Colors of Design',
+			'Baby room nursery with soft neutral palette and tailored furnishings by Colors of Design Group',
 		imageWidth: 1920,
 		imageHeight: 1080,
 		seoTitle: 'Baby Room Interior Design | Colors of Design Group',
@@ -963,13 +1148,22 @@ export const projects: Project[] = [
 		materials: ['Soft neutrals', 'Layered textiles', 'Tailored furnishings', 'Gentle lighting', 'Curated accents'],
 		gallery: [
 			{
-				src: '/baby-room/baby-room.avif',
+				src: '/baby-room/baby-room-2.avif',
 				alt: 'Baby room nursery with soft neutral interior design by Colors of Design Group',
 				width: 1920,
 				height: 1080,
 				caption: 'Nursery',
 				description:
 					'A calm nursery shaped by soft neutrals, gentle texture, and furnishings chosen for comfort and longevity.',
+			},
+			{
+				src: '/baby-room/baby-room.avif',
+				alt: 'Baby room nursery interior with layered textiles and gentle lighting',
+				width: 1920,
+				height: 1080,
+				caption: 'Nursery view',
+				description:
+					'Storage, styling, and soft finishes composed for everyday use in a restful, personal room.',
 			},
 		],
 	},
@@ -1307,6 +1501,72 @@ export const projects: Project[] = [
 			},
 		],
 	},
+	{
+		slug: 'bathroom-design',
+		name: 'Bathroom Design',
+		location: 'Miami, FL',
+		scope: 'Bathroom · Interior Design & Furnishings',
+		concept:
+			'A bathroom shaped by stone, warm materials, and lighting that turns daily routines into a calm, collected experience.',
+		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
+		year: '2024',
+		imageSrc: '/bathroom-design/bathroom-design-bathroom-02.avif',
+		imageAlt: 'Bathroom view with warm materials and considered detailing',
+		imageWidth: 2000,
+		imageHeight: 1335,
+		seoTitle: 'Bathroom Design | Colors of Design Group',
+		seoDescription:
+			'Bathroom interior design by Colors of Design Group, stone surfaces, custom millwork, and a space composed for everyday ease in Miami.',
+		challenge:
+			'The bathroom needed to feel spa-like without losing practicality. The clients wanted surfaces, storage, and lighting that could support daily routines while still feeling personal and refined.',
+		approach:
+			'Colors of Design developed a material palette and fixture plan shaped around light, proportion, and ease of use. Stone, millwork, and finishing details were specified to integrate with the architecture and keep the room visually quiet.',
+		outcome:
+			'The completed bathroom feels warm, practical, and composed, a space ready for everyday use and quiet retreat.',
+		materials: ['Natural stone', 'Custom millwork', 'Layered lighting', 'Tailored fixtures', 'Warm wood tones'],
+		gallery: [
+			{
+				src: '/bathroom-design/bathroom-design-bathroom-01.avif',
+				alt: 'Bathroom interior with stone surfaces and tailored design by Colors of Design Group',
+				width: 2000,
+				height: 2989,
+				caption: 'Bathroom',
+				description: 'Stone, surfaces, and lighting composed for daily use with a calm, residential tone.',
+			},
+			{
+				src: '/bathroom-design/bathroom-design-bathroom-02.avif',
+				alt: 'Bathroom view with warm materials and considered detailing',
+				width: 2000,
+				height: 1335,
+				caption: 'Bathroom view',
+				description: 'A wider view of the bathroom showing proportion, finishes, and the project’s material palette.',
+			},
+			{
+				src: '/bathroom-design/bathroom-design-tub-01.avif',
+				alt: 'Freestanding tub with stone surfaces and layered bathroom design',
+				width: 2000,
+				height: 2996,
+				caption: 'Tub',
+				description: 'The tub area composed with stone, lighting, and fixtures chosen for comfort and visual calm.',
+			},
+			{
+				src: '/bathroom-design/bathroom-design-shower-01.avif',
+				alt: 'Shower with stone surfaces and tailored bathroom finishes',
+				width: 2000,
+				height: 1346,
+				caption: 'Shower',
+				description: 'Stone and glass specified for daily use with a refined, spa-like atmosphere.',
+			},
+			{
+				src: '/bathroom-design/bathroom-design-sink-01.avif',
+				alt: 'Vanity and sink detail with warm materials and custom millwork',
+				width: 1955,
+				height: 2929,
+				caption: 'Vanity',
+				description: 'Millwork, fixtures, and finishes integrated for function and a collected, residential tone.',
+			},
+		],
+	},
 ];
 
 const portfolioSlugs = [
@@ -1321,6 +1581,7 @@ const portfolioSlugs = [
 	'baby-room',
 	'asheville',
 	'sunny-isles',
+	'bathroom-design',
 ] as const;
 
 export function getPortfolioProjects(): Project[] {

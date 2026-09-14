@@ -222,13 +222,13 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 	'park-grove': {
 		scope: 'Residencia completa · Diseño de interiores y mobiliario',
 		concept:
-			'Una residencia en Park Grove compuesta a lo largo del estar, la cocina, el trabajo y la circulación: materiales cálidos, mobiliario en capas y estancias definidas tanto para reunirse como para una vida cotidiana concentrada.',
+			'Una residencia en Park Grove compuesta a lo largo del estar, la cocina, el trabajo, la terraza exterior y la circulación: materiales cálidos, mobiliario en capas y estancias definidas tanto para reunirse como para una vida cotidiana concentrada.',
 		services: ['Diseño de interiores integral', 'Mobiliario y estilismo'],
 		imageAlt:
 			'Sala de Park Grove con mobiliario en capas y luz natural, por Colors of Design Group',
 		seoTitle: 'Park Grove | Diseño de interiores | Colors of Design Group',
 		seoDescription:
-			'Diseño de interiores para una residencia en Park Grove, Miami: sala, cocina, zona de trabajo y mobiliario a medida compuestos para la fluidez cotidiana, por Colors of Design Group.',
+			'Diseño de interiores para una residencia en Park Grove, Miami: sala, cocina, zona de trabajo, terraza exterior y mobiliario a medida compuestos para la fluidez cotidiana, por Colors of Design Group.',
 		challenge:
 			'La residencia debía sentirse completa a lo largo de áreas de estar abiertas, una cocina funcional y espacios para el trabajo y la rutina diaria. Los clientes querían un hogar capaz de recibir con holgura y, a la vez, ofrecer momentos más pausados y una circulación clara.',
 		approach:
@@ -281,10 +281,22 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 					'Un espacio de trabajo dedicado, definido con mobiliario e iluminación para la concentración y el uso cotidiano.',
 			},
 			{
+				alt: 'Despacho de Park Grove con escritorio de mármol, cama abatible y estanterías empotradas',
+				caption: 'Despacho',
+				description:
+					'Una estancia flexible de trabajo e invitados con escritorio de mármol, estanterías empotradas y cama abatible de doble uso.',
+			},
+			{
 				alt: 'Pasillo de Park Grove con iluminación considerada y acabados interiores cálidos',
 				caption: 'Pasillo',
 				description:
 					'Circulación definida con iluminación y acabados que conectan las estancias públicas y privadas del hogar.',
+			},
+			{
+				alt: 'Terraza de Park Grove con asientos exteriores y vista al comedor',
+				caption: 'Terraza',
+				description:
+					'Asientos exteriores y una mesa auxiliar dispuestos en la terraza, con el comedor visible más allá del cristal.',
 			},
 			{
 				alt: 'Detalle de diseño de interiores de Park Grove con texturas en capas y neutrales cálidos',
@@ -316,18 +328,60 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				description:
 					'Selecciones de mobiliario y acentos elegidas por confort, escala y armonía con la arquitectura.',
 			},
+			{
+				alt: 'Detalle de terraza de Park Grove con sillones exteriores y mesa auxiliar hexagonal',
+				caption: 'Detalle de terraza',
+				description:
+					'Sillones exteriores y una mesa auxiliar hexagonal con topiaria, compuestos para una vida serena en la terraza.',
+			},
+			{
+				alt: 'Estilismo de terraza de Park Grove con topiaria, libros y mesa auxiliar redonda',
+				caption: 'Estilismo exterior',
+				description:
+					'Una viñeta curada en la terraza con topiaria, libros apilados y una mesa auxiliar redonda frente a la vista urbana.',
+			},
+			{
+				alt: 'Viñeta de arte de Park Grove con pintura abstracta y cómoda antigua pintada',
+				caption: 'Viñeta de arte',
+				description:
+					'Arte abstracto junto a una cómoda antigua pintada, libros y acentos escultóricos para un momento interior de colección.',
+			},
+			{
+				alt: 'Arte mural de Park Grove con dos cuadros abstractos figurativos enmarcados',
+				caption: 'Arte mural',
+				description:
+					'Dos cuadros abstractos figurativos enmarcados sobre un banco texturizado, aportando profundidad y carácter a la estancia.',
+			},
+			{
+				alt: 'Detalle de mesita de noche de Park Grove con lámpara de vidrio ahumado y escultura de conchas',
+				caption: 'Detalle de mesita',
+				description:
+					'Una viñeta junto a la cama con lámpara de vidrio ahumado, escultura de conchas y libros en capas sobre una mesita de dos niveles.',
+			},
+			{
+				alt: 'Detalle de terraza de Park Grove con mesa hexagonal y guirnalda de cuentas',
+				caption: 'Estilismo de terraza',
+				description:
+					'Una mesa auxiliar hexagonal con topiaria y guirnalda de cuentas, flanqueada por sillones exteriores.',
+			},
+			{
+				alt: 'Estanterías empotradas de Park Grove con libros, vasijas de vidrio y objetos escultóricos',
+				caption: 'Estanterías',
+				description:
+					'Estanterías empotradas de madera y metal con libros, vasijas de vidrio y objetos escultóricos en contraste sereno.',
+			},
 		],
 	},
 	selassie: {
 		scope: 'Residencia completa · Diseño de interiores y mobiliario',
 		concept:
-			'Una residencia en Miami definida a lo largo del estar, el dormitorio, el baño y la circulación: almacenamiento a medida, materiales cálidos y estancias compuestas tanto para reunirse como para el retiro sereno.',
+			'Una residencia en Miami definida a lo largo del estar, el dormitorio y la circulación: almacenamiento a medida, materiales cálidos y estancias compuestas tanto para reunirse como para el retiro sereno.',
 		services: ['Diseño de interiores integral', 'Mobiliario y estilismo'],
 		imageAlt:
 			'Sala de Selassie con mobiliario en capas y luz natural, por Colors of Design Group',
 		seoTitle: 'Selassie | Diseño de interiores | Colors of Design Group',
 		seoDescription:
-			'Diseño de interiores para Selassie, una residencia en Miami: sala, dormitorio, baño, almacenamiento a medida y mobiliario compuesto para la fluidez cotidiana, por Colors of Design Group.',
+			'Diseño de interiores para Selassie, una residencia en Miami: sala, dormitorio, almacenamiento a medida y mobiliario compuesto para la fluidez cotidiana, por Colors of Design Group.',
 		challenge:
 			'La vivienda debía sentirse completa a lo largo de áreas de estar abiertas y estancias privadas, con almacenamiento y carpintería integrados con limpieza a la arquitectura. Los clientes querían espacios capaces de recibir con holgura y, a la vez, ofrecer un retiro sereno.',
 		approach:
@@ -397,18 +451,6 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				description:
 					'Capas de acabado que completan cada estancia sin alterar la paleta serena del conjunto.',
 			},
-			{
-				alt: 'Interior de baño de Selassie con superficies de piedra y diseño a medida, por Colors of Design Group',
-				caption: 'Baño',
-				description:
-					'Piedra, superficies e iluminación compuestos para el uso diario, con un tono sereno y residencial.',
-			},
-			{
-				alt: 'Vista del baño de Selassie con materiales cálidos y detalle considerado',
-				caption: 'Detalle del baño',
-				description:
-					'Acabados y accesorios seleccionados para mantener la estancia cálida, funcional y visualmente serena.',
-			},
 		],
 	},
 	kitchen: {
@@ -442,22 +484,100 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 					'Gabinetes, superficies e iluminación compuestos para el uso diario, con un tono sereno y residencial.',
 			},
 			{
-				alt: 'Vista de la cocina con gabinetes a medida y luz natural',
+				alt: 'Cocina con carpintería de madera clara, isla de mármol y vistas al mar',
 				caption: 'Vista de la cocina',
 				description:
-					'Una vista más amplia de la cocina que muestra circulación, almacenamiento y la paleta material del proyecto.',
+					'Carpintería de madera clara e isla de mármol dispuestas para la cocina cotidiana con vistas al agua.',
 			},
 			{
-				alt: 'Composición de cocina con acabados cálidos y detalle considerado',
+				alt: 'Isla de cocina con encimera de mármol en cascada y taburetes',
+				caption: 'Isla',
+				description:
+					'Una isla de mármol en cascada con fregadero integrado, taburetes y gabinetes superiores con puertas de vidrio.',
+			},
+			{
+				alt: 'Cocina con carpintería de madera oscura, superficies de mármol y electrodomésticos integrados',
 				caption: 'Carpintería',
 				description:
-					'Acabados y accesorios seleccionados para mantener la estancia cálida, funcional y visualmente serena.',
+					'Gabinetes de madera oscura, encimeras de mármol y electrodomésticos integrados en torno a una isla central y mesa de comedor.',
 			},
 			{
-				alt: 'Detalle de cocina con materiales en capas y carpintería a medida',
-				caption: 'Detalle',
+				alt: 'Cocina con comedor en la isla, superficies de mármol y vistas al jardín',
+				caption: 'Cocina y comedor',
 				description:
-					'Contrastes materiales y detalle que dan profundidad a la cocina sin ruido visual.',
+					'Una isla con comedor integrado, superficies de mármol y carpintería alta compuesta para la circulación y la luz.',
+			},
+			{
+				alt: 'Isla de cocina con barra desayunadora de madera y electrodomésticos integrados',
+				caption: 'Detalle de isla',
+				description:
+					'Una isla de mármol con barra desayunadora de madera, taburetes y electrodomésticos integrados en carpintería de madera clara.',
+			},
+			{
+				alt: 'Isla de cocina con gabinetes beige y vistas tropicales desde la ventana',
+				caption: 'Espacio de reunión',
+				description:
+					'Una isla de mármol con comedor integrado, gabinetes cálidos y ventanas que enmarcan el paisaje circundante.',
+			},
+			{
+				alt: 'Cocina de madera clara con gabinetes de vidrio y superficies de mármol',
+				caption: 'Composición de cocina',
+				description:
+					'Carpintería de madera clara, gabinetes superiores de vidrio e isla de mármol con barra desayunadora de madera y taburetes.',
+			},
+			{
+				alt: 'Cocina con gabinetes metálicos, encimeras de mármol y taburetes',
+				caption: 'Gabinetes',
+				description:
+					'Gabinetes superiores metálicos, unidades base beige e isla de mármol con fregadero integrado y taburetes.',
+			},
+			{
+				alt: 'Detalle de isla de cocina con encimera de mármol y fregadero integrado',
+				caption: 'Detalle de isla',
+				description:
+					'Una vista más cercana de la isla de mármol con fregadero integrado, grifo y gabinetes base sin tiradores.',
+			},
+			{
+				alt: 'Muro de electrodomésticos con carpintería metálica y encimeras de mármol',
+				caption: 'Muro de electrodomésticos',
+				description:
+					'Carpintería metálica de piso a techo que integra hornos, estación de café y refrigeración con encimeras de mármol.',
+			},
+			{
+				alt: 'Carpintería de cocina a todo lo alto con electrodomésticos integrados y vistas urbanas',
+				caption: 'Carpintería',
+				description:
+					'Gabinetes de madera clara a todo lo alto con electrodomésticos integrados, superficies de mármol y vistas a la ciudad.',
+			},
+			{
+				alt: 'Muro de cocción con respaldo de mármol y gabinetes con puertas de vidrio',
+				caption: 'Muro de cocción',
+				description:
+					'Un muro de cocción con respaldo de mármol, gabinetes superiores de vidrio y horno y cocina integrados.',
+			},
+			{
+				alt: 'Cocina con gabinetes metálicos beige, isla de mármol y vistas urbanas',
+				caption: 'Vista de la cocina',
+				description:
+					'Gabinetes metálicos beige, una isla de mármol con taburetes y ventanas de piso a techo con vistas a la ciudad.',
+			},
+			{
+				alt: 'Cocina blanca con vigas de madera en el techo, isla de mármol y bodega de vinos',
+				caption: 'Cocina',
+				description:
+					'Una cocina blanca luminosa con vigas de madera en el techo, isla de mármol con almacenamiento de vinos y electrodomésticos integrados.',
+			},
+			{
+				alt: 'Cocina blanca minimalista abierta al estar con vigas de madera en el techo',
+				caption: 'Cocina abierta',
+				description:
+					'Una cocina blanca minimalista con vigas de madera, superficies de mármol y conexión abierta al área de estar.',
+			},
+			{
+				alt: 'Cocina y comedor con isla de mármol y refrigeradores de vino',
+				caption: 'Cocina y comedor',
+				description:
+					'Una cocina y comedor unidos por una isla de mármol con almacenamiento de vinos, iluminación lineal y vistas al jardín.',
 			},
 		],
 	},
@@ -714,6 +834,12 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				description:
 					'Un cuarto de infantes sereno, definido por neutrales suaves, textura delicada y mobiliario elegido por confort y durabilidad.',
 			},
+			{
+				alt: 'Interior de cuarto de infantes con textiles en capas e iluminación suave',
+				caption: 'Vista del cuarto',
+				description:
+					'Almacenamiento, estilismo y acabados suaves compuestos para el uso cotidiano en una estancia serena y personal.',
+			},
 		],
 	},
 	asheville: {
@@ -953,6 +1079,61 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 				caption: 'Vista del espacio',
 				description:
 					'Iluminación, textiles y proporción trabajan juntos para asentar la arquitectura en una estancia habitada.',
+			},
+		],
+	},
+	'bathroom-design': {
+		scope: 'Baño · Diseño de interiores y mobiliario',
+		concept:
+			'Un baño definido por la piedra, materiales cálidos e iluminación que convierte las rutinas diarias en una experiencia serena y de colección.',
+		services: ['Diseño de interiores integral', 'Mobiliario y estilismo'],
+		imageAlt: 'Vista del baño con materiales cálidos y detalle considerado',
+		seoTitle: 'Diseño de baño | Colors of Design Group',
+		seoDescription:
+			'Diseño de interiores de baño por Colors of Design Group: superficies de piedra, carpintería a medida y un espacio compuesto para la fluidez cotidiana en Miami.',
+		challenge:
+			'El baño debía sentirse de spa sin perder practicidad. Los clientes querían superficies, almacenamiento e iluminación capaces de sostener las rutinas diarias y, a la vez, sentirse personales y refinados.',
+		approach:
+			'Colors of Design desarrolló una paleta material y un plan de accesorios definidos en torno a la luz, la proporción y la facilidad de uso. Se especificaron piedra, carpintería y detalles de acabado para integrarse a la arquitectura y mantener la estancia visualmente serena.',
+		outcome:
+			'El baño concluido se siente cálido, práctico y compuesto: un espacio listo para el uso cotidiano y el retiro sereno.',
+		materials: [
+			'Piedra natural',
+			'Carpintería a medida',
+			'Iluminación en capas',
+			'Grifería y accesorios a medida',
+			'Tonos de madera cálidos',
+		],
+		gallery: [
+			{
+				alt: 'Interior de baño con superficies de piedra y diseño a medida, por Colors of Design Group',
+				caption: 'Baño',
+				description:
+					'Piedra, superficies e iluminación compuestos para el uso diario, con un tono sereno y residencial.',
+			},
+			{
+				alt: 'Vista del baño con materiales cálidos y detalle considerado',
+				caption: 'Vista del baño',
+				description:
+					'Una vista más amplia del baño que muestra proporción, acabados y la paleta material del proyecto.',
+			},
+			{
+				alt: 'Bañera independiente con superficies de piedra e iluminación en capas',
+				caption: 'Bañera',
+				description:
+					'La zona de la bañera compuesta con piedra, iluminación y accesorios elegidos por comodidad y calma visual.',
+			},
+			{
+				alt: 'Ducha con superficies de piedra y acabados de baño a medida',
+				caption: 'Ducha',
+				description:
+					'Piedra y vidrio especificados para el uso diario con una atmósfera refinada, de spa.',
+			},
+			{
+				alt: 'Detalle de tocador y lavabo con materiales cálidos y carpintería a medida',
+				caption: 'Tocador',
+				description:
+					'Carpintería, grifería y acabados integrados para la función y un tono residencial de colección.',
 			},
 		],
 	},
