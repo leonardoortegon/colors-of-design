@@ -1107,15 +1107,6 @@ export const projects: Project[] = [
 					'A quieter moment in the room, shaped by proportion, texture, and considered placement.',
 			},
 			{
-				src: '/placeres/placeres-living-room-12.avif',
-				alt: 'Placeres living room furnishing detail with layered neutral textures',
-				width: 2000,
-				height: 1334,
-				caption: 'Furnishings',
-				description:
-					'Furniture selections chosen for comfort, scale, and harmony with the architecture.',
-			},
-			{
 				src: '/placeres/placeres-living-room-15.avif',
 				alt: 'Placeres living room view with balanced seating and warm interior tones',
 				width: 2000,
