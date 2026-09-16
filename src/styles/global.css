@@ -7,7 +7,7 @@
 }
 
 :root {
-	--color-bg: #ffffff;
+	--color-bg: #f4f1ed;
 	--color-text: #1a1a1a;
 	--color-text-muted: #5c5c5c;
 	--color-accent: #1a1a1a;
@@ -16,7 +16,7 @@
 	--font-heading: 'DM Serif Display', Georgia, serif;
 	--hero-max-width: 1920px;
 	--site-gutter: clamp(1rem, 3vw, 2rem);
-	--color-earth: #faf8f3;
+	--color-earth: #eeebe6;
 	--color-earth-pink: #d9b0a5;
 	--color-earth-pink-hover: #cba398;
 }
