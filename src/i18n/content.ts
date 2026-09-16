@@ -344,7 +344,7 @@ const awardsEs: AwardRecognition[] = [
 	},
 	{
 		eyebrow: 'Decor Book',
-		heading: 'Margaret Van Puffelen',
+		heading: 'Colors of Design',
 		stackedImage: {
 			src: '/decor-01.avif',
 			alt: 'Retrato de Margaret Van Puffelen en Decor Book',
@@ -358,7 +358,7 @@ const awardsEs: AwardRecognition[] = [
 			height: 1086,
 		},
 		imageCaption: 'Decor Book · página 312',
-		lead: 'Colors of Design',
+		lead: 'Margaret Van Puffelen',
 		paragraphs: [
 			'Con una visión anclada en el modernismo orgánico y el naturalismo refinado, Colors of Design transformó este apartamento mid-century—diseñado originalmente por el arquitecto Morris Lapidus—en un retiro eco-chic en el corazón de Miami Beach. El proyecto une lujo contenido y sostenibilidad, y ofrece a sus propietarios sudamericanos un escape sereno de una vida de ritmo intenso.',
 			'Dirigido por un equipo multidisciplinario, el estudio abordó esta remodelación integral con énfasis en funcionalidad, equilibrio y elegancia atemporal. Paletas neutras, texturas en capas y mobiliario a medida se unieron para evocar calma y sofisticación costera. Un elemento destacado: la chimenea escultórica, que ancla el área de estar mientras integra a la perfección iluminación, almacenamiento y tecnología doméstica.',
