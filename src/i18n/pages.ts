@@ -306,7 +306,7 @@ export function pageCopy(locale: Locale) {
 			heroAlt: 'Luxury residential interior by Colors of Design Group in Miami',
 			splitHeading: 'Distinctive by design.\nPersonal by nature.',
 			splitCopy:
-				'We create interiors that feel considered, comfortable, and unmistakably personal. Our multidisciplinary team brings together interior design, architecture, custom furnishings, lighting, and project management to shape every detail into one cohesive home.',
+				'At Colors of Design Group, exceptional interiors begin with exceptional service. We guide our clients through every stage of the design journey with a highly personalized approach, bringing together interior design, architecture, custom furnishings, lighting, and project coordination to create refined, enduring spaces that feel distinctly their own.',
 			meetStudio: 'Meet the Studio',
 			selectedWork: 'Selected Work',
 			selectedIntro:

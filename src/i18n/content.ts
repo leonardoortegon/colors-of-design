@@ -298,7 +298,7 @@ const awardsIntroEs = {
 const awardsEs: AwardRecognition[] = [
 	{
 		eyebrow: 'Reconocimiento de la industria',
-		heading: 'Luxury Lifestyle Awards 2023',
+		heading: 'Luxury Lifestyle Awards',
 		image: {
 			src: '/luxury-lifestyle.jpg',
 			alt: 'Reconocimiento Luxury Lifestyle Awards 2023 para Colors of Design Group',
@@ -313,7 +313,7 @@ const awardsEs: AwardRecognition[] = [
 	},
 	{
 		eyebrow: 'Prensa local',
-		heading: 'Design Minds 2023',
+		heading: 'Design Minds',
 		image: {
 			src: '/design-minds.jpg',
 			alt: 'Invitación al evento Design Minds 2023 con Colors of Design Group',
@@ -386,7 +386,23 @@ const awardsEs: AwardRecognition[] = [
 ];
 
 export function localizeAwards(locale: Locale) {
-	return locale === 'es' ? { intro: awardsIntroEs, items: awardsEs } : { intro: awardsIntro, items: awards };
+	const localizedAwards = locale === 'es' ? awardsEs : awards;
+	const preferredOrder = ['Decor Book', 'Design Minds', 'Key Biscayne Magazine', 'Luxury Lifestyle Awards'];
+	const awardOrderKey = (award: AwardRecognition) =>
+		['Design Minds', 'Luxury Lifestyle Awards'].includes(award.heading) ? award.heading : award.eyebrow;
+
+	const orderedAwards = localizedAwards
+		.map((award, index) => ({ award, index }))
+		.sort((a, b) => {
+			const aRank = preferredOrder.indexOf(awardOrderKey(a.award));
+			const bRank = preferredOrder.indexOf(awardOrderKey(b.award));
+			return (aRank === -1 ? preferredOrder.length : aRank) - (bRank === -1 ? preferredOrder.length : bRank) || a.index - b.index;
+		})
+		.map(({ award }) => award);
+
+	return locale === 'es'
+		? { intro: awardsIntroEs, items: orderedAwards }
+		: { intro: awardsIntro, items: orderedAwards };
 }
 
 const journalEs = [

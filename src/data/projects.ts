@@ -31,7 +31,7 @@ export interface Project {
 export const projects: Project[] = [
 	{
 		slug: 'petretta',
-		name: 'Petretta',
+		name: 'The Caribbean Miami Beach',
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
@@ -218,7 +218,7 @@ export const projects: Project[] = [
 	},
 	{
 		slug: 'massis',
-		name: 'Massis',
+		name: 'Miami Beach',
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
@@ -517,7 +517,7 @@ export const projects: Project[] = [
 	},
 	{
 		slug: 'selassie',
-		name: 'Selassie',
+		name: 'Key Biscayne',
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
@@ -993,7 +993,7 @@ export const projects: Project[] = [
 	},
 	{
 		slug: 'placeres',
-		name: 'Placeres',
+		name: 'Coral Gables',
 		location: 'Miami, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
@@ -1173,7 +1173,7 @@ export const projects: Project[] = [
 	},
 	{
 		slug: 'solaris',
-		name: 'Solaris',
+		name: 'Miami Beach',
 		location: 'Miami Beach, FL',
 		scope: 'Full Remodel · Interior Design & Furnishings',
 		concept:
@@ -1320,7 +1320,7 @@ export const projects: Project[] = [
 			'A nursery composed in soft neutrals, gentle texture, and thoughtful details, a calm room designed to grow with a family.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
-		imageSrc: '/baby-room/baby-room-2.avif',
+		imageSrc: '/baby-room/baby-room.avif',
 		imageAlt:
 			'Baby room nursery with soft neutral palette and tailored furnishings by Colors of Design Group',
 		imageWidth: 1920,
@@ -1337,8 +1337,8 @@ export const projects: Project[] = [
 		materials: ['Soft neutrals', 'Layered textiles', 'Tailored furnishings', 'Gentle lighting', 'Curated accents'],
 		gallery: [
 			{
-				src: '/baby-room/baby-room-2.avif',
-				alt: 'Baby room nursery with soft neutral interior design by Colors of Design Group',
+				src: '/baby-room/baby-room.avif',
+				alt: 'Baby room nursery interior with layered textiles and gentle lighting',
 				width: 1920,
 				height: 1080,
 				caption: 'Nursery',
@@ -1346,8 +1346,8 @@ export const projects: Project[] = [
 					'A calm nursery shaped by soft neutrals, gentle texture, and furnishings chosen for comfort and longevity.',
 			},
 			{
-				src: '/baby-room/baby-room.avif',
-				alt: 'Baby room nursery interior with layered textiles and gentle lighting',
+				src: '/baby-room/baby-room-2.avif',
+				alt: 'Baby room nursery with soft neutral interior design by Colors of Design Group',
 				width: 1920,
 				height: 1080,
 				caption: 'Nursery view',

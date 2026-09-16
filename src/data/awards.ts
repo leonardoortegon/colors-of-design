@@ -28,15 +28,16 @@ export interface AwardRecognition {
 }
 
 export const awardsIntro = {
-	heading: 'Awards & recognitions',
+	heading: 'Awards & Recognition',
+	subheading: 'Recognized for Excellence in Design',
 	description:
-		'Colors of Design has been honored by industry peers, publications, and the Houzz community for design excellence and client service.',
+		'Colors of Design Group has been honored by leading industry organizations, publications, and design communities for excellence in interior design and client service. Each recognition reflects our commitment to thoughtful design, enduring quality, and a highly personalized experience for every client.',
 };
 
 export const awards: AwardRecognition[] = [
 	{
 		eyebrow: 'Industry recognition',
-		heading: 'Luxury Lifestyle Awards 2023',
+		heading: 'Luxury Lifestyle Awards',
 		image: {
 			src: '/luxury-lifestyle.jpg',
 			alt: 'Luxury Lifestyle Awards 2023 recognition for Colors of Design Group',
@@ -51,7 +52,7 @@ export const awards: AwardRecognition[] = [
 	},
 	{
 		eyebrow: 'Local press',
-		heading: 'Design Minds 2023',
+		heading: 'Design Minds',
 		image: {
 			src: '/design-minds.jpg',
 			alt: 'Design Minds 2023 event invitation featuring Colors of Design Group',

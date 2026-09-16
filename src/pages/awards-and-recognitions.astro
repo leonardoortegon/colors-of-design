@@ -38,6 +38,7 @@ const description = pages.awards.description;
 
 			<header class="awards-page__header">
 				<h1 class="awards-page__heading">{awardsIntro.heading}</h1>
+				{awardsIntro.subheading && <h2 class="awards-page__subheading">{awardsIntro.subheading}</h2>}
 				<p class="awards-page__intro">{awardsIntro.description}</p>
 			</header>
 
@@ -89,6 +90,15 @@ const description = pages.awards.description;
 		line-height: 1.75;
 		color: var(--color-text-muted);
 		max-width: 34rem;
+		margin-bottom: 1rem;
+	}
+
+	.awards-page__subheading {
+		font-family: var(--font-heading);
+		font-size: clamp(1.25rem, 2vw, 1.75rem);
+		font-weight: 600;
+		line-height: 1.2;
+		color: var(--color-text);
 	}
 
 	@media (min-width: 901px) {
