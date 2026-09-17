@@ -33,12 +33,47 @@
     },
     {
       "source": "/projects-item/coral-gables",
-      "destination": "/work/",
+      "destination": "/work/placeres/",
       "permanent": true
     },
     {
       "source": "/projects-item/sunny-isles",
       "destination": "/work/sunny-isles/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/children",
+      "destination": "/work/baby-room/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/key-biscayne",
+      "destination": "/work/selassie/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/massi",
+      "destination": "/work/massis/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/miami-beach",
+      "destination": "/work/solaris/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/park-grove",
+      "destination": "/work/park-grove/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/renders",
+      "destination": "/work/renders/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/south-point-miami-beach",
+      "destination": "/work/petretta/",
       "permanent": true
     },
     {
@@ -57,17 +92,7 @@
       "permanent": true
     },
     {
-      "source": "/work/delray-beach-interior-design/",
-      "destination": "/work/",
-      "permanent": true
-    },
-    {
       "source": "/work/brickell-penthouse",
-      "destination": "/work/sunny-isles/",
-      "permanent": true
-    },
-    {
-      "source": "/work/brickell-penthouse/",
       "destination": "/work/sunny-isles/",
       "permanent": true
     },
@@ -99,6 +124,101 @@
     {
       "source": "/journal",
       "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/account",
+      "destination": "/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/cart",
+      "destination": "/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/terms-and-conditions",
+      "destination": "/privacy-policy/",
+      "permanent": true
+    },
+    {
+      "source": "/interior-design-online-consultations",
+      "destination": "/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/key-biscayne-luxury-interior-design-services",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/north-carolina-luxury-interior-design-services",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/vero-beach-luxury-interior-design-services",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/home-decor-tips/5-ways-to-make-your-home-feel-like-a-five-star-hotel",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/home-decor-tips/interior-design-services",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/home-decor-tips/the-importance-of-declutter-your-home",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/table-lamp",
+      "destination": "/interior-design-online-shop/table-lamp/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/one-of-a-kind",
+      "destination": "/interior-design-online-shop/one-of-a-kind/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/selenite-sconces",
+      "destination": "/interior-design-online-shop/selenite-sconces/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/crystal-floor-lamp",
+      "destination": "/interior-design-online-shop/crystal-floor-lamp/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/nest-pendant",
+      "destination": "/interior-design-online-shop/nest-pendant/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/luxe-indoor-swing",
+      "destination": "/interior-design-online-shop/luxe-indoor-swing/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/drop-pendant",
+      "destination": "/interior-design-online-shop/drop-pendant/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/outdoor-swing",
+      "destination": "/interior-design-online-shop/outdoor-swing/",
+      "permanent": true
+    },
+    {
+      "source": "/online-shopping/interior-design-gift-card",
+      "destination": "/interior-design-online-shop/interior-design-gift-card/",
       "permanent": true
     },
     {
@@ -159,6 +279,31 @@
     {
       "source": "/es/asesoria-profesional-diseno-interior",
       "destination": "/es/contact-us/",
+      "permanent": true
+    },
+    {
+      "source": "/es/mi-cuenta",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/compra",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tips-para-el-hogar/5-tips-para-que-su-hogar-se-sienta-como-un-hotel-de-lujo",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tips-para-el-hogar/consultas-de-diseno-online",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tips-para-el-hogar/la-importancia-de-ordenar-su-hogar",
+      "destination": "/es/interior-design-blog/",
       "permanent": true
     },
     {
@@ -233,7 +378,7 @@
     },
     {
       "source": "/es/projects-item/coral-gables-2",
-      "destination": "/es/work/",
+      "destination": "/es/work/placeres/",
       "permanent": true
     },
     {
@@ -263,7 +408,7 @@
     },
     {
       "source": "/es/projects-item/key-biscayne-2",
-      "destination": "/es/work/casa-del-mar/",
+      "destination": "/es/work/selassie/",
       "permanent": true
     },
     {
@@ -273,7 +418,7 @@
     },
     {
       "source": "/es/projects-item/renders-2",
-      "destination": "/es/work/",
+      "destination": "/es/work/renders/",
       "permanent": true
     },
     {
@@ -283,7 +428,7 @@
     },
     {
       "source": "/es/projects-item/miami-beach-2",
-      "destination": "/es/work/",
+      "destination": "/es/work/solaris/",
       "permanent": true
     },
     {
@@ -293,7 +438,7 @@
     },
     {
       "source": "/es/projects-item/south-point-miami-beach-2",
-      "destination": "/es/work/",
+      "destination": "/es/work/petretta/",
       "permanent": true
     },
     {
@@ -307,13 +452,173 @@
       "permanent": true
     },
     {
-      "source": "/online-shopping/:slug",
-      "destination": "/interior-design-online-shop/:slug/",
+      "source": "/online-shopping/:path*",
+      "destination": "/interior-design-online-shop/",
       "permanent": true
     },
     {
       "source": "/online-store/:path*",
       "destination": "/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/interior-design-styles/:path*",
+      "destination": "/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/interior-design-tags/:path*",
+      "destination": "/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/projects-item/:path*",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/category/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/author/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/art-basel-miami-beach-florida/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/color-palettes/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/design-trends/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/feng-shui-design-services/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/promotions-and-discounts-in-miami/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/wallpaper-design-trends/:path*",
+      "destination": "/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/awards/:path*",
+      "destination": "/awards-and-recognitions/",
+      "permanent": true
+    },
+    {
+      "source": "/services-category/:path*",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/team-category/:path*",
+      "destination": "/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/media-category/:path*",
+      "destination": "/awards-and-recognitions/",
+      "permanent": true
+    },
+    {
+      "source": "/exhibitions-category/:path*",
+      "destination": "/awards-and-recognitions/",
+      "permanent": true
+    },
+    {
+      "source": "/books-category/:path*",
+      "destination": "/awards-and-recognitions/",
+      "permanent": true
+    },
+    {
+      "source": "/es/online-shopping/:path*",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tienda-online/:path*",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/interior-design-styles/:path*",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/interior-design-tags/:path*",
+      "destination": "/es/interior-design-online-shop/",
+      "permanent": true
+    },
+    {
+      "source": "/es/projects-item/:path*",
+      "destination": "/es/work/",
+      "permanent": true
+    },
+    {
+      "source": "/es/category/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tag/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/art-basel-miami-beach-florida-es/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/feng-shui-es/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/paleta-de-colores/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/promociones-y-descuentos/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tendencias-de-diseno/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/tendencias-wallpaper/:path*",
+      "destination": "/es/interior-design-blog/",
+      "permanent": true
+    },
+    {
+      "source": "/es/premios/:path*",
+      "destination": "/es/awards-and-recognitions/",
       "permanent": true
     }
   ]

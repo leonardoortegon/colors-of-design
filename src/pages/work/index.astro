@@ -12,7 +12,25 @@ import { localizeProjects } from '../../i18n/content';
 const locale = getLocale(Astro.url.pathname);
 const pages = pageCopy(locale);
 const t = copy(locale);
-const projects = localizeProjects(locale);
+const projectOrder = [
+	'sunny-isles',
+	'massis',
+	'park-grove',
+	'casa-del-mar',
+	'solaris',
+	'asheville',
+	'bathroom-design',
+	'kitchen',
+	'selassie',
+	'placeres',
+	'greenberg',
+	'petretta',
+	'renders',
+];
+const localizedProjects = localizeProjects(locale);
+const projects = [...localizedProjects].sort(
+	(a, b) => (projectOrder.indexOf(a.slug) === -1 ? projectOrder.length : projectOrder.indexOf(a.slug)) - (projectOrder.indexOf(b.slug) === -1 ? projectOrder.length : projectOrder.indexOf(b.slug)),
+);
 const title = pages.work.title;
 const description = pages.work.description;
 const pageUrl = absoluteUrl(localizedPath(locale, '/work/'));

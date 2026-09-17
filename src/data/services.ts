@@ -275,7 +275,7 @@ export const services: Service[] = [
 			'Finish selections',
 			'Installation oversight',
 		],
-		imageSrc: '/petretta/petretta-cabinet-02.avif',
+		imageSrc: '/placeres/placeres-living-room-09.avif',
 		imageAlt: 'Built-in millwork cabinetry with warm wood finishes by Colors of Design Group',
 		imageWidth: 900,
 		imageHeight: 1350,

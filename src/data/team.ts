@@ -36,15 +36,9 @@ export const teamMembers: TeamMember[] = [
 		imageAlt: 'Yusnelis Alvarez, architect and interior designer at Colors of Design',
 	},
 	{
-		name: 'Jorge Morales',
-		role: 'Architect',
-		imageSrc: '/jorge-morales.avif',
-		imageAlt: 'Jorge Morales, architect at Colors of Design',
-	},
-	{
 		name: 'Ulysses',
 		role: 'Interior Designer & Architect',
-		imageSrc: '/ulysses.jpg',
+		imageSrc: '/ulysses.avif',
 		imageAlt: 'Ulysses, interior designer and architect at Colors of Design',
 		paragraphs: [
 			'With a degree in architecture and general construction from the University of Mexico, Ulysses specialized in interior design, architecture, conceptual visualization, and space planning.',

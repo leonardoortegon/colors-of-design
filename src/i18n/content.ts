@@ -269,10 +269,6 @@ const teamEs: Record<string, Pick<TeamMember, 'role' | 'imageAlt' | 'paragraphs'
 		role: 'Arquitecta, diseñadora de interiores',
 		imageAlt: 'Yusnelis Alvarez, arquitecta y diseñadora de interiores en Colors of Design',
 	},
-	'Jorge Morales': {
-		role: 'Arquitecto',
-		imageAlt: 'Jorge Morales, arquitecto en Colors of Design',
-	},
 	Ulysses: {
 		role: 'Diseñador de interiores y arquitecto',
 		imageAlt: 'Ulysses, diseñador de interiores y arquitecto en Colors of Design',
