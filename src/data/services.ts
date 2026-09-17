@@ -9,6 +9,10 @@ export interface Service {
 	imageAlt: string;
 	imageWidth: number;
 	imageHeight: number;
+	secondaryImageSrc?: string;
+	secondaryImageAlt?: string;
+	secondaryImageWidth?: number;
+	secondaryImageHeight?: number;
 }
 
 export const services: Service[] = [
@@ -167,10 +171,14 @@ export const services: Service[] = [
 			'Value engineering',
 			'Investment guidance',
 		],
-		imageSrc: '/park-grove/park-grove-kitchen-01.avif',
-		imageAlt: 'Kitchen interior with specified materials and finishes by Colors of Design Group',
+		imageSrc: '/budget-management.avif',
+		imageAlt: 'Budget management planning materials by Colors of Design Group',
 		imageWidth: 2000,
 		imageHeight: 1335,
+		secondaryImageSrc: '/park-grove/park-grove-kitchen-01.avif',
+		secondaryImageAlt: 'Kitchen interior with specified materials and finishes by Colors of Design Group',
+		secondaryImageWidth: 2000,
+		secondaryImageHeight: 1335,
 	},
 	{
 		slug: 'feng-shui',
@@ -247,7 +255,7 @@ export const services: Service[] = [
 			'Hardware coordination',
 			'Professional installation',
 		],
-		imageSrc: '/park-grove/park-grove-living-room-01.avif',
+		imageSrc: '/custom-window-treatment.avif',
 		imageAlt: 'Custom drapery framing floor-to-ceiling windows in a living room by Colors of Design Group',
 		imageWidth: 2000,
 		imageHeight: 1335,

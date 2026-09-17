@@ -52,13 +52,26 @@ const url = localizedPath(locale, `/services/${service.slug}/`);
 					]}
 				/>
 				<div class="editorial-grid service-hero__grid">
-					<img
-						class="editorial-image"
-						src={service.imageSrc}
-						alt={service.imageAlt}
-						width={service.imageWidth}
-						height={service.imageHeight}
-					/>
+					<div class="service-hero__media">
+						{service.slug === 'budget-management' && service.secondaryImageSrc ? (
+							<img
+								class="editorial-image"
+								src={service.secondaryImageSrc}
+								alt={service.secondaryImageAlt ?? ''}
+								width={service.secondaryImageWidth}
+								height={service.secondaryImageHeight}
+								loading="lazy"
+							/>
+						) : (
+							<img
+								class="editorial-image"
+								src={service.imageSrc}
+								alt={service.imageAlt}
+								width={service.imageWidth}
+								height={service.imageHeight}
+							/>
+						)}
+					</div>
 					<div class="editorial-copy">
 						<p class="eyebrow">{service.scope}</p>
 						<h1>{service.name}</h1>
@@ -116,6 +129,12 @@ const url = localizedPath(locale, `/services/${service.slug}/`);
 
 	.service-hero__grid {
 		margin-top: clamp(2rem, 5vw, 4rem);
+	}
+
+	.service-hero__media {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(1.25rem, 3vw, 2rem);
 	}
 
 	.service-hero__summary {
