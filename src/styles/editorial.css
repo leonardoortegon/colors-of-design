@@ -122,6 +122,10 @@
 	letter-spacing: -0.02em;
 }
 
+.contact-page__closing {
+	font-weight: 600;
+}
+
 .contact-page__details {
 	display: grid;
 	grid-template-columns: 1fr 1fr;

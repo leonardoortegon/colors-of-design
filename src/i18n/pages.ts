@@ -95,10 +95,15 @@ export function pageCopy(locale: Locale) {
 			contact: {
 				title: 'Contacte nuestro estudio de diseño de interiores en Miami | Colors of Design',
 				description:
-					'Contacte a Colors of Design Group, un estudio de diseño de interiores en Miami que crea interiores residenciales refinados en el sur de Florida y más allá.',
+					'Todo interior memorable comienza con una conversación. Contacte a Colors of Design Group para iniciar una experiencia de diseño reflexiva y personalizada.',
 				jsonName: 'Contacto Colors of Design',
-				p1: 'Colors of Design es un estudio de diseño de interiores en Miami que crea hogares armoniosos, modernos y atemporales, desde el primer concepto hasta la instalación final.',
-				p2: `Fundado por ${site.founder}, nuestro equipo trabaja con clientes en el sur de Florida, Carolina del Norte y más allá en planificación espacial, diseño a medida, mobiliario e instalación llave en mano.`,
+				h1: 'Creemos Algo Excepcional',
+				p1: 'Todo interior memorable comienza con una conversación. En Colors of Design Group, nos alegra conocer su visión, estilo de vida y aspiraciones para su espacio. Ya sea que planee una nueva residencia, una renovación o una transformación integral de interiores, nuestro equipo está aquí para acompañarle en una experiencia de diseño reflexiva y personalizada.',
+				p1Closing: 'Contáctenos para comenzar a crear un espacio inconfundiblemente suyo.',
+				formHeading: 'Contáctenos',
+				formCopy: 'Cuéntenos sobre su visión de diseño y su proyecto.',
+				formCopyClosing:
+					'Ya sea que cree una nueva residencia, transforme un espacio existente o inicie una renovación, nuestro equipo está aquí para ofrecer orientación reflexiva, soluciones de diseño personalizadas y una experiencia fluida del concepto a la finalización.',
 				email: 'Correo',
 				phone: 'Teléfono',
 				studio: 'Estudio',
@@ -369,10 +374,15 @@ export function pageCopy(locale: Locale) {
 		contact: {
 			title: 'Contact Our Miami Interior Design Studio | Colors of Design',
 			description:
-				'Contact Colors of Design Group, a Miami interior design studio creating refined residential interiors across South Florida and beyond.',
+				'Every remarkable interior begins with a conversation. Contact Colors of Design Group to begin a thoughtful, personalized design experience.',
 			jsonName: 'Contact Colors of Design',
-			p1: 'Colors of Design is a Miami interior design studio creating harmonious, modern, and timeless homes, from first concept to final installation.',
-			p2: `Founded by ${site.founder}, our team works with clients across South Florida, North Carolina, and beyond on space planning, custom design, furnishings, and turnkey installation.`,
+			h1: 'Let’s Create Something Exceptional',
+			p1: 'Every remarkable interior begins with a conversation. At Colors of Design Group, we welcome the opportunity to learn about your vision, lifestyle, and aspirations for your space. Whether you are planning a new residence, a renovation, or a complete interior transformation, our team is here to guide you through a thoughtful and personalized design experience.',
+			p1Closing: 'Contact us to begin creating a space that is distinctly yours.',
+			formHeading: 'Contact Us',
+			formCopy: 'Tell us about your design vision and project.',
+			formCopyClosing:
+				'Whether you are creating a new residence, transforming an existing space, or beginning a renovation, our team is here to provide thoughtful guidance, personalized design solutions, and a seamless experience from concept to completion.',
 			email: 'Email',
 			phone: 'Phone',
 			studio: 'Studio',

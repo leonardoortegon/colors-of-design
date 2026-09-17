@@ -33,9 +33,12 @@ const contactPath = localizedPath(locale, '/contact-us/');
 				<div class="contact-page__split">
 					<div class="contact-page__info editorial-copy">
 						<p class="eyebrow">{t.crumbs.contact}</p>
-						<h1>{site.name}</h1>
-						<p>{pages.contact.p1}</p>
-						<p>{pages.contact.p2}</p>
+						<h1>{pages.contact.h1}</h1>
+						<p>
+							{pages.contact.p1}
+							{' '}
+							<strong class="contact-page__closing">{pages.contact.p1Closing}</strong>
+						</p>
 
 						<dl class="contact-page__details">
 							<div class="contact-page__detail">
@@ -69,7 +72,11 @@ const contactPath = localizedPath(locale, '/contact-us/');
 
 					<div class="contact-page__form">
 						<div class="contact-page__form-stack">
-							<InquiryFormIntro />
+							<InquiryFormIntro
+								variant="contact"
+								heading={pages.contact.formHeading}
+								copyText={`${pages.contact.formCopy} ${pages.contact.formCopyClosing}`}
+							/>
 							<InquiryForm simple idPrefix="contact-" />
 						</div>
 					</div>

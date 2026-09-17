@@ -7,19 +7,43 @@ interface Props {
 	headingLevel?: 'h1' | 'h2';
 	id?: string;
 	locale?: Locale;
+	heading?: string;
+	copyText?: string;
+	copyClosing?: string;
+	variant?: 'default' | 'contact';
 }
 
-const { headingLevel = 'h2', id, locale = getLocale(Astro.url.pathname) } = Astro.props;
+const {
+	headingLevel = 'h2',
+	id,
+	locale = getLocale(Astro.url.pathname),
+	heading,
+	copyText,
+	copyClosing,
+	variant = 'default',
+} = Astro.props;
 const HeadingTag = headingLevel;
 const t = copy(locale);
+const resolvedHeading = heading ?? t.inquiryHeading;
+const resolvedCopy = copyText ?? t.inquiryCopy;
 ---
 
-<div class="inquiry-form-intro">
+<div class:list={['inquiry-form-intro', variant === 'contact' && 'inquiry-form-intro--contact']}>
 	<p class="inquiry-form-intro__phone">
 		<a href={site.phoneHref}>{site.phone}</a>
 	</p>
-	<HeadingTag id={id} class="inquiry-form-intro__heading">{t.inquiryHeading}</HeadingTag>
-	<p class="inquiry-form-intro__copy">{t.inquiryCopy}</p>
+	<HeadingTag id={id} class="inquiry-form-intro__heading">{resolvedHeading}</HeadingTag>
+	<p class="inquiry-form-intro__copy">
+		{resolvedCopy}
+		{
+			copyClosing && (
+				<>
+					{' '}
+					<strong class="inquiry-form-intro__closing">{copyClosing}</strong>
+				</>
+			)
+		}
+	</p>
 </div>
 
 <style>
@@ -65,5 +89,10 @@ const t = copy(locale);
 		line-height: 1.75;
 		color: var(--color-text-muted);
 		margin: 0;
+	}
+
+	.inquiry-form-intro__closing {
+		font-weight: 600;
+		color: var(--color-text);
 	}
 </style>
