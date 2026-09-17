@@ -24,7 +24,7 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 				<form
 					class="conversion__form"
 					data-conversion-form
-					data-contact-endpoint="/api/contact"
+					data-contact-endpoint="/api/contact/"
 					data-source="conversion"
 					data-sending={t.sending}
 					data-success={t.sendSuccess}
@@ -239,7 +239,7 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 
 <script>
 	async function submitConversion(form: HTMLFormElement) {
-		const endpoint = form.dataset.contactEndpoint || '/api/contact';
+		const endpoint = form.dataset.contactEndpoint || '/api/contact/';
 		const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
 		const status = form.querySelector<HTMLElement>('[data-form-status]');
 		const defaultLabel = button?.textContent || '';
@@ -269,9 +269,15 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 					source: form.dataset.source || 'conversion',
 				}),
 			});
-			const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+			const result = (await response.json().catch(() => ({}))) as {
+				ok?: boolean;
+				error?: string;
+				detail?: string;
+			};
 			if (!response.ok || !result.ok) {
-				throw new Error(result.error || form.dataset.error || 'Unable to send your message.');
+				throw new Error(
+					result.detail || result.error || form.dataset.error || 'Unable to send your message.',
+				);
 			}
 			form.reset();
 			if (status) {

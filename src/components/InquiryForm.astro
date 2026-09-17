@@ -32,7 +32,7 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 			class="inquiry-form inquiry-form--simple"
 			data-inquiry-form
 			data-inquiry-simple
-			data-contact-endpoint="/api/contact"
+			data-contact-endpoint="/api/contact/"
 			data-source={source}
 			data-sending={t.sending}
 			data-success={t.sendSuccess}
@@ -79,7 +79,7 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 		<form
 			class="inquiry-form"
 			data-inquiry-form
-			data-contact-endpoint="/api/contact"
+			data-contact-endpoint="/api/contact/"
 			data-source={source}
 			data-sending={t.sending}
 			data-success={t.sendSuccess}
@@ -285,7 +285,7 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 
 <script>
 	async function submitInquiry(form: HTMLFormElement) {
-		const endpoint = form.dataset.contactEndpoint || '/api/contact';
+		const endpoint = form.dataset.contactEndpoint || '/api/contact/';
 		const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
 		const status = form.querySelector<HTMLElement>('[data-form-status]');
 		const defaultLabel = button?.textContent || '';
@@ -320,10 +320,16 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
 				body: JSON.stringify(payload),
 			});
-			const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+			const result = (await response.json().catch(() => ({}))) as {
+				ok?: boolean;
+				error?: string;
+				detail?: string;
+			};
 
 			if (!response.ok || !result.ok) {
-				throw new Error(result.error || form.dataset.error || 'Unable to send your message.');
+				throw new Error(
+					result.detail || result.error || form.dataset.error || 'Unable to send your message.',
+				);
 			}
 
 			form.reset();
