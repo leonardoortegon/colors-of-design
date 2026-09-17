@@ -100,10 +100,6 @@ export function pageCopy(locale: Locale) {
 				h1: 'Creemos Algo Excepcional',
 				p1: 'Todo interior memorable comienza con una conversación. En Colors of Design Group, nos alegra conocer su visión, estilo de vida y aspiraciones para su espacio. Ya sea que planee una nueva residencia, una renovación o una transformación integral de interiores, nuestro equipo está aquí para acompañarle en una experiencia de diseño reflexiva y personalizada.',
 				p1Closing: 'Contáctenos para comenzar a crear un espacio inconfundiblemente suyo.',
-				formHeading: 'Contáctenos',
-				formCopy: 'Cuéntenos sobre su visión de diseño y su proyecto.',
-				formCopyClosing:
-					'Ya sea que cree una nueva residencia, transforme un espacio existente o inicie una renovación, nuestro equipo está aquí para ofrecer orientación reflexiva, soluciones de diseño personalizadas y una experiencia fluida del concepto a la finalización.',
 				email: 'Correo',
 				phone: 'Teléfono',
 				studio: 'Estudio',
@@ -379,10 +375,6 @@ export function pageCopy(locale: Locale) {
 			h1: 'Let’s Create Something Exceptional',
 			p1: 'Every remarkable interior begins with a conversation. At Colors of Design Group, we welcome the opportunity to learn about your vision, lifestyle, and aspirations for your space. Whether you are planning a new residence, a renovation, or a complete interior transformation, our team is here to guide you through a thoughtful and personalized design experience.',
 			p1Closing: 'Contact us to begin creating a space that is distinctly yours.',
-			formHeading: 'Contact Us',
-			formCopy: 'Tell us about your design vision and project.',
-			formCopyClosing:
-				'Whether you are creating a new residence, transforming an existing space, or beginning a renovation, our team is here to provide thoughtful guidance, personalized design solutions, and a seamless experience from concept to completion.',
 			email: 'Email',
 			phone: 'Phone',
 			studio: 'Studio',

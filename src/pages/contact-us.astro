@@ -72,11 +72,7 @@ const contactPath = localizedPath(locale, '/contact-us/');
 
 					<div class="contact-page__form">
 						<div class="contact-page__form-stack">
-							<InquiryFormIntro
-								variant="contact"
-								heading={pages.contact.formHeading}
-								copyText={`${pages.contact.formCopy} ${pages.contact.formCopyClosing}`}
-							/>
+							<InquiryFormIntro />
 							<InquiryForm simple idPrefix="contact-" />
 						</div>
 					</div>

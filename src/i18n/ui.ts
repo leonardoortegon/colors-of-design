@@ -36,8 +36,9 @@ export const ui = {
 		viewProduct: (name: string) => `View ${name}`,
 		fromPrice: (price: string) => `From ${price}`,
 		close: 'Close',
-		inquiryHeading: 'Start your project',
-		inquiryCopy: 'Tell us about your property, what you hope to create, and where you are in the process.',
+		inquiryHeading: 'Contact Us',
+		inquiryCopy:
+			'Tell us about your design vision and project. Whether you are creating a new residence, transforming an existing space, or beginning a renovation, our team is here to provide thoughtful guidance, personalized design solutions, and a seamless experience from concept to completion.',
 		name: 'Name',
 		phone: 'Phone',
 		email: 'Email',
@@ -148,8 +149,9 @@ export const ui = {
 		viewProduct: (name: string) => `Ver ${name}`,
 		fromPrice: (price: string) => `Desde ${price}`,
 		close: 'Cerrar',
-		inquiryHeading: 'Inicie su proyecto',
-		inquiryCopy: 'Cuéntenos sobre su propiedad, lo que desea crear y en qué punto del proceso se encuentra.',
+		inquiryHeading: 'Contáctenos',
+		inquiryCopy:
+			'Cuéntenos sobre su visión de diseño y su proyecto. Ya sea que cree una nueva residencia, transforme un espacio existente o inicie una renovación, nuestro equipo está aquí para ofrecer orientación reflexiva, soluciones de diseño personalizadas y una experiencia fluida del concepto a la finalización.',
 		name: 'Nombre',
 		phone: 'Teléfono',
 		email: 'Correo',
