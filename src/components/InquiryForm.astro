@@ -9,6 +9,7 @@ interface Props {
 	idPrefix?: string;
 	showPrivacyNote?: boolean;
 	locale?: Locale;
+	source?: string;
 }
 
 const {
@@ -17,19 +18,50 @@ const {
 	locale = getLocale(Astro.url.pathname),
 	submitLabel,
 	showPrivacyNote = simple,
+	source = simple ? 'contact' : 'inquiry',
 } = Astro.props;
 
 const t = copy(locale);
-const resolvedSubmit = submitLabel ?? (simple ? t.sendMessage : t.prepareDraft);
+const resolvedSubmit = submitLabel ?? t.sendMessage;
 const fieldId = (name: string) => `${idPrefix}${name}`;
 ---
 
 {
 	simple ? (
-		<form class="inquiry-form inquiry-form--simple" data-inquiry-form data-inquiry-simple data-recipient={site.email} data-mail-hello={t.mailHello} data-mail-name={t.mailName} data-mail-phone={t.mailPhone} data-subject-from={t.mailSubjectFrom('__NAME__')}>
+		<form
+			class="inquiry-form inquiry-form--simple"
+			data-inquiry-form
+			data-inquiry-simple
+			data-contact-endpoint="/api/contact"
+			data-source={source}
+			data-sending={t.sending}
+			data-success={t.sendSuccess}
+			data-error={t.sendError}
+		>
+			<div class="inquiry-form__honeypot" aria-hidden="true">
+				<label for={fieldId('inquiry-website')}>Website</label>
+				<input
+					id={fieldId('inquiry-website')}
+					name="website"
+					type="text"
+					tabindex="-1"
+					autocomplete="off"
+				/>
+			</div>
 			<div>
 				<label for={fieldId('inquiry-name')}>{t.name}</label>
 				<input id={fieldId('inquiry-name')} name="name" autocomplete="name" required maxlength="100" />
+			</div>
+			<div>
+				<label for={fieldId('inquiry-email')}>{t.email}</label>
+				<input
+					id={fieldId('inquiry-email')}
+					name="email"
+					type="email"
+					autocomplete="email"
+					required
+					maxlength="160"
+				/>
 			</div>
 			<div>
 				<label for={fieldId('inquiry-phone')}>{t.phone}</label>
@@ -39,27 +71,24 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 				<label for={fieldId('inquiry-message')}>{t.message}</label>
 				<textarea id={fieldId('inquiry-message')} name="message" rows="4" required maxlength="1800" />
 			</div>
-			<button class="inquiry-form__button" type="submit">{resolvedSubmit}</button>
+			<button class="inquiry-form__button" type="submit" data-submit-button>{resolvedSubmit}</button>
+			<p class="inquiry-form__status" data-form-status role="status" hidden></p>
 			{showPrivacyNote && <p class="inquiry-form__privacy">{t.privacyNote}</p>}
 		</form>
 	) : (
 		<form
 			class="inquiry-form"
 			data-inquiry-form
-			data-recipient={site.email}
-			data-mail-hello={t.mailHello}
-			data-mail-name={t.mailName}
-			data-mail-phone={t.mailPhone}
-			data-mail-email={t.mailEmail}
-			data-mail-location={t.mailLocation}
-			data-mail-service={t.mailService}
-			data-not-provided={t.notProvided}
-			data-to-discuss={t.toDiscuss}
-			data-draft-ready={t.draftReady}
-			data-draft-copied={t.draftCopied}
-			data-select-copy={t.selectCopy}
-			data-subject-prefix={t.mailSubject('__DETAIL__')}
+			data-contact-endpoint="/api/contact"
+			data-source={source}
+			data-sending={t.sending}
+			data-success={t.sendSuccess}
+			data-error={t.sendError}
 		>
+			<div class="inquiry-form__honeypot" aria-hidden="true">
+				<label for="inquiry-website">Website</label>
+				<input id="inquiry-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+			</div>
 			<div class="inquiry-form__pair">
 				<div>
 					<label for="inquiry-name">{t.name} <span>{t.required}</span></label>
@@ -102,24 +131,13 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 					placeholder={t.visionPlaceholder}
 				/>
 			</div>
-			<p class="inquiry-form__note" id="inquiry-help">
-				{t.prepareNote}
-			</p>
-			<button class="inquiry-form__button" type="submit" disabled aria-describedby="inquiry-help">
+			<button class="inquiry-form__button" type="submit" data-submit-button>
 				{resolvedSubmit}
 			</button>
-			<div class="inquiry-form__draft" data-draft-panel hidden>
-				<p role="status" data-draft-status>
-					{t.draftReady}
-				</p>
-				<label for="inquiry-draft">{t.yourDraft}</label>
-				<textarea id="inquiry-draft" data-draft-text readonly rows="9" />
-				<a class="inquiry-form__button" data-draft-link href={`mailto:${site.email}`}>{t.openEmail}</a>
-				<button class="text-link" type="button" data-copy-draft>{t.copyDraft}</button>
-				<p class="inquiry-form__note">
-					{t.sendTo} <a href={`mailto:${site.email}`}>{site.email}</a>. {t.notSent}
-				</p>
-			</div>
+			<p class="inquiry-form__status" data-form-status role="status" hidden></p>
+			<p class="inquiry-form__note">
+				{t.formNote}
+			</p>
 			<noscript>
 				<p>
 					{t.emailDirectly} <a href={`mailto:${site.email}`}>{site.email}</a>, {t.orCall}{' '}
@@ -140,6 +158,18 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 1.5rem;
+	}
+
+	.inquiry-form__honeypot {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 
 	label {
@@ -186,11 +216,16 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 		font-size: 0.75rem;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
-		transition: background 0.2s;
+		transition: background 0.2s, opacity 0.2s;
 	}
 
-	.inquiry-form__button:hover {
+	.inquiry-form__button:hover:not(:disabled) {
 		background: #ece6dc;
+	}
+
+	.inquiry-form__button:disabled {
+		opacity: 0.65;
+		cursor: wait;
 	}
 
 	.inquiry-form--simple .inquiry-form__button {
@@ -202,7 +237,7 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 		letter-spacing: 0.12em;
 	}
 
-	.inquiry-form--simple .inquiry-form__button:hover {
+	.inquiry-form--simple .inquiry-form__button:hover:not(:disabled) {
 		color: #ffffff;
 		background-color: var(--color-accent-hover);
 		border-color: var(--color-accent-hover);
@@ -226,23 +261,18 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 		text-decoration: underline;
 	}
 
-	.inquiry-form__draft {
-		padding: 1.5rem;
-		border: 1px solid #c5b9a5;
-		background: white;
+	.inquiry-form__status {
+		margin: 0;
+		font-size: 0.875rem;
+		line-height: 1.6;
 	}
 
-	.inquiry-form__draft > p:first-child {
-		margin-bottom: 1rem;
-		font-size: 0.9rem;
+	.inquiry-form__status[data-state='success'] {
+		color: #2f5d3a;
 	}
 
-	.inquiry-form__draft textarea {
-		margin-bottom: 1.25rem;
-	}
-
-	.inquiry-form__draft .inquiry-form__note {
-		margin-top: 1rem;
+	.inquiry-form__status[data-state='error'] {
+		color: #8a2f2f;
 	}
 
 	@media (max-width: 540px) {
@@ -254,68 +284,74 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 </style>
 
 <script>
-	document.querySelectorAll<HTMLFormElement>('[data-inquiry-form]').forEach((form) => {
-		const isSimple = form.hasAttribute('data-inquiry-simple');
+	async function submitInquiry(form: HTMLFormElement) {
+		const endpoint = form.dataset.contactEndpoint || '/api/contact';
+		const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
+		const status = form.querySelector<HTMLElement>('[data-form-status]');
+		const defaultLabel = button?.textContent || '';
 
-		if (isSimple) {
-			form.addEventListener('submit', (event) => {
-				event.preventDefault();
-				if (!form.reportValidity()) return;
+		const data = new FormData(form);
+		const value = (key: string) => String(data.get(key) || '').trim();
 
-				const data = new FormData(form);
-				const value = (key: string) => String(data.get(key) || '').trim();
-				const subjectTemplate = form.dataset.subjectFrom || 'Project inquiry from __NAME__';
-				const subject = subjectTemplate.replace('__NAME__', value('name'));
-				const hello = form.dataset.mailHello || 'Hello Colors of Design,';
-				const nameLabel = form.dataset.mailName || 'Name';
-				const phoneLabel = form.dataset.mailPhone || 'Phone';
-				const body = `${hello}\n\n${value('message')}\n\n${nameLabel}: ${value('name')}\n${phoneLabel}: ${value('phone')}`;
-				window.location.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-			});
-			return;
+		const payload = {
+			name: value('name'),
+			email: value('email'),
+			phone: value('phone'),
+			location: value('location'),
+			service: value('service'),
+			message: value('message'),
+			website: value('website'),
+			source: form.dataset.source || 'website',
+		};
+
+		if (button) {
+			button.disabled = true;
+			button.textContent = form.dataset.sending || 'Sending…';
+		}
+		if (status) {
+			status.hidden = true;
+			status.removeAttribute('data-state');
+			status.textContent = '';
 		}
 
-		const panel = form.querySelector<HTMLElement>('[data-draft-panel]')!;
-		const draft = form.querySelector<HTMLTextAreaElement>('[data-draft-text]')!;
-		const link = form.querySelector<HTMLAnchorElement>('[data-draft-link]')!;
-		const status = form.querySelector<HTMLElement>('[data-draft-status]')!;
+		try {
+			const response = await fetch(endpoint, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: JSON.stringify(payload),
+			});
+			const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
 
+			if (!response.ok || !result.ok) {
+				throw new Error(result.error || form.dataset.error || 'Unable to send your message.');
+			}
+
+			form.reset();
+			if (status) {
+				status.hidden = false;
+				status.dataset.state = 'success';
+				status.textContent = form.dataset.success || 'Thank you. Your message has been sent.';
+			}
+		} catch (error) {
+			if (status) {
+				status.hidden = false;
+				status.dataset.state = 'error';
+				status.textContent =
+					error instanceof Error ? error.message : form.dataset.error || 'Unable to send your message.';
+			}
+		} finally {
+			if (button) {
+				button.disabled = false;
+				button.textContent = defaultLabel;
+			}
+		}
+	}
+
+	document.querySelectorAll<HTMLFormElement>('[data-inquiry-form]').forEach((form) => {
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
 			if (!form.reportValidity()) return;
-
-			const data = new FormData(form);
-			const value = (key: string) => String(data.get(key) || '').trim();
-			if (!value('name') || !value('message')) {
-				form.querySelector<HTMLTextAreaElement>('#inquiry-message')?.focus();
-				return;
-			}
-
-			const subjectTemplate = form.dataset.subjectPrefix || 'Project inquiry: __DETAIL__';
-			const subject = subjectTemplate.replace('__DETAIL__', value('location') || value('service'));
-			const hello = form.dataset.mailHello || 'Hello Colors of Design,';
-			const body = `${hello}\n\n${value('message')}\n\n${form.dataset.mailName || 'Name'}: ${value('name')}\n${form.dataset.mailEmail || 'Email'}: ${value('email')}\n${form.dataset.mailPhone || 'Phone'}: ${value('phone') || form.dataset.notProvided || 'Not provided'}\n${form.dataset.mailLocation || 'Location'}: ${value('location') || form.dataset.toDiscuss || 'To discuss'}\n${form.dataset.mailService || 'Service'}: ${value('service')}`;
-			draft.value = `To: ${form.dataset.recipient}\nSubject: ${subject}\n\n${body}`;
-			link.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-			status.textContent = form.dataset.draftReady || 'Your draft is ready. Open your email app to send it, or copy the text below.';
-			panel.hidden = false;
-			link.focus();
+			void submitInquiry(form);
 		});
-
-		form.querySelector('[data-copy-draft]')?.addEventListener('click', async () => {
-			try {
-				await navigator.clipboard.writeText(draft.value);
-				status.textContent = form.dataset.draftCopied || 'Draft copied. Paste it into your email app, review, and send.';
-			} catch {
-				draft.focus();
-				draft.select();
-				status.textContent = form.dataset.selectCopy || 'Select and copy the draft, then paste it into your email app.';
-			}
-		});
-
-		form.addEventListener('input', () => {
-			panel.hidden = true;
-		});
-		form.querySelector<HTMLButtonElement>('[type=submit]')!.disabled = false;
 	});
 </script>

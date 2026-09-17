@@ -28,7 +28,17 @@ To add an article, create a Markdown file in `src/pages/interior-design-blog/`, 
 
 ## Inquiries
 
-The form validates fields and prepares an email draft locally, with an email-app link and copy option. It does not send messages or store form data on a server. The recipient is `interiors@colorsofdesign.com`. Without JavaScript, visitors have direct email and telephone links. No backend credentials are needed.
+The contact forms post to `/api/contact`, a Vercel serverless function that sends email through [Resend](https://resend.com).
+
+Required environment variables (set in Vercel → Project → Settings → Environment Variables):
+
+- `RESEND_API_KEY` — API key from Resend
+- `CONTACT_TO_EMAIL` — destination inbox (defaults to `interiors@colorsofdesign.com`)
+- `CONTACT_FROM_EMAIL` — verified Resend from address (e.g. `Colors of Design <interiors@colorsofdesign.com>`)
+
+Copy `.env.example` for local values. For local API testing, run `vercel dev` (plain `astro dev` serves pages only).
+
+Without JavaScript, visitors still have direct email and telephone links.
 
 ## SEO and deployment
 

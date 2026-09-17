@@ -1,6 +1,5 @@
 ---
 import InquiryFormIntro from './InquiryFormIntro.astro';
-import { site } from '../data/site';
 import { copy } from '../i18n/ui';
 import { getLocale, type Locale } from '../i18n/locale';
 
@@ -22,7 +21,20 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 			<InquiryFormIntro id="conversion-heading" locale={locale} />
 
 			<div class="conversion__form-panel">
-				<form class="conversion__form" data-conversion-form data-recipient={site.email} data-mail-hello={t.mailHello} data-mail-name={t.mailName} data-mail-phone={t.mailPhone} data-subject-from={t.mailSubjectFrom('__NAME__')}>
+				<form
+					class="conversion__form"
+					data-conversion-form
+					data-contact-endpoint="/api/contact"
+					data-source="conversion"
+					data-sending={t.sending}
+					data-success={t.sendSuccess}
+					data-error={t.sendError}
+				>
+					<div class="conversion__honeypot" aria-hidden="true">
+						<label for="conversion-website">Website</label>
+						<input id="conversion-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+					</div>
+
 					<div class="conversion__field">
 						<label class="conversion__label" for="conversion-name">{t.name}</label>
 						<input
@@ -33,6 +45,19 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 							autocomplete="name"
 							required
 							maxlength="100"
+						/>
+					</div>
+
+					<div class="conversion__field">
+						<label class="conversion__label" for="conversion-email">{t.email}</label>
+						<input
+							class="conversion__input"
+							type="email"
+							id="conversion-email"
+							name="email"
+							autocomplete="email"
+							required
+							maxlength="160"
 						/>
 					</div>
 
@@ -61,7 +86,8 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 						></textarea>
 					</div>
 
-					<button type="submit" class="conversion__submit">{resolvedSubmit}</button>
+					<button type="submit" class="conversion__submit" data-submit-button>{resolvedSubmit}</button>
+					<p class="conversion__status" data-form-status role="status" hidden></p>
 				</form>
 
 				<p class="conversion__privacy">{resolvedPrivacy}</p>
@@ -101,6 +127,19 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 		display: flex;
 		flex-direction: column;
 		gap: 1.75rem;
+		position: relative;
+	}
+
+	.conversion__honeypot {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
 	}
 
 	.conversion__field {
@@ -162,10 +201,30 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 		transition: background-color 0.2s ease, border-color 0.2s ease;
 	}
 
-	.conversion__submit:hover {
+	.conversion__submit:hover:not(:disabled) {
 		color: #ffffff;
 		background-color: var(--color-accent-hover);
 		border-color: var(--color-accent-hover);
+	}
+
+	.conversion__submit:disabled {
+		opacity: 0.65;
+		cursor: wait;
+	}
+
+	.conversion__status {
+		margin: 0;
+		font-family: var(--font-body);
+		font-size: 0.875rem;
+		line-height: 1.6;
+	}
+
+	.conversion__status[data-state='success'] {
+		color: #2f5d3a;
+	}
+
+	.conversion__status[data-state='error'] {
+		color: #8a2f2f;
 	}
 
 	.conversion__privacy {
@@ -179,18 +238,67 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 </style>
 
 <script>
+	async function submitConversion(form: HTMLFormElement) {
+		const endpoint = form.dataset.contactEndpoint || '/api/contact';
+		const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
+		const status = form.querySelector<HTMLElement>('[data-form-status]');
+		const defaultLabel = button?.textContent || '';
+		const data = new FormData(form);
+		const value = (key: string) => String(data.get(key) || '').trim();
+
+		if (button) {
+			button.disabled = true;
+			button.textContent = form.dataset.sending || 'Sending…';
+		}
+		if (status) {
+			status.hidden = true;
+			status.removeAttribute('data-state');
+			status.textContent = '';
+		}
+
+		try {
+			const response = await fetch(endpoint, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+				body: JSON.stringify({
+					name: value('name'),
+					email: value('email'),
+					phone: value('phone'),
+					message: value('message'),
+					website: value('website'),
+					source: form.dataset.source || 'conversion',
+				}),
+			});
+			const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+			if (!response.ok || !result.ok) {
+				throw new Error(result.error || form.dataset.error || 'Unable to send your message.');
+			}
+			form.reset();
+			if (status) {
+				status.hidden = false;
+				status.dataset.state = 'success';
+				status.textContent = form.dataset.success || 'Thank you. Your message has been sent.';
+			}
+		} catch (error) {
+			if (status) {
+				status.hidden = false;
+				status.dataset.state = 'error';
+				status.textContent =
+					error instanceof Error ? error.message : form.dataset.error || 'Unable to send your message.';
+			}
+		} finally {
+			if (button) {
+				button.disabled = false;
+				button.textContent = defaultLabel;
+			}
+		}
+	}
+
 	document.querySelectorAll<HTMLFormElement>('[data-conversion-form]').forEach((form) => {
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
 			if (!form.reportValidity()) return;
-
-			const data = new FormData(form);
-			const value = (key: string) => String(data.get(key) || '').trim();
-			const subjectTemplate = form.dataset.subjectFrom || 'Project inquiry from __NAME__';
-			const subject = subjectTemplate.replace('__NAME__', value('name'));
-			const hello = form.dataset.mailHello || 'Hello Colors of Design,';
-			const body = `${hello}\n\n${value('message')}\n\n${form.dataset.mailName || 'Name'}: ${value('name')}\n${form.dataset.mailPhone || 'Phone'}: ${value('phone')}`;
-			window.location.href = `mailto:${form.dataset.recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+			void submitConversion(form);
 		});
 	});
 </script>
