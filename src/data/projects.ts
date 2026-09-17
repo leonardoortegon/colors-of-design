@@ -2187,20 +2187,20 @@ export const projects: Project[] = [
 ];
 
 const portfolioSlugs = [
-	'solaris',
+	'sunny-isles',
 	'park-grove',
-	'petretta',
+	'solaris',
 	'casa-del-mar',
 	'massis',
+	'asheville',
+	'petretta',
 	'selassie',
 	'placeres',
-	'baby-room',
-	'asheville',
-	'sunny-isles',
-	'bathroom-design',
 	'greenberg',
-	'kitchen',
 	'renders',
+	'bathroom-design',
+	'kitchen',
+	'baby-room',
 ] as const;
 
 export function getPortfolioProjects(): Project[] {
