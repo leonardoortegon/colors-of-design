@@ -2,6 +2,11 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/webmail/",
+      "destination": "https://premium80.web-hosting.com:2096/",
+      "permanent": false
+    },
+    {
       "source": "/webmail/:path*",
       "destination": "https://premium80.web-hosting.com:2096/",
       "permanent": false
