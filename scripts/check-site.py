@@ -87,6 +87,8 @@ vercel_static = {r['source']: r['destination'] for r in vercel['redirects'] if '
 if vercel_static != redirects:
     errors.append(f'Redirect mismatch between vercel.json and redirects.json: {set(vercel_static.items()) ^ set(redirects.items())}')
 for source, target in redirects.items():
+    if urlsplit(target).scheme in ('http', 'https'):
+        continue
     dest = DIST/target.strip('/')/'index.html'
     if not dest.exists(): errors.append(f'{source}: missing redirect target {target}')
     if target.rstrip('/') in redirects: errors.append(f'{source}: redirect chain')

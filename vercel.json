@@ -3,12 +3,12 @@
   "redirects": [
     {
       "source": "/webmail/",
-      "destination": "https://premium80.web-hosting.com:2096/",
+      "destination": "https://webmail-p80.web-hosting.com/",
       "permanent": false
     },
     {
       "source": "/webmail/:path*",
-      "destination": "https://premium80.web-hosting.com:2096/",
+      "destination": "https://webmail-p80.web-hosting.com/",
       "permanent": false
     },
     {
