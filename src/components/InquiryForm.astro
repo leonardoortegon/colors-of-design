@@ -74,11 +74,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 			</div>
 			{turnstileSiteKey && (
 				<div
-					class="cf-turnstile"
+					class="cf-turnstile inquiry-form__security"
 					data-sitekey={turnstileSiteKey}
 					data-action="contact_form"
 					data-appearance="interaction-only"
 					data-size="flexible"
+					data-theme="light"
 				></div>
 			)}
 			<button class="inquiry-form__button" type="submit" data-submit-button>{resolvedSubmit}</button>
@@ -143,11 +144,12 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 			</div>
 			{turnstileSiteKey && (
 				<div
-					class="cf-turnstile"
+					class="cf-turnstile inquiry-form__security"
 					data-sitekey={turnstileSiteKey}
 					data-action="contact_form"
 					data-appearance="interaction-only"
 					data-size="flexible"
+					data-theme="light"
 				></div>
 			)}
 			<button class="inquiry-form__button" type="submit" data-submit-button>
@@ -236,6 +238,11 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		transition: background 0.2s, opacity 0.2s;
+	}
+
+	.inquiry-form__security {
+		width: min(100%, 300px);
+		justify-self: center;
 	}
 
 	.inquiry-form__button:hover:not(:disabled) {
