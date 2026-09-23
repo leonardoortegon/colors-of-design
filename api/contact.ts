@@ -10,6 +10,19 @@ const MAX_LENGTH = {
 	message: 1800,
 } as const;
 
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const MIN_FORM_COMPLETION_MS = 2_000;
+const requestHistory = new Map<string, number[]>();
+const PRODUCTION_HOSTNAMES = new Set(['colorsofdesign.com', 'www.colorsofdesign.com']);
+
+interface TurnstileResult {
+	success: boolean;
+	hostname?: string;
+	action?: string;
+	'error-codes'?: string[];
+}
+
 function trim(value: unknown, max: number): string {
 	return String(value ?? '')
 		.trim()
@@ -29,7 +42,57 @@ function escapeHtml(value: string): string {
 		.replaceAll("'", '&#39;');
 }
 
+function getClientIp(req: VercelRequest): string {
+	const forwarded = req.headers['x-forwarded-for'];
+	const value = Array.isArray(forwarded) ? forwarded[0] : forwarded;
+	return value?.split(',')[0]?.trim() || req.socket.remoteAddress || 'unknown';
+}
+
+function isRateLimited(ip: string): boolean {
+	const now = Date.now();
+	const cutoff = now - RATE_LIMIT_WINDOW_MS;
+	const recent = (requestHistory.get(ip) || []).filter((timestamp) => timestamp > cutoff);
+
+	if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+		requestHistory.set(ip, recent);
+		return true;
+	}
+
+	recent.push(now);
+	requestHistory.set(ip, recent);
+
+	if (requestHistory.size > 1_000) {
+		for (const [key, timestamps] of requestHistory) {
+			if (!timestamps.some((timestamp) => timestamp > cutoff)) requestHistory.delete(key);
+		}
+	}
+
+	return false;
+}
+
+async function verifyTurnstile(
+	token: string,
+	secret: string,
+	remoteIp: string,
+): Promise<TurnstileResult> {
+	const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({
+			secret,
+			response: token,
+			remoteip: remoteIp === 'unknown' ? undefined : remoteIp,
+		}),
+		signal: AbortSignal.timeout(8_000),
+	});
+
+	if (!response.ok) return { success: false, 'error-codes': ['siteverify-unavailable'] };
+	return (await response.json()) as TurnstileResult;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+	res.setHeader('Cache-Control', 'no-store');
+
 	if (req.method === 'OPTIONS') {
 		res.setHeader('Allow', 'POST, OPTIONS');
 		return res.status(204).end();
@@ -58,6 +121,51 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		return res.status(200).json({ ok: true });
 	}
 
+	const origin = req.headers.origin;
+	if (
+		origin &&
+		origin !== 'https://colorsofdesign.com' &&
+		origin !== 'https://www.colorsofdesign.com' &&
+		!origin.startsWith('http://localhost:')
+	) {
+		return res.status(403).json({ error: 'Unable to verify this submission.' });
+	}
+
+	const startedAt = Number(body.startedAt);
+	const completionTime = Date.now() - startedAt;
+	if (!Number.isFinite(startedAt) || completionTime < MIN_FORM_COMPLETION_MS) {
+		return res.status(200).json({ ok: true });
+	}
+
+	const remoteIp = getClientIp(req);
+	if (isRateLimited(remoteIp)) {
+		return res.status(429).json({
+			error: 'Too many messages were submitted. Please wait a few minutes and try again.',
+		});
+	}
+
+	const turnstileSecret = process.env.TURNSTILE_SECRET_KEY?.trim();
+	if (turnstileSecret) {
+		const turnstileToken = trim(body.turnstileToken, 2_048);
+		if (!turnstileToken) {
+			return res.status(400).json({ error: 'Please complete the security check.' });
+		}
+
+		try {
+			const validation = await verifyTurnstile(turnstileToken, turnstileSecret, remoteIp);
+			const hostnameIsValid =
+				process.env.VERCEL_ENV !== 'production' ||
+				(validation.hostname ? PRODUCTION_HOSTNAMES.has(validation.hostname) : false);
+			if (!validation.success || validation.action !== 'contact_form' || !hostnameIsValid) {
+				console.warn('Turnstile rejected contact form submission', validation['error-codes']);
+				return res.status(403).json({ error: 'Security verification failed. Please try again.' });
+			}
+		} catch (error) {
+			console.error('Turnstile verification error:', error);
+			return res.status(503).json({ error: 'Security verification is temporarily unavailable.' });
+		}
+	}
+
 	const name = trim(body.name, MAX_LENGTH.name);
 	const email = trim(body.email, MAX_LENGTH.email);
 	const phone = trim(body.phone, MAX_LENGTH.phone);
@@ -66,11 +174,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	const message = trim(body.message, MAX_LENGTH.message);
 	const source = trim(body.source, 40) || 'website';
 
-	if (!name || !message) {
-		return res.status(400).json({ error: 'Name and message are required.' });
+	if (!name || !email || !message) {
+		return res.status(400).json({ error: 'Name, email, and message are required.' });
 	}
 
-	if (email && !isValidEmail(email)) {
+	if (!isValidEmail(email)) {
 		return res.status(400).json({ error: 'Please provide a valid email address.' });
 	}
 

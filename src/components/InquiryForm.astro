@@ -24,6 +24,7 @@ const {
 const t = copy(locale);
 const resolvedSubmit = submitLabel ?? t.sendMessage;
 const fieldId = (name: string) => `${idPrefix}${name}`;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 {
@@ -71,6 +72,15 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 				<label for={fieldId('inquiry-message')}>{t.message}</label>
 				<textarea id={fieldId('inquiry-message')} name="message" rows="4" required maxlength="1800" />
 			</div>
+			{turnstileSiteKey && (
+				<div
+					class="cf-turnstile"
+					data-sitekey={turnstileSiteKey}
+					data-action="contact_form"
+					data-appearance="interaction-only"
+					data-size="flexible"
+				></div>
+			)}
 			<button class="inquiry-form__button" type="submit" data-submit-button>{resolvedSubmit}</button>
 			<p class="inquiry-form__status" data-form-status role="status" hidden></p>
 			{showPrivacyNote && <p class="inquiry-form__privacy">{t.privacyNote}</p>}
@@ -131,6 +141,15 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 					placeholder={t.visionPlaceholder}
 				/>
 			</div>
+			{turnstileSiteKey && (
+				<div
+					class="cf-turnstile"
+					data-sitekey={turnstileSiteKey}
+					data-action="contact_form"
+					data-appearance="interaction-only"
+					data-size="flexible"
+				></div>
+			)}
 			<button class="inquiry-form__button" type="submit" data-submit-button>
 				{resolvedSubmit}
 			</button>
@@ -301,6 +320,8 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 			service: value('service'),
 			message: value('message'),
 			website: value('website'),
+			startedAt: Number(form.dataset.startedAt || 0),
+			turnstileToken: value('cf-turnstile-response'),
 			source: form.dataset.source || 'website',
 		};
 
@@ -333,12 +354,23 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 			}
 
 			form.reset();
+			form.dataset.startedAt = String(Date.now());
+			const turnstile = (window as Window & {
+				turnstile?: { reset: (container?: string | HTMLElement) => void };
+			}).turnstile;
+			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
+			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
 			if (status) {
 				status.hidden = false;
 				status.dataset.state = 'success';
 				status.textContent = form.dataset.success || 'Thank you. Your message has been sent.';
 			}
 		} catch (error) {
+			const turnstile = (window as Window & {
+				turnstile?: { reset: (container?: string | HTMLElement) => void };
+			}).turnstile;
+			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
+			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
 			if (status) {
 				status.hidden = false;
 				status.dataset.state = 'error';
@@ -354,6 +386,7 @@ const fieldId = (name: string) => `${idPrefix}${name}`;
 	}
 
 	document.querySelectorAll<HTMLFormElement>('[data-inquiry-form]').forEach((form) => {
+		form.dataset.startedAt = String(Date.now());
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
 			if (!form.reportValidity()) return;

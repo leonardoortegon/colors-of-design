@@ -83,6 +83,7 @@ const structuredData = {
 	'@context': 'https://schema.org',
 	'@graph': [organizationLd, websiteLd, ...graph],
 };
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <!doctype html>
@@ -119,6 +120,9 @@ const structuredData = {
 			href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300..600&display=swap"
 			rel="stylesheet"
 		/>
+		{turnstileSiteKey && (
+			<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+		)}
 	</head>
 	<body>
 		<a class="skip-link" href="#main">{t.skipToContent}</a>

@@ -36,6 +36,13 @@ Required environment variables (set in Vercel → Project → Settings → Envir
 - `CONTACT_TO_EMAIL` — destination inbox (defaults to `interiors@colorsofdesign.com`)
 - `CONTACT_FROM_EMAIL` — verified Resend from address (e.g. `Colors of Design <interiors@colorsofdesign.com>`)
 
+Recommended anti-spam environment variables:
+
+- `PUBLIC_TURNSTILE_SITE_KEY` — public site key for a Cloudflare Turnstile widget restricted to `colorsofdesign.com` and `www.colorsofdesign.com`
+- `TURNSTILE_SECRET_KEY` — private key for server-side Turnstile verification
+
+The API also applies a honeypot, form-completion timing check, same-origin check, and a lightweight per-instance rate limit. Turnstile is only enforced when `TURNSTILE_SECRET_KEY` is configured; set both Turnstile variables together before deploying.
+
 Copy `.env.example` for local values. For local API testing, run `vercel dev` (plain `astro dev` serves pages only).
 
 Without JavaScript, visitors still have direct email and telephone links.
