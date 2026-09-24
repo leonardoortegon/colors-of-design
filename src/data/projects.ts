@@ -518,20 +518,20 @@ export const projects: Project[] = [
 	{
 		slug: 'selassie',
 		name: 'Key Biscayne',
-		location: 'Miami, FL',
+		location: 'Key Biscayne, FL',
 		scope: 'Full Residence · Interior Design & Furnishings',
 		concept:
-			'A Miami residence shaped across living, bedroom, bathroom, kids room, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
+			'A Key Biscayne residence shaped across living, bedroom, bathroom, kids room, and circulation, custom storage, warm materials, and rooms composed for both gathering and quiet retreat.',
 		services: ['Full-Service Interior Design', 'Furnishings & Styling'],
 		year: '2024',
 		imageSrc: '/selassie/selassie-living-room-01.avif',
 		imageAlt:
-			'Selassie living room interior with layered furnishings and natural light by Colors of Design Group',
+			'Key Biscayne living room interior with layered furnishings and natural light by Colors of Design Group',
 		imageWidth: 2000,
 		imageHeight: 1335,
-		seoTitle: 'Selassie Interior Design | Colors of Design Group',
+		seoTitle: 'Key Biscayne Interior Design Project | Colors of Design',
 		seoDescription:
-			'Interior design for Selassie, a Miami residence, living room, bedroom, bathroom, kids room, custom storage, and tailored furnishings composed for everyday ease by Colors of Design Group.',
+			'Explore a Key Biscayne residence with refined living spaces, bedrooms, custom storage, layered lighting, and tailored furnishings by Colors of Design Group.',
 		challenge:
 			'The home needed to feel complete across open living areas and private rooms, with storage and millwork that integrated cleanly into the architecture. The clients wanted spaces that could host comfortably while still offering quiet retreat.',
 		approach:

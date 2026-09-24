@@ -157,11 +157,6 @@
       "permanent": true
     },
     {
-      "source": "/key-biscayne-luxury-interior-design-services",
-      "destination": "/services/",
-      "permanent": true
-    },
-    {
       "source": "/north-carolina-luxury-interior-design-services",
       "destination": "/services/",
       "permanent": true

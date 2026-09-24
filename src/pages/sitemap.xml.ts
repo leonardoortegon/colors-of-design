@@ -14,6 +14,7 @@ const englishPaths = [
 	'/work-process/',
 	'/contact-us/',
 	'/awards-and-recognitions/',
+	'/key-biscayne-luxury-interior-design-services/',
 	'/interior-design-blog/',
 	`${shopBasePath}/`,
 	'/privacy-policy/',

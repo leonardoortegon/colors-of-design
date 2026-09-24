@@ -1,0 +1,279 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import ConversionSection from './ConversionSection.astro';
+import { absoluteUrl, site } from '../data/site';
+import { localizedPath, type Locale } from '../i18n/locale';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const isSpanish = locale === 'es';
+const path = localizedPath(locale, '/key-biscayne-luxury-interior-design-services/');
+const pageUrl = absoluteUrl(path);
+
+const content = isSpanish
+	? {
+			title: 'Diseño de interiores de lujo en Key Biscayne | Colors of Design',
+			description:
+				'Servicios de diseño de interiores de lujo en Key Biscayne, desde renovaciones y mobiliario hasta iluminación, carpintería personalizada y coordinación de proyectos.',
+			home: 'Inicio',
+			crumb: 'Diseño de interiores en Key Biscayne',
+			eyebrow: 'Diseño de interiores en Key Biscayne',
+			heading: 'Servicios de diseño de interiores de lujo en Key Biscayne',
+			intro:
+				'Colors of Design Group crea residencias refinadas y personales en Key Biscayne. Guiamos cada etapa del proyecto con un enfoque cercano que conecta la arquitectura interior, los acabados, el mobiliario y la instalación final.',
+			secondary:
+				'Ya sea una renovación completa, una nueva residencia o una actualización cuidadosamente seleccionada, desarrollamos cada espacio alrededor de la manera en que nuestros clientes viven, reciben invitados y descansan.',
+			start: 'Comience su proyecto',
+			servicesEyebrow: 'Un enfoque integral',
+			servicesHeading: 'Diseño coordinado, de la idea a la instalación',
+			servicesIntro:
+				'El alcance se adapta a cada propiedad, pero cada proyecto se beneficia de una visión clara, decisiones coordinadas y atención constante a los detalles.',
+			projectEyebrow: 'Proyecto destacado en Key Biscayne',
+			projectHeading: 'Una residencia diseñada como un conjunto completo',
+			projectCopy:
+				'Esta residencia de Key Biscayne reúne áreas sociales abiertas y habitaciones privadas mediante una paleta cálida, mobiliario a medida, iluminación en capas y carpintería integrada.',
+			viewProject: 'Ver el proyecto de Key Biscayne',
+			processEyebrow: 'Nuestra manera de trabajar',
+			processHeading: 'Un proceso personal, claro y detallado',
+			processIntro:
+				'Nuestro estudio dirige el proyecto con una comunicación constante y un alcance definido, para que cada decisión contribuya a un resultado coherente y duradero.',
+			steps: [
+				['01', 'Descubrir', 'Conocemos su estilo de vida, prioridades, propiedad, calendario e inversión prevista.'],
+				['02', 'Diseñar', 'Desarrollamos la distribución, los materiales, la iluminación, el mobiliario y los detalles arquitectónicos como una sola composición.'],
+				['03', 'Realizar', 'Coordinamos compras, entregas, instalación y los detalles finales para completar la visión.'],
+			],
+			services: [
+				['Diseño de interiores', 'Concepto, materiales, mobiliario y dirección completa del diseño.', 'interior-design'],
+				['Arquitectura de interiores', 'Planificación espacial, detalles arquitectónicos y especificaciones.', 'interior-architecture'],
+				['Servicio llave en mano', 'Dirección integral desde la primera idea hasta la instalación final.', 'turn-key-services'],
+				['Planificación del espacio', 'Distribuciones pensadas para el movimiento, la comodidad y la vida diaria.', 'space-planning'],
+				['Carpintería personalizada', 'Gabinetes, muebles empotrados y detalles adaptados a la arquitectura.', 'custom-millwork-cabinetry'],
+				['Iluminación y mobiliario', 'Selecciones coordinadas que aportan calidez, proporción y personalidad.', 'lighting-design'],
+			],
+		}
+	: {
+			title: 'Luxury Interior Design Services in Key Biscayne | Colors of Design',
+			description:
+				'Luxury interior design services in Key Biscayne, including renovations, furnishings, lighting, custom millwork, and project coordination from concept to completion.',
+			home: 'Home',
+			crumb: 'Key Biscayne Interior Design',
+			eyebrow: 'Key Biscayne Interior Design',
+			heading: 'Luxury Interior Design Services in Key Biscayne',
+			intro:
+				'Colors of Design Group creates refined, personal residences in Key Biscayne. We guide every stage of the project through a highly attentive approach that connects interior architecture, finishes, furnishings, and final installation.',
+			secondary:
+				'Whether the project is a complete renovation, a new residence, or a carefully considered update, we shape each space around how our clients live, gather, and retreat.',
+			start: 'Start your project',
+			servicesEyebrow: 'A complete approach',
+			servicesHeading: 'Coordinated design, from first idea to final installation',
+			servicesIntro:
+				'The scope is tailored to each property, while every project benefits from a clear vision, coordinated decisions, and consistent attention to detail.',
+			projectEyebrow: 'Featured Key Biscayne project',
+			projectHeading: 'A residence designed as one complete whole',
+			projectCopy:
+				'This Key Biscayne residence brings open gathering spaces and private rooms together through a warm palette, tailored furnishings, layered lighting, and integrated custom cabinetry.',
+			viewProject: 'View the Key Biscayne project',
+			processEyebrow: 'How we work',
+			processHeading: 'A personal, clear, and detailed process',
+			processIntro:
+				'Our studio leads the work with consistent communication and a defined scope, allowing every decision to contribute to a cohesive and enduring result.',
+			steps: [
+				['01', 'Discover', 'We learn how you live, what you value, and the priorities, timeline, and investment for your property.'],
+				['02', 'Design', 'We develop the layout, materials, lighting, furnishings, and architectural details as one considered composition.'],
+				['03', 'Deliver', 'We coordinate purchasing, deliveries, installation, and finishing details to bring the vision to completion.'],
+			],
+			services: [
+				['Interior Design', 'Concept development, materials, furnishings, and complete design direction.', 'interior-design'],
+				['Interior Architecture', 'Spatial planning, architectural details, drawings, and specifications.', 'interior-architecture'],
+				['Turn Key Services', 'End-to-end leadership from the first idea through final installation.', 'turn-key-services'],
+				['Space Planning', 'Layouts composed for movement, comfort, and everyday life.', 'space-planning'],
+				['Custom Millwork & Cabinetry', 'Built-ins, cabinetry, and details tailored to the architecture.', 'custom-millwork-cabinetry'],
+				['Lighting & Furnishings', 'Coordinated selections that bring warmth, proportion, and character.', 'lighting-design'],
+			],
+		};
+
+const jsonLd = [
+	{
+		'@type': 'WebPage',
+		'@id': `${pageUrl}#page`,
+		url: pageUrl,
+		name: content.heading,
+		description: content.description,
+		isPartOf: { '@id': `${site.url}/#website` },
+		about: { '@id': `${pageUrl}#service` },
+	},
+	{
+		'@type': 'Service',
+		'@id': `${pageUrl}#service`,
+		name: content.heading,
+		description: content.description,
+		url: pageUrl,
+		image: absoluteUrl('/selassie/selassie-living-room-01.avif'),
+		provider: { '@id': `${site.url}/#studio` },
+		areaServed: {
+			'@type': 'City',
+			name: 'Key Biscayne',
+			containedInPlace: { '@type': 'State', name: 'Florida' },
+		},
+		hasOfferCatalog: {
+			'@type': 'OfferCatalog',
+			name: isSpanish ? 'Servicios de diseño' : 'Design services',
+			itemListElement: content.services.map(([name, description]) => ({
+				'@type': 'Offer',
+				itemOffered: { '@type': 'Service', name, description },
+			})),
+		},
+	},
+	{
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: content.home, item: absoluteUrl(localizedPath(locale, '/')) },
+			{ '@type': 'ListItem', position: 2, name: content.crumb, item: pageUrl },
+		],
+	},
+];
+---
+
+<BaseLayout
+	title={content.title}
+	description={content.description}
+	image="/selassie/selassie-living-room-01.avif"
+	canonicalPath={path}
+	jsonLd={jsonLd}
+>
+	<main class="page key-biscayne" id="main">
+		<section class="key-biscayne__hero" data-nav-earth-top data-nav-surface="earth">
+			<div class="key-biscayne__container">
+				<Breadcrumbs items={[{ label: content.home, href: localizedPath(locale, '/') }, { label: content.crumb }]} />
+				<div class="key-biscayne__hero-grid">
+					<div class="key-biscayne__hero-copy">
+						<p class="eyebrow">{content.eyebrow}</p>
+						<h1>{content.heading}</h1>
+						<p class="key-biscayne__lead">{content.intro}</p>
+						<p>{content.secondary}</p>
+						<a class="text-link" href="#inquiry">{content.start}</a>
+					</div>
+					<figure class="key-biscayne__hero-media">
+						<img
+							src="/selassie/selassie-living-room-01.avif"
+							alt={isSpanish ? 'Sala de una residencia en Key Biscayne diseñada por Colors of Design Group' : 'Key Biscayne residence living room designed by Colors of Design Group'}
+							width="2000"
+							height="1335"
+							fetchpriority="high"
+						/>
+					</figure>
+				</div>
+			</div>
+		</section>
+
+		<section class="key-biscayne__services" aria-labelledby="key-biscayne-services">
+			<div class="key-biscayne__container">
+				<header class="key-biscayne__section-header">
+					<p class="eyebrow">{content.servicesEyebrow}</p>
+					<h2 id="key-biscayne-services">{content.servicesHeading}</h2>
+					<p>{content.servicesIntro}</p>
+				</header>
+				<ul class="key-biscayne__service-grid">
+					{content.services.map(([name, description, slug]) => (
+						<li>
+							<a href={localizedPath(locale, `/services/${slug}/`)}>
+								<h3>{name}</h3>
+								<p>{description}</p>
+								<span aria-hidden="true">↗</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+
+		<section class="key-biscayne__project" aria-labelledby="key-biscayne-project" data-nav-surface="earth">
+			<div class="key-biscayne__container key-biscayne__project-grid">
+				<figure>
+					<img
+						src="/selassie/selassie-entrance-01.avif"
+						alt={isSpanish ? 'Entrada de una residencia en Key Biscayne con mobiliario seleccionado' : 'Key Biscayne residence entry with tailored furnishings'}
+						width="2000"
+						height="2667"
+						loading="lazy"
+					/>
+				</figure>
+				<div class="key-biscayne__project-copy">
+					<p class="eyebrow">{content.projectEyebrow}</p>
+					<h2 id="key-biscayne-project">{content.projectHeading}</h2>
+					<p>{content.projectCopy}</p>
+					<a class="text-link" href={localizedPath(locale, '/work/selassie/')}>{content.viewProject}</a>
+				</div>
+			</div>
+		</section>
+
+		<section class="key-biscayne__process" aria-labelledby="key-biscayne-process">
+			<div class="key-biscayne__container">
+				<header class="key-biscayne__section-header">
+					<p class="eyebrow">{content.processEyebrow}</p>
+					<h2 id="key-biscayne-process">{content.processHeading}</h2>
+					<p>{content.processIntro}</p>
+				</header>
+				<ol class="key-biscayne__steps">
+					{content.steps.map(([number, name, description]) => (
+						<li>
+							<span>{number}</span>
+							<h3>{name}</h3>
+							<p>{description}</p>
+						</li>
+					))}
+				</ol>
+			</div>
+		</section>
+
+		<ConversionSection locale={locale} />
+	</main>
+</BaseLayout>
+
+<style>
+	.key-biscayne__container { width: 100%; max-width: 1400px; margin-inline: auto; padding-inline: var(--site-gutter); }
+	.key-biscayne__hero { margin-top: -4.75rem; padding-block: calc(4.75rem + 2rem) clamp(4.5rem, 8vw, 7rem); background: var(--color-earth); }
+	.key-biscayne__hero-grid, .key-biscayne__project-grid { display: grid; grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: center; }
+	.key-biscayne__hero-grid { margin-top: clamp(2.5rem, 6vw, 5rem); }
+	.key-biscayne__hero-copy, .key-biscayne__project-copy { max-width: 36rem; }
+	.key-biscayne__hero-copy h1 { font-family: var(--font-heading); font-size: clamp(2.75rem, 5vw, 4.75rem); font-weight: 400; line-height: 1.05; letter-spacing: -.025em; margin-top: 1.25rem; text-wrap: balance; }
+	.key-biscayne__hero-copy p:not(.eyebrow), .key-biscayne__section-header > p:not(.eyebrow), .key-biscayne__project-copy p:not(.eyebrow) { color: var(--color-text-muted); line-height: 1.85; margin-top: 1.25rem; }
+	.key-biscayne__hero-copy .key-biscayne__lead { font-size: clamp(1rem, 1.3vw, 1.125rem); }
+	.key-biscayne__hero-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+	.key-biscayne__services, .key-biscayne__process { padding-block: clamp(4.5rem, 8vw, 7rem); background: var(--color-bg); }
+	.key-biscayne__section-header { max-width: 46rem; }
+	.key-biscayne__section-header h2, .key-biscayne__project-copy h2 { font-family: var(--font-heading); font-size: clamp(2.25rem, 4vw, 3.75rem); font-weight: 400; line-height: 1.1; letter-spacing: -.02em; margin-top: 1.25rem; text-wrap: balance; }
+	.key-biscayne__service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; margin-top: clamp(3rem, 6vw, 5rem); border-top: 1px solid #dcd9d1; }
+	.key-biscayne__service-grid li { border-bottom: 1px solid #dcd9d1; }
+	.key-biscayne__service-grid li:not(:nth-child(3n + 1)) { border-left: 1px solid #dcd9d1; }
+	.key-biscayne__service-grid a { display: grid; grid-template-columns: 1fr auto; align-content: start; gap: 1rem; min-height: 15rem; padding: clamp(1.5rem, 3vw, 2.5rem); transition: background-color .2s ease; }
+	.key-biscayne__service-grid a:hover { background: var(--color-earth); }
+	.key-biscayne__service-grid h3 { font-family: var(--font-heading); font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 400; line-height: 1.2; }
+	.key-biscayne__service-grid p { grid-column: 1 / -1; color: var(--color-text-muted); line-height: 1.75; }
+	.key-biscayne__project { padding-block: clamp(4.5rem, 8vw, 7rem); background: var(--color-earth); }
+	.key-biscayne__project figure { width: min(100%, 37rem); }
+	.key-biscayne__project img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+	.key-biscayne__steps { list-style: none; margin-top: clamp(3rem, 6vw, 5rem); border-top: 1px solid #dcd9d1; }
+	.key-biscayne__steps li { display: grid; grid-template-columns: 4rem minmax(10rem, .6fr) minmax(0, 1.4fr); gap: clamp(1rem, 3vw, 3rem); padding-block: 2rem; border-bottom: 1px solid #dcd9d1; align-items: baseline; }
+	.key-biscayne__steps span { font-family: var(--font-heading); font-size: 1.375rem; color: #877465; }
+	.key-biscayne__steps h3 { font-family: var(--font-heading); font-size: clamp(1.5rem, 2.2vw, 2rem); font-weight: 400; }
+	.key-biscayne__steps p { color: var(--color-text-muted); line-height: 1.75; }
+	@media (max-width: 900px) {
+		.key-biscayne__hero-grid, .key-biscayne__project-grid { grid-template-columns: 1fr; }
+		.key-biscayne__hero-media { margin-top: 1rem; }
+		.key-biscayne__service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		.key-biscayne__service-grid li:not(:nth-child(3n + 1)) { border-left: 0; }
+		.key-biscayne__service-grid li:nth-child(even) { border-left: 1px solid #dcd9d1; }
+	}
+	@media (max-width: 600px) {
+		.key-biscayne__service-grid { grid-template-columns: 1fr; }
+		.key-biscayne__service-grid li:nth-child(even) { border-left: 0; }
+		.key-biscayne__service-grid a { min-height: 0; }
+		.key-biscayne__steps li { grid-template-columns: 2.5rem 1fr; }
+		.key-biscayne__steps p { grid-column: 2; }
+	}
+</style>
