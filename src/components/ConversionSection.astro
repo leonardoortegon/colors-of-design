@@ -13,6 +13,7 @@ const { locale = getLocale(Astro.url.pathname), submitLabel, privacyNote } = Ast
 const t = copy(locale);
 const resolvedSubmit = submitLabel ?? t.submitLabel;
 const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <section class="conversion" id="inquiry" aria-labelledby="conversion-heading" data-nav-surface="earth">
@@ -85,6 +86,17 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 							maxlength="1800"
 						></textarea>
 					</div>
+
+					{turnstileSiteKey && (
+						<div
+							class="cf-turnstile conversion__security"
+							data-sitekey={turnstileSiteKey}
+							data-action="contact_form"
+							data-appearance="interaction-only"
+							data-size="flexible"
+							data-theme="light"
+						></div>
+					)}
 
 					<button type="submit" class="conversion__submit" data-submit-button>{resolvedSubmit}</button>
 					<p class="conversion__status" data-form-status role="status" hidden></p>
@@ -183,6 +195,11 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 		min-height: 6rem;
 	}
 
+	.conversion__security {
+		width: min(100%, 300px);
+		align-self: center;
+	}
+
 	.conversion__submit {
 		display: inline-flex;
 		align-items: center;
@@ -266,6 +283,8 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 					phone: value('phone'),
 					message: value('message'),
 					website: value('website'),
+					startedAt: Number(form.dataset.startedAt || 0),
+					turnstileToken: value('cf-turnstile-response'),
 					source: form.dataset.source || 'conversion',
 				}),
 			});
@@ -280,12 +299,23 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 				);
 			}
 			form.reset();
+			form.dataset.startedAt = String(Date.now());
+			const turnstile = (window as Window & {
+				turnstile?: { reset: (container?: string | HTMLElement) => void };
+			}).turnstile;
+			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
+			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
 			if (status) {
 				status.hidden = false;
 				status.dataset.state = 'success';
 				status.textContent = form.dataset.success || 'Thank you. Your message has been sent.';
 			}
 		} catch (error) {
+			const turnstile = (window as Window & {
+				turnstile?: { reset: (container?: string | HTMLElement) => void };
+			}).turnstile;
+			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
+			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
 			if (status) {
 				status.hidden = false;
 				status.dataset.state = 'error';
@@ -301,6 +331,7 @@ const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
 	}
 
 	document.querySelectorAll<HTMLFormElement>('[data-conversion-form]').forEach((form) => {
+		form.dataset.startedAt = String(Date.now());
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
 			if (!form.reportValidity()) return;

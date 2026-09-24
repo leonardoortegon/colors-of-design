@@ -109,6 +109,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		return res.status(500).json({ error: 'Email service is not configured.' });
 	}
 
+	const turnstileSecret = process.env.TURNSTILE_SECRET_KEY?.trim();
+	if (process.env.VERCEL_ENV === 'production' && !turnstileSecret) {
+		console.error('TURNSTILE_SECRET_KEY is missing in production');
+		return res.status(503).json({ error: 'Security verification is temporarily unavailable.' });
+	}
+
 	let body: Record<string, unknown> = {};
 	try {
 		body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body ?? {});
@@ -144,7 +150,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		});
 	}
 
-	const turnstileSecret = process.env.TURNSTILE_SECRET_KEY?.trim();
 	if (turnstileSecret) {
 		const turnstileToken = trim(body.turnstileToken, 2_048);
 		if (!turnstileToken) {
