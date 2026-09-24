@@ -158,7 +158,7 @@ const jsonLd = [
 						<p>{project.outcome}</p>
 
 						{project.slug === 'selassie' && (
-							<a class="text-link" href={localizedPath(locale, '/key-biscayne-luxury-interior-design-services/')}>
+							<a class="text-link project__location-link" href={localizedPath(locale, '/key-biscayne-luxury-interior-design-services/')}>
 								{locale === 'es' ? 'Servicios de diseño en Key Biscayne' : 'Key Biscayne interior design services'}
 							</a>
 						)}
@@ -356,6 +356,10 @@ const jsonLd = [
 		font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
 		line-height: 1.75;
 		color: var(--color-text-muted);
+	}
+
+	.project__location-link {
+		align-self: flex-start;
 	}
 
 	.project__section-title {
