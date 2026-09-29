@@ -6,15 +6,38 @@ const MAX_LENGTH = {
 	email: 160,
 	phone: 40,
 	location: 150,
-	service: 120,
+	projectType: 40,
+	projectScope: 40,
+	timeline: 40,
 	message: 1800,
 } as const;
 
 const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
 const RATE_LIMIT_MAX_REQUESTS = 5;
-const MIN_FORM_COMPLETION_MS = 2_000;
+const MIN_FORM_COMPLETION_MS = 8_000;
 const requestHistory = new Map<string, number[]>();
 const PRODUCTION_HOSTNAMES = new Set(['colorsofdesign.com', 'www.colorsofdesign.com']);
+const FORM_VERSION = 'project-intake-v1';
+const PROJECT_TYPES: Record<string, string> = {
+	'full-service': 'Full-service interior design',
+	renovation: 'Renovation & interior architecture',
+	furnishings: 'Furnishings & styling',
+	'new-construction': 'New construction',
+	consultation: 'Design consultation',
+};
+const PROJECT_SCOPES: Record<string, string> = {
+	'whole-home': 'Entire home',
+	'multiple-rooms': 'Several rooms',
+	'single-room': 'One room',
+	commercial: 'Commercial space',
+};
+const TIMELINES: Record<string, string> = {
+	'ready-now': 'As soon as possible',
+	'one-three-months': 'Within 1–3 months',
+	'three-six-months': 'Within 3–6 months',
+	'six-plus-months': 'More than 6 months from now',
+	exploring: 'Still exploring',
+};
 
 interface TurnstileResult {
 	success: boolean;
@@ -143,6 +166,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		return res.status(200).json({ ok: true });
 	}
 
+	if (trim(body.formVersion, 40) !== FORM_VERSION) {
+		return res.status(400).json({ error: 'Please complete the project inquiry form.' });
+	}
+
+	const projectTypeKey = trim(body.projectType, MAX_LENGTH.projectType);
+	const projectScopeKey = trim(body.projectScope, MAX_LENGTH.projectScope);
+	const timelineKey = trim(body.timeline, MAX_LENGTH.timeline);
+	if (!PROJECT_TYPES[projectTypeKey] || !PROJECT_SCOPES[projectScopeKey] || !TIMELINES[timelineKey]) {
+		return res.status(400).json({ error: 'Please complete all project details.' });
+	}
+
 	const remoteIp = getClientIp(req);
 	if (isRateLimited(remoteIp)) {
 		return res.status(429).json({
@@ -175,23 +209,33 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	const email = trim(body.email, MAX_LENGTH.email);
 	const phone = trim(body.phone, MAX_LENGTH.phone);
 	const location = trim(body.location, MAX_LENGTH.location);
-	const service = trim(body.service, MAX_LENGTH.service);
 	const message = trim(body.message, MAX_LENGTH.message);
 	const source = trim(body.source, 40) || 'website';
+	const projectType = PROJECT_TYPES[projectTypeKey];
+	const projectScope = PROJECT_SCOPES[projectScopeKey];
+	const timeline = TIMELINES[timelineKey];
 
-	if (!name || !email || !message) {
-		return res.status(400).json({ error: 'Name, email, and message are required.' });
+	if (!name || !email || !phone || !location || !message) {
+		return res.status(400).json({ error: 'Please complete every required field.' });
 	}
 
 	if (!isValidEmail(email)) {
 		return res.status(400).json({ error: 'Please provide a valid email address.' });
 	}
 
+	if (phone.replace(/\D/g, '').length < 7) {
+		return res.status(400).json({ error: 'Please provide a valid phone number.' });
+	}
+
+	if (location.length < 3 || message.length < 30) {
+		return res.status(400).json({ error: 'Please provide a little more information about your project.' });
+	}
+
 	const to = process.env.CONTACT_TO_EMAIL || 'interiors@colorsofdesign.com';
 	const from =
 		process.env.CONTACT_FROM_EMAIL || 'Colors of Design <onboarding@resend.dev>';
 
-	const subjectParts = [name, location || service].filter(Boolean);
+	const subjectParts = [name, location, projectType].filter(Boolean);
 	const subject = `Project inquiry from ${subjectParts.join(' · ')}`;
 
 	const textLines = [
@@ -202,8 +246,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		`Name: ${name}`,
 		`Email: ${email || 'Not provided'}`,
 		`Phone: ${phone || 'Not provided'}`,
-		`Location: ${location || 'To discuss'}`,
-		`Service: ${service || 'To discuss'}`,
+		`Location: ${location}`,
+		`Project type: ${projectType}`,
+		`Project scope: ${projectScope}`,
+		`Timeline: ${timeline}`,
 		`Source: ${source}`,
 	];
 
@@ -211,8 +257,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		['Name', name],
 		['Email', email || 'Not provided'],
 		['Phone', phone || 'Not provided'],
-		['Location', location || 'To discuss'],
-		['Service', service || 'To discuss'],
+		['Location', location],
+		['Project type', projectType],
+		['Project scope', projectScope],
+		['Timeline', timeline],
 		['Source', source],
 	]
 		.map(

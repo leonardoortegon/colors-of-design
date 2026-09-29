@@ -1,4 +1,5 @@
 ---
+import InquiryForm from './InquiryForm.astro';
 import InquiryFormIntro from './InquiryFormIntro.astro';
 import { copy } from '../i18n/ui';
 import { getLocale, type Locale } from '../i18n/locale';
@@ -13,95 +14,21 @@ const { locale = getLocale(Astro.url.pathname), submitLabel, privacyNote } = Ast
 const t = copy(locale);
 const resolvedSubmit = submitLabel ?? t.submitLabel;
 const resolvedPrivacy = privacyNote ?? t.conversionPrivacy;
-const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <section class="conversion" id="inquiry" aria-labelledby="conversion-heading" data-nav-surface="earth">
 	<div class="conversion__inner">
 		<div class="conversion__stack">
 			<InquiryFormIntro id="conversion-heading" locale={locale} />
-
 			<div class="conversion__form-panel">
-				<form
-					class="conversion__form"
-					data-conversion-form
-					data-contact-endpoint="/api/contact/"
-					data-source="conversion"
-					data-sending={t.sending}
-					data-success={t.sendSuccess}
-					data-error={t.sendError}
-				>
-					<div class="conversion__honeypot" aria-hidden="true">
-						<label for="conversion-website">Website</label>
-						<input id="conversion-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-					</div>
-
-					<div class="conversion__field">
-						<label class="conversion__label" for="conversion-name">{t.name}</label>
-						<input
-							class="conversion__input"
-							type="text"
-							id="conversion-name"
-							name="name"
-							autocomplete="name"
-							required
-							maxlength="100"
-						/>
-					</div>
-
-					<div class="conversion__field">
-						<label class="conversion__label" for="conversion-email">{t.email}</label>
-						<input
-							class="conversion__input"
-							type="email"
-							id="conversion-email"
-							name="email"
-							autocomplete="email"
-							required
-							maxlength="160"
-						/>
-					</div>
-
-					<div class="conversion__field">
-						<label class="conversion__label" for="conversion-phone">{t.phone}</label>
-						<input
-							class="conversion__input"
-							type="tel"
-							id="conversion-phone"
-							name="phone"
-							autocomplete="tel"
-							required
-							maxlength="40"
-						/>
-					</div>
-
-					<div class="conversion__field">
-						<label class="conversion__label" for="conversion-message">{t.message}</label>
-						<textarea
-							class="conversion__textarea"
-							id="conversion-message"
-							name="message"
-							rows="4"
-							required
-							maxlength="1800"
-						></textarea>
-					</div>
-
-					{turnstileSiteKey && (
-						<div
-							class="cf-turnstile conversion__security"
-							data-sitekey={turnstileSiteKey}
-							data-action="contact_form"
-							data-appearance="interaction-only"
-							data-size="flexible"
-							data-theme="light"
-						></div>
-					)}
-
-					<button type="submit" class="conversion__submit" data-submit-button>{resolvedSubmit}</button>
-					<p class="conversion__status" data-form-status role="status" hidden></p>
-				</form>
-
+				<InquiryForm
+					simple
+					idPrefix="conversion-"
+					locale={locale}
+					source="conversion"
+					submitLabel={resolvedSubmit}
+					showPrivacyNote={false}
+				/>
 				<p class="conversion__privacy">{resolvedPrivacy}</p>
 			</div>
 		</div>
@@ -127,7 +54,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 		align-items: stretch;
 		gap: clamp(2.5rem, 5vw, 3.5rem);
 		width: 100%;
-		max-width: 30rem;
+		max-width: 34rem;
 		margin-inline: auto;
 	}
 
@@ -135,117 +62,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 		width: 100%;
 	}
 
-	.conversion__form {
-		display: flex;
-		flex-direction: column;
-		gap: 1.75rem;
-		position: relative;
-	}
-
-	.conversion__honeypot {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border: 0;
-	}
-
-	.conversion__field {
-		display: flex;
-		flex-direction: column;
-		gap: 0.625rem;
-	}
-
-	.conversion__label {
-		font-family: var(--font-body);
-		font-size: 0.6875rem;
-		font-weight: 500;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--color-text-muted);
-	}
-
-	.conversion__input,
-	.conversion__textarea {
-		width: 100%;
-		padding: 0.625rem 0;
-		font-family: var(--font-body);
-		font-size: 1rem;
-		line-height: 1.5;
-		color: var(--color-text);
-		background-color: transparent;
-		border: none;
-		border-bottom: 1px solid rgba(26, 26, 26, 0.16);
-		border-radius: 0;
-		transition: border-color 0.2s ease;
-	}
-
-	.conversion__input:focus,
-	.conversion__textarea:focus {
-		outline: none;
-		border-bottom-color: var(--color-text);
-	}
-
-	.conversion__textarea {
-		resize: vertical;
-		min-height: 6rem;
-	}
-
-	.conversion__security {
-		width: min(100%, 300px);
-		align-self: center;
-	}
-
-	.conversion__submit {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		margin-top: 0.5rem;
-		padding: 0.875rem 2rem;
-		font-family: var(--font-body);
-		font-size: 0.8125rem;
-		font-weight: 500;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: #ffffff;
-		background-color: var(--color-text);
-		border: 1px solid var(--color-text);
-		transition: background-color 0.2s ease, border-color 0.2s ease;
-	}
-
-	.conversion__submit:hover:not(:disabled) {
-		color: #ffffff;
-		background-color: var(--color-accent-hover);
-		border-color: var(--color-accent-hover);
-	}
-
-	.conversion__submit:disabled {
-		opacity: 0.65;
-		cursor: wait;
-	}
-
-	.conversion__status {
-		margin: 0;
-		font-family: var(--font-body);
-		font-size: 0.875rem;
-		line-height: 1.6;
-	}
-
-	.conversion__status[data-state='success'] {
-		color: #2f5d3a;
-	}
-
-	.conversion__status[data-state='error'] {
-		color: #8a2f2f;
-	}
-
 	.conversion__privacy {
-		margin-top: 1.25rem;
+		margin: 1.25rem 0 0;
 		font-family: var(--font-body);
 		font-size: 0.75rem;
 		line-height: 1.6;
@@ -253,89 +71,3 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 		opacity: 0.85;
 	}
 </style>
-
-<script>
-	async function submitConversion(form: HTMLFormElement) {
-		const endpoint = form.dataset.contactEndpoint || '/api/contact/';
-		const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
-		const status = form.querySelector<HTMLElement>('[data-form-status]');
-		const defaultLabel = button?.textContent || '';
-		const data = new FormData(form);
-		const value = (key: string) => String(data.get(key) || '').trim();
-
-		if (button) {
-			button.disabled = true;
-			button.textContent = form.dataset.sending || 'Sending…';
-		}
-		if (status) {
-			status.hidden = true;
-			status.removeAttribute('data-state');
-			status.textContent = '';
-		}
-
-		try {
-			const response = await fetch(endpoint, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-				body: JSON.stringify({
-					name: value('name'),
-					email: value('email'),
-					phone: value('phone'),
-					message: value('message'),
-					website: value('website'),
-					startedAt: Number(form.dataset.startedAt || 0),
-					turnstileToken: value('cf-turnstile-response'),
-					source: form.dataset.source || 'conversion',
-				}),
-			});
-			const result = (await response.json().catch(() => ({}))) as {
-				ok?: boolean;
-				error?: string;
-				detail?: string;
-			};
-			if (!response.ok || !result.ok) {
-				throw new Error(
-					result.detail || result.error || form.dataset.error || 'Unable to send your message.',
-				);
-			}
-			form.reset();
-			form.dataset.startedAt = String(Date.now());
-			const turnstile = (window as Window & {
-				turnstile?: { reset: (container?: string | HTMLElement) => void };
-			}).turnstile;
-			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
-			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
-			if (status) {
-				status.hidden = false;
-				status.dataset.state = 'success';
-				status.textContent = form.dataset.success || 'Thank you. Your message has been sent.';
-			}
-		} catch (error) {
-			const turnstile = (window as Window & {
-				turnstile?: { reset: (container?: string | HTMLElement) => void };
-			}).turnstile;
-			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
-			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
-			if (status) {
-				status.hidden = false;
-				status.dataset.state = 'error';
-				status.textContent =
-					error instanceof Error ? error.message : form.dataset.error || 'Unable to send your message.';
-			}
-		} finally {
-			if (button) {
-				button.disabled = false;
-				button.textContent = defaultLabel;
-			}
-		}
-	}
-
-	document.querySelectorAll<HTMLFormElement>('[data-conversion-form]').forEach((form) => {
-		form.dataset.startedAt = String(Date.now());
-		form.addEventListener('submit', (event) => {
-			event.preventDefault();
-			if (!form.reportValidity()) return;
-			void submitConversion(form);
-		});
-	});
-</script>

@@ -13,391 +13,339 @@ interface Props {
 }
 
 const {
-	simple = false,
 	idPrefix = '',
 	locale = getLocale(Astro.url.pathname),
 	submitLabel,
-	showPrivacyNote = simple,
-	source = simple ? 'contact' : 'inquiry',
+	showPrivacyNote = true,
+	source: sourceProp,
 } = Astro.props;
 
 const t = copy(locale);
 const resolvedSubmit = submitLabel ?? t.sendMessage;
+const source = sourceProp ?? (Astro.props.simple ? 'contact' : 'inquiry');
 const fieldId = (name: string) => `${idPrefix}${name}`;
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+
+const projectTypes = [
+	['full-service', t.projectTypeFull],
+	['renovation', t.projectTypeRenovation],
+	['furnishings', t.projectTypeFurnishings],
+	['new-construction', t.projectTypeConstruction],
+	['consultation', t.projectTypeConsultation],
+] as const;
+
+const scopes = [
+	['whole-home', t.projectScopeWhole],
+	['multiple-rooms', t.projectScopeMultiple],
+	['single-room', t.projectScopeSingle],
+	['commercial', t.projectScopeCommercial],
+] as const;
+
+const timelines = [
+	['ready-now', t.projectTimelineNow],
+	['one-three-months', t.projectTimelineOneThree],
+	['three-six-months', t.projectTimelineThreeSix],
+	['six-plus-months', t.projectTimelineSixPlus],
+	['exploring', t.projectTimelineExploring],
+] as const;
 ---
 
-{
-	simple ? (
-		<form
-			class="inquiry-form inquiry-form--simple"
-			data-inquiry-form
-			data-inquiry-simple
-			data-contact-endpoint="/api/contact/"
-			data-source={source}
-			data-sending={t.sending}
-			data-success={t.sendSuccess}
-			data-error={t.sendError}
-		>
-			<div class="inquiry-form__honeypot" aria-hidden="true">
-				<label for={fieldId('inquiry-website')}>Website</label>
-				<input
-					id={fieldId('inquiry-website')}
-					name="website"
-					type="text"
-					tabindex="-1"
-					autocomplete="off"
-				/>
+<form
+	class="inquiry-form"
+	data-inquiry-form
+	data-contact-endpoint="/api/contact/"
+	data-source={source}
+	data-sending={t.sending}
+	data-success={t.sendSuccess}
+	data-error={t.sendError}
+>
+	<div class="inquiry-form__honeypot" aria-hidden="true">
+		<label for={fieldId('website')}>Website</label>
+		<input id={fieldId('website')} name="website" type="text" tabindex="-1" autocomplete="off" />
+	</div>
+
+	<div
+		class="inquiry-form__progress"
+		aria-label={`${t.formStep} 1 ${t.formOf} 3`}
+		data-form-progress
+		data-step-label={t.formStep}
+		data-of-label={t.formOf}
+	>
+		<div class="inquiry-form__progress-item" data-progress-item data-state="active">
+			<span>1</span><small>{t.projectStepLabel}</small>
+		</div>
+		<div class="inquiry-form__progress-line" aria-hidden="true"></div>
+		<div class="inquiry-form__progress-item" data-progress-item>
+			<span>2</span><small>{t.visionStepLabel}</small>
+		</div>
+		<div class="inquiry-form__progress-line" aria-hidden="true"></div>
+		<div class="inquiry-form__progress-item" data-progress-item>
+			<span>3</span><small>{t.contactStepLabel}</small>
+		</div>
+	</div>
+
+	<fieldset class="inquiry-form__step" data-form-step>
+		<legend class="inquiry-form__step-heading" tabindex="-1" data-step-heading>
+			<span>{t.formStep} 1 {t.formOf} 3</span>
+			{t.projectStepTitle}
+		</legend>
+		<p class="inquiry-form__step-copy">{t.projectStepCopy}</p>
+
+		<div class="inquiry-form__field">
+			<p class="inquiry-form__label">{t.projectType} <span>{t.required}</span></p>
+			<div class="inquiry-form__choices">
+				{projectTypes.map(([value, label], index) => (
+					<div class="inquiry-form__choice">
+						<input
+							id={fieldId(`project-type-${value}`)}
+							type="radio"
+							name="projectType"
+							value={value}
+							required={index === 0}
+						/>
+						<label for={fieldId(`project-type-${value}`)}>{label}</label>
+					</div>
+				))}
 			</div>
-			<div>
-				<label for={fieldId('inquiry-name')}>{t.name}</label>
-				<input id={fieldId('inquiry-name')} name="name" autocomplete="name" required maxlength="100" />
-			</div>
-			<div>
-				<label for={fieldId('inquiry-email')}>{t.email}</label>
-				<input
-					id={fieldId('inquiry-email')}
-					name="email"
-					type="email"
-					autocomplete="email"
-					required
-					maxlength="160"
-				/>
-			</div>
-			<div>
-				<label for={fieldId('inquiry-phone')}>{t.phone}</label>
-				<input id={fieldId('inquiry-phone')} name="phone" type="tel" autocomplete="tel" required maxlength="40" />
-			</div>
-			<div>
-				<label for={fieldId('inquiry-message')}>{t.message}</label>
-				<textarea id={fieldId('inquiry-message')} name="message" rows="4" required maxlength="1800" />
-			</div>
-			{turnstileSiteKey && (
-				<div
-					class="cf-turnstile inquiry-form__security"
-					data-sitekey={turnstileSiteKey}
-					data-action="contact_form"
-					data-appearance="interaction-only"
-					data-size="flexible"
-					data-theme="light"
-				></div>
-			)}
-			<button class="inquiry-form__button" type="submit" data-submit-button>{resolvedSubmit}</button>
-			<p class="inquiry-form__status" data-form-status role="status" hidden></p>
-			{showPrivacyNote && <p class="inquiry-form__privacy">{t.privacyNote}</p>}
-		</form>
-	) : (
-		<form
-			class="inquiry-form"
-			data-inquiry-form
-			data-contact-endpoint="/api/contact/"
-			data-source={source}
-			data-sending={t.sending}
-			data-success={t.sendSuccess}
-			data-error={t.sendError}
-		>
-			<div class="inquiry-form__honeypot" aria-hidden="true">
-				<label for="inquiry-website">Website</label>
-				<input id="inquiry-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-			</div>
-			<div class="inquiry-form__pair">
-				<div>
-					<label for="inquiry-name">{t.name} <span>{t.required}</span></label>
-					<input id="inquiry-name" name="name" autocomplete="name" required maxlength="100" />
-				</div>
-				<div>
-					<label for="inquiry-email">{t.email} <span>{t.required}</span></label>
-					<input id="inquiry-email" name="email" type="email" autocomplete="email" required maxlength="160" />
-				</div>
-			</div>
-			<div class="inquiry-form__pair">
-				<div>
-					<label for="inquiry-phone">{t.phone} <span>{t.optional}</span></label>
-					<input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
-				</div>
-				<div>
-					<label for="inquiry-location">{t.projectLocation}</label>
-					<input id="inquiry-location" name="location" placeholder={t.cityState} maxlength="150" />
-				</div>
-			</div>
-			<div>
-				<label for="inquiry-service">{t.howCanWeHelp}</label>
-				<select id="inquiry-service" name="service">
-					<option value={t.serviceExplore}>{t.serviceExplore}</option>
-					<option>{t.serviceFull}</option>
-					<option>{t.serviceReno}</option>
-					<option>{t.serviceFurniture}</option>
-					<option>{t.serviceTurnkey}</option>
-					<option>{t.serviceConsult}</option>
+		</div>
+
+		<div class="inquiry-form__pair">
+			<div class="inquiry-form__field">
+				<label for={fieldId('scope')}>{t.projectScope} <span>{t.required}</span></label>
+				<select id={fieldId('scope')} name="projectScope" required>
+					<option value="" selected disabled>{t.selectOption}</option>
+					{scopes.map(([value, label]) => <option value={value}>{label}</option>)}
 				</select>
 			</div>
-			<div>
-				<label for="inquiry-message">{t.tellUsProject} <span>{t.required}</span></label>
-				<textarea
-					id="inquiry-message"
-					name="message"
-					rows="4"
-					required
-					maxlength="1800"
-					placeholder={t.visionPlaceholder}
-				/>
+			<div class="inquiry-form__field">
+				<label for={fieldId('location')}>{t.projectLocation} <span>{t.required}</span></label>
+				<input id={fieldId('location')} name="location" placeholder={t.cityState} required maxlength="150" />
 			</div>
-			{turnstileSiteKey && (
-				<div
-					class="cf-turnstile inquiry-form__security"
-					data-sitekey={turnstileSiteKey}
-					data-action="contact_form"
-					data-appearance="interaction-only"
-					data-size="flexible"
-					data-theme="light"
-				></div>
-			)}
-			<button class="inquiry-form__button" type="submit" data-submit-button>
-				{resolvedSubmit}
-			</button>
-			<p class="inquiry-form__status" data-form-status role="status" hidden></p>
-			<p class="inquiry-form__note">
-				{t.formNote}
-			</p>
-			<noscript>
-				<p>
-					{t.emailDirectly} <a href={`mailto:${site.email}`}>{site.email}</a>, {t.orCall}{' '}
-					<a href={site.phoneHref}>{site.phone}</a>.
-				</p>
-			</noscript>
-		</form>
-	)
-}
+		</div>
+
+		<div class="inquiry-form__actions inquiry-form__actions--end">
+			<button class="inquiry-form__next" type="button" data-step-next>{t.continueLabel}</button>
+		</div>
+	</fieldset>
+
+	<fieldset class="inquiry-form__step" data-form-step hidden>
+		<legend class="inquiry-form__step-heading" tabindex="-1" data-step-heading>
+			<span>{t.formStep} 2 {t.formOf} 3</span>
+			{t.visionStepTitle}
+		</legend>
+
+		<div class="inquiry-form__field">
+			<label for={fieldId('timeline')}>{t.projectTimeline} <span>{t.required}</span></label>
+			<select id={fieldId('timeline')} name="timeline" required>
+				<option value="" selected disabled>{t.selectOption}</option>
+				{timelines.map(([value, label]) => <option value={value}>{label}</option>)}
+			</select>
+		</div>
+
+		<div class="inquiry-form__field">
+			<label for={fieldId('message')}>{t.tellUsProject} <span>{t.required}</span></label>
+			<textarea id={fieldId('message')} name="message" rows="5" required minlength="30" maxlength="1800" placeholder={t.visionPlaceholder}></textarea>
+		</div>
+
+		<div class="inquiry-form__actions">
+			<button class="inquiry-form__back" type="button" data-step-back>{t.backLabel}</button>
+			<button class="inquiry-form__next" type="button" data-step-next>{t.continueLabel}</button>
+		</div>
+	</fieldset>
+
+	<fieldset class="inquiry-form__step" data-form-step hidden>
+		<legend class="inquiry-form__step-heading" tabindex="-1" data-step-heading>
+			<span>{t.formStep} 3 {t.formOf} 3</span>
+			{t.contactStepTitle}
+		</legend>
+
+		<div class="inquiry-form__field">
+			<label for={fieldId('name')}>{t.name} <span>{t.required}</span></label>
+			<input id={fieldId('name')} name="name" autocomplete="name" required maxlength="100" />
+		</div>
+		<div class="inquiry-form__pair">
+			<div class="inquiry-form__field">
+				<label for={fieldId('email')}>{t.email} <span>{t.required}</span></label>
+				<input id={fieldId('email')} name="email" type="email" autocomplete="email" required maxlength="160" />
+			</div>
+			<div class="inquiry-form__field">
+				<label for={fieldId('phone')}>{t.phone} <span>{t.required}</span></label>
+				<input id={fieldId('phone')} name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="40" />
+			</div>
+		</div>
+
+		{turnstileSiteKey && (
+			<div class="cf-turnstile inquiry-form__security" data-sitekey={turnstileSiteKey} data-action="contact_form" data-appearance="interaction-only" data-size="flexible" data-theme="light"></div>
+		)}
+
+		<div class="inquiry-form__actions">
+			<button class="inquiry-form__back" type="button" data-step-back>{t.backLabel}</button>
+			<button class="inquiry-form__button" type="submit" data-submit-button>{resolvedSubmit}</button>
+		</div>
+	</fieldset>
+
+	<p class="inquiry-form__status" data-form-status role="status" aria-live="polite" hidden></p>
+	{showPrivacyNote && <p class="inquiry-form__privacy">{t.privacyNote}</p>}
+	<noscript>
+		<p class="inquiry-form__privacy">
+			{t.emailDirectly} <a href={`mailto:${site.email}`}>{site.email}</a>, {t.orCall}{' '}
+			<a href={site.phoneHref}>{site.phone}</a>.
+		</p>
+	</noscript>
+</form>
 
 <style>
-	.inquiry-form {
-		display: grid;
-		gap: 1.75rem;
-	}
-
-	.inquiry-form__pair {
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1.5rem;
-	}
-
-	.inquiry-form__honeypot {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border: 0;
-	}
-
-	label {
-		display: block;
-		font-size: 0.6875rem;
-		font-weight: 500;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		margin-bottom: 0.5rem;
-	}
-
-	label span {
-		font-weight: 400;
-		color: var(--color-text-muted);
-	}
-
-	input,
-	textarea,
-	select {
-		width: 100%;
-		color: var(--color-text);
-		background: transparent;
-		font: inherit;
-		font-size: 1rem;
-		padding: 0.75rem 0;
-		border: 0;
-		border-bottom: 1px solid #aaa59b;
-		border-radius: 0;
-	}
-
-	textarea {
-		resize: vertical;
-	}
-
-	select {
-		padding-right: 1rem;
-	}
-
-	.inquiry-form__button {
-		display: block;
-		text-align: center;
-		padding: 1rem;
-		border: 1px solid var(--color-text);
-		font-size: 0.75rem;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		transition: background 0.2s, opacity 0.2s;
-	}
-
-	.inquiry-form__security {
-		width: min(100%, 300px);
-		justify-self: center;
-	}
-
-	.inquiry-form__button:hover:not(:disabled) {
-		background: #ece6dc;
-	}
-
-	.inquiry-form__button:disabled {
-		opacity: 0.65;
-		cursor: wait;
-	}
-
-	.inquiry-form--simple .inquiry-form__button {
-		color: #ffffff;
-		background-color: var(--color-text);
-		border-color: var(--color-text);
-		padding: 0.875rem 2rem;
-		font-size: 0.8125rem;
-		letter-spacing: 0.12em;
-	}
-
-	.inquiry-form--simple .inquiry-form__button:hover:not(:disabled) {
-		color: #ffffff;
-		background-color: var(--color-accent-hover);
-		border-color: var(--color-accent-hover);
-	}
-
-	.inquiry-form__privacy {
-		margin: 0;
-		font-size: 0.75rem;
-		line-height: 1.6;
-		color: var(--color-text-muted);
-		opacity: 0.85;
-	}
-
-	.inquiry-form__note {
-		font-size: 0.75rem;
-		line-height: 1.8;
-		color: var(--color-text-muted);
-	}
-
-	.inquiry-form__note a {
-		text-decoration: underline;
-	}
-
-	.inquiry-form__status {
-		margin: 0;
-		font-size: 0.875rem;
-		line-height: 1.6;
-	}
-
-	.inquiry-form__status[data-state='success'] {
-		color: #2f5d3a;
-	}
-
-	.inquiry-form__status[data-state='error'] {
-		color: #8a2f2f;
-	}
+	.inquiry-form { display: grid; gap: 1.75rem; width: 100%; }
+	.inquiry-form__honeypot { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+	.inquiry-form__progress { display: grid; grid-template-columns: auto 1fr auto 1fr auto; align-items: start; gap: 0.625rem; }
+	.inquiry-form__progress-item { display: grid; justify-items: center; gap: 0.45rem; min-width: 3.5rem; color: var(--color-text-muted); }
+	.inquiry-form__progress-item span { display: grid; place-items: center; width: 2rem; height: 2rem; border: 1px solid #aaa59b; border-radius: 50%; font-size: 0.75rem; transition: color 0.2s, background 0.2s, border-color 0.2s; }
+	.inquiry-form__progress-item small { font-size: 0.625rem; letter-spacing: 0.08em; text-transform: uppercase; }
+	.inquiry-form__progress-item[data-state='active'], .inquiry-form__progress-item[data-state='complete'] { color: var(--color-text); }
+	.inquiry-form__progress-item[data-state='active'] span, .inquiry-form__progress-item[data-state='complete'] span { color: #fff; background: var(--color-text); border-color: var(--color-text); }
+	.inquiry-form__progress-line { height: 1px; margin-top: 1rem; background: #c9c3b9; }
+	.inquiry-form__step { display: grid; gap: 1.5rem; min-width: 0; padding: 0; margin: 0; border: 0; }
+	.inquiry-form__step[hidden] { display: none; }
+	.inquiry-form__step-heading { display: grid; gap: 0.45rem; width: 100%; padding: 0; font-family: var(--font-display); font-size: clamp(1.45rem, 4vw, 1.9rem); line-height: 1.15; }
+	.inquiry-form__step-heading:focus { outline: none; }
+	.inquiry-form__step-heading span { font-family: var(--font-body); font-size: 0.625rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-muted); }
+	.inquiry-form__step-copy, .inquiry-form__privacy { margin: 0; font-size: 0.75rem; line-height: 1.65; color: var(--color-text-muted); }
+	.inquiry-form__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+	.inquiry-form__field > label, .inquiry-form__label { display: block; margin: 0 0 0.5rem; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; }
+	.inquiry-form__field label span, .inquiry-form__label span { font-weight: 400; color: var(--color-text-muted); }
+	.inquiry-form input:not([type='radio']), .inquiry-form textarea, .inquiry-form select { width: 100%; color: var(--color-text); background: transparent; font: inherit; font-size: 1rem; padding: 0.75rem 0; border: 0; border-bottom: 1px solid #aaa59b; border-radius: 0; }
+	.inquiry-form textarea { resize: vertical; }
+	.inquiry-form select { padding-right: 1rem; }
+	.inquiry-form__choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.625rem; }
+	.inquiry-form__choice { position: relative; }
+	.inquiry-form__choice input { position: absolute; opacity: 0; pointer-events: none; }
+	.inquiry-form__choice label { display: flex; align-items: center; min-height: 3.5rem; margin: 0; padding: 0.75rem 0.9rem; border: 1px solid #c9c3b9; font-size: 0.75rem; line-height: 1.35; cursor: pointer; transition: border-color 0.2s, background-color 0.2s; }
+	.inquiry-form__choice input:checked + label { background: #e8e1d6; border-color: var(--color-text); }
+	.inquiry-form__choice input:focus-visible + label { outline: 2px solid var(--color-text); outline-offset: 2px; }
+	.inquiry-form__actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 0.25rem; }
+	.inquiry-form__actions--end { justify-content: flex-end; }
+	.inquiry-form__next, .inquiry-form__button, .inquiry-form__back { min-width: 8.5rem; padding: 0.9rem 1.4rem; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; transition: background 0.2s, color 0.2s, border-color 0.2s, opacity 0.2s; }
+	.inquiry-form__next, .inquiry-form__button { color: #fff; background: var(--color-text); border: 1px solid var(--color-text); }
+	.inquiry-form__back { color: var(--color-text); background: transparent; border: 1px solid #aaa59b; }
+	.inquiry-form__next:hover, .inquiry-form__button:hover:not(:disabled) { color: #fff; background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+	.inquiry-form__back:hover { border-color: var(--color-text); }
+	.inquiry-form__button:disabled { opacity: 0.65; cursor: wait; }
+	.inquiry-form__security { width: min(100%, 300px); justify-self: center; }
+	.inquiry-form__status { margin: 0; font-size: 0.875rem; line-height: 1.6; }
+	.inquiry-form__status[data-state='success'] { color: #2f5d3a; }
+	.inquiry-form__status[data-state='error'] { color: #8a2f2f; }
+	.inquiry-form__privacy a { text-decoration: underline; }
 
 	@media (max-width: 540px) {
-		.inquiry-form__pair {
-			grid-template-columns: 1fr;
-			gap: 1.75rem;
-		}
+		.inquiry-form__pair, .inquiry-form__choices { grid-template-columns: 1fr; }
+		.inquiry-form__pair { gap: 1.5rem; }
+		.inquiry-form__progress-item small { display: none; }
+		.inquiry-form__actions { align-items: stretch; }
+		.inquiry-form__next, .inquiry-form__button, .inquiry-form__back { min-width: 0; flex: 1; }
 	}
 </style>
 
 <script>
-	async function submitInquiry(form: HTMLFormElement) {
-		const endpoint = form.dataset.contactEndpoint || '/api/contact/';
-		const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
-		const status = form.querySelector<HTMLElement>('[data-form-status]');
-		const defaultLabel = button?.textContent || '';
+	const FORM_VERSION = 'project-intake-v1';
 
-		const data = new FormData(form);
-		const value = (key: string) => String(data.get(key) || '').trim();
+	function setupInquiryForm(form: HTMLFormElement) {
+		if (form.dataset.enhanced === 'true') return;
+		form.dataset.enhanced = 'true';
+		form.dataset.startedAt = String(Date.now());
 
-		const payload = {
-			name: value('name'),
-			email: value('email'),
-			phone: value('phone'),
-			location: value('location'),
-			service: value('service'),
-			message: value('message'),
-			website: value('website'),
-			startedAt: Number(form.dataset.startedAt || 0),
-			turnstileToken: value('cf-turnstile-response'),
-			source: form.dataset.source || 'website',
-		};
+		const steps = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-form-step]'));
+		const progressItems = Array.from(form.querySelectorAll<HTMLElement>('[data-progress-item]'));
+		const progress = form.querySelector<HTMLElement>('[data-form-progress]');
+		let currentStep = 0;
 
-		if (button) {
-			button.disabled = true;
-			button.textContent = form.dataset.sending || 'Sending…';
-		}
-		if (status) {
-			status.hidden = true;
-			status.removeAttribute('data-state');
-			status.textContent = '';
+		function showStep(nextStep: number, moveFocus = true) {
+			currentStep = Math.max(0, Math.min(nextStep, steps.length - 1));
+			steps.forEach((step, index) => { step.hidden = index !== currentStep; });
+			progressItems.forEach((item, index) => { item.dataset.state = index < currentStep ? 'complete' : index === currentStep ? 'active' : ''; });
+			if (progress) {
+				const stepLabel = progress.dataset.stepLabel || 'Step';
+				const ofLabel = progress.dataset.ofLabel || 'of';
+				progress.setAttribute('aria-label', `${stepLabel} ${currentStep + 1} ${ofLabel} ${steps.length}`);
+			}
+			if (moveFocus) requestAnimationFrame(() => steps[currentStep]?.querySelector<HTMLElement>('[data-step-heading]')?.focus());
 		}
 
-		try {
-			const response = await fetch(endpoint, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-				body: JSON.stringify(payload),
+		function validateStep(step: HTMLFieldSetElement): boolean {
+			const controls = Array.from(step.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea'));
+			const invalid = controls.find((control) => !control.checkValidity());
+			if (!invalid) return true;
+			invalid.reportValidity();
+			return false;
+		}
+
+		form.querySelectorAll<HTMLButtonElement>('[data-step-next]').forEach((button) => {
+			button.addEventListener('click', () => {
+				const step = steps[currentStep];
+				if (step && validateStep(step)) showStep(currentStep + 1);
 			});
-			const result = (await response.json().catch(() => ({}))) as {
-				ok?: boolean;
-				error?: string;
-				detail?: string;
-			};
+		});
+		form.querySelectorAll<HTMLButtonElement>('[data-step-back]').forEach((button) => button.addEventListener('click', () => showStep(currentStep - 1)));
 
-			if (!response.ok || !result.ok) {
-				throw new Error(
-					result.detail || result.error || form.dataset.error || 'Unable to send your message.',
-				);
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const invalidStep = steps.findIndex((step) => Array.from(step.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea')).some((control) => !control.checkValidity()));
+			if (invalidStep >= 0) {
+				showStep(invalidStep);
+				validateStep(steps[invalidStep]);
+				return;
 			}
 
-			form.reset();
-			form.dataset.startedAt = String(Date.now());
-			const turnstile = (window as Window & {
-				turnstile?: { reset: (container?: string | HTMLElement) => void };
-			}).turnstile;
-			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
-			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
-			if (status) {
-				status.hidden = false;
-				status.dataset.state = 'success';
-				status.textContent = form.dataset.success || 'Thank you. Your message has been sent.';
+			const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
+			const status = form.querySelector<HTMLElement>('[data-form-status]');
+			const defaultLabel = button?.textContent || '';
+			const data = new FormData(form);
+			const value = (key: string) => String(data.get(key) || '').trim();
+
+			if (button) { button.disabled = true; button.textContent = form.dataset.sending || 'Sending…'; }
+			if (status) { status.hidden = true; status.removeAttribute('data-state'); status.textContent = ''; }
+
+			try {
+				const response = await fetch(form.dataset.contactEndpoint || '/api/contact/', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+					body: JSON.stringify({
+						formVersion: FORM_VERSION,
+						projectType: value('projectType'),
+						projectScope: value('projectScope'),
+						location: value('location'),
+						timeline: value('timeline'),
+						message: value('message'),
+						name: value('name'),
+						email: value('email'),
+						phone: value('phone'),
+						website: value('website'),
+						startedAt: Number(form.dataset.startedAt || 0),
+						turnstileToken: value('cf-turnstile-response'),
+						source: form.dataset.source || 'website',
+					}),
+				});
+				const result = (await response.json().catch(() => ({}))) as { ok?: boolean; error?: string; detail?: string };
+				if (!response.ok || !result.ok) throw new Error(result.detail || result.error || form.dataset.error || 'Unable to send your message.');
+
+				form.reset();
+				form.dataset.startedAt = String(Date.now());
+				const turnstile = (window as Window & { turnstile?: { reset: (container?: string | HTMLElement) => void } }).turnstile;
+				const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
+				if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
+				showStep(0, false);
+				if (status) { status.hidden = false; status.dataset.state = 'success'; status.textContent = form.dataset.success || 'Thank you. Your message has been sent.'; }
+			} catch (error) {
+				const turnstile = (window as Window & { turnstile?: { reset: (container?: string | HTMLElement) => void } }).turnstile;
+				const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
+				if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
+				if (status) { status.hidden = false; status.dataset.state = 'error'; status.textContent = error instanceof Error ? error.message : form.dataset.error || 'Unable to send your message.'; }
+			} finally {
+				if (button) { button.disabled = false; button.textContent = defaultLabel; }
 			}
-		} catch (error) {
-			const turnstile = (window as Window & {
-				turnstile?: { reset: (container?: string | HTMLElement) => void };
-			}).turnstile;
-			const turnstileContainer = form.querySelector<HTMLElement>('.cf-turnstile');
-			if (turnstile && turnstileContainer) turnstile.reset(turnstileContainer);
-			if (status) {
-				status.hidden = false;
-				status.dataset.state = 'error';
-				status.textContent =
-					error instanceof Error ? error.message : form.dataset.error || 'Unable to send your message.';
-			}
-		} finally {
-			if (button) {
-				button.disabled = false;
-				button.textContent = defaultLabel;
-			}
-		}
+		});
+
+		showStep(0, false);
 	}
 
-	document.querySelectorAll<HTMLFormElement>('[data-inquiry-form]').forEach((form) => {
-		form.dataset.startedAt = String(Date.now());
-		form.addEventListener('submit', (event) => {
-			event.preventDefault();
-			if (!form.reportValidity()) return;
-			void submitInquiry(form);
-		});
-	});
+	document.querySelectorAll<HTMLFormElement>('[data-inquiry-form]').forEach(setupInquiryForm);
 </script>
