@@ -14,24 +14,41 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Skip when Vercel secrets are missing
+        id: vercel-configured
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping Vercel deploy: VERCEL_TOKEN is not configured in GitHub Actions secrets."
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.vercel-configured.outputs.configured == 'true'
 
       - uses: actions/setup-node@v4
+        if: steps.vercel-configured.outputs.configured == 'true'
         with:
           node-version: 22
           cache: npm
 
       - name: Install dependencies
+        if: steps.vercel-configured.outputs.configured == 'true'
         run: npm ci
 
       - name: Install Vercel CLI
+        if: steps.vercel-configured.outputs.configured == 'true'
         run: npm install -g vercel@latest
 
       - name: Pull Vercel environment
+        if: steps.vercel-configured.outputs.configured == 'true'
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Build for Vercel
+        if: steps.vercel-configured.outputs.configured == 'true'
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel production
+        if: steps.vercel-configured.outputs.configured == 'true'
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
