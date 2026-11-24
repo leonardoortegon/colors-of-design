@@ -840,7 +840,7 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 		concept:
 			'Un apartamento mid-century eco-chic de Morris Lapidus, reimaginado con modernismo orgánico, naturalismo refinado y lujo contenido para un retiro sereno en Miami Beach.',
 		services: ['Diseño de interiores integral', 'Mobiliario y estilismo'],
-		imageAlt: 'Comedor de Solaris con iluminación en capas y mesa refinada',
+		imageAlt: 'Sofá crema bajo un tríptico de dunas, con cojines salvia y mesa de centro de madera',
 		seoTitle: 'Solaris | Diseño de interiores | Colors of Design Group',
 		seoDescription:
 			'Colors of Design transformó un apartamento mid-century de Morris Lapidus en Miami Beach en un retiro eco-chic: modernismo orgánico, texturas en capas y una chimenea escultórica que ancla el estar.',
@@ -859,75 +859,125 @@ export const projectsEs: Record<string, ProjectEsOverlay> = {
 		],
 		gallery: [
 			{
-				alt: 'Sala de Solaris con luz natural y diseño de interiores en capas, por Colors of Design Group',
+				alt: 'Sofá crema con cojines verde salvia bajo un tríptico de dunas',
 				caption: 'Sala',
-				description:
-					'Una sala abierta definida por la luz del día, asientos proporcionales y una paleta neutra serena.',
+				description: 'Un sofá bajo en crema queda bajo un tríptico de dunas, con cojines salvia y botánicos, una lámpara trípode y cortinas con motivo de hojas.',
 			},
 			{
-				alt: 'Vista de la sala de Solaris con mobiliario curado y tonos interiores cálidos',
-				caption: 'Espacio de reunión',
-				description:
-					'Mobiliario y acabados compuestos para suavizar la arquitectura y anclar la estancia.',
-			},
-			{
-				alt: 'Comedor de Solaris con mobiliario a medida y luz natural de Miami',
+				alt: 'Mesa de piedra clara, sillas crema y esferas de vidrio ahumado, abiertas a la cocina',
 				caption: 'Comedor',
-				description:
-					'Un comedor previsto para las comidas cotidianas y para recibir, con materiales elegidos por calidez y durabilidad.',
+				description: 'Seis sillas crema con aros de latón rodean una mesa de piedra bajo esferas de vidrio ahumado, con la cocina al fondo.',
 			},
 			{
-				alt: 'Zona de comedor de Solaris con iluminación en capas y mesa refinada',
-				caption: 'Comedor',
-				description:
-					'Iluminación, proporción y detalles de estilismo que completan la estancia sin formalidad.',
+				alt: 'Mesa de comedor frente a un pasaplatos enmarcado en madera hacia la cocina',
+				caption: 'Pasaplatos',
+				description: 'La mesa de piedra mira a una abertura revestida en madera hacia la encimera de la cocina, con una fotografía aérea grande en la pared derecha.',
 			},
 			{
-				alt: 'Cocina de Solaris con superficies de piedra y diseño interior en madera cálida',
+				alt: 'Sofá crema bajo un tríptico de dunas, con peonías y mesa de centro de madera',
+				caption: 'Sala',
+				description: 'El muro del sofá lo ancla el tríptico de dunas, con peonías blancas, una bandeja con varillas y una mesa de centro de madera clara al frente.',
+			},
+			{
+				alt: 'Cocina en galería con gabinetes gris claro, backsplash de mármol y tiradores de latón',
 				caption: 'Cocina',
-				description:
-					'Piedra, madera y gabinetes a medida dispuestos para el uso diario y la claridad visual.',
+				description: 'Una cocina en galería de gabinetes gris claro llega a un backsplash de mármol, con tiradores de latón en el muro de despensa.',
 			},
 			{
-				alt: 'Detalle de cocina de Solaris con materiales en capas y luz natural',
+				alt: 'Muro de cocción con placa de inducción, horno empotrado e iluminación bajo gabinete',
+				caption: 'Muro de cocción',
+				description: 'El muro de cocción une una placa de inducción negra con horno y microondas de acero, iluminados por una tira continua bajo los gabinetes altos.',
+			},
+			{
+				alt: 'Tostadora Smeg azul claro, cuenco de cítricos y rosas blancas sobre mármol',
+				caption: 'Encimera',
+				description: 'Un primer plano de la encimera: tostadora Smeg azul claro, cuenco de cítricos y bananas, rosas blancas y una bandeja de pastelería.',
+			},
+			{
+				alt: 'Mesa de comedor al frente, con cocina, chimenea lineal y sala al fondo',
+				caption: 'Plano abierto',
+				description: 'Desde la mesa, la cocina, una chimenea lineal con repisas flotantes y la sala se leen como una sola estancia.',
+			},
+			{
+				alt: 'Hervidor y cafetera Smeg blancos junto a la placa de inducción',
 				caption: 'Detalle de cocina',
-				description: 'Volumen vertical y selecciones de acabado que honran la escala del espacio.',
+				description: 'Un hervidor y una cafetera Smeg blancos quedan sobre el mármol, junto a la placa de inducción negra y la campana.',
 			},
 			{
-				alt: 'Dormitorio principal de Solaris con textiles en capas y paleta neutra suave',
-				caption: 'Suite principal',
-				description: 'Un dormitorio de descanso compuesto en textura, proporción y contraste sereno.',
+				alt: 'Ducha walk-in revestida en piedra beige con ranuras horizontales',
+				caption: 'Ducha',
+				description: 'La ducha walk-in está envuelta en piedra beige acanalada, con un nicho cromado y un desagüe cuadrado en el piso.',
 			},
 			{
-				alt: 'Dormitorio de Solaris con mobiliario a medida y tonos interiores cálidos',
-				caption: 'Dormitorio',
-				description:
-					'Tapicería y acabados seleccionados para crear retiro sin perder conexión con el resto del hogar.',
+				alt: 'Vanidad de madera con tapa gruesa de cuarzo, grifería cromada y suculentas',
+				caption: 'Vanidad',
+				description: 'Una vanidad de madera lleva una tapa gruesa de cuarzo, lavabo bajo encimera, grifería cromada, coral y una bandeja de suculentas.',
 			},
 			{
-				alt: 'Interior de dormitorio de Solaris con luz natural y mobiliario curado',
-				caption: 'Suite de huéspedes',
-				description:
-					'Una estancia privada definida por la luz del día, materiales suaves y una colocación considerada.',
+				alt: 'Mesa de piedra con rosas amarillas frente a una obra de arena y agua',
+				caption: 'Comedor',
+				description: 'Rosas amarillas y un cuenco oscuro quedan sobre la mesa de piedra, frente a una obra enmarcada de arena y agua verde.',
 			},
 			{
-				alt: 'Vista de dormitorio de Solaris con ropa de cama en capas y diseño de interiores neutro',
-				caption: 'Dormitorio',
-				description:
-					'Textiles y mobiliario en capas para añadir profundidad, manteniendo la atmósfera serena.',
+				alt: 'Tres colgantes de fibra anudada sobre una cama blanca y un asiento de ventana',
+				caption: 'Dormitorio de huéspedes',
+				description: 'Tres piezas de fibra anudada con borlas largas cuelgan sobre una cama blanca, junto a un taburete de piedra y un asiento de ventana estampado.',
 			},
 			{
-				alt: 'Baño principal de Solaris con superficies de piedra y diseño de interiores refinado',
-				caption: 'Baño principal',
-				description:
-					'Piedra, iluminación y carpintería compuestos para el ritual diario y una calidad material duradera.',
+				alt: 'Mesita blanca con lámpara de latón, difusor y marcos pequeños',
+				caption: 'Mesita de noche',
+				description: 'Una mesita blanca sostiene una lámpara de latón con pantalla de concha, un difusor y dos marcos pequeños, contra un revestimiento texturizado.',
 			},
 			{
-				alt: 'Terraza de Solaris con mobiliario pensado para la vida en South Florida',
-				caption: 'Terraza',
-				description:
-					'Una estancia exterior que prolonga el lenguaje interior: cómoda, duradera y abierta a la luz.',
+				alt: 'Dormitorio con dos camas blancas, colgantes anudados y asiento de ventana empotrado',
+				caption: 'Dormitorio twin',
+				description: 'Dos camas blancas comparten la estancia con colgantes de nudos, una luminaria de techo en forma de concha y un asiento empotrado bajo una fotografía de playa.',
 			},
+			{
+				alt: 'Cama tapizada con mesitas de ratán y ventana al agua',
+				caption: 'Dormitorio principal',
+				description: 'Una cama tapizada mira a una ventana sobre el agua y las palmeras, flanqueada por mesitas de ratán y colgantes de latón.',
+			},
+			{
+				alt: 'Cómoda con frente de ratán bajo una pantalla con una isla tropical',
+				caption: 'Cómoda',
+				description: 'Una cómoda larga con frente de ratán queda bajo una pantalla de pared, con una butaca blanca y el borde de la cama a la vista.',
+			},
+			{
+				alt: 'Pasillo con espejo alto de marco bronce que abre a un vestidor',
+				caption: 'Pasillo',
+				description: 'Un espejo alto de marco bronce recorre el pasillo, que termina en un vestidor abierto con barras blancas.',
+			},
+			{
+				alt: 'Vestidor blanco con estantes abiertos, dos barras y luz integrada',
+				caption: 'Vestidor',
+				description: 'El vestidor está resuelto en carpintería blanca, con estantes abiertos a un lado, dos barras y un panel posterior iluminado.',
+			},
+			{
+				alt: 'Baño con inodoro, bidé y ducha de vidrio en piedra clara',
+				caption: 'Baño',
+				description: 'Un inodoro y un bidé quedan junto a una ducha de vidrio sin marco, todo en baldosa de piedra de gran formato.',
+			},
+			{
+				alt: 'Ducha de vidrio con rociador de techo, ducha de mano y nicho empotrado',
+				caption: 'Ducha de lluvia',
+				description: 'Dentro del cerramiento de vidrio, un rociador de techo y una ducha de mano quedan sobre piedra clara, con un nicho para frascos.',
+			},
+			{
+				alt: 'Vanidad de nogal y espejo sin marco empotrados en muros de piedra clara',
+				caption: 'Vanidad',
+				description: 'Una vanidad de nogal de dos cajones y un espejo grande sin marco quedan empotrados en muros de piedra clara, con toallas enrolladas en la encimera.',
+			},
+			{
+				alt: 'Mesa redonda blanca en la terraza con rosas amarillas, copas y fruta, frente a palmeras y la bahía',
+				caption: 'Mesa de terraza',
+				description: 'Una mesa blanca escultórica sostiene rosas amarillas, copas y una bandeja de fruta, con palmeras, agua y el skyline a lo lejos, más allá de la baranda de vidrio.',
+			},
+			{
+				alt: 'Dos sofás exteriores con cojines de palmera y rayas, frente al skyline de Miami',
+				caption: 'Salón de terraza',
+				description: 'Un par de sofás exteriores y mesas blancas anidadas miran al frente de agua, con el skyline de la ciudad en el horizonte.',
+			}
 		],
 	},
 	'baby-room': {
