@@ -22,7 +22,7 @@ interface Props {
 	ctaHref?: string;
 	headingLevel?: 'h1' | 'h2';
 	sectionId?: string;
-	cardLayout?: 'alternating' | 'image-left';
+	cardLayout?: 'alternating' | 'image-left' | 'stacked';
 	alternateBackgrounds?: boolean;
 	centerHeader?: boolean;
 	centerHeaderOnDesktop?: boolean;
@@ -72,6 +72,7 @@ const t = copy(locale);
 					'work__card',
 					cardLayout === 'alternating' && index % 2 === 0 && 'work__card--alternate-left',
 					cardLayout === 'image-left' && 'work__card--listing',
+					cardLayout === 'stacked' && 'work__card--stacked',
 					alternateBackgrounds && index % 2 === 1 && 'work__card--muted',
 				];
 				const cardContent = (
@@ -253,6 +254,29 @@ const t = copy(locale);
 		height: auto;
 	}
 
+	.work__card--stacked .work__card-layout {
+		grid-template-columns: 1fr;
+		align-items: start;
+		gap: clamp(1.25rem, 2.5vw, 1.75rem);
+	}
+
+	.work__card--stacked .work__card-body {
+		order: 1;
+		max-width: 40rem;
+		justify-self: start;
+	}
+
+	.work__card--stacked .work__card-media {
+		order: 2;
+		width: 100%;
+	}
+
+	.work__card--stacked .work__card-image {
+		width: 100%;
+		max-height: min(72vh, 52rem);
+		object-fit: cover;
+	}
+
 	.work__card-action:hover {
 		border-color: var(--color-text);
 	}
@@ -371,22 +395,30 @@ const t = copy(locale);
 
 		.work__card-layout,
 		.work__card--alternate-left .work__card-layout,
-		.work__card--listing .work__card-layout {
+		.work__card--listing .work__card-layout,
+		.work__card--stacked .work__card-layout {
 			grid-template-columns: 1fr;
 		}
 
 		.work__card-body,
 		.work__card--alternate-left .work__card-body,
-		.work__card--listing .work__card-body {
+		.work__card--listing .work__card-body,
+		.work__card--stacked .work__card-body {
 			max-width: none;
 			justify-self: stretch;
-			order: 0;
+			order: 1;
 		}
 
 		.work__card-media,
 		.work__card--alternate-left .work__card-media,
-		.work__card--listing .work__card-media {
-			order: -1;
+		.work__card--listing .work__card-media,
+		.work__card--stacked .work__card-media {
+			order: 2;
+		}
+
+		.work__card--stacked .work__card-image {
+			max-height: none;
+			object-fit: contain;
 		}
 	}
 </style>

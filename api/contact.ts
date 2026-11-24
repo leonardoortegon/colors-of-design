@@ -46,6 +46,26 @@ interface TurnstileResult {
 	'error-codes'?: string[];
 }
 
+function requestContext(req: VercelRequest) {
+	return {
+		requestId: String(req.headers['x-vercel-id'] || ''),
+		country: String(req.headers['x-vercel-ip-country'] || 'unknown'),
+	};
+}
+
+function logContactEvent(
+	req: VercelRequest,
+	event: 'accepted' | 'rejected' | 'failed',
+	details: Record<string, unknown> = {},
+) {
+	console.info(JSON.stringify({
+		type: 'contact_form',
+		event,
+		...requestContext(req),
+		...details,
+	}));
+}
+
 function trim(value: unknown, max: number): string {
 	return String(value ?? '')
 		.trim()
@@ -142,11 +162,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	try {
 		body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body ?? {});
 	} catch {
+		logContactEvent(req, 'failed', { reason: 'invalid_request' });
 		return res.status(400).json({ error: 'Invalid request body.' });
 	}
 
 	// Honeypot — bots fill this; humans never see it.
 	if (trim(body.website, 200)) {
+		logContactEvent(req, 'rejected', { reason: 'honeypot' });
 		return res.status(200).json({ ok: true });
 	}
 
@@ -157,16 +179,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		origin !== 'https://www.colorsofdesign.com' &&
 		!origin.startsWith('http://localhost:')
 	) {
+		logContactEvent(req, 'rejected', { reason: 'origin' });
 		return res.status(403).json({ error: 'Unable to verify this submission.' });
 	}
 
 	const startedAt = Number(body.startedAt);
 	const completionTime = Date.now() - startedAt;
 	if (!Number.isFinite(startedAt) || completionTime < MIN_FORM_COMPLETION_MS) {
+		logContactEvent(req, 'rejected', { reason: 'completion_time' });
 		return res.status(200).json({ ok: true });
 	}
 
 	if (trim(body.formVersion, 40) !== FORM_VERSION) {
+		logContactEvent(req, 'rejected', { reason: 'form_version' });
 		return res.status(400).json({ error: 'Please complete the project inquiry form.' });
 	}
 
@@ -174,11 +199,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	const projectScopeKey = trim(body.projectScope, MAX_LENGTH.projectScope);
 	const timelineKey = trim(body.timeline, MAX_LENGTH.timeline);
 	if (!PROJECT_TYPES[projectTypeKey] || !PROJECT_SCOPES[projectScopeKey] || !TIMELINES[timelineKey]) {
+		logContactEvent(req, 'rejected', { reason: 'project_details' });
 		return res.status(400).json({ error: 'Please complete all project details.' });
 	}
 
 	const remoteIp = getClientIp(req);
 	if (isRateLimited(remoteIp)) {
+		logContactEvent(req, 'rejected', { reason: 'rate_limit' });
 		return res.status(429).json({
 			error: 'Too many messages were submitted. Please wait a few minutes and try again.',
 		});
@@ -187,6 +214,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	if (turnstileSecret) {
 		const turnstileToken = trim(body.turnstileToken, 2_048);
 		if (!turnstileToken) {
+			logContactEvent(req, 'rejected', { reason: 'turnstile_missing' });
 			return res.status(400).json({ error: 'Please complete the security check.' });
 		}
 
@@ -196,10 +224,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 				process.env.VERCEL_ENV !== 'production' ||
 				(validation.hostname ? PRODUCTION_HOSTNAMES.has(validation.hostname) : false);
 			if (!validation.success || validation.action !== 'contact_form' || !hostnameIsValid) {
+				logContactEvent(req, 'rejected', {
+					reason: !validation.success
+						? 'turnstile_challenge'
+						: validation.action !== 'contact_form'
+							? 'turnstile_action'
+							: 'turnstile_hostname',
+					errorCodes: validation['error-codes'] || [],
+				});
 				console.warn('Turnstile rejected contact form submission', validation['error-codes']);
 				return res.status(403).json({ error: 'Security verification failed. Please try again.' });
 			}
 		} catch (error) {
+			logContactEvent(req, 'failed', { reason: 'turnstile_unavailable' });
 			console.error('Turnstile verification error:', error);
 			return res.status(503).json({ error: 'Security verification is temporarily unavailable.' });
 		}
@@ -216,18 +253,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 	const timeline = TIMELINES[timelineKey];
 
 	if (!name || !email || !phone || !location || !message) {
+		logContactEvent(req, 'rejected', { reason: 'required_fields' });
 		return res.status(400).json({ error: 'Please complete every required field.' });
 	}
 
 	if (!isValidEmail(email)) {
+		logContactEvent(req, 'rejected', { reason: 'email_validation' });
 		return res.status(400).json({ error: 'Please provide a valid email address.' });
 	}
 
 	if (phone.replace(/\D/g, '').length < 7) {
+		logContactEvent(req, 'rejected', { reason: 'phone_validation' });
 		return res.status(400).json({ error: 'Please provide a valid phone number.' });
 	}
 
 	if (location.length < 3 || message.length < 30) {
+		logContactEvent(req, 'rejected', { reason: 'content_validation' });
 		return res.status(400).json({ error: 'Please provide a little more information about your project.' });
 	}
 
@@ -289,6 +330,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 		});
 
 		if (error) {
+			logContactEvent(req, 'failed', { reason: 'email_delivery' });
 			console.error('Resend error:', error);
 			const detail =
 				typeof error === 'object' && error && 'message' in error
@@ -300,8 +342,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 			});
 		}
 
+		logContactEvent(req, 'accepted', {
+			formVersion: FORM_VERSION,
+			source,
+		});
 		return res.status(200).json({ ok: true });
 	} catch (error) {
+		logContactEvent(req, 'failed', { reason: 'contact_api_error' });
 		console.error('Contact API error:', error);
 		return res.status(500).json({ error: 'Unable to send your message right now.' });
 	}

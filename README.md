@@ -43,6 +43,11 @@ Recommended anti-spam environment variables:
 
 The API also applies a honeypot, form-completion timing check, same-origin check, and a lightweight per-instance rate limit. Turnstile is only enforced when `TURNSTILE_SECRET_KEY` is configured; set both Turnstile variables together before deploying.
 
+Contact-form decisions are emitted as structured `contact_form` events in Vercel Runtime Logs.
+The events include an outcome, rejection/failure reason, Vercel request ID, and country code, but
+exclude names, email addresses, phone numbers, locations, and inquiry text. Filter Runtime Logs for
+`"type":"contact_form"` to compare accepted, rejected, and failed submissions.
+
 Copy `.env.example` for local values. For local API testing, run `vercel dev` (plain `astro dev` serves pages only).
 
 Without JavaScript, visitors still have direct email and telephone links.
